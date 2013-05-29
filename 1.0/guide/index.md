@@ -1,10 +1,11 @@
 ## 综述
 Autocomplete组件
 
-组件分为两部分：
+组件分为3个部分：
 
-* 输入过程中的辅助提示
-* 聚焦到输入框时，展示热门推荐的提示
+* Base: 底层数据逻辑处理 ,提供 **afterQueryChange** 和 **afterResultsChange** 两个事件，可基于此做二次开发
+* Rich: 输入过程中的辅助提示 ，提供各种配置参数 
+* Hot: 聚焦到输入框时，展示热门推荐的提示。和Base Rich完全隔离
 
 ## 组件快速使用
 
@@ -28,3 +29,13 @@ Autocomplete组件
         });
 
 ```
+
+##基础配置
+
+|Attribute:属性名称|Default:默认值|Description:说明|
+|:--------|:------|:----------|
+|inputNode|null|**Required** {String|NodeList} 绑定的输入框节点|
+|source|null|**Required** {String|Object|Array}支持JSONP,本地数据支持Object&Array,传入字符串时认为是一个jsonp请求的url|
+|resultListLocator|null|**Required** {String|Function} 指定推荐的数据结果在数据源中的位置|
+|resultTextLocator|null|**Required** {String|Function} 指定每一个数据项对应的填充到输入框的数据|
+|maxResults|1000|展示的搜索结果最大数值|
