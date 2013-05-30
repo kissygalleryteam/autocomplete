@@ -9,6 +9,9 @@ KISSY.add(function (S, AcBase, AcRich , AcHot) {
      * @class Autocomplete
      * @constructor
      * @extends Base
+     * @uses AutocompleteBase
+     * @uses AutocompleteRich
+     * @uses AutocompleteHot
      */
     var _extend = function (name , base , extensions , px , sx){
         var Autocomplete = function (){

@@ -1,4 +1,17 @@
 KISSY.add(function (S, Node , Event , Io , Tpl){
+    /**
+     自动完成组件
+     @module autocomplete
+     @submodule autocomplete-hot
+     **/
+    /**
+     自动完成组件热门推荐
+     @class AutocompleteHot
+     @extends AutocompleteBase
+     @uses Overlay
+     @constructor
+     @param {Object} 配置项
+     **/
     var EVT_SELECT = 'select';
     var EVT_QUERY = 'afterQueryChange';
 
@@ -11,9 +24,14 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
     var AutoCompleteHot = function (){};
     AutoCompleteHot.ATTRS = {
         /**
-         * 热门推荐模板
-         * @cfg {String}
-         */
+         * 热门推荐的模板，数据源来自hotSource参数，内容渲染到this.hotNode节点内
+         * @attribute hotTemplate
+         * @type String
+         * @default '<div class="ks-ac-hot-city"><div class="ks-ac-acinput-hot-tit">热门城市/国家(支持汉字/拼音/英文字母)</div>' +
+                         '<ul class="tab-nav">{{#results}}<li class="J_TabItem">{{tabname}}</li>{{/results}}</ul>' +
+                         '<div class="tab-content J_TabContent">{{#results}}' +
+                         '<div class="tab-pannel J_Pannel">{{#tabdata}}<dl><dt>{{dt}}</dt><dd>{{#dd}}<span><a data-sid="{{sid}}" class="J_AcItem" tabindex="-1" href="javascript:void(0);" target="_self">{{cityName}}</a></span>{{/dd}}</dd></dl>{{/tabdata}}</div>{{/results}}</div></div>'
+         **/
         hotTemplate : {
             value : '<div class="ks-ac-hot-city"><div class="ks-ac-acinput-hot-tit">热门城市/国家(支持汉字/拼音/英文字母)</div>' +
                 '<ul class="tab-nav">{{#results}}<li class="J_TabItem">{{tabname}}</li>{{/results}}</ul>' +
@@ -21,54 +39,62 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
                 '<div class="tab-pannel J_Pannel">{{#tabdata}}<dl><dt>{{dt}}</dt><dd>{{#dd}}<span><a data-sid="{{sid}}" class="J_AcItem" tabindex="-1" href="javascript:void(0);" target="_self">{{cityName}}</a></span>{{/dd}}</dd></dl>{{/tabdata}}</div>{{/results}}</div></div>'
         },
         /**
-         * 热门推荐城市数据源接口,支持JSONP和本地数据
-         * @cfg {String|Object}
-         */
+         * 热门推荐的数据源，支持JSONP和本地数据，传参类型为字符串时将被判断为JSONP数据源
+         * @attribute hotSource
+         * @type String|Object
+         * @default null
+         **/
         hotSource : {
             value : null,
             setter : '_onHotSourceChange'
         },
         /**
-         * 热门推荐的callback函数名 IO专用
-         * @cfg {String}
-         */
+         * 热门推荐数据源指定为JSONP时，callback的参数名
+         * @attribute
+         * @type String
+         * @default
+         **/
         hotJsonpCallback : {
             value :'callback'
         },
         /**
          * 当前热门推荐被选中tab
-         * @cfg {Number}
-         */
+         * @attribute hotActiveTab
+         * @type number
+         * @default null
+         **/
         hotActiveTab : {
             value : null
         },
         /**
-         * 热门数据格式化
-         * @cfg {Function}
-         */
+         * 热门数据格式化同时要求数据实现绑定
+         * @attribute hotResultsFormatter
+         * @type function
+         * @default  function (data){
+                         var results = {};
+                         S.each(data.results,function (_iObj){
+                             S.each(_iObj.tabdata , function (_jObj){
+                                 S.each(_jObj.dd , function (_kObj){
+                                     var id = 'hot_source_id_'+ S.guid();//必需
+                                     _kObj.raw = S.mix({}, _kObj);
+                                     _kObj.sid = id;//必需
+                                     _kObj.text = _kObj.cityName;
+                                     results[id] = _kObj;
+                                 })
+                             });
+                         });
+                         return results;
+                     }
+         **/
         hotResultsFormatter : {
-            value : null
-        },
-        /**
-         * 热门推荐区域宽度设置
-         * @cfg {Number}
-         */
-        hotWidth : {
-            value : 320
-        },
-        /**
-         * 处理数据层和UI层绑定需要用到的键值对
-         * @cfg {Function}
-         */
-        hotResultsLocator : {
             value : function (data){
                 var results = {};
                 S.each(data.results,function (_iObj){
                     S.each(_iObj.tabdata , function (_jObj){
                         S.each(_jObj.dd , function (_kObj){
-                            var id = 'hot_source_id_'+ S.guid();
+                            var id = 'hot_source_id_'+ S.guid();//必需
                             _kObj.raw = S.mix({}, _kObj);
-                            _kObj.sid = id;
+                            _kObj.sid = id;//必需
                             _kObj.text = _kObj.cityName;
                             results[id] = _kObj;
                         })
@@ -78,8 +104,29 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
             }
         },
         /**
-         * 热门推荐的状态
-         */
+         * 热门推荐的宽度
+         * @attribute hotWidth
+         * @type number|NodeList|null
+         * @default null
+         **/
+        hotWidth : {
+            value : 320
+        },
+        /**
+         * 提供一个数据的预处理的机制，要求返回数据对象.
+         * @attribute hotResultsLocator
+         * @type function
+         * @default null
+         **/
+        hotResultsLocator : {
+            value : null
+        },
+        /**
+         * 热门推荐层的可见状态
+         * @attribute hotVisible
+         * @type boolean
+         * @default false
+         **/
         hotVisible : {
             value : false
         }
@@ -172,6 +219,7 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
             //在热门推荐按下esc时触发隐藏
             this.hotNode.on('keydown', function (e){
                 if (e.keyCode === 27) {
+                    this.set('hotVisible' , false);
                     this.set('visible',false);
                 }
             },this);
@@ -190,8 +238,9 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
              */
             var _build = function (data){
                 var locator = that.get('hotResultsLocator');
-                data = that._parseHotResponse(data);
-                that._hotResults = locator.call(this, data);
+                var formatter = that.get('hotResultsFormatter');
+                locator && (data = locator.call(that , data));
+                that._hotResults = formatter.call(that, data);//数据扁平化实现DOM的id和数据的绑定
                 var html = new Tpl(that.get('hotTemplate')).render(data);
                 var hot_node = that.hotNode;
                 hot_node.html(html);
@@ -213,13 +262,6 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
             }else if(S.isObject(source) || S.isArray(source)){
                 _build(source);
             }
-        },
-        _parseHotResponse : function (results){
-            var formatter = this.get('hotResultsFormatter');
-            if (formatter && S.isFunction(formatter)) {
-                results = formatter.call(this,results);
-            }
-            return results;
         },
         /**
          * 修改hotSource时重置HOT的状态

@@ -47,11 +47,23 @@ module.exports = function(grunt) {
                     '<%= pkg.version %>/build/index-min.js': ['<%= pkg.version %>/build/index.js']
                 }
             }
+        },
+        yuidoc: {
+            compile: {
+                name       : '<%= pkg.name %>',
+                description: '<%= pkg.description %>',
+                version    : '<%= pkg.version %>',
+                options    : {
+                    paths : '<%= pkg.version %>/',
+                    outdir: '<%= pkg.version %>/guide/'
+                }
+            }
         }
     });
 
     // 使用到的任务，可以增加其他任务
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-yuidoc');
     grunt.loadNpmTasks('grunt-kmc');
     return grunt.registerTask('default', ['kmc', 'uglify']);
 };

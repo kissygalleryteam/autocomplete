@@ -8,11 +8,36 @@ gallery/autocomplete/1.0/index
 
 */
 KISSY.add('gallery/autocomplete/1.0/base',function (S){
+    /**
+    自动完成组件
+    @module autocomplete
+    @main autocomplete
+    **/
+
+    /**
+    AutocompleteBase
+     自动完成组件的基类，主要提供底层数据逻辑的处理，分发两个事件<b>results afterQueryChange<b>
+    @class AutoCompleteBase
+    @uses Overlay
+    @constructor
+    **/
     var INPUT_NODE = 'inputNode';
 
     var QUERY = 'query';
     var RESULTS = 'results';
+    /**
+     * 推荐的数据发生变化
+     @event results
+     @param {Array} 推荐的数据结果
+     @param {String} 查询的关键字
+     */
     var EVT_RESULTS = 'results';
+    /**
+     * query发生变化
+     * @event afterQueryChange
+     * @param {String} newVal
+     * @param {String} prevVal
+     */
     var EVT_QUERY = 'afterQueryChange' ;
     var VALUE_CHANGE = 'valuechange';
     var REQUEST_TEMPLATE = 'requestTemplate';
@@ -23,10 +48,18 @@ KISSY.add('gallery/autocomplete/1.0/base',function (S){
     AutoCompleteBase.ATTRS = {
         /**
          * 使用缓存，当source是后端提供的数据接口时，将同样的请求做缓存
+         * @attribute enableCache
+         * @default true
+         * @type boolean
          */
         enableCache : {
             value : true
         },
+        /**
+         * @attribute inputNode
+         * @default null
+         * @type String|NodeList
+         */
         inputNode : {
             value : null,
             setter : function (el){
@@ -38,19 +71,28 @@ KISSY.add('gallery/autocomplete/1.0/base',function (S){
         },
         /**
          * 允许返回的最大值，设置为0表示不限制
+         * @attribute maxResults
+         * @default null
+         * @type String|NodeList
          */
         maxResults:{
             value : 1000
         },
         /**
          * 最小查询字符串长度，输入框的值为空时，不进行查询
-         */
+         * @attribute minQuerylengt
+         * @type number
+         * @default 1
+         **/
         minQueryLength : {
             value : 1
         },
         /**
-         * jsonp 请求的callback的NAME设定,默认为callback
-         */
+         * kissy jsonp 的配置项，用于接口的callback的key不是'callback'时
+         * @attribute jsonpCallback
+         * @type String
+         * @default callback
+         **/
         jsonpCallback : {
             value : 'callback'
         },
@@ -59,14 +101,20 @@ KISSY.add('gallery/autocomplete/1.0/base',function (S){
         },
         /**
          * 延时查询,避免用户连续输入时密集发送查询请求
-         */
+         * @attribute queryDelay
+         * @type number
+         * @default 100
+         **/
         queryDelay : {
             value : 100
         },
         /**
          * 查询字符分隔符,如果配置了这个值，将以此作为分隔符将输入框的值分割为数组，取数组的最后一个值作为查询参数.
          * 用于输入框支持多项输入
-         */
+         * @attribute queryDelimiter
+         * @type String
+         * @default null
+         **/
         queryDelimiter : {
             value : null
         },
@@ -82,6 +130,12 @@ KISSY.add('gallery/autocomplete/1.0/base',function (S){
          * 数据结果过滤
          * @type Array
          */
+        /**
+         * 数据过滤器，要对本地数据或者远程返回数据进行处理时
+         * @attribute resultFilter
+         * @type Function
+         * @default null
+         **/
         resultFilter : {
             value : null
         },
@@ -89,21 +143,28 @@ KISSY.add('gallery/autocomplete/1.0/base',function (S){
          * 数据结果初始化
          * @type : Function
          */
+        /**
+         * 处理数据项展示的函数
+         * @attribute resultFormatter
+         * @type Function
+         * @default null
+         **/
         resultFormatter : {
             value : null
         },
         /**
          * 搜索结果高亮处理函数
          * @type {Function}
-         */
         resultHighlighter : {
             value : null ,
             setter : '_setResultHighlighter'
-        },
+        },*/
         /**
          * 数据结果返回时的第一个处理函数，指定数组位置
-         * @type {Function|String}
-         */
+         * @attribute resultListLocator
+         * @type String | Function
+         * @default null
+         **/
         resultListLocator : {
             value : null ,
             setter : '_setLocator'
@@ -117,6 +178,12 @@ KISSY.add('gallery/autocomplete/1.0/base',function (S){
         /**
          * 在触发选择后，对当前文本的操作
          */
+        /**
+         * 指定每一个数据项被选中后填入到输入框的内容,可以指定一个字段或者用函数返回一个拼接的字段
+         * @attribute resultTextLocator
+         * @type String | Function
+         * @default null
+         **/
         resultTextLocator:{
             value : null,
             setter : '_setLocator'
@@ -136,8 +203,11 @@ KISSY.add('gallery/autocomplete/1.0/base',function (S){
             setter : '_onSetValue'
         },
         /**
-         * 是否打开浏览器默认行为
-         */
+         * 开启浏览器默认的自动填充行为
+         * @attribute allowBrowserAutocomplete
+         * @type Boolean
+         * @default false
+         **/
         allowBrowserAutocomplete : {
             value : false
         }
@@ -507,6 +577,16 @@ KISSY.add('gallery/autocomplete/1.0/base',function (S){
  * RICH 包含UI所有交互逻辑
  */
 KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
+    /**
+     * @module autocomplete
+     * @submodule autocomplete-rich
+     */
+
+    /**
+     * AutocompleteRich主要基于AutocompleteBase，利用afterQueryChange和results两个事件创建包含更多交互的富应用
+     * @class AutocompleteRich
+     * @extend S.Base
+     */
     var QUERY = 'query';
     var RESULT = 'result';
 
@@ -536,21 +616,30 @@ KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
     };
     AutoCompleteRich.ATTRS = {
         /**
-         * {Numberic || NodeList || 'this'} 'this'表示宽度和输入框保持一致
-         */
+         * 显示提示框的宽度设定。传入一个节点时，会以此节点的宽度作为组件宽度，默认null时，会自动设定为输入框的宽度
+         * @attribute width
+         * @type Number|NodeList|null
+         * @default null
+         **/
         width:{
             value : null,
             getter : '_getWidth'
         },
         /**
          * 在输入框失去焦点时有推联想搜索结果，启用自动回填当前被激活的数据项
-         */
+         * @attribute enableAutoFill
+         * @type Boolean
+         * @default true
+         **/
         enableAutoFill : {
             value : true
         },
         /**
-         * 默认激活第一个候选项
-         */
+         * 有推荐结果时，默认选中第一项
+         * @attribute activeFirstItem
+         * @type Boolean
+         * @default true
+         **/
         activeFirstItem: {
             value: true
         },
@@ -568,14 +657,18 @@ KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
             value: null
         },
         /**
-         * overlay的visible
-         */
+         提示层可见状态发送变化时的事件
+         @event afterVisibleChange
+         @param {Boolean} e.newVal e.prevVal
+         **/
         visible : {
             value : false
         },
         /**
-         * 推荐结果的可见状态
-         */
+         推荐的结果的LIST可见状态发生变化时触发
+         @event afterResultsListVisibleChange
+         @param {Boolean} e.newVal e.prevVal
+         **/
         resultsListVisible : {
             value : false
         },
@@ -588,6 +681,20 @@ KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
         /**
          * 对齐配置
          */
+        /**
+         * 提示层的位置的配置，
+         * @attribute align
+         * @type Object
+         * @default {
+                         node : null,
+                         points : ['bl', 'tl'],
+                         offset : [0,-1],
+                         overflow:{
+                             adjustX: 0, // 当对象不能处于可显示区域时，自动调整横坐标
+                             adjustY: 0// 当对象不能处于可显示区域时，自动调整纵坐标
+                         }
+                     }
+         **/
         align : {
             value : {
                 node : null,
@@ -602,6 +709,20 @@ KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
         /**
          * 最外层容器HTML片段
          */
+        /**
+         * 层的基础HTML模板结构
+         * @attribute boundingBoxTemplate
+         * @type String
+         * @default '<div class="ks-ac-header"></div>' +
+         '<div class="ks-ac-body">' +
+         '   <div class="ks-ac-message J_AcMessage"></div>' +
+         '   <div class="ks-ac-content J_AcContent">' +
+         '       <div class="J_HotList"></div>' +
+         '       <div class="J_ResultsList"></div>' +
+         '   </div>' +
+         '</div>' +
+         '<div class="ks-ac-footer"><span></span></div>'
+         **/
         boundingBoxTemplate : {
             value: '<div class="ks-ac-header"></div>' +
                 '<div class="ks-ac-body">' +
@@ -613,18 +734,39 @@ KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
                 '</div>' +
                 '<div class="ks-ac-footer"><span></span></div>'
         },
+        /**
+         * 推荐结果的外层容器HTML模板
+         * @attribute listNodeTemplate
+         * @type String
+         * @default <div class="ks-ac-list"></div>
+         **/
         listNodeTemplate : {
             value : '<div class="ks-ac-list"></div>'
         },
+        /**
+         * 推荐结果单个数据项的外层容器HTML模板
+         * @attribute itemNodeTemplate
+         * @type String
+         * @default <div class="ks-ac-item"></div>
+         **/
         itemNodeTemplate : {
             value : '<div class="ks-ac-item"></div>'
         },
+        /**
+         * 没有查询结果时的提示模板
+         * @attribute noResultsMessage
+         * @type String
+         * @default 没有"<span class="ks-ac-message-hightlight">{query}</span>"相关的推荐
+         **/
         noResultsMessage : {
             value : '没有"<span class="ks-ac-message-hightlight">{query}</span>"相关的推荐'
         },
         /**
-         * {NodeList} clickoutside的范围元素
-         */
+         * clickoutside时需要排除在外的节点
+         * @attribute trigger
+         * @type Array
+         * @default []
+         **/
         trigger : {
             value : []
         }
@@ -655,7 +797,7 @@ KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
             input_node.addClass(CLS_AC_INPUT);
             //基于overlay组件
             var overlay = this.overlay = new O({
-                align:this.get('align'),
+                align: this.get('align'),
                 content : this.get('boundingBoxTemplate')
             });
             overlay.render();
@@ -778,15 +920,18 @@ KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
 
         },
         /**
-         * 显示消息
-         * @param msg
-         */
+         * 显示信息
+         * @method showMessage
+         * @param {String} msg 错误提示信息
+         * @chainable
+         **/
         showMessage : function (msg){
             this.messageNode.html(msg);
             var that = this;
             setTimeout(function (){
                 that.set('messageVisible', true);
             },1);
+            return this
         },
         /**
          * 重新定位容器对齐
@@ -809,6 +954,12 @@ KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
                 item_node = this.get(ACTIVE_ITEM);
             }
             var result = item_node.data(RESULT);
+
+            /**
+             当用户选定某一项后触发
+             * @event select
+             * @param {Object} results
+             **/
             this.fire(EVT_SELECT,{
                 node : item_node,
                 result : result
@@ -1042,6 +1193,19 @@ KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
     return AutoCompleteRich;
 },{requires : ['node','event','overlay','sizzle']});
 KISSY.add('gallery/autocomplete/1.0/hot',function (S, Node , Event , Io , Tpl){
+    /**
+     自动完成组件
+     @module autocomplete
+     @submodule autocomplete-hot
+     **/
+    /**
+     自动完成组件热门推荐
+     @class AutocompleteHot
+     @extends AutocompleteBase
+     @uses Overlay
+     @constructor
+     @param {Object} 配置项
+     **/
     var EVT_SELECT = 'select';
     var EVT_QUERY = 'afterQueryChange';
 
@@ -1054,9 +1218,14 @@ KISSY.add('gallery/autocomplete/1.0/hot',function (S, Node , Event , Io , Tpl){
     var AutoCompleteHot = function (){};
     AutoCompleteHot.ATTRS = {
         /**
-         * 热门推荐模板
-         * @cfg {String}
-         */
+         * 热门推荐的模板，数据源来自hotSource参数，内容渲染到this.hotNode节点内
+         * @attribute hotTemplate
+         * @type String
+         * @default '<div class="ks-ac-hot-city"><div class="ks-ac-acinput-hot-tit">热门城市/国家(支持汉字/拼音/英文字母)</div>' +
+                         '<ul class="tab-nav">{{#results}}<li class="J_TabItem">{{tabname}}</li>{{/results}}</ul>' +
+                         '<div class="tab-content J_TabContent">{{#results}}' +
+                         '<div class="tab-pannel J_Pannel">{{#tabdata}}<dl><dt>{{dt}}</dt><dd>{{#dd}}<span><a data-sid="{{sid}}" class="J_AcItem" tabindex="-1" href="javascript:void(0);" target="_self">{{cityName}}</a></span>{{/dd}}</dd></dl>{{/tabdata}}</div>{{/results}}</div></div>'
+         **/
         hotTemplate : {
             value : '<div class="ks-ac-hot-city"><div class="ks-ac-acinput-hot-tit">热门城市/国家(支持汉字/拼音/英文字母)</div>' +
                 '<ul class="tab-nav">{{#results}}<li class="J_TabItem">{{tabname}}</li>{{/results}}</ul>' +
@@ -1064,54 +1233,62 @@ KISSY.add('gallery/autocomplete/1.0/hot',function (S, Node , Event , Io , Tpl){
                 '<div class="tab-pannel J_Pannel">{{#tabdata}}<dl><dt>{{dt}}</dt><dd>{{#dd}}<span><a data-sid="{{sid}}" class="J_AcItem" tabindex="-1" href="javascript:void(0);" target="_self">{{cityName}}</a></span>{{/dd}}</dd></dl>{{/tabdata}}</div>{{/results}}</div></div>'
         },
         /**
-         * 热门推荐城市数据源接口,支持JSONP和本地数据
-         * @cfg {String|Object}
-         */
+         * 热门推荐的数据源，支持JSONP和本地数据，传参类型为字符串时将被判断为JSONP数据源
+         * @attribute hotSource
+         * @type String|Object
+         * @default null
+         **/
         hotSource : {
             value : null,
             setter : '_onHotSourceChange'
         },
         /**
-         * 热门推荐的callback函数名 IO专用
-         * @cfg {String}
-         */
+         * 热门推荐数据源指定为JSONP时，callback的参数名
+         * @attribute
+         * @type String
+         * @default
+         **/
         hotJsonpCallback : {
             value :'callback'
         },
         /**
          * 当前热门推荐被选中tab
-         * @cfg {Number}
-         */
+         * @attribute hotActiveTab
+         * @type number
+         * @default null
+         **/
         hotActiveTab : {
             value : null
         },
         /**
-         * 热门数据格式化
-         * @cfg {Function}
-         */
+         * 热门数据格式化同时要求数据实现绑定
+         * @attribute hotResultsFormatter
+         * @type function
+         * @default  function (data){
+                         var results = {};
+                         S.each(data.results,function (_iObj){
+                             S.each(_iObj.tabdata , function (_jObj){
+                                 S.each(_jObj.dd , function (_kObj){
+                                     var id = 'hot_source_id_'+ S.guid();//必需
+                                     _kObj.raw = S.mix({}, _kObj);
+                                     _kObj.sid = id;//必需
+                                     _kObj.text = _kObj.cityName;
+                                     results[id] = _kObj;
+                                 })
+                             });
+                         });
+                         return results;
+                     }
+         **/
         hotResultsFormatter : {
-            value : null
-        },
-        /**
-         * 热门推荐区域宽度设置
-         * @cfg {Number}
-         */
-        hotWidth : {
-            value : 320
-        },
-        /**
-         * 处理数据层和UI层绑定需要用到的键值对
-         * @cfg {Function}
-         */
-        hotResultsLocator : {
             value : function (data){
                 var results = {};
                 S.each(data.results,function (_iObj){
                     S.each(_iObj.tabdata , function (_jObj){
                         S.each(_jObj.dd , function (_kObj){
-                            var id = 'hot_source_id_'+ S.guid();
+                            var id = 'hot_source_id_'+ S.guid();//必需
                             _kObj.raw = S.mix({}, _kObj);
-                            _kObj.sid = id;
+                            _kObj.sid = id;//必需
                             _kObj.text = _kObj.cityName;
                             results[id] = _kObj;
                         })
@@ -1121,8 +1298,29 @@ KISSY.add('gallery/autocomplete/1.0/hot',function (S, Node , Event , Io , Tpl){
             }
         },
         /**
-         * 热门推荐的状态
-         */
+         * 热门推荐的宽度
+         * @attribute hotWidth
+         * @type number|NodeList|null
+         * @default null
+         **/
+        hotWidth : {
+            value : 320
+        },
+        /**
+         * 提供一个数据的预处理的机制，要求返回数据对象.
+         * @attribute hotResultsLocator
+         * @type function
+         * @default null
+         **/
+        hotResultsLocator : {
+            value : null
+        },
+        /**
+         * 热门推荐层的可见状态
+         * @attribute hotVisible
+         * @type boolean
+         * @default false
+         **/
         hotVisible : {
             value : false
         }
@@ -1215,6 +1413,7 @@ KISSY.add('gallery/autocomplete/1.0/hot',function (S, Node , Event , Io , Tpl){
             //在热门推荐按下esc时触发隐藏
             this.hotNode.on('keydown', function (e){
                 if (e.keyCode === 27) {
+                    this.set('hotVisible' , false);
                     this.set('visible',false);
                 }
             },this);
@@ -1233,8 +1432,9 @@ KISSY.add('gallery/autocomplete/1.0/hot',function (S, Node , Event , Io , Tpl){
              */
             var _build = function (data){
                 var locator = that.get('hotResultsLocator');
-                data = that._parseHotResponse(data);
-                that._hotResults = locator.call(this, data);
+                var formatter = that.get('hotResultsFormatter');
+                locator && (data = locator.call(that , data));
+                that._hotResults = formatter.call(that, data);//数据扁平化实现DOM的id和数据的绑定
                 var html = new Tpl(that.get('hotTemplate')).render(data);
                 var hot_node = that.hotNode;
                 hot_node.html(html);
@@ -1256,13 +1456,6 @@ KISSY.add('gallery/autocomplete/1.0/hot',function (S, Node , Event , Io , Tpl){
             }else if(S.isObject(source) || S.isArray(source)){
                 _build(source);
             }
-        },
-        _parseHotResponse : function (results){
-            var formatter = this.get('hotResultsFormatter');
-            if (formatter && S.isFunction(formatter)) {
-                results = formatter.call(this,results);
-            }
-            return results;
         },
         /**
          * 修改hotSource时重置HOT的状态
@@ -1287,6 +1480,9 @@ KISSY.add('gallery/autocomplete/1.0/index',function (S, AcBase, AcRich , AcHot) 
      * @class Autocomplete
      * @constructor
      * @extends Base
+     * @uses AutocompleteBase
+     * @uses AutocompleteRich
+     * @uses AutocompleteHot
      */
     var _extend = function (name , base , extensions , px , sx){
         var Autocomplete = function (){
