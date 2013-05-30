@@ -179,15 +179,16 @@
 				source           : 'http://suggest.taobao.com/sug?q={query}',
 				hotSource        : hotsource,
 				hotTemplate      : hotTemplate,
-				hotResultsLocator: function(data){
+				hotResultsFormatter: function(data){
 					var results = {};
-					S.each(data.keywords,function (keyword){
+					data.keywords = S.map(data.keywords,function (keyword){
 						var _kObj = {key: keyword};
 						var id = 'hot_source_id_'+ S.guid();
 						_kObj.raw = S.mix({}, _kObj);
 						_kObj.sid = id;
 						_kObj.text = keyword;
 						results[id] = _kObj;
+						return _kObj;
 					});
 					return results;
 				},
