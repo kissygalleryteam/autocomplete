@@ -1,0 +1,155 @@
+body {
+	padding: 20px;
+	text-align: left;
+	font-size: 12px;
+	line-height: 1.5;
+	background: #e3e3e3;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+p {
+	padding: 8px;
+}
+
+input {
+	padding: 5px;
+	width: 200px;
+}
+
+button {
+	padding: 5px;
+}
+
+details {
+	padding: 20px;
+	background: #fff;
+	margin: 20px 0;
+}
+
+summary {
+	font-size: 14px;
+	border-bottom: 2px solid #339bb9;
+	padding: 5px;
+	margin-bottom: 10px;
+}
+
+.code {
+	width: 95%;
+	background: #e3e3e3;
+	border-radius: 5px;
+	padding: 5px;
+	line-height: 20px;
+	height: auto;
+	display: block;
+	overflow: visible;
+	height: 500px;
+}
+.ks-ac-near-tip{
+	border-top: 1px dashed #e3e3e3;
+	padding: 4px 1px;
+	margin: 0 4px;
+}
+.ks-ac-item-inner-sub{
+	padding-left: 1em;
+	color: #808080;
+}
+
+.ks-autocomplete {
+	overflow: hidden;
+	_margin-left: -2px;
+	_margin-top: -3px;
+	background: white;
+	border: 1px solid #999;
+	z-index: 99999;
+}
+ul, ol {
+	list-style: none;
+}
+.ks-autocomplete div {
+	color: #404040;
+	padding: 1px 0 2px;
+	font-size: 12px;
+	line-height: 18px;
+	float: left;
+	width: 100%;
+}
+.ks-autocomplete div {
+	line-height: 24px;
+	padding: 0;
+}
+.ks-suggest-container div, .ks-suggest-footer {
+	overflow: hidden;
+	zoom: 1;
+	clear: both;
+}
+.ks-suggest-key {
+	float: left;
+	text-align: left;
+	padding-left: 5px;
+}
+.ks-suggest-result {
+	float: right;
+	text-align: right;
+	padding-right: 5px;
+	color: #999;
+}
+.ks-autocomplete .ks-suggest-cate {
+	color: #7e7e7e;
+	margin-left: 8px;
+}
+.ks-autocomplete .ks-suggest-extras-xp, .ks-autocomplete .ks-suggest-extras-dp {
+	border-top: 1px solid #E5E5E5;
+}
+.ks-autocomplete .ks-selected {
+	background-position: 8px -17px;
+	background-color: #39F;
+	cursor: default;
+}
+.ks-autocomplete .ks-suggest-extras-xp .ks-suggest-xp-tag, .ks-autocomplete .ks-suggest-extras-dp .ks-suggest-dp-tag {
+	float: right;
+	width: 80px;
+	text-align: center;
+	border-left: 1px solid #E5E5E5;
+}
+.ks-autocomplete .ks-selected span {
+	color: #FFF;
+	cursor: default;
+}
+.ks-autocomplete .ks-suggest-extras-xp .ks-suggest-xp-icon, .ks-autocomplete .ks-suggest-extras-dp .ks-suggest-dp-icon {
+	float: left;
+	width: 25px;
+	height: 24px;
+	font-size: 0px;
+	background: url(http://img04.taobaocdn.com/tps/i4/T1Fg6QXg4bXXaTNmze-40-14.png) no-repeat;
+}
+.ks-autocomplete .ks-suggest-extras-xp .ks-suggest-xp-icon {
+	background-position: 5px 5px;
+}
+.ks-ac-active{
+	background: #9cd9ff;
+}
+.ks-ac-active span{
+	color: #fff;
+}
+
+.ks-ac-hot-keyword {
+	padding: 5px 0;
+	background: #fff;
+	overflow: hidden;
+	zoom: 1;
+	border: 1px solid #bec2c4;
+	border-right-color: #bec2c4;
+	border-bottom-color: #bec2c4;
+}
+
+#output{
+	clear: both;
+}
+#output a{
+	text-decoration: underline;
+	color: #0072DB;
+}

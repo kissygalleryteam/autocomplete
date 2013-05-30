@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Email地址辅助输入</title>
+	<meta charset="GBK"/>
+	<link rel="stylesheet" href="http://a.tbcdn.cn/??p/global/1.0/global-min.css,p/fp/2013/assets/build/first-screen.css,p/fp/2013/assets/build/second-screen.css?t=20130520">
+	<style type="text/css">
+		body {
+			padding: 20px;
+			text-align: left;
+			font-size: 12px;
+			line-height: 1.5;
+			background: #e3e3e3;
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		p {
+			padding: 8px;
+		}
+
+		input {
+			padding: 5px;
+			width: 200px;
+		}
+
+		button {
+			padding: 5px;
+		}
+
+		details {
+			padding: 20px;
+			background: #fff;
+			margin: 20px 0;
+		}
+
+		summary {
+			font-size: 14px;
+			border-bottom: 2px solid #339bb9;
+			padding: 5px;
+			margin-bottom: 10px;
+		}
+
+		.code {
+			width: 95%;
+			background: #e3e3e3;
+			border-radius: 5px;
+			padding: 5px;
+			line-height: 20px;
+			height: auto;
+			display: block;
+			overflow: visible;
+			height: 500px;
+		}
+	</style>
+	<script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy-min.js" charset="utf-8"></script>
+	<script type="text/javascript">
+		var S = KISSY;
+		S.Config.debug = true;
+		if (S.Config.debug) {
+			var srcPath = "../../../";
+			S.config({
+				packages: [
+					{
+						name                  : "gallery",
+						path                  : srcPath,
+						charset               : "utf-8",
+						ignorePackageNameInUri: true
+					}
+				]
+			});
+		}
+	</script>
+</head>
+<body>
+	<h1>AutoComplete组件</h1>
+	<h4>author : Shuke </h4>
+
+	<details open>
+		<summary>Email地址输入自动完成</summary>
+		<form>
+			<p><label for="J_Test">收件人：</label><input type="text" id="J_Test"/>
+				<button type="button" id="showmessage">显示提示信息</button>
+				<span id="J_SelectedText"></span></p>
+		</form>
+	</details>
+	<script>
+		S.use('gallery/autocomplete/1.0/index', function (S, Autocomplete) {
+
+			var emails = {
+				emails: [{
+					name: 'Adams',
+					email: 'adams@tmall.com'
+				},{
+					name: 'Albert',
+					email: 'albert@tmall.com'
+				},{
+					name: 'Allen',
+					email: 'allen@tmall.com'
+				},{
+					name: 'Bell',
+					email: 'bell@taobao.com'
+				},{
+					name: 'Bob',
+					email: 'bob@taobao.com'
+				},{
+					name: 'David',
+					email: 'david@etao.com'
+				},{
+					name: 'Edison',
+					email: 'edison@etao.com'
+				},{
+					name: 'Edward',
+					email: 'edward@etao.com'
+				},{
+					name: 'Jack',
+					email: 'jack@taobao.com'
+				},{
+					name: 'Kevin',
+					email: 'kevin@aliyun.com'
+				},{
+					name: 'Lucy',
+					email: 'lucy@taobao.com'
+				},{
+					name: 'Lily',
+					email: 'lily@alibaba-inc.com'
+				},{
+					name: 'Mary',
+					email: 'mary@taobao.com'
+				},{
+					name: 'Sophia',
+					email: 'sophia@aliyun.com'
+				},{
+					name: 'Smith',
+					email: 'smith@aliyun.com'
+				},{
+					name: 'Terry',
+					email: 'terry@yahoo.com'
+				},{
+					name: 'Webb',
+					email: 'webb@etao.com'
+				},{
+					name: 'Yale',
+					email: 'yale@taobao.com'
+				},{
+					name: 'Zakas',
+					email: 'zakas@yahoo.com'
+				}]
+			};
+
+
+			var autocomplete = new Autocomplete({
+				inputNode        : '#J_Test',
+				source           : emails,
+				resultListLocator: function(results){
+					var ret = [];
+					var query = S.trim(this.get('value'));
+					var reg = new RegExp(query, 'gi');
+					S.each(results.emails, function(_item){
+						if(_item.name.match(reg)){
+							ret.push(S.clone(_item));
+						}
+					});
+					return ret;
+				},//过滤结果
+				resultTextLocator: 'name',//指定文本内容
+				activeFirstItem  : false,
+				resultFormatter  : function (query, results) {//对展示进行格式化
+					var result = [];
+					var tpl = '<div class="ks-ac-item-inner"><span class="ks-ac-name">{name}</span><span class="ks-ac-intro">{email}</span></div>';
+					S.each(results, function(_item){
+						result.push(S.substitute(tpl, {
+							name: _item.raw.name,
+							email: _item.raw.email
+						}));
+					});
+					return result;
+				}
+			});
+			autocomplete.on('select', function (e) {
+				console.log(e);
+				/*var url = 'http://s.taobao.com/search?q=' + e.result.text +
+						'&commend=all&ssid=s5-e-p1&search_type=item&sourceId=tb.index&spm=1.1000386.5803581.d4908513&suggest=0_3&source=suggest&wq=' +
+						e.currentTarget.get('value');
+				if(e.result.raw['index'] !== undefined){
+					url += '&cat=' + e.result.raw[1];
+				}
+				S.one('#result').html('<a href="'+ url + '">' + e.result.text + '</a>');
+				//S.one('#result').html(S.one('#J_SelectedText').html() + '|' + e.result.text + '--------' + e.result.raw.cityCode);*/
+			});
+		});
+	</script>
+</body>
