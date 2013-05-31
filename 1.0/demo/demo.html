@@ -423,13 +423,13 @@
 				'<div class="tab-content J_TabContent">{{#keywords}}' +
 				'<div class="J_AcItem" data-sid="{{sid}}"><span class="ks-suggest-key">{{key}}</span></div>' +
 				'{{/keywords}}</div></div>';
-
+		var source = 'http://suggest.taobao.com/sug?q={query}';
 		var autocomplete = new Autocomplete({
 			inputNode        : '#q',
 			//source           : 'http://kezhan.trip.taobao.com/citysuggest.do?t=0&q={query}',
-			source           : 'http://suggest.taobao.com/sug?q={query}',
-			hotSource        : hotsource,
-			hotTemplate      : hotTemplate,
+			source           : source,
+			//hotSource        : hotsource,
+			//hotTemplate      : hotTemplate,
 			hotResultsFormatter: function(data){
 				var results = {};
 				data.keywords = S.map(data.keywords,function (keyword){
@@ -498,7 +498,7 @@
 						//类别数据
 						result.push(S.substitute(catTpl, {
 							index: raw['index'],
-							keyword: raw[2],
+							keyword: raw[2] || query,
 							catid: raw[1],
 							catname: raw[0]
 						}));
@@ -525,14 +525,32 @@
 			shop: 'ssrch'
 		}
 		S.all('#J_Search li').on('click', function(e){
+			//UI变化
+			e.stopPropagation();
 			e.preventDefault();
 			S.all('#J_Search li').removeClass('selected');
 			var node = new S.Node(this);
 			node.addClass('selected');
-			var area = map[node.data('searchtype')];
-			var source = autocomplete.get('source');
-			console.log(source);
-			autocomplete.set('source');
+			S.one('#J_Search input')[0].focus();
+
+			//动态更改source
+			var area = map[node.attr('data-searchtype')];
+			var newSource = source;
+			area && (newSource += '&area=' + area);
+			console.log(newSource);
+			autocomplete._cache = {};
+			autocomplete.set('source', newSource);
+			//
+			/*setTimeout(function(){
+				autocomplete.set('query', {
+					query: S.one('#J_Search input').val()
+				});
+			}, 0);*/
+
+			autocomplete.set('query', {
+				query: S.one('#J_Search input').val()
+			});
+
 		});
 	});
 </script>
