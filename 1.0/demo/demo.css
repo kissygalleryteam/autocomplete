@@ -153,3 +153,7 @@ ul, ol {
 	text-decoration: underline;
 	color: #0072DB;
 }
+
+.ks-email-wrap{
+	display: inline-block;
+}

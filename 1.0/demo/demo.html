@@ -3,7 +3,7 @@
 <head>
     <meta charset="gbk"/>
     <title>AutoComplete组件</title>
-    <script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy-min.js" charset="utf-8"></script>
+    <script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy.js" charset="utf-8"></script>
 	<link rel="stylesheet" href="http://a.tbcdn.cn/??p/global/1.0/global-min.css,p/fp/2013/assets/build/first-screen.css,p/fp/2013/assets/build/second-screen.css?t=20130520">
 	<link rel="stylesheet" href="demo.css">
     <script type="text/javascript">
@@ -555,7 +555,7 @@
 	});
 </script>
 <script>
-	S.use('gallery/autocomplete/1.0/index', function (S, Autocomplete) {
+	S.use('gallery/autocomplete/1.0/multiple', function (S, Multiple) {
 
 		var emails = {
 			emails: [{
@@ -618,24 +618,25 @@
 			}]
 		};
 
+		var node = '#email_input';
 
-		var autocomplete = new Autocomplete({
-			inputNode        : '#email_input',
-			source           : emails,
+		var multipleComp = new Multiple(node, {
+			source: emails,
+			resultTextLocator: 'name',//指定文本内容
+			resultIdLocator: 'email',//指定唯一标识字段
+			activeFirstItem  : false,
 			resultListLocator: function(results){
 				var ret = [];
 				var query = S.trim(this.get('value'));
 				var reg = new RegExp(query, 'gi');
-				S.each(results.emails, function(_item){
+				S.each(results['emails'], function(_item){
 					if(_item.name.match(reg)){
 						ret.push(S.clone(_item));
 					}
 				});
 				return ret;
 			},//过滤结果
-			resultTextLocator: 'name',//指定文本内容
-			activeFirstItem  : false,
-			resultFormatter  : function (query, results) {//对展示进行格式化
+			resultFormatter  : function (query, results) {//对下拉展示进行格式化
 				var result = [];
 				var tpl = '<div class="ks-ac-item-inner"><span class="ks-ac-name">{name}</span><span class="ks-ac-intro">{email}</span></div>';
 				S.each(results, function(_item){
@@ -645,19 +646,23 @@
 					}));
 				});
 				return result;
+			},
+			insertFormatter: function(results){
+				var result = [];
+				var tpl = '<div class="ks-multiple-item-inner"><span class="ks-ac-mul-name">{name}</span>' +
+						'<span class="ks-ac-mul-intro">&lt;{email}&gt;</span>' +
+						'<span class="ks-ac-mul-delete" data-id="{id}">x</span></div>';
+				S.each(results, function(_item){
+					result.push(S.substitute(tpl, {
+						name: _item.raw.name,
+						email: _item.raw.email,
+						id: _item.raw.email
+					}));
+				});
+				return result;
 			}
 		});
-		autocomplete.on('select', function (e) {
-			console.log(e);
-			/*var url = 'http://s.taobao.com/search?q=' + e.result.text +
-			 '&commend=all&ssid=s5-e-p1&search_type=item&sourceId=tb.index&spm=1.1000386.5803581.d4908513&suggest=0_3&source=suggest&wq=' +
-			 e.currentTarget.get('value');
-			 if(e.result.raw['index'] !== undefined){
-			 url += '&cat=' + e.result.raw[1];
-			 }
-			 S.one('#result').html('<a href="'+ url + '">' + e.result.text + '</a>');
-			 //S.one('#result').html(S.one('#J_SelectedText').html() + '|' + e.result.text + '--------' + e.result.raw.cityCode);*/
-		});
+
 	});
 </script>
 </body>
