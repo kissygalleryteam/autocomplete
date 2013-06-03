@@ -44,7 +44,7 @@ KISSY.add(function (S, AutoComplete) {
         insertFormatter: {
             value: undefined
         }
-    }
+    };
 
     S.extend(Multiple, AutoComplete);
 
@@ -68,18 +68,13 @@ KISSY.add(function (S, AutoComplete) {
         bindEvent: function(){
             var self = this;
             //keydown事件绑定
-            var selectEnterFlag = false;
-            var limit = !self.get('inputLimit');
+            var limit = self.get('inputLimit');
             self.container.on('keydown', function(e){
-                if(!selectEnterFlag){
-                    //只对不是从列表中enter选择的
-                    if(!limit && e.keyCode == 13){
-                        //回车键，添加item
-                        //只有无输入限制（必须从下拉列表中点选）时才响应回车添加
-                        self.addItem(S.trim(this.value));
-                        this.value = '';
-                    }
-                    selectEnterFlag = !selectEnterFlag;
+                if(!limit && e.keyCode == 13 && this.value){
+                    //回车键，添加item
+                    //只有无输入限制（必须从下拉列表中点选）时才响应回车添加
+                    self.addItem(S.trim(this.value));
+                    this.value = '';
                 }
             });
             self.container.siblings('div.ks-multiple-list').delegate('click', 'span.ks-ac-mul-delete', function(e){
@@ -90,7 +85,6 @@ KISSY.add(function (S, AutoComplete) {
 
             self.on('select', function(e){
                 self.addItem(e.result);
-                selectEnterFlag = true;
                 self.container.val('');
             })
 
@@ -103,6 +97,7 @@ KISSY.add(function (S, AutoComplete) {
          * @param item
          */
         addItem: function(item){
+            var self = this;
             if(S.isString(item)){
                 var val = item;
                 item = {raw: {}};

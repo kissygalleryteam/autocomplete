@@ -89,9 +89,10 @@
 <details open>
 	<summary>Email地址输入自动完成</summary>
 	<form>
-		<p><label for="J_Test">收件人：</label><input type="text" id="email_input"/>
-			<button type="button" id="showmessage">显示提示信息</button>
-			<span id="J_SelectedText"></span></p>
+		<p><label for="email_input">收件人：</label><input type="text" id="email_input"/>
+			<button type="button" id="show_emails">显示收件人列表</button>
+		</p>
+		<p id="email_list"></p>
 	</form>
 </details>
 
@@ -625,6 +626,7 @@
 			resultTextLocator: 'name',//指定文本内容
 			resultIdLocator: 'email',//指定唯一标识字段
 			activeFirstItem  : false,
+			inputLimit: true,       //指定是否限制只能输入下拉列表中的项
 			resultListLocator: function(results){
 				var ret = [];
 				var query = S.trim(this.get('value'));
@@ -663,6 +665,10 @@
 			}
 		});
 
+		S.one('#show_emails').on('click', function(){
+			alert(multipleComp.get('dataList'));
+			S.log(multipleComp.get('dataList'));
+		});
 	});
 </script>
 </body>
