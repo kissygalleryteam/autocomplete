@@ -39,6 +39,15 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
                 '<div class="tab-pannel J_Pannel">{{#tabdata}}<dl><dt>{{dt}}</dt><dd>{{#dd}}<span><a data-sid="{{sid}}" class="J_AcItem" tabindex="-1" href="javascript:void(0);" target="_self">{{cityName}}</a></span>{{/dd}}</dd></dl>{{/tabdata}}</div>{{/results}}</div></div>'
         },
         /**
+         * 热门推荐的宽度
+         * @attribute hotWidth
+         * @type number|NodeList|null
+         * @default null
+         **/
+        hotWidth : {
+            value : 320
+        },
+        /**
          * 热门推荐的数据源，支持JSONP和本地数据，传参类型为字符串时将被判断为JSONP数据源
          * @attribute hotSource
          * @type String|Object
@@ -102,15 +111,6 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
                 });
                 return results;
             }
-        },
-        /**
-         * 热门推荐的宽度
-         * @attribute hotWidth
-         * @type number|NodeList|null
-         * @default null
-         **/
-        hotWidth : {
-            value : 320
         },
         /**
          * 提供一个数据的预处理的机制，要求返回数据对象.

@@ -9,7 +9,8 @@ YUI.add("yuidoc-meta", function(Y) {
     "modules": [
         "autocomplete",
         "autocomplete-hot",
-        "autocomplete-rich"
+        "autocomplete-rich",
+        "autocomplete_multiple"
     ],
     "allModules": [
         {
@@ -26,6 +27,10 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "autocomplete-rich",
             "name": "autocomplete-rich",
             "description": "AutocompleteRich主要基于AutocompleteBase，利用afterQueryChange和results两个事件创建包含更多交互的富应用"
+        },
+        {
+            "displayName": "autocomplete/multiple",
+            "name": "autocomplete_multiple"
         }
     ]
 } };

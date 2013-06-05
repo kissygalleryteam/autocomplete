@@ -16,12 +16,6 @@ KISSY.add(function (S){
 
     var QUERY = 'query';
     var RESULTS = 'results';
-    /**
-     * 推荐的数据发生变化
-     @event results
-     @param {Array} 推荐的数据结果
-     @param {String} 查询的关键字
-     */
     var EVT_RESULTS = 'results';
     /**
      * query发生变化
@@ -141,17 +135,17 @@ KISSY.add(function (S){
          * @default null
          **/
         resultFormatter : {
-            value : null
+            value : function (query, results) {
+                return S.map(results, function (_item) {
+                    return S.substitute('<div class="ks-ac-item-inner"><span class="ks-ac-name">{cityname}</span><span class="ks-ac-intro">{py}</span></div>', {
+                        cityname: _item.text,
+                        py      : _item.raw.py
+                    });
+                });
+            }
         },
         /**
-         * 搜索结果高亮处理函数
-         * @type {Function}
-        resultHighlighter : {
-            value : null ,
-            setter : '_setResultHighlighter'
-        },*/
-        /**
-         * 数据结果返回时的第一个处理函数，指定数组位置
+         * 数据结果返回时的第一个处理函数，指定数组位置,同时可以对数据源进行二次加工
          * @attribute resultListLocator
          * @type String | Function
          * @default null
@@ -163,12 +157,10 @@ KISSY.add(function (S){
         /**
          * 存储当前的查询结果
          */
+
         results : {
             value : []
         },
-        /**
-         * 在触发选择后，对当前文本的操作
-         */
         /**
          * 指定每一个数据项被选中后填入到输入框的内容,可以指定一个字段或者用函数返回一个拼接的字段
          * @attribute resultTextLocator
@@ -412,6 +404,13 @@ KISSY.add(function (S){
 
             facade.results = results;
             this.set(RESULTS , results);
+
+            /**
+             匹配到的数据返回且发生变化
+             @event results
+             @param {Array} 推荐的数据结果
+             @param {String} 查询的关键字
+             */
             this.fire(EVT_RESULTS, facade);
         },
         /**

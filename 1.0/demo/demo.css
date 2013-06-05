@@ -48,39 +48,17 @@ summary {
 	overflow: visible;
 	height: 500px;
 }
-.ks-ac-near-tip{
-	border-top: 1px dashed #e3e3e3;
-	padding: 4px 1px;
-	margin: 0 4px;
-}
-.ks-ac-item-inner-sub{
-	padding-left: 1em;
-	color: #808080;
-}
-
 .ks-autocomplete {
 	overflow: hidden;
 	_margin-left: -2px;
 	_margin-top: -3px;
 	background: white;
-	border: 1px solid #999;
 	z-index: 99999;
 }
 ul, ol {
 	list-style: none;
 }
-.ks-autocomplete div {
-	color: #404040;
-	padding: 1px 0 2px;
-	font-size: 12px;
-	line-height: 18px;
-	float: left;
-	width: 100%;
-}
-.ks-autocomplete div {
-	line-height: 24px;
-	padding: 0;
-}
+
 .ks-suggest-container div, .ks-suggest-footer {
 	overflow: hidden;
 	zoom: 1;
@@ -138,9 +116,9 @@ ul, ol {
 
 .ks-ac-hot-keyword {
 	padding: 5px 0;
+  zoom: 1;
 	background: #fff;
 	overflow: hidden;
-	zoom: 1;
 	border: 1px solid #bec2c4;
 	border-right-color: #bec2c4;
 	border-bottom-color: #bec2c4;

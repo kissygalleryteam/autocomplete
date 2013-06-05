@@ -9,7 +9,7 @@ KISSY.add(function (S ,Node , Event , O){
 
     /**
      * AutocompleteRich主要基于AutocompleteBase，利用afterQueryChange和results两个事件创建包含更多交互的富应用
-     * @class AutocompleteRich
+     * @class  AutocompleteRich
      * @extend S.Base
      */
     var QUERY = 'query';
@@ -122,14 +122,15 @@ KISSY.add(function (S ,Node , Event , O){
          **/
         align : {
             value : {
-                node : null,
-                points : ['bl', 'tl'],
-                offset : [0,-1],
-                overflow:{
+                node    : null,
+                points  : ['bl', 'tl'],
+                offset  : [0, -1],
+                overflow: {
                     adjustX: 0, // 当对象不能处于可显示区域时，自动调整横坐标
                     adjustY: 0// 当对象不能处于可显示区域时，自动调整纵坐标
                 }
-            }
+            },
+            setter : '_setAlign'
         },
         /**
          * 最外层容器HTML片段
@@ -216,13 +217,12 @@ KISSY.add(function (S ,Node , Event , O){
         },
         _renderRich : function (){
             var input_node = this.get('inputNode');
-            var _align = this.get('align');
-            _align.node = input_node;
-            this.set('align', _align);
             input_node.addClass(CLS_AC_INPUT);
+            var _align = this.get('align');
+            _align.node = _align.node ? _align.node : input_node;
             //基于overlay组件
             var overlay = this.overlay = new O({
-                align: this.get('align'),
+                align: _align,
                 content : this.get('boundingBoxTemplate')
             });
             overlay.render();
@@ -381,9 +381,9 @@ KISSY.add(function (S ,Node , Event , O){
             var result = item_node.data(RESULT);
 
             /**
-             当用户选定某一项后触发
+             * 用户选定某一项后触发
              * @event select
-             * @param {Object} results
+             * @param {Object} results {node : 触发事件的节点,result:{text:文本,display:显示的HTML代码,raw:对应的数据源}}
              **/
             this.fire(EVT_SELECT,{
                 node : item_node,
@@ -612,6 +612,31 @@ KISSY.add(function (S ,Node , Event , O){
             }
             if (val === null) {
                 return this.get('inputNode').outerWidth();
+            }
+        },
+        /**
+         * 对齐的配置进行默认值的处理
+         * @param cfg
+         * @returns {{node: null, points: Array, offset: Array, overflow: {adjustX: number, adjustY: number}}}
+         * @private
+         */
+        _setAlign : function (cfg){
+            var _cfg = {
+                node    : null,
+                points  : ['bl', 'tl'],
+                offset  : [0, -1],
+                overflow: {
+                    adjustX: 0, // 当对象不能处于可显示区域时，自动调整横坐标
+                    adjustY: 0// 当对象不能处于可显示区域时，自动调整纵坐标
+                }
+            };
+            S.mix(_cfg , cfg , undefined , undefined , true);
+            _cfg.node = S.isString(_cfg.node) ? S.one(_cfg.node) : _cfg.node;
+            if (_cfg.node) {
+                return _cfg;
+            }else{
+                _cfg.node = this.get('inputNode');
+                return _cfg;
             }
         }
     };

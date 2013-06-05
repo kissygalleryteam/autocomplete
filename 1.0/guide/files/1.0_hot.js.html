@@ -59,6 +59,8 @@
             
                 <li><a href="../modules/autocomplete-rich.html">autocomplete-rich</a></li>
             
+                <li><a href="../modules/autocomplete_multiple.html">autocomplete/multiple</a></li>
+            
             </ul>
         </div>
     </div>
@@ -139,6 +141,15 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
                 &#x27;&lt;div class=&quot;tab-pannel J_Pannel&quot;&gt;{{#tabdata}}&lt;dl&gt;&lt;dt&gt;{{dt}}&lt;/dt&gt;&lt;dd&gt;{{#dd}}&lt;span&gt;&lt;a data-sid=&quot;{{sid}}&quot; class=&quot;J_AcItem&quot; tabindex=&quot;-1&quot; href=&quot;javascript:void(0);&quot; target=&quot;_self&quot;&gt;{{cityName}}&lt;/a&gt;&lt;/span&gt;{{/dd}}&lt;/dd&gt;&lt;/dl&gt;{{/tabdata}}&lt;/div&gt;{{/results}}&lt;/div&gt;&lt;/div&gt;&#x27;
         },
         /**
+         * 热门推荐的宽度
+         * @attribute hotWidth
+         * @type number|NodeList|null
+         * @default null
+         **/
+        hotWidth : {
+            value : 320
+        },
+        /**
          * 热门推荐的数据源，支持JSONP和本地数据，传参类型为字符串时将被判断为JSONP数据源
          * @attribute hotSource
          * @type String|Object
@@ -202,15 +213,6 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
                 });
                 return results;
             }
-        },
-        /**
-         * 热门推荐的宽度
-         * @attribute hotWidth
-         * @type number|NodeList|null
-         * @default null
-         **/
-        hotWidth : {
-            value : 320
         },
         /**
          * 提供一个数据的预处理的机制，要求返回数据对象.
