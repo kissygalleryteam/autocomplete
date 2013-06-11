@@ -1,41 +1,26 @@
-## 综述
-Autocomplete组件
+## Autocomplete
 
-组件分为3个部分：
+* 版本：1.0
+* API：[http://gallery.kissyui.com/autocomplete/1.0/guide/main.html](http://gallery.kissyui.com/autocomplete/1.0/guide/index.html)
+* demo：[http://gallery.kissyui.com/autocomplete/1.0/demo/index.html](http://gallery.kissyui.com/autocomplete/1.0/demo/index.html)
 
-* Base: 底层数据逻辑处理 ,提供 **afterQueryChange** 和 **afterResultsChange** 两个事件，可基于此做二次开发
-* Rich: 输入过程中的辅助提示 ，提供各种配置参数 
-* Hot: 聚焦到输入框时，展示热门推荐的提示。和Base Rich完全隔离
+##功能
+* 支持本地或远程，并对匹配结果进行二次开发
+* 支持热门推荐，及没有任何输入时暂时默认推荐内容
+* 支持多个项的输入，自行指定分隔符
+* 更多演示请看DEMO和查阅API
 
-## 组件快速使用
-
+##快速使用
 
 ```javascript
-
-		var autocomplete = new Autocomplete({
-            inputNode : '#J_Test',//绑定的节点
-            source : 'http://s.jipiao.trip.taobao.com/city_search.do?lines={maxResults}&q={query}',//数据源，支持jsonp 或者本地的Object && Array
-            resultListLocator : 'result',//指定list依赖的数组在数据源的位置
-            resultTextLocator : 'cityName',//指定一个数据项的字段为文本内容
-            hotSource : 'http://www.taobao.com/go/rgn/trip/chinahotcity_jsonp.php',//热门推荐的数据，如果不指定，则不展示热门推荐
-            resultFormatter : function (query, results){//对展示进行格式化
-                return S.map(results,function (_item){
-                    return S.substitute('<div class="ks-ac-item-inner"><span class="ks-ac-name">{cityname}</span><span class="ks-ac-intro">{py}</span></div>',{
-                        cityname : _item.text.replace(new RegExp(query,'gi') , '<span class="ks-ac-message-hightlight">'+ query +'</span>'),
-                        py : _item.raw.py.replace(new RegExp(query,'gi') , '<span class="ks-ac-message-hightlight">'+ query +'</span>')
-                    });
-                });
-            }
-        });
-
+S.use('gallery/autocomplete/1.0/index', function (S, Autocomplete) {
+var autocomplete = new Autocomplete({
+    inputNode        : '#J_NeCity',
+    source           : 'http://s.jipiao.trip.taobao.com/city_search.do?lines={maxResults}&q={query}',
+    resultListLocator: 'result',//指定返回数据里的数组位置
+    resultTextLocator: 'cityName',//指定回填的文本内容
+  hotSource : 'http://www.taobao.com/go/rgn/trip/chinahotcity_jsonp.php'//不指定及没有热门推荐，必须按照此数据模板提供，其他数据格式需要自行重新配置hotResultsFormatter和hotResultsLocator
+});
+})
 ```
 
-##基础配置
-
-|Attribute:属性名称|Default:默认值|Description:说明|
-|:--------|:------|:----------|
-|inputNode|null|**Required** {String|NodeList} 绑定的输入框节点|
-|source|null|**Required** {String|Object|Array}支持JSONP,本地数据支持Object&Array,传入字符串时认为是一个jsonp请求的url|
-|resultListLocator|null|**Required** {String|Function} 指定推荐的数据结果在数据源中的位置|
-|resultTextLocator|null|**Required** {String|Function} 指定每一个数据项对应的填充到输入框的数据|
-|maxResults|1000|展示的搜索结果最大数值|
