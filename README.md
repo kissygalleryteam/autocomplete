@@ -1,7 +1,7 @@
 ## Autocomplete
 
 * 版本：1.0
-* API：[http://gallery.kissyui.com/autocomplete/1.0/guide/index.html](http://gallery.kissyui.com/autocomplete/1.0/guide/index.html)
+* API：[http://gallery.kissyui.com/autocomplete/1.0/guide/main.html](http://gallery.kissyui.com/autocomplete/1.0/guide/main.html)
 * demo：[http://gallery.kissyui.com/autocomplete/1.0/demo/index.html](http://gallery.kissyui.com/autocomplete/1.0/demo/index.html)
 
 ##功能
@@ -23,6 +23,7 @@ var autocomplete = new Autocomplete({
 });
 })
 ```
+
 
 ## changelog
 
