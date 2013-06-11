@@ -1549,7 +1549,7 @@ KISSY.add('gallery/autocomplete/1.0/index',function (S, AcBase, AcRich , AcHot) 
         return Autocomplete;
     };
     return _extend('Autocomplete' , S.Base , [AcBase , AcRich, AcHot],{},{});
-}, {requires:['./base' , './rich' , './hot' ,'./autocomplete-min.css']});
+}, {requires:['./base' , './rich' , './hot' ,'./autocomplete.css']});
 
 
 

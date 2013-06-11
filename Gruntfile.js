@@ -66,9 +66,13 @@ module.exports = function(grunt) {
                 }
             },
             base: {
-                files: {
-                    '<%= pkg.version %>/build/index-min.js': ['<%= pkg.version %>/build/index.js']
-                }
+                files :[{
+                    expand : true,
+                    cwd : '<%= pkg.version %>/',
+                    src : ['./*.js','!./*-min.js'],
+                    dest : '<%= pkg.version %>/build/',
+                    ext : '-min.js'
+                }]
             }
         },
         yuidoc: {
