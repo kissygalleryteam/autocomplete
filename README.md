@@ -24,6 +24,7 @@ var autocomplete = new Autocomplete({
 })
 ```
 
+
 ## changelog
 
 ### V1.0
