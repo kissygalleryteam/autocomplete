@@ -53,7 +53,9 @@ KISSY.add(function (S, AcBase, AcRich , AcHot) {
         Autocomplete.NAME = name ;
         return Autocomplete;
     };
-    return _extend('Autocomplete' , S.Base , [AcBase , AcRich, AcHot],{},{});
+    var AutoComplete = _extend('Autocomplete' , S.Base , [AcBase , AcRich, AcHot],{},{});
+    AutoComplete.extend = _extend ;
+    return AutoComplete;
 }, {requires:['./base' , './rich' , './hot' ,'./autocomplete.css']});
 
 

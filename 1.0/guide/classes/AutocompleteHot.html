@@ -256,19 +256,7 @@
                     <ul class="index-list attrs extends">
                         
                             <li class="index-item attr">
-                                <a href="#attr_hotSource">hotSource</a>
-                            </li>
-                        
-                            <li class="index-item attr">
-                                <a href="#attr_hotTemplate">hotTemplate</a>
-                            </li>
-                        
-                            <li class="index-item attr">
-                                <a href="#attr_hotWidth">hotWidth</a>
-                            </li>
-                        
-                            <li class="index-item attr">
-                                <a href="#attr_"></a>
+                                <a href="#attr_hotActiveTab">hotActiveTab</a>
                             </li>
                         
                             <li class="index-item attr">
@@ -280,11 +268,55 @@
                             </li>
                         
                             <li class="index-item attr">
+                                <a href="#attr_hotResultsFormatter">hotResultsFormatter</a>
+                            </li>
+                        
+                            <li class="index-item attr">
                                 <a href="#attr_hotResultsLocator">hotResultsLocator</a>
                             </li>
                         
                             <li class="index-item attr">
+                                <a href="#attr_hotResultsLocator">hotResultsLocator</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_hotSource">hotSource</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_hotSource">hotSource</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_hotTemplate">hotTemplate</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_"></a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_hotTemplate">hotTemplate</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_"></a>
+                            </li>
+                        
+                            <li class="index-item attr">
                                 <a href="#attr_hotVisible">hotVisible</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_hotVisible">hotVisible</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_hotWidth">hotWidth</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_hotWidth">hotWidth</a>
                             </li>
                         
                     </ul>
@@ -301,6 +333,405 @@
         
             <div id="attrs" class="api-class-tabpanel">
                 <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_hotActiveTab" class="attr item">
+    <a name="config_hotActiveTab"></a> 
+    <h3 class="name"><code>hotActiveTab</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/1.0_build_index.js.html#l1287"><code>1.0&#x2F;build&#x2F;index.js:1287</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>当前热门推荐被选中tab</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_hotActiveTab" class="attr item">
+    <a name="config_hotActiveTab"></a> 
+    <h3 class="name"><code>hotActiveTab</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/1.0_hot.js.html#l69"><code>1.0&#x2F;hot.js:69</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>当前热门推荐被选中tab</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_hotResultsFormatter" class="attr item">
+    <a name="config_hotResultsFormatter"></a> 
+    <h3 class="name"><code>hotResultsFormatter</code></h3>
+    <span class="type">Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/1.0_build_index.js.html#l1296"><code>1.0&#x2F;build&#x2F;index.js:1296</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>热门数据格式化同时要求数据实现绑定</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> function (data){
+                        var results = {};
+                        S.each(data.results,function (_iObj){
+                            S.each(_iObj.tabdata , function (_jObj){
+                                S.each(_jObj.dd , function (_kObj){
+                                    var id = &#x27;hot_source_id_&#x27;+ S.guid();//必需
+                                    _kObj.raw = S.mix({}, _kObj);
+                                    _kObj.sid = id;//必需
+                                    _kObj.text = _kObj.cityName;
+                                    results[id] = _kObj;
+                                })
+                            });
+                        });
+                        return results;
+                    }</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_hotResultsFormatter" class="attr item">
+    <a name="config_hotResultsFormatter"></a> 
+    <h3 class="name"><code>hotResultsFormatter</code></h3>
+    <span class="type">Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/1.0_hot.js.html#l78"><code>1.0&#x2F;hot.js:78</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>热门数据格式化同时要求数据实现绑定</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> function (data){
+                        var results = {};
+                        S.each(data.results,function (_iObj){
+                            S.each(_iObj.tabdata , function (_jObj){
+                                S.each(_jObj.dd , function (_kObj){
+                                    var id = &#x27;hot_source_id_&#x27;+ S.guid();//必需
+                                    _kObj.raw = S.mix({}, _kObj);
+                                    _kObj.sid = id;//必需
+                                    _kObj.text = _kObj.cityName;
+                                    results[id] = _kObj;
+                                })
+                            });
+                        });
+                        return results;
+                    }</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_hotResultsLocator" class="attr item">
+    <a name="config_hotResultsLocator"></a> 
+    <h3 class="name"><code>hotResultsLocator</code></h3>
+    <span class="type">Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/1.0_build_index.js.html#l1333"><code>1.0&#x2F;build&#x2F;index.js:1333</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>提供一个数据的预处理的机制，要求返回数据对象.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_hotResultsLocator" class="attr item">
+    <a name="config_hotResultsLocator"></a> 
+    <h3 class="name"><code>hotResultsLocator</code></h3>
+    <span class="type">Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/1.0_hot.js.html#l115"><code>1.0&#x2F;hot.js:115</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>提供一个数据的预处理的机制，要求返回数据对象.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_hotSource" class="attr item">
+    <a name="config_hotSource"></a> 
+    <h3 class="name"><code>hotSource</code></h3>
+    <span class="type">String | Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/1.0_build_index.js.html#l1268"><code>1.0&#x2F;build&#x2F;index.js:1268</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>热门推荐的数据源，支持JSONP和本地数据，传参类型为字符串时将被判断为JSONP数据源</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="attr_hotSource" class="attr item">
@@ -412,10 +843,10 @@
 </div>
 
                 
-                    <div id="attr_hotWidth" class="attr item">
-    <a name="config_hotWidth"></a> 
-    <h3 class="name"><code>hotWidth</code></h3>
-    <span class="type">Number | NodeList | Null</span>
+                    <div id="attr_" class="attr item">
+    <a name="config_"></a> 
+    <h3 class="name"><code></code></h3>
+    <span class="type">String</span>
 
     
 
@@ -442,7 +873,7 @@
             
         
         
-        <a href="../files/1.0_hot.js.html#l41"><code>1.0&#x2F;hot.js:41</code></a>
+        <a href="../files/1.0_build_index.js.html#l1278"><code>1.0&#x2F;build&#x2F;index.js:1278</code></a>
         
         </p>
 
@@ -452,11 +883,65 @@
     </div>
 
     <div class="description">
-        <p>热门推荐的宽度</p>
+        <p>热门推荐数据源指定为JSONP时，callback的参数名</p>
     </div>
 
     
-        <p><strong>Default:</strong> null</p>
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_hotTemplate" class="attr item">
+    <a name="config_hotTemplate"></a> 
+    <h3 class="name"><code>hotTemplate</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/1.0_build_index.js.html#l1244"><code>1.0&#x2F;build&#x2F;index.js:1244</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>热门推荐的模板，数据源来自hotSource参数，内容渲染到this.hotNode节点内</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;&lt;div class=&quot;ks-ac-hot-city&quot;&gt;&lt;div class=&quot;ks-ac-acinput-hot-tit&quot;&gt;热门城市/国家(支持汉字/拼音/英文字母)&lt;/div&gt;&#x27; +
+                        &#x27;&lt;ul class=&quot;tab-nav&quot;&gt;{{#results}}&lt;li class=&quot;J_TabItem&quot;&gt;{{tabname}}&lt;/li&gt;{{/results}}&lt;/ul&gt;&#x27; +
+                        &#x27;&lt;div class=&quot;tab-content J_TabContent&quot;&gt;{{#results}}&#x27; +
+                        &#x27;&lt;div class=&quot;tab-pannel J_Pannel&quot;&gt;{{#tabdata}}&lt;dl&gt;&lt;dt&gt;{{dt}}&lt;/dt&gt;&lt;dd&gt;{{#dd}}&lt;span&gt;&lt;a data-sid=&quot;{{sid}}&quot; class=&quot;J_AcItem&quot; tabindex=&quot;-1&quot; href=&quot;javascript:void(0);&quot; target=&quot;_self&quot;&gt;{{cityName}}&lt;/a&gt;&lt;/span&gt;{{/dd}}&lt;/dd&gt;&lt;/dl&gt;{{/tabdata}}&lt;/div&gt;{{/results}}&lt;/div&gt;&lt;/div&gt;&#x27;</p>
     
 
     
@@ -516,10 +1001,10 @@
 </div>
 
                 
-                    <div id="attr_hotActiveTab" class="attr item">
-    <a name="config_hotActiveTab"></a> 
-    <h3 class="name"><code>hotActiveTab</code></h3>
-    <span class="type">Number</span>
+                    <div id="attr_hotVisible" class="attr item">
+    <a name="config_hotVisible"></a> 
+    <h3 class="name"><code>hotVisible</code></h3>
+    <span class="type">Boolean</span>
 
     
 
@@ -546,7 +1031,7 @@
             
         
         
-        <a href="../files/1.0_hot.js.html#l69"><code>1.0&#x2F;hot.js:69</code></a>
+        <a href="../files/1.0_build_index.js.html#l1342"><code>1.0&#x2F;build&#x2F;index.js:1342</code></a>
         
         </p>
 
@@ -556,131 +1041,11 @@
     </div>
 
     <div class="description">
-        <p>当前热门推荐被选中tab</p>
+        <p>热门推荐层的可见状态</p>
     </div>
 
     
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="attr_hotResultsFormatter" class="attr item">
-    <a name="config_hotResultsFormatter"></a> 
-    <h3 class="name"><code>hotResultsFormatter</code></h3>
-    <span class="type">Function</span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/1.0_hot.js.html#l78"><code>1.0&#x2F;hot.js:78</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>热门数据格式化同时要求数据实现绑定</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> function (data){
-                        var results = {};
-                        S.each(data.results,function (_iObj){
-                            S.each(_iObj.tabdata , function (_jObj){
-                                S.each(_jObj.dd , function (_kObj){
-                                    var id = &#x27;hot_source_id_&#x27;+ S.guid();//必需
-                                    _kObj.raw = S.mix({}, _kObj);
-                                    _kObj.sid = id;//必需
-                                    _kObj.text = _kObj.cityName;
-                                    results[id] = _kObj;
-                                })
-                            });
-                        });
-                        return results;
-                    }</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="attr_hotResultsLocator" class="attr item">
-    <a name="config_hotResultsLocator"></a> 
-    <h3 class="name"><code>hotResultsLocator</code></h3>
-    <span class="type">Function</span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/1.0_hot.js.html#l115"><code>1.0&#x2F;hot.js:115</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>提供一个数据的预处理的机制，要求返回数据对象.</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
+        <p><strong>Default:</strong> false</p>
     
 
     
@@ -734,6 +1099,112 @@
 
     
         <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_hotWidth" class="attr item">
+    <a name="config_hotWidth"></a> 
+    <h3 class="name"><code>hotWidth</code></h3>
+    <span class="type">Number | NodeList | Null</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/1.0_hot.js.html#l41"><code>1.0&#x2F;hot.js:41</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>热门推荐的宽度</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_hotWidth" class="attr item">
+    <a name="config_hotWidth"></a> 
+    <h3 class="name"><code>hotWidth</code></h3>
+    <span class="type">Number | NodeList | Null</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/1.0_build_index.js.html#l1259"><code>1.0&#x2F;build&#x2F;index.js:1259</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>热门推荐的宽度</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
     
 
     
