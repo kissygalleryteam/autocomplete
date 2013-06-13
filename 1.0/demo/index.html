@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="demo.css">
     <script type="text/javascript">
         var S = KISSY;
+        S.Config.debug = true ;
         if (S.Config.debug) {
             var srcPath = "../../../";
             S.config({
@@ -561,6 +562,7 @@
 	<summary>Email地址输入自动完成</summary>
 	<form>
 		<p><label for="email_input">请输入多个城市：</label><input type="text" id="email_input"/>
+            <button type="button" id="show_emails">显示收件人列表</button>
 		</p>
 	</form>
 </details>
@@ -685,7 +687,6 @@
 	<summary>支持多个城市的输入，可以指定分隔符</summary>
 	<form>
 		<p><label for="email_input">收件人：</label><input type="text" id="J_Citys"/>
-			<button type="button" id="show_emails">显示收件人列表</button>
 		</p>
 		<p id="email_list"></p>
 	</form>
@@ -714,5 +715,83 @@
         });
     })
 </script>
+
+
+<details open>
+	<summary>可以继承AutocompleteBase二次开发，基于afterQueryChange和results两个事件</summary>
+	<form>
+		<p><label for="email_input">YUI Module Search：</label><input type="text" id="J_Yui"/>
+		</p>
+        <div class="nodelist" id="J_NodeList">
+
+        </div>
+	</form>
+    <style type="text/css">
+        .nodelist{
+            border:1px solid #ccc;
+            padding:10px;
+        }
+        .nodelist .list-item{
+            background: #efefef;
+            margin:1px 0;
+            padding:10px;
+        }
+        .nodelist .list-item p{
+            color:#808080;
+            font-size:10px;
+            padding:3px 2em;
+        }
+    </style>
+    <script type="text/javascript">
+        KISSY.add('gallery/autocomplete/1.0/menu' , function (S , RichBase , AcBase){
+            var Menu = RichBase.extend([AcBase],{
+                constructor : function Menu(){
+                    Menu.superclass.constructor.apply(this , arguments);
+                },
+                initializer : function (){
+                    if (!this.get('listNode')) {
+                        return;
+                    }
+                    this._bindMenu();
+                },
+                _bindMenu : function (){
+                    var listNode = this.get('listNode');
+                    this.on('results' , function (e){
+                        var _html = '';
+                        S.each(e.results , function (_item){
+                            _html += S.substitute('<div class="list-item">{displayName} <p>(url: <a target="_blank" href="http://yuilibrary.com{url}">{url}</a></p><p> Description: {description})</p></div>' , _item.raw);
+                        });
+                        listNode.html(_html);
+                    });
+                    this.on('afterQueryChange' , function (e){
+                        if(e.newVal.query === ''){
+                            this.get('listNode').html('');
+                        }
+                    });
+                }
+            },{
+                ATTRS : {
+                    listNode : {
+                        value :null,
+                        setter : function (val){
+                            return val instanceof S.NodeList ? val :  S.one(val);
+                        }
+                    }
+                }
+            });
+            return Menu;
+        }, {requires : ['rich-base','gallery/autocomplete/1.0/base']});
+        KISSY.use('gallery/autocomplete/1.0/menu' , function (S , AcYui){
+            new AcYui({
+                inputNode : '#J_Yui',
+                source : 'http://yuilibrary.com/api/v1/search/suggest?q={query}&count=50',
+                resultListLocator : 'data.results',
+                resultTextLocator : 'name',
+                listNode : '#J_NodeList'
+            })
+        });
+    </script>
+</details>
+
 </body>
 </html>

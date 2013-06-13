@@ -21,7 +21,9 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
     var SELECTOR_ITEM = '.' + CLS_ITEM;
     var SELECTOR_TAB = '.J_TabItem';
 
-    var AutoCompleteHot = function (){};
+    var AutoCompleteHot = function (){
+        this.initHot.apply(this , arguments);
+    };
     AutoCompleteHot.ATTRS = {
         /**
          * 热门推荐的模板，数据源来自hotSource参数，内容渲染到this.hotNode节点内
@@ -132,7 +134,7 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
         }
     };
     AutoCompleteHot.prototype = {
-        initializer : function (){
+        initHot : function (){
             if (this.get('hotSource') === null) {
                 return ;
             }

@@ -3,7 +3,7 @@
  * @author 舒克<shuke.cl@taobao.com>
  * @module autocomplete
  **/
-KISSY.add(function (S, AcBase, AcRich , AcHot) {
+KISSY.add(function (S , RichBase , AcBase, AcRich , AcHot) {
     /**
      * 通用的自动完成组件
      * @class Autocomplete
@@ -53,10 +53,8 @@ KISSY.add(function (S, AcBase, AcRich , AcHot) {
         Autocomplete.NAME = name ;
         return Autocomplete;
     };
-    var AutoComplete = _extend('Autocomplete' , S.Base , [AcBase , AcRich, AcHot],{},{});
-    AutoComplete.extend = _extend ;
-    return AutoComplete;
-}, {requires:['./base' , './rich' , './hot' ,'./autocomplete.css']});
+    return RichBase.extend([AcBase , AcRich, AcHot] , {},{});
+}, {requires:['rich-base' , './base' , './rich' , './hot' ,'./autocomplete.css']});
 
 
 
