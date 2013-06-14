@@ -38,6 +38,7 @@ KISSY.add(function (S ,Node , Event , O){
 
 
     var AutoCompleteRich = function (){
+        this.initRich.apply(this , arguments);
     };
     AutoCompleteRich.ATTRS = {
         /**
@@ -206,7 +207,7 @@ KISSY.add(function (S ,Node , Event , O){
         hotNode        : null,//热门推荐节点
         headerNode     : null,//头部节点
         footerNode     : null,//尾部节点
-        initializer : function (){
+        initRich : function (){
             this._renderRich();
             this._bindRich();
         },

@@ -1,3 +1,3 @@
-/*! autocomplete - v1.0 - 2013-06-11 1:07:12 PM
+/*! autocomplete - v1.0 - 2013-06-13 5:17:03 PM
 * Copyright (c) 2013 舒克; Licensed  */
-KISSY.add(function(a,b,c,d){var e=function(b,c,d,e,f){var g=function(){g.superclass.constructor.apply(this,arguments),this.initializer()},h=[],i=[],j=function(){};return j.prototype=e,a.mix(j,f,void 0,void 0,!0),d.push(j),a.extend(g,c),a.each(d,function(b){var c=b.prototype;c&&c.initializer&&h.push(c.initializer),c&&c.destructor&&i.push(c.destructor),a.augment(g,b),a.mix(g,b,void 0,void 0,!0)}),g.prototype.initializer=function(){a.each(h,function(a){a.call(this)},this)},g.prototype.destructor=function(){a.each(i,function(a){a.call(this)},this)},g.NAME=b,g};return e("Autocomplete",a.Base,[b,c,d],{},{})},{requires:["./base","./rich","./hot","./autocomplete.css"]});
+KISSY.add(function(a,b,c,d,e){return b.extend([c,d,e],{},{})},{requires:["rich-base","./base","./rich","./hot","./autocomplete.css"]});
