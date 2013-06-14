@@ -193,7 +193,7 @@ KISSY.add('gallery/autocomplete/1.0/base',function (S){
          */
         value : {
             value : '',
-            setter : '_onSetValue'
+            setter : '_onSetVal'
         },
         /**
          * 开启浏览器默认的自动填充行为
@@ -271,7 +271,7 @@ KISSY.add('gallery/autocomplete/1.0/base',function (S){
                 });
             }
         },
-        _onSetValue : function (val){
+        _onSetVal : function (val){
             this.get('inputNode').val(val);
         },
         _onInputValueChange : function (e){
