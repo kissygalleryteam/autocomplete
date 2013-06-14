@@ -131,6 +131,7 @@ KISSY.add(function (S){
     var RESULT_LIST_LOCATOR = &#x27;resultListLocator&#x27;;
 
     function AutoCompleteBase(){
+        this.initBase.apply(this, arguments);
     }
     AutoCompleteBase.ATTRS = {
         /**
@@ -298,7 +299,7 @@ KISSY.add(function (S){
         }
     };
     AutoCompleteBase.prototype = {
-        initializer : function (){
+        initBase : function (){
             if (this.get(&#x27;enableCache&#x27;) === true) {
                 this._cache = {};
             }
