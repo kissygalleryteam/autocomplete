@@ -8,7 +8,6 @@
 	<link rel="stylesheet" href="demo.css">
     <script type="text/javascript">
         var S = KISSY;
-        S.Config.debug = true ;
         if (S.Config.debug) {
             var srcPath = "../../../";
             S.config({
@@ -31,7 +30,7 @@
 <details open>
     <summary>国内热门城市自动完成</summary>
     <form>
-        <p>输入城市：<input type="text" id="J_NeCity"/>（最简单的城市推荐输入框）</p>
+        <p>输入城市：<input type="text" id="J_NeCity" value="北京"/>（最简单的城市推荐输入框）</p>
         <script type="text/javascript">
             S.use('gallery/autocomplete/1.0/index', function (S, Autocomplete) {
                     var autocomplete = new Autocomplete({
