@@ -519,11 +519,11 @@ KISSY.add(function (S ,Node , Event , O){
          */
         _afterKeyDown : function (e){
             switch(e.keyCode){
-                case 38 :
+                case 38 ://up
                     e.preventDefault();
                     this.activePrevItem();
                     break;
-                case 40 :
+                case 40 ://down
                     e.preventDefault();
                     this.activeNextItem();
                     break;
