@@ -518,6 +518,7 @@ KISSY.add(function (S ,Node , Event , O){
                 this.overlay.set(&#x27;width&#x27;, this.get(&#x27;width&#x27;));
                 this.resultsListNode.show();
                 this.set(&#x27;visible&#x27;, true);
+                this._syncPosition();
             } else {
                 this.resultsListNode.hide();
             }
