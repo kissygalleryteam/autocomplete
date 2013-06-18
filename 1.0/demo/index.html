@@ -809,11 +809,7 @@
 
         <script type="text/javascript">
             //重新定义组件将aria模块mix进来
-            S.add('gallery/autocomplete/1.0/ac' , function (S, RichBase , AcBase , AcRich ,AcHot , AcAria){
-                return RichBase.extend([AcBase , AcRich , AcHot ,AcAria],{},{});
-            }, {requires:['rich-base' , './base' , './rich' , './hot' , './aria','./autocomplete.css']});
-
-            S.use('gallery/autocomplete/1.0/ac', function (S, Autocomplete) {
+            S.use('gallery/autocomplete/1.0/index-aria', function (S, Autocomplete) {
                 var autocomplete = new Autocomplete({
                     inputNode        : '#J_AriaCity',
                     //source           : 'http://kezhan.trip.taobao.com/citysuggest.do?t=0&q={query}',

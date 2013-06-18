@@ -26,8 +26,6 @@ KISSY.add(function (S ,Node , Event , O){
         },
         bindAria : function (){
             this.on('afterHotActiveTabChange' , function (e){
-                var _prevNav = this.hotNavNodes.item(e.prevVal);
-                var _prevPannel = this.hotPannelNodes.item(e.prevVal);
                 var _nextNav = this.hotNavNodes.item(e.newVal);
                 var _nextPannel = this.hotPannelNodes.item(e.newVal);
                 var _clickNodes = this.hotItemNodes = _nextPannel.all(SELECTOR_ITEM);
@@ -62,7 +60,7 @@ KISSY.add(function (S ,Node , Event , O){
                         default :
                             break;
                     }
-                };
+                }
             }, this);
 
             //在tab上的键盘操作
@@ -216,11 +214,11 @@ KISSY.add(function (S ,Node , Event , O){
                     if (direction === 'up') {
                         y -- ;
                         this._selectHot(x, y ,direction);
-                        return;
+                        return false;
                     }else if(direction === 'down'){
                         y ++ ;
                         this._selectHot(x, y ,direction);
-                        return;
+                        return false;
                     }
                 }
 
