@@ -1517,7 +1517,7 @@ KISSY.add('gallery/autocomplete/1.0/index',function (S , RichBase , AcBase, AcRi
      * @uses AutocompleteRich
      * @uses AutocompleteHot
      */
-    return RichBase.extend([AcBase , AcRich, AcHot , AcAria] , {},{});
+    return RichBase.extend([AcBase , AcRich, AcHot] , {},{});
 }, {requires:['rich-base' , './base' , './rich' , './hot' ,'./autocomplete.css']});
 
 

@@ -3,11 +3,13 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "AutoCompleteBase",
         "Autocomplete",
+        "AutocompleteAria",
         "AutocompleteHot",
         "AutocompleteRich"
     ],
     "modules": [
         "autocomplete",
+        "autocomplete-aria",
         "autocomplete-hot",
         "autocomplete-rich",
         "autocomplete_multiple"
@@ -17,6 +19,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "autocomplete",
             "name": "autocomplete",
             "description": "自动完成组件"
+        },
+        {
+            "displayName": "autocomplete-aria",
+            "name": "autocomplete-aria",
+            "description": "AutocompleteAria主要基于AutocompleteHot，盲人用户的支持，增加组件的可用性"
         },
         {
             "displayName": "autocomplete-hot",
