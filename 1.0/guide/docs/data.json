@@ -16,6 +16,17 @@
             "fors": {},
             "namespaces": {}
         },
+        "1.0/aria.js": {
+            "name": "1.0/aria.js",
+            "modules": {
+                "autocomplete-aria": 1
+            },
+            "classes": {
+                "AutocompleteAria": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "1.0/base.js": {
             "name": "1.0/base.js",
             "modules": {},
@@ -67,18 +78,20 @@
             "name": "autocomplete",
             "submodules": {
                 "autocomplete-rich": 1,
-                "autocomplete-hot": 1
+                "autocomplete-hot": 1,
+                "autocomplete-aria": 1
             },
             "classes": {
                 "AutoCompleteBase": 1,
                 "AutocompleteRich": 1,
                 "AutocompleteHot": 1,
-                "Autocomplete": 1
+                "Autocomplete": 1,
+                "AutocompleteAria": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "main",
-            "file": "1.0/index.js",
+            "file": "1.0/aria.js",
             "line": 7,
             "description": "自动完成组件",
             "itemtype": "main",
@@ -115,6 +128,21 @@
             "file": "1.0/hot.js",
             "line": 7,
             "description": "自动完成组件"
+        },
+        "autocomplete-aria": {
+            "name": "autocomplete-aria",
+            "submodules": {},
+            "classes": {
+                "AutocompleteAria": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "autocomplete",
+            "namespace": "",
+            "file": "1.0/aria.js",
+            "line": 7,
+            "description": "AutocompleteAria主要基于AutocompleteHot，盲人用户的支持，增加组件的可用性"
         },
         "autocomplete/multiple": {
             "name": "autocomplete/multiple",
@@ -216,6 +244,22 @@
                 "AutocompleteRich",
                 "AutocompleteHot"
             ]
+        },
+        "AutocompleteAria": {
+            "name": "AutocompleteAria",
+            "shortname": "AutocompleteAria",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "autocomplete",
+            "submodule": "autocomplete-aria",
+            "namespace": "",
+            "file": "1.0/aria.js",
+            "line": 7,
+            "description": "AutocompleteAria主要基于AutocompleteHot，盲人用户的支持，增加组件的可用性",
+            "extends": "AutocompleteBase"
         }
     },
     "classitems": [
@@ -242,7 +286,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 43,
+            "line": 44,
             "description": "使用缓存，当source是后端提供的数据接口时，将同样的请求做缓存",
             "itemtype": "attribute",
             "name": "enableCache",
@@ -253,7 +297,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 52,
+            "line": 53,
             "itemtype": "attribute",
             "name": "inputNode",
             "default": "null",
@@ -263,7 +307,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 66,
+            "line": 67,
             "description": "允许返回的最大值，设置为0表示不限制",
             "itemtype": "attribute",
             "name": "maxResults",
@@ -274,7 +318,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 75,
+            "line": 76,
             "description": "最小查询字符串长度，输入框的值为空时，不进行查询",
             "itemtype": "attribute",
             "name": "minQuerylengt",
@@ -285,7 +329,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 84,
+            "line": 85,
             "description": "kissy jsonp 的配置项，用于接口的callback的key不是'callback'时",
             "itemtype": "attribute",
             "name": "jsonpCallback",
@@ -296,7 +340,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 96,
+            "line": 97,
             "description": "延时查询,避免用户连续输入时密集发送查询请求",
             "itemtype": "attribute",
             "name": "queryDelay",
@@ -307,7 +351,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 105,
+            "line": 106,
             "description": "查询字符分隔符,如果配置了这个值，将以此作为分隔符将输入框的值分割为数组，取数组的最后一个值作为查询参数.\n用于输入框支持多项输入",
             "itemtype": "attribute",
             "name": "queryDelimiter",
@@ -318,7 +362,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 115,
+            "line": 116,
             "description": "数据源的请求模板.",
             "type": "String",
             "class": "AutoCompleteBase",
@@ -326,7 +370,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 123,
+            "line": 124,
             "description": "数据结果过滤",
             "type": "Array",
             "class": "AutoCompleteBase",
@@ -334,7 +378,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 127,
+            "line": 128,
             "description": "数据过滤器，要对本地数据或者远程返回数据进行处理时",
             "itemtype": "attribute",
             "name": "resultFilter",
@@ -345,7 +389,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 136,
+            "line": 137,
             "description": "数据结果初始化",
             "type": ": Function",
             "class": "AutoCompleteBase",
@@ -353,7 +397,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 140,
+            "line": 141,
             "description": "处理数据项展示的函数",
             "itemtype": "attribute",
             "name": "resultFormatter",
@@ -364,7 +408,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 156,
+            "line": 157,
             "description": "数据结果返回时的第一个处理函数，指定数组位置,同时可以对数据源进行二次加工",
             "itemtype": "attribute",
             "name": "resultListLocator",
@@ -375,14 +419,14 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 166,
+            "line": 167,
             "description": "存储当前的查询结果",
             "class": "AutoCompleteBase",
             "module": "autocomplete"
         },
         {
             "file": "1.0/build/index.js",
-            "line": 173,
+            "line": 174,
             "description": "指定每一个数据项被选中后填入到输入框的内容,可以指定一个字段或者用函数返回一个拼接的字段",
             "itemtype": "attribute",
             "name": "resultTextLocator",
@@ -393,21 +437,21 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 183,
+            "line": 184,
             "description": "数据源",
             "class": "AutoCompleteBase",
             "module": "autocomplete"
         },
         {
             "file": "1.0/build/index.js",
-            "line": 190,
+            "line": 191,
             "description": "设置输入框的值,可以用于区分是用户通过UI输入造成的valueChange还是代码通过 setValue()改变的输入框的值",
             "class": "AutoCompleteBase",
             "module": "autocomplete"
         },
         {
             "file": "1.0/build/index.js",
-            "line": 197,
+            "line": 198,
             "description": "开启浏览器默认的自动填充行为",
             "itemtype": "attribute",
             "name": "allowBrowserAutocomplete",
@@ -418,7 +462,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 225,
+            "line": 226,
             "description": "渲染组件",
             "access": "private",
             "tagname": "",
@@ -427,7 +471,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 232,
+            "line": 233,
             "description": "事件处理中心",
             "access": "private",
             "tagname": "",
@@ -436,7 +480,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 251,
+            "line": 252,
             "description": "query 事件后默认出发函数",
             "params": [
                 {
@@ -453,7 +497,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 281,
+            "line": 282,
             "description": "实力的 value 属性被set后触发",
             "access": "private",
             "tagname": "",
@@ -462,7 +506,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 337,
+            "line": 338,
             "description": "数据查询返回结果后，对数据进行过滤排序，文本替换,高亮等操作",
             "access": "private",
             "tagname": "",
@@ -471,7 +515,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 417,
+            "line": 418,
             "description": "匹配到的数据返回且发生变化",
             "itemtype": "event",
             "name": "results",
@@ -492,7 +536,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 425,
+            "line": 426,
             "description": "数据返回成功后的回调处理方法",
             "params": [
                 {
@@ -511,7 +555,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 440,
+            "line": 441,
             "description": "setter 启用缓存",
             "access": "private",
             "tagname": "",
@@ -520,7 +564,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 504,
+            "line": 505,
             "description": "jsonp格式的数据源",
             "params": [
                 {
@@ -534,7 +578,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 562,
+            "line": 563,
             "description": "设置autocomplete属性，关闭浏览器默认的自动完成功能",
             "access": "private",
             "tagname": "",
@@ -543,14 +587,14 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 575,
+            "line": 576,
             "description": "RICH 包含UI所有交互逻辑",
             "class": "AutoCompleteBase",
             "module": "autocomplete"
         },
         {
             "file": "1.0/build/index.js",
-            "line": 617,
+            "line": 619,
             "description": "显示提示框的宽度设定。传入一个节点时，会以此节点的宽度作为组件宽度，默认null时，会自动设定为输入框的宽度",
             "itemtype": "attribute",
             "name": "width",
@@ -562,7 +606,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 627,
+            "line": 629,
             "description": "在输入框失去焦点时有推联想搜索结果，启用自动回填当前被激活的数据项",
             "itemtype": "attribute",
             "name": "enableAutoFill",
@@ -574,7 +618,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 636,
+            "line": 638,
             "description": "有推荐结果时，默认选中第一项",
             "itemtype": "attribute",
             "name": "activeFirstItem",
@@ -586,7 +630,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 645,
+            "line": 647,
             "description": "当前的激活项",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -594,7 +638,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 651,
+            "line": 653,
             "description": "当前的HOVER项",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -602,7 +646,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 658,
+            "line": 660,
             "description": "提示层可见状态发送变化时的事件",
             "itemtype": "event",
             "name": "afterVisibleChange",
@@ -619,7 +663,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 666,
+            "line": 668,
             "description": "推荐的结果的LIST可见状态发生变化时触发",
             "itemtype": "event",
             "name": "afterResultsListVisibleChange",
@@ -636,7 +680,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 674,
+            "line": 676,
             "description": "message的可见状态",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -644,7 +688,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 680,
+            "line": 682,
             "description": "对齐配置",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -652,7 +696,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 683,
+            "line": 685,
             "description": "提示层的位置的配置，",
             "itemtype": "attribute",
             "name": "align",
@@ -664,7 +708,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 709,
+            "line": 711,
             "description": "最外层容器HTML片段",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -672,7 +716,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 712,
+            "line": 714,
             "description": "层的基础HTML模板结构",
             "itemtype": "attribute",
             "name": "boundingBoxTemplate",
@@ -684,7 +728,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 737,
+            "line": 739,
             "description": "推荐结果的外层容器HTML模板",
             "itemtype": "attribute",
             "name": "listNodeTemplate",
@@ -696,7 +740,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 746,
+            "line": 748,
             "description": "推荐结果单个数据项的外层容器HTML模板",
             "itemtype": "attribute",
             "name": "itemNodeTemplate",
@@ -708,7 +752,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 755,
+            "line": 757,
             "description": "没有查询结果时的提示模板",
             "itemtype": "attribute",
             "name": "noResultsMessage",
@@ -720,7 +764,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 764,
+            "line": 766,
             "description": "clickoutside时需要排除在外的节点",
             "itemtype": "attribute",
             "name": "trigger",
@@ -732,7 +776,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 816,
+            "line": 818,
             "description": "生成搜索结果列表",
             "params": [
                 {
@@ -750,7 +794,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 828,
+            "line": 830,
             "description": "创建搜索结果的子项",
             "params": [
                 {
@@ -770,7 +814,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 839,
+            "line": 841,
             "description": "绑定事件",
             "access": "private",
             "tagname": "",
@@ -780,7 +824,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 876,
+            "line": 878,
             "description": "搜索结果列表事件绑定",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -788,7 +832,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 893,
+            "line": 895,
             "description": "搜索结果返回时响应",
             "params": [
                 {
@@ -804,7 +848,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 921,
+            "line": 923,
             "description": "显示信息",
             "itemtype": "method",
             "name": "showMessage",
@@ -822,7 +866,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 935,
+            "line": 937,
             "description": "重新定位容器对齐",
             "access": "private",
             "tagname": "",
@@ -832,7 +876,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 943,
+            "line": 945,
             "description": "重置results list的状态",
             "access": "private",
             "tagname": "",
@@ -842,7 +886,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 957,
+            "line": 959,
             "description": "用户选定某一项后触发",
             "itemtype": "event",
             "name": "select",
@@ -859,7 +903,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 968,
+            "line": 970,
             "description": "同步状态",
             "params": [
                 {
@@ -875,7 +919,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1018,
+            "line": 1020,
             "description": "判断是否在区域外的点击",
             "params": [
                 {
@@ -899,7 +943,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1066,
+            "line": 1068,
             "description": "上下按钮选择时触发回调",
             "params": [
                 {
@@ -915,7 +959,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1077,
+            "line": 1079,
             "description": "鼠标移动到ITEM上时的回调",
             "params": [
                 {
@@ -931,7 +975,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1088,
+            "line": 1090,
             "description": "键盘事件回调",
             "params": [
                 {
@@ -947,7 +991,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1123,
+            "line": 1125,
             "description": "鼠标移入时选中指定项",
             "params": [
                 {
@@ -961,7 +1005,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1133,
+            "line": 1135,
             "description": "通过键盘激活的下一项",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -969,7 +1013,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1150,
+            "line": 1152,
             "description": "通过键盘激活的上一项",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -977,7 +1021,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1158,
+            "line": 1160,
             "description": "返回节点的第一个子节点",
             "return": {
                 "description": "",
@@ -991,7 +1035,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1166,
+            "line": 1168,
             "description": "返回节点的最后一个子节点",
             "return": {
                 "description": "",
@@ -1005,7 +1049,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1174,
+            "line": 1176,
             "description": "设定宽度值",
             "params": [
                 {
@@ -1025,7 +1069,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1191,
+            "line": 1193,
             "description": "对齐的配置进行默认值的处理",
             "params": [
                 {
@@ -1045,7 +1089,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1244,
+            "line": 1248,
             "description": "热门推荐的模板，数据源来自hotSource参数，内容渲染到this.hotNode节点内",
             "itemtype": "attribute",
             "name": "hotTemplate",
@@ -1057,7 +1101,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1259,
+            "line": 1263,
             "description": "热门推荐的宽度",
             "itemtype": "attribute",
             "name": "hotWidth",
@@ -1069,7 +1113,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1268,
+            "line": 1272,
             "description": "热门推荐的数据源，支持JSONP和本地数据，传参类型为字符串时将被判断为JSONP数据源",
             "itemtype": "attribute",
             "name": "hotSource",
@@ -1081,7 +1125,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1278,
+            "line": 1282,
             "description": "热门推荐数据源指定为JSONP时，callback的参数名",
             "itemtype": "attribute",
             "name": "",
@@ -1093,7 +1137,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1287,
+            "line": 1291,
             "description": "当前热门推荐被选中tab",
             "itemtype": "attribute",
             "name": "hotActiveTab",
@@ -1105,7 +1149,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1296,
+            "line": 1300,
             "description": "热门数据格式化同时要求数据实现绑定",
             "itemtype": "attribute",
             "name": "hotResultsFormatter",
@@ -1117,7 +1161,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1333,
+            "line": 1337,
             "description": "提供一个数据的预处理的机制，要求返回数据对象.",
             "itemtype": "attribute",
             "name": "hotResultsLocator",
@@ -1129,7 +1173,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1342,
+            "line": 1346,
             "description": "热门推荐层的可见状态",
             "itemtype": "attribute",
             "name": "hotVisible",
@@ -1141,7 +1185,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1445,
+            "line": 1454,
             "description": "初始化热门推荐",
             "access": "private",
             "tagname": "",
@@ -1151,7 +1195,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1452,
+            "line": 1461,
             "description": "HOT的渲染",
             "params": [
                 {
@@ -1167,13 +1211,119 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1484,
+            "line": 1493,
             "description": "修改hotSource时重置HOT的状态",
             "access": "private",
             "tagname": "",
             "class": "AutocompleteHot",
             "module": "autocomplete",
             "submodule": "autocomplete-hot"
+        },
+        {
+            "file": "1.0/aria.js",
+            "line": 101,
+            "description": "生成一个二维数组，数组每一项代表一个节点,完成上下左右键盘键操作功能，同时完成节点数据绑定\n[[1, 2, 3, 4, 5, 6, 7, 8],\n [9,10,11,12,13,14,15,16],\n [......................]]",
+            "params": [
+                {
+                    "name": "nodes",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "AutocompleteAria",
+            "module": "autocomplete",
+            "submodule": "autocomplete-aria"
+        },
+        {
+            "file": "1.0/aria.js",
+            "line": 138,
+            "description": "选择位于上方的节点",
+            "params": [
+                {
+                    "name": "item",
+                    "description": ""
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AutocompleteAria",
+            "module": "autocomplete",
+            "submodule": "autocomplete-aria"
+        },
+        {
+            "file": "1.0/aria.js",
+            "line": 152,
+            "description": "选择位于下方节点",
+            "params": [
+                {
+                    "name": "item",
+                    "description": ""
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AutocompleteAria",
+            "module": "autocomplete",
+            "submodule": "autocomplete-aria"
+        },
+        {
+            "file": "1.0/aria.js",
+            "line": 166,
+            "description": "选择左侧节点",
+            "params": [
+                {
+                    "name": "item",
+                    "description": ""
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AutocompleteAria",
+            "module": "autocomplete",
+            "submodule": "autocomplete-aria"
+        },
+        {
+            "file": "1.0/aria.js",
+            "line": 184,
+            "description": "选择右侧节点",
+            "params": [
+                {
+                    "name": "item",
+                    "description": ""
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AutocompleteAria",
+            "module": "autocomplete",
+            "submodule": "autocomplete-aria"
+        },
+        {
+            "file": "1.0/aria.js",
+            "line": 202,
+            "description": "选择指定坐标的节点,当一步没有找到时，根据direction进行下一步的查找",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "二维数组横坐标"
+                },
+                {
+                    "name": "y",
+                    "description": "二位数组纵坐标"
+                },
+                {
+                    "name": "direction",
+                    "description": "来源的键盘键"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "AutocompleteAria",
+            "module": "autocomplete",
+            "submodule": "autocomplete-aria"
         },
         {
             "file": "1.0/base.js",
@@ -1595,7 +1745,7 @@
         },
         {
             "file": "1.0/hot.js",
-            "line": 229,
+            "line": 234,
             "description": "初始化热门推荐",
             "access": "private",
             "tagname": "",
@@ -1605,7 +1755,7 @@
         },
         {
             "file": "1.0/hot.js",
-            "line": 236,
+            "line": 241,
             "description": "HOT的渲染",
             "params": [
                 {
@@ -1621,7 +1771,7 @@
         },
         {
             "file": "1.0/hot.js",
-            "line": 268,
+            "line": 273,
             "description": "修改hotSource时重置HOT的状态",
             "access": "private",
             "tagname": "",
@@ -2213,39 +2363,47 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: extend with extends",
-            "line": " 1.0/build/index.js:584"
+            "line": " 1.0/build/index.js:585"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:816"
+            "line": " 1.0/build/index.js:818"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:828"
+            "line": " 1.0/build/index.js:830"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:1018"
+            "line": " 1.0/build/index.js:1020"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:1158"
+            "line": " 1.0/build/index.js:1160"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:1166"
+            "line": " 1.0/build/index.js:1168"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:1174"
+            "line": " 1.0/build/index.js:1176"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:1191"
+            "line": " 1.0/build/index.js:1193"
         },
         {
             "message": "unknown tag: fileoverview",
-            "line": " 1.0/build/index.js:1496"
+            "line": " 1.0/build/index.js:1505"
+        },
+        {
+            "message": "replacing incorrect tag: extend with extends",
+            "line": " 1.0/aria.js:7"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " 1.0/aria.js:101"
         },
         {
             "message": "unknown tag: fileoverview",
@@ -2293,175 +2451,199 @@
         },
         {
             "message": "Missing item type\n数据源的请求模板.",
-            "line": " 1.0/build/index.js:115"
+            "line": " 1.0/build/index.js:116"
         },
         {
             "message": "Missing item type\n数据结果过滤",
-            "line": " 1.0/build/index.js:123"
+            "line": " 1.0/build/index.js:124"
         },
         {
             "message": "Missing item type\n数据结果初始化",
-            "line": " 1.0/build/index.js:136"
+            "line": " 1.0/build/index.js:137"
         },
         {
             "message": "Missing item type\n存储当前的查询结果",
-            "line": " 1.0/build/index.js:166"
+            "line": " 1.0/build/index.js:167"
         },
         {
             "message": "Missing item type\n数据源",
-            "line": " 1.0/build/index.js:183"
+            "line": " 1.0/build/index.js:184"
         },
         {
             "message": "Missing item type\n设置输入框的值,可以用于区分是用户通过UI输入造成的valueChange还是代码通过 setValue()改变的输入框的值",
-            "line": " 1.0/build/index.js:190"
+            "line": " 1.0/build/index.js:191"
         },
         {
             "message": "Missing item type\n渲染组件",
-            "line": " 1.0/build/index.js:225"
+            "line": " 1.0/build/index.js:226"
         },
         {
             "message": "Missing item type\n事件处理中心",
-            "line": " 1.0/build/index.js:232"
+            "line": " 1.0/build/index.js:233"
         },
         {
             "message": "Missing item type\nquery 事件后默认出发函数",
-            "line": " 1.0/build/index.js:251"
+            "line": " 1.0/build/index.js:252"
         },
         {
             "message": "Missing item type\n实力的 value 属性被set后触发",
-            "line": " 1.0/build/index.js:281"
+            "line": " 1.0/build/index.js:282"
         },
         {
             "message": "Missing item type\n数据查询返回结果后，对数据进行过滤排序，文本替换,高亮等操作",
-            "line": " 1.0/build/index.js:337"
+            "line": " 1.0/build/index.js:338"
         },
         {
             "message": "Missing item type\n数据返回成功后的回调处理方法",
-            "line": " 1.0/build/index.js:425"
+            "line": " 1.0/build/index.js:426"
         },
         {
             "message": "Missing item type\nsetter 启用缓存",
-            "line": " 1.0/build/index.js:440"
+            "line": " 1.0/build/index.js:441"
         },
         {
             "message": "Missing item type\njsonp格式的数据源",
-            "line": " 1.0/build/index.js:504"
+            "line": " 1.0/build/index.js:505"
         },
         {
             "message": "Missing item type\n设置autocomplete属性，关闭浏览器默认的自动完成功能",
-            "line": " 1.0/build/index.js:562"
+            "line": " 1.0/build/index.js:563"
         },
         {
             "message": "Missing item type\nRICH 包含UI所有交互逻辑",
-            "line": " 1.0/build/index.js:575"
+            "line": " 1.0/build/index.js:576"
         },
         {
             "message": "Missing item type\n当前的激活项",
-            "line": " 1.0/build/index.js:645"
+            "line": " 1.0/build/index.js:647"
         },
         {
             "message": "Missing item type\n当前的HOVER项",
-            "line": " 1.0/build/index.js:651"
+            "line": " 1.0/build/index.js:653"
         },
         {
             "message": "Missing item type\nmessage的可见状态",
-            "line": " 1.0/build/index.js:674"
+            "line": " 1.0/build/index.js:676"
         },
         {
             "message": "Missing item type\n对齐配置",
-            "line": " 1.0/build/index.js:680"
+            "line": " 1.0/build/index.js:682"
         },
         {
             "message": "Missing item type\n最外层容器HTML片段",
-            "line": " 1.0/build/index.js:709"
+            "line": " 1.0/build/index.js:711"
         },
         {
             "message": "Missing item type\n生成搜索结果列表",
-            "line": " 1.0/build/index.js:816"
+            "line": " 1.0/build/index.js:818"
         },
         {
             "message": "Missing item type\n创建搜索结果的子项",
-            "line": " 1.0/build/index.js:828"
+            "line": " 1.0/build/index.js:830"
         },
         {
             "message": "Missing item type\n绑定事件",
-            "line": " 1.0/build/index.js:839"
+            "line": " 1.0/build/index.js:841"
         },
         {
             "message": "Missing item type\n搜索结果列表事件绑定",
-            "line": " 1.0/build/index.js:876"
+            "line": " 1.0/build/index.js:878"
         },
         {
             "message": "Missing item type\n搜索结果返回时响应",
-            "line": " 1.0/build/index.js:893"
+            "line": " 1.0/build/index.js:895"
         },
         {
             "message": "Missing item type\n重新定位容器对齐",
-            "line": " 1.0/build/index.js:935"
+            "line": " 1.0/build/index.js:937"
         },
         {
             "message": "Missing item type\n重置results list的状态",
-            "line": " 1.0/build/index.js:943"
+            "line": " 1.0/build/index.js:945"
         },
         {
             "message": "Missing item type\n同步状态",
-            "line": " 1.0/build/index.js:968"
+            "line": " 1.0/build/index.js:970"
         },
         {
             "message": "Missing item type\n判断是否在区域外的点击",
-            "line": " 1.0/build/index.js:1018"
+            "line": " 1.0/build/index.js:1020"
         },
         {
             "message": "Missing item type\n上下按钮选择时触发回调",
-            "line": " 1.0/build/index.js:1066"
+            "line": " 1.0/build/index.js:1068"
         },
         {
             "message": "Missing item type\n鼠标移动到ITEM上时的回调",
-            "line": " 1.0/build/index.js:1077"
+            "line": " 1.0/build/index.js:1079"
         },
         {
             "message": "Missing item type\n键盘事件回调",
-            "line": " 1.0/build/index.js:1088"
+            "line": " 1.0/build/index.js:1090"
         },
         {
             "message": "Missing item type\n鼠标移入时选中指定项",
-            "line": " 1.0/build/index.js:1123"
+            "line": " 1.0/build/index.js:1125"
         },
         {
             "message": "Missing item type\n通过键盘激活的下一项",
-            "line": " 1.0/build/index.js:1133"
+            "line": " 1.0/build/index.js:1135"
         },
         {
             "message": "Missing item type\n通过键盘激活的上一项",
-            "line": " 1.0/build/index.js:1150"
+            "line": " 1.0/build/index.js:1152"
         },
         {
             "message": "Missing item type\n返回节点的第一个子节点",
-            "line": " 1.0/build/index.js:1158"
+            "line": " 1.0/build/index.js:1160"
         },
         {
             "message": "Missing item type\n返回节点的最后一个子节点",
-            "line": " 1.0/build/index.js:1166"
+            "line": " 1.0/build/index.js:1168"
         },
         {
             "message": "Missing item type\n设定宽度值",
-            "line": " 1.0/build/index.js:1174"
+            "line": " 1.0/build/index.js:1176"
         },
         {
             "message": "Missing item type\n对齐的配置进行默认值的处理",
-            "line": " 1.0/build/index.js:1191"
+            "line": " 1.0/build/index.js:1193"
         },
         {
             "message": "Missing item type\n初始化热门推荐",
-            "line": " 1.0/build/index.js:1445"
+            "line": " 1.0/build/index.js:1454"
         },
         {
             "message": "Missing item type\nHOT的渲染",
-            "line": " 1.0/build/index.js:1452"
+            "line": " 1.0/build/index.js:1461"
         },
         {
             "message": "Missing item type\n修改hotSource时重置HOT的状态",
-            "line": " 1.0/build/index.js:1484"
+            "line": " 1.0/build/index.js:1493"
+        },
+        {
+            "message": "Missing item type\n生成一个二维数组，数组每一项代表一个节点,完成上下左右键盘键操作功能，同时完成节点数据绑定\n[[1, 2, 3, 4, 5, 6, 7, 8],\n [9,10,11,12,13,14,15,16],\n [......................]]",
+            "line": " 1.0/aria.js:101"
+        },
+        {
+            "message": "Missing item type\n选择位于上方的节点",
+            "line": " 1.0/aria.js:138"
+        },
+        {
+            "message": "Missing item type\n选择位于下方节点",
+            "line": " 1.0/aria.js:152"
+        },
+        {
+            "message": "Missing item type\n选择左侧节点",
+            "line": " 1.0/aria.js:166"
+        },
+        {
+            "message": "Missing item type\n选择右侧节点",
+            "line": " 1.0/aria.js:184"
+        },
+        {
+            "message": "Missing item type\n选择指定坐标的节点,当一步没有找到时，根据direction进行下一步的查找",
+            "line": " 1.0/aria.js:202"
         },
         {
             "message": "Missing item type\n数据源的请求模板.",
@@ -2525,15 +2707,15 @@
         },
         {
             "message": "Missing item type\n初始化热门推荐",
-            "line": " 1.0/hot.js:229"
+            "line": " 1.0/hot.js:234"
         },
         {
             "message": "Missing item type\nHOT的渲染",
-            "line": " 1.0/hot.js:236"
+            "line": " 1.0/hot.js:241"
         },
         {
             "message": "Missing item type\n修改hotSource时重置HOT的状态",
-            "line": " 1.0/hot.js:268"
+            "line": " 1.0/hot.js:273"
         },
         {
             "message": "Missing item type\n容器元素",

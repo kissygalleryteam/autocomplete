@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/Autocomplete.html">Autocomplete</a></li>
             
+                <li><a href="../classes/AutocompleteAria.html">AutocompleteAria</a></li>
+            
                 <li><a href="../classes/AutoCompleteBase.html">AutoCompleteBase</a></li>
             
                 <li><a href="../classes/AutocompleteHot.html">AutocompleteHot</a></li>
@@ -54,6 +56,8 @@
             <ul id="api-modules" class="apis modules">
             
                 <li><a href="../modules/autocomplete.html">autocomplete</a></li>
+            
+                <li><a href="../modules/autocomplete-aria.html">autocomplete-aria</a></li>
             
                 <li><a href="../modules/autocomplete-hot.html">autocomplete-hot</a></li>
             
@@ -140,6 +144,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
     var RESULT_LIST_LOCATOR = &#x27;resultListLocator&#x27;;
 
     function AutoCompleteBase(){
+        this.initBase.apply(this, arguments);
     }
     AutoCompleteBase.ATTRS = {
         /**
@@ -294,7 +299,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
          */
         value : {
             value : &#x27;&#x27;,
-            setter : &#x27;_onSetValue&#x27;
+            setter : &#x27;_onSetVal&#x27;
         },
         /**
          * 开启浏览器默认的自动填充行为
@@ -307,7 +312,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
         }
     };
     AutoCompleteBase.prototype = {
-        initializer : function (){
+        initBase : function (){
             if (this.get(&#x27;enableCache&#x27;) === true) {
                 this._cache = {};
             }
@@ -372,7 +377,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
                 });
             }
         },
-        _onSetValue : function (val){
+        _onSetVal : function (val){
             this.get(&#x27;inputNode&#x27;).val(val);
         },
         _onInputValueChange : function (e){
@@ -714,6 +719,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
 
 
     var AutoCompleteRich = function (){
+        this.initRich.apply(this , arguments);
     };
     AutoCompleteRich.ATTRS = {
         /**
@@ -882,7 +888,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
         hotNode        : null,//热门推荐节点
         headerNode     : null,//头部节点
         footerNode     : null,//尾部节点
-        initializer : function (){
+        initRich : function (){
             this._renderRich();
             this._bindRich();
         },
@@ -1194,11 +1200,11 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
          */
         _afterKeyDown : function (e){
             switch(e.keyCode){
-                case 38 :
+                case 38 ://up
                     e.preventDefault();
                     this.activePrevItem();
                     break;
-                case 40 :
+                case 40 ://down
                     e.preventDefault();
                     this.activeNextItem();
                     break;
@@ -1341,7 +1347,9 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
     var SELECTOR_ITEM = &#x27;.&#x27; + CLS_ITEM;
     var SELECTOR_TAB = &#x27;.J_TabItem&#x27;;
 
-    var AutoCompleteHot = function (){};
+    var AutoCompleteHot = function (){
+        this.initHot.apply(this , arguments);
+    };
     AutoCompleteHot.ATTRS = {
         /**
          * 热门推荐的模板，数据源来自hotSource参数，内容渲染到this.hotNode节点内
@@ -1354,9 +1362,9 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
          **/
         hotTemplate : {
             value : &#x27;&lt;div class=&quot;ks-ac-hot-city&quot;&gt;&lt;div class=&quot;ks-ac-acinput-hot-tit&quot;&gt;热门城市/国家(支持汉字/拼音/英文字母)&lt;/div&gt;&#x27; +
-                &#x27;&lt;ul class=&quot;tab-nav&quot;&gt;{{#results}}&lt;li class=&quot;J_TabItem&quot;&gt;{{tabname}}&lt;/li&gt;{{/results}}&lt;/ul&gt;&#x27; +
+                &#x27;&lt;ul class=&quot;tab-nav&quot;&gt;{{#results}}&lt;li class=&quot;J_TabItem&quot; tabindex=&quot;2&quot;&gt;&lt;a href=&quot;javascript:void(0)&quot; target=&quot;_self&quot;&gt;{{tabname}}&lt;/a&gt;&lt;/li&gt;{{/results}}&lt;/ul&gt;&#x27; +
                 &#x27;&lt;div class=&quot;tab-content J_TabContent&quot;&gt;{{#results}}&#x27; +
-                &#x27;&lt;div class=&quot;tab-pannel J_Pannel&quot;&gt;{{#tabdata}}&lt;dl&gt;&lt;dt&gt;{{dt}}&lt;/dt&gt;&lt;dd&gt;{{#dd}}&lt;span&gt;&lt;a data-sid=&quot;{{sid}}&quot; class=&quot;J_AcItem&quot; tabindex=&quot;-1&quot; href=&quot;javascript:void(0);&quot; target=&quot;_self&quot;&gt;{{cityName}}&lt;/a&gt;&lt;/span&gt;{{/dd}}&lt;/dd&gt;&lt;/dl&gt;{{/tabdata}}&lt;/div&gt;{{/results}}&lt;/div&gt;&lt;/div&gt;&#x27;
+                &#x27;&lt;div class=&quot;tab-pannel J_Pannel&quot;&gt;{{#tabdata}}&lt;dl&gt;&lt;dt&gt;{{dt}}&lt;/dt&gt;&lt;dd&gt;{{#dd}}&lt;span&gt;&lt;a data-sid=&quot;{{sid}}&quot; class=&quot;J_AcItem&quot; tabindex=&quot;3&quot; href=&quot;javascript:void(0);&quot; target=&quot;_self&quot;&gt;{{cityName}}&lt;/a&gt;&lt;/span&gt;{{/dd}}&lt;/dd&gt;&lt;/dl&gt;{{/tabdata}}&lt;/div&gt;{{/results}}&lt;/div&gt;&lt;/div&gt;&#x27;
         },
         /**
          * 热门推荐的宽度
@@ -1452,7 +1460,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
         }
     };
     AutoCompleteHot.prototype = {
-        initializer : function (){
+        initHot : function (){
             if (this.get(&#x27;hotSource&#x27;) === null) {
                 return ;
             }
@@ -1501,6 +1509,11 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
                 }
                 this.set(&#x27;hotVisible&#x27; , true);
             },this);
+            input_node.on(&#x27;keydown&#x27;, function (e){
+                if (this.get(&#x27;hotVisible&#x27;) &amp;&amp; (e.keyCode === 38 || e.keyCode === 40)) {
+                    this.overlayNode[0].focus();
+                }
+            } , this);
             this.on(EVT_QUERY , function (e){
                 if (S.trim(e.newVal.query) === &#x27;&#x27;) {//输入框为空时展示热门推荐
                     this.set(&#x27;messageVisible&#x27; , false);
@@ -1600,7 +1613,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
  * @author 舒克&lt;shuke.cl@taobao.com&gt;
  * @module autocomplete
  **/
-KISSY.add(&#x27;gallery/autocomplete/1.0/index&#x27;,function (S, AcBase, AcRich , AcHot) {
+KISSY.add(&#x27;gallery/autocomplete/1.0/index&#x27;,function (S , RichBase , AcBase, AcRich , AcHot) {
     /**
      * 通用的自动完成组件
      * @class Autocomplete
@@ -1610,50 +1623,8 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/index&#x27;,function (S, AcBase, AcRich
      * @uses AutocompleteRich
      * @uses AutocompleteHot
      */
-    var _extend = function (name , base , extensions , px , sx){
-        var Autocomplete = function (){
-            Autocomplete.superclass.constructor.apply(this,arguments);
-            this.initializer();
-        };
-        //将构造函数和析构函数存入数组，然后依次调用，避免覆盖
-        var initializers = [];
-        var destructors = [];
-
-        var addition = function (){};
-        addition.prototype  = px;
-        S.mix(addition , sx ,undefined, undefined , true);//mix statics
-        extensions.push(addition);
-        S.extend(Autocomplete, base);//继承 base
-        S.each(extensions , function (extClass){ //mix 原型和静态属性方法
-            var ext_pro = extClass.prototype ;
-            //构造函数的处理
-            if (ext_pro &amp;&amp; ext_pro.initializer) {
-                initializers.push(ext_pro.initializer);
-            }
-            //析构函数的处理
-            if (ext_pro &amp;&amp; ext_pro.destructor) {
-                destructors.push(ext_pro.destructor)
-            }
-            S.augment(Autocomplete, extClass);
-            S.mix(Autocomplete, extClass , undefined , undefined ,true);
-        });
-        Autocomplete.prototype.initializer = function (){
-            S.each(initializers , function (initializer){
-                initializer.call(this);
-            },this);
-        };
-        Autocomplete.prototype.destructor = function (){
-            S.each(destructors , function (destructor){
-                destructor.call(this);
-            },this);
-        };
-        Autocomplete.NAME = name ;
-        return Autocomplete;
-    };
-    var AutoComplete = _extend(&#x27;Autocomplete&#x27; , S.Base , [AcBase , AcRich, AcHot],{},{});
-    AutoComplete.extend = _extend ;
-    return AutoComplete;
-}, {requires:[&#x27;./base&#x27; , &#x27;./rich&#x27; , &#x27;./hot&#x27; ,&#x27;./autocomplete.css&#x27;]});
+    return RichBase.extend([AcBase , AcRich, AcHot] , {},{});
+}, {requires:[&#x27;rich-base&#x27; , &#x27;./base&#x27; , &#x27;./rich&#x27; , &#x27;./hot&#x27; ,&#x27;./autocomplete.css&#x27;]});
 
 
 
