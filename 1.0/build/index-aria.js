@@ -1,119 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>1.0/build/index.js - autocomplete</title>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
-    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
-    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
-</head>
-<body class="yui3-skin-sam">
-
-<div id="doc">
-    <div id="hd" class="yui3-g header">
-        <div class="yui3-u-3-4">
-            
-                <h1><img src="../assets/css/logo.png" title="autocomplete"></h1>
-            
-        </div>
-        <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.0</em>
-        </div>
-    </div>
-    <div id="bd" class="yui3-g">
-
-        <div class="yui3-u-1-4">
-            <div id="docs-sidebar" class="sidebar apidocs">
-                <div id="api-list">
-    <h2 class="off-left">APIs</h2>
-    <div id="api-tabview" class="tabview">
-        <ul class="tabs">
-            <li><a href="#api-classes">Classes</a></li>
-            <li><a href="#api-modules">Modules</a></li>
-        </ul>
-
-        <div id="api-tabview-filter">
-            <input type="search" id="api-filter" placeholder="Type to filter APIs">
-        </div>
-
-        <div id="api-tabview-panel">
-            <ul id="api-classes" class="apis classes">
-            
-                <li><a href="../classes/Autocomplete.html">Autocomplete</a></li>
-            
-                <li><a href="../classes/AutocompleteAria.html">AutocompleteAria</a></li>
-            
-                <li><a href="../classes/AutoCompleteBase.html">AutoCompleteBase</a></li>
-            
-                <li><a href="../classes/AutocompleteHot.html">AutocompleteHot</a></li>
-            
-                <li><a href="../classes/AutocompleteRich.html">AutocompleteRich</a></li>
-            
-            </ul>
-
-            <ul id="api-modules" class="apis modules">
-            
-                <li><a href="../modules/autocomplete.html">autocomplete</a></li>
-            
-                <li><a href="../modules/autocomplete-aria.html">autocomplete-aria</a></li>
-            
-                <li><a href="../modules/autocomplete-hot.html">autocomplete-hot</a></li>
-            
-                <li><a href="../modules/autocomplete-rich.html">autocomplete-rich</a></li>
-            
-                <li><a href="../modules/autocomplete_multiple.html">autocomplete/multiple</a></li>
-            
-            </ul>
-        </div>
-    </div>
-</div>
-
-            </div>
-        </div>
-        <div class="yui3-u-3-4">
-                <div id="api-options">
-        Show:
-        <label for="api-show-inherited">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </div>
-
-
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <h1 class="file-heading">File: 1.0/build/index.js</h1>
-
-<div class="file">
-    <pre class="code prettyprint linenums">
 /*
 combined files : 
 
 gallery/autocomplete/1.0/base
 gallery/autocomplete/1.0/rich
 gallery/autocomplete/1.0/hot
-gallery/autocomplete/1.0/index
+gallery/autocomplete/1.0/aria
+gallery/autocomplete/1.0/index-aria
 
 */
-KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
+KISSY.add('gallery/autocomplete/1.0/base',function (S){
     /**
     自动完成组件
     @module autocomplete
@@ -122,26 +17,26 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
 
     /**
     AutocompleteBase
-     自动完成组件的基类，主要提供底层数据逻辑的处理，分发两个事件&lt;b&gt;results afterQueryChange&lt;b&gt;
+     自动完成组件的基类，主要提供底层数据逻辑的处理，分发两个事件<b>results afterQueryChange<b>
     @class AutoCompleteBase
     @uses Overlay
     @constructor
     **/
-    var INPUT_NODE = &#x27;inputNode&#x27;;
+    var INPUT_NODE = 'inputNode';
 
-    var QUERY = &#x27;query&#x27;;
-    var RESULTS = &#x27;results&#x27;;
-    var EVT_RESULTS = &#x27;results&#x27;;
+    var QUERY = 'query';
+    var RESULTS = 'results';
+    var EVT_RESULTS = 'results';
     /**
      * query发生变化
      * @event afterQueryChange
      * @param {String} newVal
      * @param {String} prevVal
      */
-    var EVT_QUERY = &#x27;afterQueryChange&#x27; ;
-    var VALUE_CHANGE = &#x27;valuechange&#x27;;
-    var REQUEST_TEMPLATE = &#x27;requestTemplate&#x27;;
-    var RESULT_LIST_LOCATOR = &#x27;resultListLocator&#x27;;
+    var EVT_QUERY = 'afterQueryChange' ;
+    var VALUE_CHANGE = 'valuechange';
+    var REQUEST_TEMPLATE = 'requestTemplate';
+    var RESULT_LIST_LOCATOR = 'resultListLocator';
 
     function AutoCompleteBase(){
         this.initBase.apply(this, arguments);
@@ -189,13 +84,13 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
             value : 1
         },
         /**
-         * kissy jsonp 的配置项，用于接口的callback的key不是&#x27;callback&#x27;时
+         * kissy jsonp 的配置项，用于接口的callback的key不是'callback'时
          * @attribute jsonpCallback
          * @type String
          * @default callback
          **/
         jsonpCallback : {
-            value : &#x27;callback&#x27;
+            value : 'callback'
         },
         query : {
             value : null
@@ -225,7 +120,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
          */
         requestTemplate : {
             value : null,
-            setter : &#x27;_setRequestTemplate&#x27;
+            setter : '_setRequestTemplate'
         },
         /**
          * 数据结果过滤
@@ -253,7 +148,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
         resultFormatter : {
             value : function (query, results) {
                 return S.map(results, function (_item) {
-                    return S.substitute(&#x27;&lt;div class=&quot;ks-ac-item-inner&quot;&gt;&lt;span class=&quot;ks-ac-name&quot;&gt;{cityname}&lt;/span&gt;&lt;span class=&quot;ks-ac-intro&quot;&gt;{py}&lt;/span&gt;&lt;/div&gt;&#x27;, {
+                    return S.substitute('<div class="ks-ac-item-inner"><span class="ks-ac-name">{cityname}</span><span class="ks-ac-intro">{py}</span></div>', {
                         cityname: _item.text,
                         py      : _item.raw.py
                     });
@@ -268,7 +163,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
          **/
         resultListLocator : {
             value : null ,
-            setter : &#x27;_setLocator&#x27;
+            setter : '_setLocator'
         },
         /**
          * 存储当前的查询结果
@@ -285,21 +180,21 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
          **/
         resultTextLocator:{
             value : null,
-            setter : &#x27;_setLocator&#x27;
+            setter : '_setLocator'
         },
         /**
          * 数据源
          */
         source : {
             value : null,
-            setter : &#x27;_setSource&#x27;
+            setter : '_setSource'
         },
         /**
          * 设置输入框的值,可以用于区分是用户通过UI输入造成的valueChange还是代码通过 setValue()改变的输入框的值
          */
         value : {
-            value : &#x27;&#x27;,
-            setter : &#x27;_onSetVal&#x27;
+            value : '',
+            setter : '_onSetVal'
         },
         /**
          * 开启浏览器默认的自动填充行为
@@ -313,12 +208,12 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
     };
     AutoCompleteBase.prototype = {
         initBase : function (){
-            if (this.get(&#x27;enableCache&#x27;) === true) {
+            if (this.get('enableCache') === true) {
                 this._cache = {};
             }
-            this.inputNode = this.get(&#x27;inputNode&#x27;);
+            this.inputNode = this.get('inputNode');
             if (!this.inputNode) {
-                S.log(&#x27;error: 没有对应的输入框节点.&#x27;);
+                S.log('error: 没有对应的输入框节点.');
                 return false;
             }
             this._renderUIAcBase();
@@ -326,7 +221,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
             return this;
         },
         destructor : function (){
-            var input_node = this.get(&#x27;inputNode&#x27;);
+            var input_node = this.get('inputNode');
             input_node.detach();
         },
         /**
@@ -343,17 +238,17 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
         _bindUIAcBase : function (){
             var input_node = this.get(INPUT_NODE);
             input_node.on(VALUE_CHANGE , this._onInputValueChange , this);
-            this.on(&#x27;afterValueChange&#x27; , this._afterValueChange , this);
+            this.on('afterValueChange' , this._afterValueChange , this);
 
             this.on(EVT_QUERY,function (e){
                 var query = S.trim(e.newVal.query);
-                if (query.length &lt; this.get(&#x27;minQueryLength&#x27;)) {//小宇最短字符时不做处理
+                if (query.length < this.get('minQueryLength')) {//小宇最短字符时不做处理
                     return ;
                 }
                 this.sendRequest(query);
             },this);
 
-            this.on(&#x27;afterAllowBrowserAutocompleteChange&#x27; , this._syncBrowserAutocomplete , this);
+            this.on('afterAllowBrowserAutocompleteChange' , this._syncBrowserAutocomplete , this);
         },
         /**
          * query 事件后默认出发函数
@@ -362,7 +257,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
          */
         sendRequest : function (query , requestTemplate){
             var request ;
-            var source = this.get(&#x27;source&#x27;);
+            var source = this.get('source');
             if (source) {
                 if (!requestTemplate) {
                     requestTemplate = this.get(REQUEST_TEMPLATE);
@@ -378,10 +273,10 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
             }
         },
         _onSetVal : function (val){
-            this.get(&#x27;inputNode&#x27;).val(val);
+            this.get('inputNode').val(val);
         },
         _onInputValueChange : function (e){
-            this.set(&#x27;value&#x27; , e.newVal ,{
+            this.set('value' , e.newVal ,{
                 silent : false
             });
         },
@@ -392,7 +287,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
         _afterValueChange : function (e){
             var that = this;
             var val = e.newVal;
-            var delimiter = this.get(&#x27;queryDelimiter&#x27;);
+            var delimiter = this.get('queryDelimiter');
             var query= val;
             var arr;
             if (delimiter !== null) {
@@ -405,7 +300,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
                     inputValue : val
                 });
             };
-            var delay = this.get(&#x27;queryDelay&#x27;);
+            var delay = this.get('queryDelay');
 
             if (delay) {
                 clearTimeout(this._delay);
@@ -417,19 +312,19 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
             }
         },
         _updateValue : function (newVal){
-            var delim = this.get(&#x27;queryDelimiter&#x27;),
+            var delim = this.get('queryDelimiter'),
                 insertDelim,
                 len,
                 prevVal;
             newVal = S.trim(newVal);
             if (delim) {
-                insertDelim = S.trim(delim); // so we don&#x27;t double up on spaces
-                prevVal     = S.map(S.trim(this.get(&#x27;value&#x27;)).split(delim), function (item){
+                insertDelim = S.trim(delim); // so we don't double up on spaces
+                prevVal     = S.map(S.trim(this.get('value')).split(delim), function (item){
                     return S.trim(item);
                 });
                 len         = prevVal.length;
 
-                if (len &gt; 1) {
+                if (len > 1) {
                     prevVal[len - 1] = newVal;
                     newVal = prevVal.join(insertDelim);
                 }
@@ -437,7 +332,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
                 newVal = newVal + insertDelim;
             }
 
-            this.set(&#x27;value&#x27; , newVal,{
+            this.set('value' , newVal,{
                 silent : true//不通过afterValueChange去触发query事件
             });
         },
@@ -446,8 +341,8 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
          * @private
          */
         _onResponse : function (query , e){
-            if (query === (this.get(&#x27;query&#x27;).query || &#x27;&#x27;)) {
-                this._parseResponse(query || &#x27;&#x27;, e.response, e.data);
+            if (query === (this.get('query').query || '')) {
+                this._parseResponse(query || '', e.response, e.data);
             }
         },
         _parseResponse: function (query , response , data) {
@@ -459,7 +354,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
 
                 listLocator = this.get(RESULT_LIST_LOCATOR),
                 results = [],
-                unfiltered = response &amp;&amp; response.results,
+                unfiltered = response && response.results,
                 formatted,
                 formatter,
                 filter,
@@ -469,18 +364,18 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
                 result,
                 text,
                 textLocator;
-            if (unfiltered &amp;&amp; listLocator) {//指定返回结果的数组路径
+            if (unfiltered && listLocator) {//指定返回结果的数组路径
                 unfiltered = listLocator.call(this, unfiltered);
             }
 
-            if (unfiltered &amp;&amp; unfiltered.length) {
-                textLocator = this.get(&#x27;resultTextLocator&#x27;);
-                filter = this.get(&#x27;resultFilter&#x27;);
+            if (unfiltered && unfiltered.length) {
+                textLocator = this.get('resultTextLocator');
+                filter = this.get('resultFilter');
                 // Create a lightweight result object for each result to make them
                 // easier to work with. The various properties on the object
                 // represent different formats of the result, and will be populated
                 // as we go.
-                for (i = 0, len = unfiltered.length; i &lt; len; ++i) {
+                for (i = 0, len = unfiltered.length; i < len; ++i) {
                     result = unfiltered[i];
                     text = textLocator ?
                         textLocator.call(this, result) :
@@ -497,20 +392,20 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
                     results = filter.call(this, query , results.concat());
                 }
                 if (results.length) {
-                    formatter = this.get(&#x27;resultFormatter&#x27;);
-                    maxResults = this.get(&#x27;maxResults&#x27;);
+                    formatter = this.get('resultFormatter');
+                    maxResults = this.get('maxResults');
 
                     //最大数据条数的限制
-                    if (maxResults &amp;&amp; maxResults &gt; 0 &amp;&amp;
-                        results.length &gt; maxResults) {
+                    if (maxResults && maxResults > 0 &&
+                        results.length > maxResults) {
                         results.length = maxResults;
                     }
                     if (formatter) {
                         formatted = formatter.call(this, query, results.concat());
                         if (!formatted) {
-                            S.log(&quot;Formatter didn&#x27;t return anything.&quot;, &#x27;warn&#x27;, &#x27;autocomplete-base&#x27;);
+                            S.log("Formatter didn't return anything.", 'warn', 'autocomplete-base');
                         }else{
-                            for (i = 0, len = formatted.length; i &lt; len; ++i) {
+                            for (i = 0, len = formatted.length; i < len; ++i) {
                                 results[i].display = formatted[i];
                             }
                         }
@@ -576,12 +471,12 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
             if (S.isFunction(locator)) {
                 return locator;
             }
-            locator = locator.toString().split(&#x27;.&#x27;);
+            locator = locator.toString().split('.');
             var getObjVal = function (obj,path){
                 if (!obj) {
                     return null;
                 }
-                for(var i=0 , len = path.length ;i &lt; len ; i++){
+                for(var i=0 , len = path.length ;i < len ; i++){
                     if (path[i] in obj) {
                         obj = obj[path[i]];
                     }
@@ -589,7 +484,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
                 return obj;
             };
             return function (result){
-                return result &amp;&amp; getObjVal(result , locator);
+                return result && getObjVal(result , locator);
             };
         },
         _setSource : function (source){
@@ -614,7 +509,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
          */
         _createJsonpSource : function (source){
             var jsonp_source = {
-                type : &#x27;jsonp&#x27;
+                type : 'jsonp'
             };
             var that = this ;
             var last_request ;
@@ -625,22 +520,22 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
             jsonp_source.sendRequest = function (request){
                 last_request = request ;
                 var cacheKey = request.request;
-                if (that._cache &amp;&amp; cacheKey in that._cache) {//从缓存获取数据
+                if (that._cache && cacheKey in that._cache) {//从缓存获取数据
                     that._sourceSuccess(that._cache[cacheKey],request);
                     return ;
                 }
                 var url;
                 url = S.substitute(source , {
                     query : request.query,
-                    maxResults: that.get(&#x27;maxResults&#x27;)
+                    maxResults: that.get('maxResults')
                 });
                 S.IO({
                     url : url,
-                    dataType : &#x27;jsonp&#x27;,
-                    jsonp : that.get(&#x27;jsonpCallback&#x27;),
+                    dataType : 'jsonp',
+                    jsonp : that.get('jsonpCallback'),
                     success : function (data){
                         if (last_request === request) {//仅处理最后一次请求
-                            that._cache &amp;&amp; (that._cache[request.request] = data);
+                            that._cache && (that._cache[request.request] = data);
                             that._sourceSuccess(data , request);
                         }
                     }
@@ -651,7 +546,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
         _createArraySource : function (source){
             var that = this;
             return  {
-                type : &#x27;Array&#x27;,
+                type : 'Array',
                 sendRequest : function (request){
                     that._sourceSuccess(source , request);
                 }
@@ -660,7 +555,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
         _createObjectSource : function (source){
             var that = this;
             return  {
-                type : &#x27;Object&#x27;,
+                type : 'Object',
                 sendRequest : function (request){
                     that._sourceSuccess(source , request);
                 }
@@ -671,18 +566,18 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
          * @private
          */
         _syncBrowserAutocomplete : function (){
-            var input_node = this.get(&#x27;inputNode&#x27;);
-            if (input_node.prop(&#x27;nodeName&#x27;).toLowerCase() === &#x27;input&#x27;) {
-                input_node.attr(&#x27;autocomplete&#x27; , this.get(&#x27;_syncBrowserAutocomplete&#x27;) ? &#x27;on&#x27; : &#x27;off&#x27;);
+            var input_node = this.get('inputNode');
+            if (input_node.prop('nodeName').toLowerCase() === 'input') {
+                input_node.attr('autocomplete' , this.get('_syncBrowserAutocomplete') ? 'on' : 'off');
             }
         }
     };
     return AutoCompleteBase;
-},{requires : [&#x27;node&#x27;,&#x27;base&#x27;]});
+},{requires : ['node','base']});
 /**
  * RICH 包含UI所有交互逻辑
  */
-KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , O){
+KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
     /**
      * @module autocomplete
      * @submodule autocomplete-rich
@@ -693,23 +588,23 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
      * @class  AutocompleteRich
      * @extend S.Base
      */
-    var QUERY = &#x27;query&#x27;;
-    var RESULT = &#x27;result&#x27;;
+    var QUERY = 'query';
+    var RESULT = 'result';
 
-    var EVT_QUERY = &#x27;afterQueryChange&#x27;;
-    var EVT_RESULTS = &#x27;results&#x27;;
-    var EVT_SELECT = &#x27;select&#x27;;
+    var EVT_QUERY = 'afterQueryChange';
+    var EVT_RESULTS = 'results';
+    var EVT_SELECT = 'select';
 
-    var ACTIVE_ITEM = &#x27;activeItem&#x27;;
-    var HOVER_ITEM = &#x27;hoverItem&#x27;;
+    var ACTIVE_ITEM = 'activeItem';
+    var HOVER_ITEM = 'hoverItem';
 
-    var CLS_ACTIVE = &#x27;ks-ac-active&#x27;;
-    var CLS_HOVER = &#x27;ks-ac-hover&#x27;;
-    var CLS_ITEM = &#x27;J_AcItem&#x27;;
-    var CLS_AC_CONTAINER = &#x27;ks-autocomplete&#x27;;
-    var CLS_AC_INPUT = &#x27;ks-autocomplete-input&#x27;;
+    var CLS_ACTIVE = 'ks-ac-active';
+    var CLS_HOVER = 'ks-ac-hover';
+    var CLS_ITEM = 'J_AcItem';
+    var CLS_AC_CONTAINER = 'ks-autocomplete';
+    var CLS_AC_INPUT = 'ks-autocomplete-input';
 
-    var SELECTOR_ITEM = &#x27;.&#x27; + CLS_ITEM;
+    var SELECTOR_ITEM = '.' + CLS_ITEM;
 
     var isArray = S.isArray;
     var doc = document;
@@ -730,7 +625,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
          **/
         width:{
             value : null,
-            getter : &#x27;_getWidth&#x27;
+            getter : '_getWidth'
         },
         /**
          * 在输入框失去焦点时有推联想搜索结果，启用自动回填当前被激活的数据项
@@ -794,7 +689,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
          * @type Object
          * @default {
                          node : null,
-                         points : [&#x27;bl&#x27;, &#x27;tl&#x27;],
+                         points : ['bl', 'tl'],
                          offset : [0,-1],
                          overflow:{
                              adjustX: 0, // 当对象不能处于可显示区域时，自动调整横坐标
@@ -805,14 +700,14 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
         align : {
             value : {
                 node    : null,
-                points  : [&#x27;bl&#x27;, &#x27;tl&#x27;],
+                points  : ['bl', 'tl'],
                 offset  : [0, -1],
                 overflow: {
                     adjustX: 0, // 当对象不能处于可显示区域时，自动调整横坐标
                     adjustY: 0// 当对象不能处于可显示区域时，自动调整纵坐标
                 }
             },
-            setter : &#x27;_setAlign&#x27;
+            setter : '_setAlign'
         },
         /**
          * 最外层容器HTML片段
@@ -821,53 +716,53 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
          * 层的基础HTML模板结构
          * @attribute boundingBoxTemplate
          * @type String
-         * @default &#x27;&lt;div class=&quot;ks-ac-header&quot;&gt;&lt;/div&gt;&#x27; +
-         &#x27;&lt;div class=&quot;ks-ac-body&quot;&gt;&#x27; +
-         &#x27;   &lt;div class=&quot;ks-ac-message J_AcMessage&quot;&gt;&lt;/div&gt;&#x27; +
-         &#x27;   &lt;div class=&quot;ks-ac-content J_AcContent&quot;&gt;&#x27; +
-         &#x27;       &lt;div class=&quot;J_HotList&quot;&gt;&lt;/div&gt;&#x27; +
-         &#x27;       &lt;div class=&quot;J_ResultsList&quot;&gt;&lt;/div&gt;&#x27; +
-         &#x27;   &lt;/div&gt;&#x27; +
-         &#x27;&lt;/div&gt;&#x27; +
-         &#x27;&lt;div class=&quot;ks-ac-footer&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&#x27;
+         * @default '<div class="ks-ac-header"></div>' +
+         '<div class="ks-ac-body">' +
+         '   <div class="ks-ac-message J_AcMessage"></div>' +
+         '   <div class="ks-ac-content J_AcContent">' +
+         '       <div class="J_HotList"></div>' +
+         '       <div class="J_ResultsList"></div>' +
+         '   </div>' +
+         '</div>' +
+         '<div class="ks-ac-footer"><span></span></div>'
          **/
         boundingBoxTemplate : {
-            value: &#x27;&lt;div class=&quot;ks-ac-header&quot;&gt;&lt;/div&gt;&#x27; +
-                &#x27;&lt;div class=&quot;ks-ac-body&quot;&gt;&#x27; +
-                &#x27;   &lt;div class=&quot;ks-ac-message J_AcMessage&quot;&gt;&lt;/div&gt;&#x27; +
-                &#x27;   &lt;div class=&quot;ks-ac-content J_AcContent&quot;&gt;&#x27; +
-                &#x27;       &lt;div class=&quot;J_HotList&quot;&gt;&lt;/div&gt;&#x27; +
-                &#x27;       &lt;div class=&quot;J_ResultsList&quot;&gt;&lt;/div&gt;&#x27; +
-                &#x27;   &lt;/div&gt;&#x27; +
-                &#x27;&lt;/div&gt;&#x27; +
-                &#x27;&lt;div class=&quot;ks-ac-footer&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&#x27;
+            value: '<div class="ks-ac-header"></div>' +
+                '<div class="ks-ac-body">' +
+                '   <div class="ks-ac-message J_AcMessage"></div>' +
+                '   <div class="ks-ac-content J_AcContent">' +
+                '       <div class="J_HotList"></div>' +
+                '       <div class="J_ResultsList"></div>' +
+                '   </div>' +
+                '</div>' +
+                '<div class="ks-ac-footer"><span></span></div>'
         },
         /**
          * 推荐结果的外层容器HTML模板
          * @attribute listNodeTemplate
          * @type String
-         * @default &lt;div class=&quot;ks-ac-list&quot;&gt;&lt;/div&gt;
+         * @default <div class="ks-ac-list"></div>
          **/
         listNodeTemplate : {
-            value : &#x27;&lt;div class=&quot;ks-ac-list&quot;&gt;&lt;/div&gt;&#x27;
+            value : '<div class="ks-ac-list"></div>'
         },
         /**
          * 推荐结果单个数据项的外层容器HTML模板
          * @attribute itemNodeTemplate
          * @type String
-         * @default &lt;div class=&quot;ks-ac-item&quot;&gt;&lt;/div&gt;
+         * @default <div class="ks-ac-item"></div>
          **/
         itemNodeTemplate : {
-            value : &#x27;&lt;div class=&quot;ks-ac-item&quot;&gt;&lt;/div&gt;&#x27;
+            value : '<div class="ks-ac-item"></div>'
         },
         /**
          * 没有查询结果时的提示模板
          * @attribute noResultsMessage
          * @type String
-         * @default 没有&quot;&lt;span class=&quot;ks-ac-message-hightlight&quot;&gt;{query}&lt;/span&gt;&quot;相关的推荐
+         * @default 没有"<span class="ks-ac-message-hightlight">{query}</span>"相关的推荐
          **/
         noResultsMessage : {
-            value : &#x27;没有&quot;&lt;span class=&quot;ks-ac-message-hightlight&quot;&gt;{query}&lt;/span&gt;&quot;相关的推荐&#x27;
+            value : '没有"<span class="ks-ac-message-hightlight">{query}</span>"相关的推荐'
         },
         /**
          * clickoutside时需要排除在外的节点
@@ -898,28 +793,28 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
             this.overlay = null;
         },
         _renderRich : function (){
-            var input_node = this.get(&#x27;inputNode&#x27;);
+            var input_node = this.get('inputNode');
             input_node.addClass(CLS_AC_INPUT);
-            var _align = this.get(&#x27;align&#x27;);
+            var _align = this.get('align');
             _align.node = _align.node ? _align.node : input_node;
             //基于overlay组件
             var overlay = this.overlay = new O({
                 align: _align,
-                content : this.get(&#x27;boundingBoxTemplate&#x27;)
+                content : this.get('boundingBoxTemplate')
             });
             overlay.render();
-            var el = overlay.get(&#x27;el&#x27;);
-            this.overlayId = &#x27;J_Ks&#x27;+ S.guid();
-            el.prop(&#x27;id&#x27; , this.overlayId).addClass(CLS_AC_CONTAINER).attr(&#x27;tabindex&#x27;,&#x27;-1&#x27;);
+            var el = overlay.get('el');
+            this.overlayId = 'J_Ks'+ S.guid();
+            el.prop('id' , this.overlayId).addClass(CLS_AC_CONTAINER).attr('tabindex','-1');
             this.overlayNode = el;
-            this.headerNode = el.one(&#x27;.J_AcHeader&#x27;);
-            this.bodyNode = el.one(&#x27;.J_AcBody&#x27;);
-            this.footerNode = el.one(&#x27;.J_AcFooter&#x27;);
-            this.messageNode = el.one(&#x27;.J_AcMessage&#x27;).hide();
-            this.contentNode = el.one(&#x27;.J_AcContent&#x27;);
-            this.hotNode = el.one(&#x27;.J_HotList&#x27;).hide();
-            this.resultsListNode = el.one(&#x27;.J_ResultsList&#x27;).hide();
-            S.one(win).on(&#x27;resize&#x27;,  S.buffer(this._syncPosition , 100 , this), this);
+            this.headerNode = el.one('.J_AcHeader');
+            this.bodyNode = el.one('.J_AcBody');
+            this.footerNode = el.one('.J_AcFooter');
+            this.messageNode = el.one('.J_AcMessage').hide();
+            this.contentNode = el.one('.J_AcContent');
+            this.hotNode = el.one('.J_HotList').hide();
+            this.resultsListNode = el.one('.J_ResultsList').hide();
+            S.one(win).on('resize',  S.buffer(this._syncPosition , 100 , this), this);
         },
         /**
          * 生成搜索结果列表
@@ -927,7 +822,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
          * @returns {NodeList} 返回documentFragment;
          */
         _buildList : function (items){
-            var listNode = S.one(S.DOM.create(this.get(&#x27;listNodeTemplate&#x27;)));
+            var listNode = S.one(S.DOM.create(this.get('listNodeTemplate')));
             S.each(items,function (_item){
                 listNode.append(this._createItemNode(_item).data(RESULT,_item));
             },this);
@@ -940,7 +835,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
          * @private
          */
         _createItemNode : function (item){
-            var node = S.one(DOM.create(this.get(&#x27;itemNodeTemplate&#x27;)));
+            var node = S.one(DOM.create(this.get('itemNodeTemplate')));
             node.addClass(CLS_ITEM).append(item.display);
             return node;
         },
@@ -949,20 +844,20 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
          * @private
          */
         _bindRich : function (){
-            var input_node = this.get(&#x27;inputNode&#x27;);
+            var input_node = this.get('inputNode');
 
             //同步状态
-            this.on(&#x27;afterVisibleChange&#x27;,this._afterVisibleChange, this);
-            this.on(&#x27;afterResultsListVisibleChange&#x27;,this._afterResultsListVisibleChange, this);
-            this.on(&#x27;afterMessageVisibleChange&#x27; , this._afterMessageVisibleChange, this);
+            this.on('afterVisibleChange',this._afterVisibleChange, this);
+            this.on('afterResultsListVisibleChange',this._afterResultsListVisibleChange, this);
+            this.on('afterMessageVisibleChange' , this._afterMessageVisibleChange, this);
 
-            input_node.on(&#x27;keydown&#x27;, S.bind(this._afterKeyDown ,this));
-            input_node.on(&#x27;focus&#x27; , this._onFocus, this);
+            input_node.on('keydown', S.bind(this._afterKeyDown ,this));
+            input_node.on('focus' , this._onFocus, this);
 
             this.on(EVT_RESULTS , S.bind(this._onResults , this));
             this.on(EVT_QUERY, this._onQuery,this);
-            this.on(&#x27;afterActiveItemChange&#x27; , S.bind(this._afterActiveChange , this));
-            this.on(&#x27;afterHoverItemChange&#x27;, S.bind(this._afterHoverChange,this));
+            this.on('afterActiveItemChange' , S.bind(this._afterActiveChange , this));
+            this.on('afterHoverItemChange', S.bind(this._afterHoverChange,this));
 
 
             //event of select
@@ -971,13 +866,13 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
             //clickoutside
             var doc_node = S.one(doc);
             var clickoutside_handler = S.bind(this._afterDocClick,this);
-            this.overlay.on(&#x27;afterVisibleChange&#x27;,function (e){
+            this.overlay.on('afterVisibleChange',function (e){
                 if(e.newVal){//展示时 绑定outclick事件
-                    doc_node.on(&#x27;click&#x27;, clickoutside_handler);
+                    doc_node.on('click', clickoutside_handler);
                     return ;
                 }
                 //隐藏时 取消监听
-                doc_node.detach(&#x27;click&#x27;, clickoutside_handler);
+                doc_node.detach('click', clickoutside_handler);
             }, this);
             this.bindList();
         },
@@ -985,16 +880,16 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
          * 搜索结果列表事件绑定
          */
         bindList : function (){
-            this.resultsListNode.delegate(&#x27;mouseenter&#x27; ,SELECTOR_ITEM , function (e){
+            this.resultsListNode.delegate('mouseenter' ,SELECTOR_ITEM , function (e){
                 var item = S.one(e.currentTarget);
                 this.hoverItem(item);
             },this);
-            this.resultsListNode.delegate(&#x27;click&#x27; , SELECTOR_ITEM , function (e){
+            this.resultsListNode.delegate('click' , SELECTOR_ITEM , function (e){
                 e.preventDefault();
                 var item = S.one(e.currentTarget);
                 this.selectItem(item);
             },this);
-            this.resultsListNode.on(&#x27;mouseleave&#x27; , function (){
+            this.resultsListNode.on('mouseleave' , function (){
                 this.set(HOVER_ITEM,null);
             },this);
         },
@@ -1011,16 +906,16 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
             if (this._isSelectVal) {
                 return ;
             }
-            if (isArray(resluts) &amp;&amp; resluts.length &gt; 0) {
+            if (isArray(resluts) && resluts.length > 0) {
                 this._clear();
                 list_node.empty();
                 list_node.append(this._buildList(resluts));
-                this.set(&#x27;messageVisible&#x27;, false);
-                this.get(&#x27;activeFirstItem&#x27;) &amp;&amp; this.set(ACTIVE_ITEM, this._getFirstItem());
-                doc.activeElement  == this.inputNode[0]  &amp;&amp; this.set(&#x27;resultsListVisible&#x27; , true);//焦点还在输入框时才进行现实
+                this.set('messageVisible', false);
+                this.get('activeFirstItem') && this.set(ACTIVE_ITEM, this._getFirstItem());
+                doc.activeElement  == this.inputNode[0]  && this.set('resultsListVisible' , true);//焦点还在输入框时才进行现实
             }else{
                 query = S.escapeHTML(query);
-                doc.activeElement  == this.inputNode[0]  &amp;&amp; this.showMessage(S.substitute(this.get(&#x27;noResultsMessage&#x27;),{//焦点还在输入框时才进行显示
+                doc.activeElement  == this.inputNode[0]  && this.showMessage(S.substitute(this.get('noResultsMessage'),{//焦点还在输入框时才进行显示
                     query : query
                 }))
             }
@@ -1036,7 +931,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
             this.messageNode.html(msg);
             var that = this;
             setTimeout(function (){
-                that.set(&#x27;messageVisible&#x27;, true);
+                that.set('messageVisible', true);
             },1);
             return this
         },
@@ -1045,7 +940,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
          * @private
          */
         _syncPosition : function (){
-            var _align = this.get(&#x27;align&#x27;);
+            var _align = this.get('align');
             this.overlay.align(_align.node , _align.points , _align.offset , _align.overflow);
         },
         /**
@@ -1090,33 +985,33 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
         _afterResultsListVisibleChange : function (e) {
             var isShowIt = e.newVal;
             if (isShowIt) {
-                this.overlay.set(&#x27;width&#x27;, this.get(&#x27;width&#x27;));
+                this.overlay.set('width', this.get('width'));
                 this.resultsListNode.show();
-                this.set(&#x27;visible&#x27;, true);
+                this.set('visible', true);
                 this._syncPosition();
             } else {
                 this.resultsListNode.hide();
             }
 
             //自动回填:输入框失去焦点时如果有推荐结果被选中则自动回填
-            if (this.get(QUERY).query !== &#x27;&#x27; &amp;&amp; e.newVal === false &amp;&amp; this.get(&#x27;enableAutoFill&#x27;)  &amp;&amp; this.get(ACTIVE_ITEM)) {
+            if (this.get(QUERY).query !== '' && e.newVal === false && this.get('enableAutoFill')  && this.get(ACTIVE_ITEM)) {
                 this.selectItem();
             }
         },
         _afterMessageVisibleChange : function (e){
             var isShowIt = e.newVal;
             if (isShowIt) {
-                this.overlay.set(&#x27;width&#x27;, this.get(&#x27;width&#x27;));
+                this.overlay.set('width', this.get('width'));
                 this.messageNode.show();
-                this.set(&#x27;visible&#x27;, true);
+                this.set('visible', true);
             } else {
                 this.messageNode.hide();
-                this.set(&#x27;visilbe&#x27;, false)
+                this.set('visilbe', false)
             }
         },
         _onFocus : function (e){
             var that = this;
-            that.set(&#x27;messageVisible&#x27;, false);
+            that.set('messageVisible', false);
             setTimeout(function () {//hack for chrome
                 if (that._isSelectVal) {
                     return;
@@ -1132,7 +1027,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
          * @private
          */
         _isOutSide: function (target_node, region_nodes) {
-            for (var i = 0 , len = region_nodes.length; i &lt; len; i++) {
+            for (var i = 0 , len = region_nodes.length; i < len; i++) {
                 var _region = region_nodes[i][0];
                 if (target_node === _region || S.one(target_node).parent(function (el) {//触发click事件的srcElement不是region_nodes成员或者它的父级元素也没有region_nodes的成员时
                     //filter
@@ -1148,14 +1043,14 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
         },
         _afterDocClick : function (e) {
             var target = e.target;
-            if (this._isOutSide(target, [this.overlayNode , this.inputNode].concat(this.get(&#x27;trigger&#x27;)))) {
-                this.set(&#x27;resultsListVisible&#x27;, false);
-                this.set(&#x27;visible&#x27;, false);
+            if (this._isOutSide(target, [this.overlayNode , this.inputNode].concat(this.get('trigger')))) {
+                this.set('resultsListVisible', false);
+                this.set('visible', false);
             }
         },
         _onSelect : function (e){
             var that = this,
-                input_node = this.get(&#x27;inputNode&#x27;);
+                input_node = this.get('inputNode');
             this._updateValue(e.result.text);
             this._isSelectVal = true;//增加一个私有属性, 记录当前状态的改变是由select事件触发，并在200MS后释放状态
             setTimeout(function () {
@@ -1163,13 +1058,13 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
             }, 200);
             input_node[0].focus();
             this.set(ACTIVE_ITEM, null);
-            this.set(&#x27;resultsListVisible&#x27;, false);
-            this.set(&#x27;visible&#x27;, false);
+            this.set('resultsListVisible', false);
+            this.set('visible', false);
         },
         _onQuery : function (e) {
             if (e.newVal.query.length === 0) {
-                this.set(&#x27;resultsListVisible&#x27;, false);
-                this.set(&#x27;messageVisible&#x27;, false);
+                this.set('resultsListVisible', false);
+                this.set('messageVisible', false);
             }
         },
         /**
@@ -1180,8 +1075,8 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
         _afterActiveChange : function (e){
             var prev_item = e.prevVal;
             var new_item = e.newVal;
-            prev_item &amp;&amp; prev_item.removeClass(CLS_ACTIVE);
-            new_item &amp;&amp; new_item.addClass(CLS_ACTIVE);
+            prev_item && prev_item.removeClass(CLS_ACTIVE);
+            new_item && new_item.addClass(CLS_ACTIVE);
         },
         /**
          * 鼠标移动到ITEM上时的回调
@@ -1191,8 +1086,8 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
         _afterHoverChange : function (e){
             var prev_item = e.prevVal;
             var new_item = e.newVal;
-            prev_item &amp;&amp; prev_item.removeClass(CLS_HOVER);
-            new_item &amp;&amp; new_item.addClass(CLS_HOVER);
+            prev_item && prev_item.removeClass(CLS_HOVER);
+            new_item && new_item.addClass(CLS_HOVER);
         },
         /**
          * 键盘事件回调
@@ -1211,19 +1106,19 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
                     break;
                 case 13 :
                     e.preventDefault();
-                    this.get(&#x27;resultsListVisible&#x27;) &amp;&amp; this.get(ACTIVE_ITEM) &amp;&amp; this.selectItem();
+                    this.get('resultsListVisible') && this.get(ACTIVE_ITEM) && this.selectItem();
                     break;
                 case 9 :// tab
-                    if (this.get(&#x27;resultsListVisible&#x27;) &amp;&amp; this.get(ACTIVE_ITEM)) {
+                    if (this.get('resultsListVisible') && this.get(ACTIVE_ITEM)) {
                         e.preventDefault();
                         this.selectItem();
                     }
-                    this.set(&#x27;resultsListVisible&#x27;, false);
-                    this.set(&#x27;visible&#x27; , false);
+                    this.set('resultsListVisible', false);
+                    this.set('visible' , false);
                     break;
                 case 27 :// esc
-                    this.set(&#x27;resultsListVisible&#x27;, false);
-                    this.set(&#x27;visible&#x27; , false);
+                    this.set('resultsListVisible', false);
+                    this.set('visible' , false);
                     break;
                 default :
                     break;
@@ -1278,7 +1173,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
          * @private
          */
         _getLastItem : function (){
-            return this.resultsListNode.one(SELECTOR_ITEM+&#x27;:last-child&#x27;);
+            return this.resultsListNode.one(SELECTOR_ITEM+':last-child');
         },
         /**
          * 设定宽度值
@@ -1294,7 +1189,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
                 return val.outerWidth();
             }
             if (val === null) {
-                return this.get(&#x27;inputNode&#x27;).outerWidth();
+                return this.get('inputNode').outerWidth();
             }
         },
         /**
@@ -1306,7 +1201,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
         _setAlign : function (cfg){
             var _cfg = {
                 node    : null,
-                points  : [&#x27;bl&#x27;, &#x27;tl&#x27;],
+                points  : ['bl', 'tl'],
                 offset  : [0, -1],
                 overflow: {
                     adjustX: 0, // 当对象不能处于可显示区域时，自动调整横坐标
@@ -1318,14 +1213,14 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
             if (_cfg.node) {
                 return _cfg;
             }else{
-                _cfg.node = this.get(&#x27;inputNode&#x27;);
+                _cfg.node = this.get('inputNode');
                 return _cfg;
             }
         }
     };
     return AutoCompleteRich;
-},{requires : [&#x27;node&#x27;,&#x27;event&#x27;,&#x27;overlay&#x27;,&#x27;sizzle&#x27;]});
-KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , Io , Tpl){
+},{requires : ['node','event','overlay','sizzle']});
+KISSY.add('gallery/autocomplete/1.0/hot',function (S, Node , Event , Io , Tpl){
     /**
      自动完成组件
      @module autocomplete
@@ -1339,14 +1234,14 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
      @constructor
      @param {Object} 配置项
      **/
-    var EVT_SELECT = &#x27;select&#x27;;
-    var EVT_QUERY = &#x27;afterQueryChange&#x27;;
+    var EVT_SELECT = 'select';
+    var EVT_QUERY = 'afterQueryChange';
 
-    var CLS_ITEM = &#x27;J_AcItem&#x27;;
-    var CLS_ACTIVE = &#x27;ks-ac-hot-selected&#x27;;
+    var CLS_ITEM = 'J_AcItem';
+    var CLS_ACTIVE = 'ks-ac-hot-selected';
 
-    var SELECTOR_ITEM = &#x27;.&#x27; + CLS_ITEM;
-    var SELECTOR_TAB = &#x27;.J_TabItem&#x27;;
+    var SELECTOR_ITEM = '.' + CLS_ITEM;
+    var SELECTOR_TAB = '.J_TabItem';
 
     var AutoCompleteHot = function (){
         this.initHot.apply(this , arguments);
@@ -1356,16 +1251,16 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
          * 热门推荐的模板，数据源来自hotSource参数，内容渲染到this.hotNode节点内
          * @attribute hotTemplate
          * @type String
-         * @default &#x27;&lt;div class=&quot;ks-ac-hot-city&quot;&gt;&lt;div class=&quot;ks-ac-acinput-hot-tit&quot;&gt;热门城市/国家(支持汉字/拼音/英文字母)&lt;/div&gt;&#x27; +
-                         &#x27;&lt;ul class=&quot;tab-nav&quot;&gt;{{#results}}&lt;li class=&quot;J_TabItem&quot;&gt;{{tabname}}&lt;/li&gt;{{/results}}&lt;/ul&gt;&#x27; +
-                         &#x27;&lt;div class=&quot;tab-content J_TabContent&quot;&gt;{{#results}}&#x27; +
-                         &#x27;&lt;div class=&quot;tab-pannel J_Pannel&quot;&gt;{{#tabdata}}&lt;dl&gt;&lt;dt&gt;{{dt}}&lt;/dt&gt;&lt;dd&gt;{{#dd}}&lt;span&gt;&lt;a data-sid=&quot;{{sid}}&quot; class=&quot;J_AcItem&quot; tabindex=&quot;-1&quot; href=&quot;javascript:void(0);&quot; target=&quot;_self&quot;&gt;{{cityName}}&lt;/a&gt;&lt;/span&gt;{{/dd}}&lt;/dd&gt;&lt;/dl&gt;{{/tabdata}}&lt;/div&gt;{{/results}}&lt;/div&gt;&lt;/div&gt;&#x27;
+         * @default '<div class="ks-ac-hot-city"><div class="ks-ac-acinput-hot-tit">热门城市/国家(支持汉字/拼音/英文字母)</div>' +
+                         '<ul class="tab-nav">{{#results}}<li class="J_TabItem">{{tabname}}</li>{{/results}}</ul>' +
+                         '<div class="tab-content J_TabContent">{{#results}}' +
+                         '<div class="tab-pannel J_Pannel">{{#tabdata}}<dl><dt>{{dt}}</dt><dd>{{#dd}}<span><a data-sid="{{sid}}" class="J_AcItem" tabindex="-1" href="javascript:void(0);" target="_self">{{cityName}}</a></span>{{/dd}}</dd></dl>{{/tabdata}}</div>{{/results}}</div></div>'
          **/
         hotTemplate : {
-            value : &#x27;&lt;div class=&quot;ks-ac-hot-city&quot;&gt;&lt;div class=&quot;ks-ac-acinput-hot-tit&quot;&gt;热门城市/国家(支持汉字/拼音/英文字母)&lt;/div&gt;&#x27; +
-                &#x27;&lt;ul class=&quot;tab-nav&quot;&gt;{{#results}}&lt;li class=&quot;J_TabItem&quot; tabindex=&quot;2&quot;&gt;&lt;a href=&quot;javascript:void(0)&quot; target=&quot;_self&quot;&gt;{{tabname}}&lt;/a&gt;&lt;/li&gt;{{/results}}&lt;/ul&gt;&#x27; +
-                &#x27;&lt;div class=&quot;tab-content J_TabContent&quot;&gt;{{#results}}&#x27; +
-                &#x27;&lt;div class=&quot;tab-pannel J_Pannel&quot;&gt;{{#tabdata}}&lt;dl&gt;&lt;dt&gt;{{dt}}&lt;/dt&gt;&lt;dd&gt;{{#dd}}&lt;span&gt;&lt;a data-sid=&quot;{{sid}}&quot; class=&quot;J_AcItem&quot; tabindex=&quot;3&quot; href=&quot;javascript:void(0);&quot; target=&quot;_self&quot;&gt;{{cityName}}&lt;/a&gt;&lt;/span&gt;{{/dd}}&lt;/dd&gt;&lt;/dl&gt;{{/tabdata}}&lt;/div&gt;{{/results}}&lt;/div&gt;&lt;/div&gt;&#x27;
+            value : '<div class="ks-ac-hot-city"><div class="ks-ac-acinput-hot-tit">热门城市/国家(支持汉字/拼音/英文字母)</div>' +
+                '<ul class="tab-nav">{{#results}}<li class="J_TabItem" tabindex="2"><a href="javascript:void(0)" target="_self">{{tabname}}</a></li>{{/results}}</ul>' +
+                '<div class="tab-content J_TabContent">{{#results}}' +
+                '<div class="tab-pannel J_Pannel">{{#tabdata}}<dl><dt>{{dt}}</dt><dd>{{#dd}}<span><a data-sid="{{sid}}" class="J_AcItem" tabindex="3" href="javascript:void(0);" target="_self">{{cityName}}</a></span>{{/dd}}</dd></dl>{{/tabdata}}</div>{{/results}}</div></div>'
         },
         /**
          * 热门推荐的宽度
@@ -1384,7 +1279,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
          **/
         hotSource : {
             value : null,
-            setter : &#x27;_onHotSourceChange&#x27;
+            setter : '_onHotSourceChange'
         },
         /**
          * 热门推荐数据源指定为JSONP时，callback的参数名
@@ -1393,7 +1288,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
          * @default
          **/
         hotJsonpCallback : {
-            value :&#x27;callback&#x27;
+            value :'callback'
         },
         /**
          * 当前热门推荐被选中tab
@@ -1413,7 +1308,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
                          S.each(data.results,function (_iObj){
                              S.each(_iObj.tabdata , function (_jObj){
                                  S.each(_jObj.dd , function (_kObj){
-                                     var id = &#x27;hot_source_id_&#x27;+ S.guid();//必需
+                                     var id = 'hot_source_id_'+ S.guid();//必需
                                      _kObj.raw = S.mix({}, _kObj);
                                      _kObj.sid = id;//必需
                                      _kObj.text = _kObj.cityName;
@@ -1430,7 +1325,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
                 S.each(data.results,function (_iObj){
                     S.each(_iObj.tabdata , function (_jObj){
                         S.each(_jObj.dd , function (_kObj){
-                            var id = &#x27;hot_source_id_&#x27;+ S.guid();//必需
+                            var id = 'hot_source_id_'+ S.guid();//必需
                             _kObj.raw = S.mix({}, _kObj);
                             _kObj.sid = id;//必需
                             _kObj.text = _kObj.cityName;
@@ -1462,7 +1357,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
     };
     AutoCompleteHot.prototype = {
         initHot : function (){
-            if (this.get(&#x27;hotSource&#x27;) === null) {
+            if (this.get('hotSource') === null) {
                 return ;
             }
             this._renderHot();
@@ -1477,85 +1372,85 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
 
         },
         _bindHot : function (){
-            var input_node = this.get(&#x27;inputNode&#x27;);
+            var input_node = this.get('inputNode');
 
-            this.on(&#x27;afterHotVisibleChange&#x27; , function (e){
+            this.on('afterHotVisibleChange' , function (e){
                 var isShowIt = e.newVal;
                 if (isShowIt) {
                     if (!this._hasBuildHot) {
                         this._buildHot();
                     }
                     this.hotNode.show();
-                    this.overlay.set(&#x27;width&#x27;,this.get(&#x27;hotWidth&#x27;));
-                    this.set(&#x27;resultsListVisible&#x27; , false);
-                    this.set(&#x27;visible&#x27; , true);
+                    this.overlay.set('width',this.get('hotWidth'));
+                    this.set('resultsListVisible' , false);
+                    this.set('visible' , true);
                     this._syncPosition();
                 }else{
                     this.hotNode.hide();
                 }
             },this);
-            this.on(&#x27;afterVisibleChange&#x27;, function (e){
+            this.on('afterVisibleChange', function (e){
                 if (e.newVal === false) {
-                    this.set(&#x27;hotVisible&#x27; , false);
+                    this.set('hotVisible' , false);
                 }
             }, this);
             //展示推荐结果时不展示热门推荐
-            this.on(&#x27;afterResultsListVisibleChange&#x27; , function (e){
+            this.on('afterResultsListVisibleChange' , function (e){
                 if (e.newVal) {
-                    this.set(&#x27;hotVisible&#x27; , false);
+                    this.set('hotVisible' , false);
                 }
             }, this);
-            input_node.on(&#x27;focus&#x27;, function (){
+            input_node.on('focus', function (){
                 if (this._isSelectVal) {
                     return;
                 }
-                this.set(&#x27;hotVisible&#x27; , true);
+                this.set('hotVisible' , true);
             },this);
-            input_node.on(&#x27;keydown&#x27;, function (e){
-                if (this.get(&#x27;hotVisible&#x27;) &amp;&amp; (e.keyCode === 38 || e.keyCode === 40)) {
+            input_node.on('keydown', function (e){
+                if (this.get('hotVisible') && (e.keyCode === 38 || e.keyCode === 40)) {
                     this.overlayNode[0].focus();
                 }
             } , this);
             this.on(EVT_QUERY , function (e){
-                if (S.trim(e.newVal.query) === &#x27;&#x27;) {//输入框为空时展示热门推荐
-                    this.set(&#x27;messageVisible&#x27; , false);
-                    this.set(&#x27;hotVisible&#x27; , true);
+                if (S.trim(e.newVal.query) === '') {//输入框为空时展示热门推荐
+                    this.set('messageVisible' , false);
+                    this.set('hotVisible' , true);
                 }else{
-                    this.set(&#x27;hotVisible&#x27; , false);
+                    this.set('hotVisible' , false);
                 }
             } , this);
 
             //点击选择项
-            this.hotNode.delegate(&#x27;click&#x27; , SELECTOR_ITEM , function (e){
+            this.hotNode.delegate('click' , SELECTOR_ITEM , function (e){
                 var el = S.one(e.currentTarget);
                 this.fire(EVT_SELECT , {
                     node : el,
-                    result : this._hotResults[el.attr(&#x27;data-sid&#x27;)]
+                    result : this._hotResults[el.attr('data-sid')]
                 })
             },this);
 
             //tab 切换
-            this.hotNode.delegate(&#x27;click&#x27; , SELECTOR_TAB , function (e){
+            this.hotNode.delegate('click' , SELECTOR_TAB , function (e){
                 var index = S.indexOf(e.currentTarget , this.hotNavNodes);
-                this.set(&#x27;hotActiveTab&#x27; , index);
+                this.set('hotActiveTab' , index);
             },this);
 
-            this.on(&#x27;afterHotActiveTabChange&#x27; , function (e){
+            this.on('afterHotActiveTabChange' , function (e){
                 var _prevNav = this.hotNavNodes.item(e.prevVal);
                 var _prevPannel = this.hotPannelNodes.item(e.prevVal);
                 var _nextNav = this.hotNavNodes.item(e.newVal);
                 var _nextPannel = this.hotPannelNodes.item(e.newVal);
-                _prevNav &amp;&amp; _prevNav.removeClass(CLS_ACTIVE);
-                _prevPannel &amp;&amp; _prevPannel.hide();
-                _nextNav &amp;&amp; _nextNav.addClass(CLS_ACTIVE);
-                _nextPannel &amp;&amp; _nextPannel.show();
+                _prevNav && _prevNav.removeClass(CLS_ACTIVE);
+                _prevPannel && _prevPannel.hide();
+                _nextNav && _nextNav.addClass(CLS_ACTIVE);
+                _nextPannel && _nextPannel.show();
             },this);
 
             //在热门推荐按下esc时触发隐藏
-            this.hotNode.on(&#x27;keydown&#x27;, function (e){
+            this.hotNode.on('keydown', function (e){
                 if (e.keyCode === 27) {
-                    this.set(&#x27;hotVisible&#x27; , false);
-                    this.set(&#x27;visible&#x27;,false);
+                    this.set('hotVisible' , false);
+                    this.set('visible',false);
                 }
             },this);
         },
@@ -1565,31 +1460,31 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
          */
         _buildHot : function (){
             var that = this;
-            var source = this.get(&#x27;hotSource&#x27;);
+            var source = this.get('hotSource');
             /**
              * HOT的渲染
              * @param data 依赖的数据源
              * @private
              */
             var _build = function (data){
-                var locator = that.get(&#x27;hotResultsLocator&#x27;);
-                var formatter = that.get(&#x27;hotResultsFormatter&#x27;);
-                locator &amp;&amp; (data = locator.call(that , data));
+                var locator = that.get('hotResultsLocator');
+                var formatter = that.get('hotResultsFormatter');
+                locator && (data = locator.call(that , data));
                 that._hotResults = formatter.call(that, data);//数据扁平化实现DOM的id和数据的绑定
-                var html = new Tpl(that.get(&#x27;hotTemplate&#x27;)).render(data);
+                var html = new Tpl(that.get('hotTemplate')).render(data);
                 var hot_node = that.hotNode;
                 hot_node.html(html);
-                that.hotNavNodes = hot_node.all(&#x27;.J_TabItem&#x27;);
-                that.hotPannelNodes = hot_node.all(&#x27;.J_Pannel&#x27;);
+                that.hotNavNodes = hot_node.all('.J_TabItem');
+                that.hotPannelNodes = hot_node.all('.J_Pannel');
                 that.hotPannelNodes.hide();
-                that.set(&#x27;hotActiveTab&#x27;,0);
+                that.set('hotActiveTab',0);
                 that._hasBuildHot = true;
             };
             if (S.isString(source)) {
                 S.IO({
                     url : source,
-                    dataType : &#x27;jsonp&#x27;,
-                    jsonp : this.get(&#x27;hotJsonpCallback&#x27;),
+                    dataType : 'jsonp',
+                    jsonp : this.get('hotJsonpCallback'),
                     success : function (data){
                         _build(data);
                     }
@@ -1605,17 +1500,241 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
         _onHotSourceChange : function (){
             this._hasBuildHot = false ;
             this._hotResults = {};
-            this.set(&#x27;hotActiveTab&#x27; , -1);
+            this.set('hotActiveTab' , -1);
         }
     };
     return AutoCompleteHot ;
-}, {requires : [&#x27;node&#x27;,&#x27;event&#x27;,&#x27;ajax&#x27; , &#x27;xtemplate&#x27;]});
-/**
- * @fileoverview 自动完成组件
- * @author 舒克&lt;shuke.cl@taobao.com&gt;
- * @module autocomplete
- **/
-KISSY.add(&#x27;gallery/autocomplete/1.0/index&#x27;,function (S , RichBase , AcBase, AcRich , AcHot) {
+}, {requires : ['node','event','ajax' , 'xtemplate']});
+KISSY.add('gallery/autocomplete/1.0/aria',function (S ,Node , Event , O){
+    /**
+     * @module autocomplete
+     * @submodule autocomplete-aria
+     */
+
+    /**
+     * AutocompleteAria主要基于AutocompleteHot，盲人用户的支持，增加组件的可用性
+     * @class  AutocompleteAria
+     * @extend AutocompleteBase
+     */
+    var CLS_ITEM = 'J_AcItem';
+    var SELECTOR_TAB = '.J_TabItem';
+    var SELECTOR_ITEM = '.' + CLS_ITEM;
+
+    var AutoCompleteAria = function (){
+        this.initAria.apply(this , arguments);
+    };
+    AutoCompleteAria.ATTRS = {};
+    AutoCompleteAria.prototype = {
+        nodeArr : null,
+        isFirstShow : true ,
+        initAria : function (){
+            this.bindAria();
+            this.nodeArr = null;
+        },
+        bindAria : function (){
+            this.on('afterHotActiveTabChange' , function (e){
+                var _nextNav = this.hotNavNodes.item(e.newVal);
+                var _nextPannel = this.hotPannelNodes.item(e.newVal);
+                var _clickNodes = this.hotItemNodes = _nextPannel.all(SELECTOR_ITEM);
+                this.nodeArr = this.buildArr2(_clickNodes);
+                if (!this.isFirstShow) {
+                    _nextNav.one('a')[0].focus();
+                }else{
+                    this.isFirstShow = false;
+                }
+            },this);
+            this.hotNode.delegate('keydown' , SELECTOR_ITEM , function (e){
+                var target = S.one(e.currentTarget);
+                var item_data = target.data('src');
+                if (target.hasClass(CLS_ITEM) && target.hasData('src')) {
+                    switch(e.keyCode){
+                        case 37 :
+                            e.preventDefault();
+                            this._selectHotLeft(item_data);
+                            break;
+                        case 38 :
+                            e.preventDefault();
+                            this._selectHotTop(item_data);
+                            break;
+                        case 39 :
+                            e.preventDefault();
+                            this._selectHotRight(item_data);
+                            break;
+                        case  40 :
+                            e.preventDefault();
+                            this._selectHotBottom(item_data);
+                            break;
+                        default :
+                            break;
+                    }
+                }
+            }, this);
+
+            //在tab上的键盘操作
+            this.hotNode.delegate('keydown' , SELECTOR_TAB , function (e){
+                var curHotTab = this.get('hotActiveTab');
+                switch(e.keyCode){
+                    case 37 : //click left
+                        curHotTab -- ;
+                        if (curHotTab < 0) {
+                            curHotTab = this.hotNavNodes.length -1;
+                        }
+                        this.set('hotActiveTab' , curHotTab);
+                        break;
+                    case 39 ://click right
+                        curHotTab ++ ;
+                        if (curHotTab >= this.hotNavNodes.length) {
+                            curHotTab = 0 ;
+                        }
+                        this.set('hotActiveTab' , curHotTab);
+                        break;
+                    case 38 : //up
+                        this.hotItemNodes.item(0)[0].focus();
+                        break;
+                    case  40 : //down
+                        this.hotItemNodes.item(0)[0].focus();
+                        break;
+                    case 9 ://click tab 点击tab时切换到当前tab对应的内容模块
+                        e.preventDefault();
+                        this.hotItemNodes.item(0)[0].focus();
+                        break;
+                    default :
+                        break;
+                }
+            },this);
+        },
+        /**
+         * 生成一个二维数组，数组每一项代表一个节点,完成上下左右键盘键操作功能，同时完成节点数据绑定
+         * [[1, 2, 3, 4, 5, 6, 7, 8],
+         *  [9,10,11,12,13,14,15,16],
+         *  [......................]]
+         * @param nodes
+         * @returns {Array}
+         */
+        buildArr2 : function (nodes){
+            var map = [];
+            var obj = {};
+            nodes.each(function (_item){
+                var xy = _item.offset();
+                if (!S.isArray(obj[xy.top])) {
+                    obj[xy.top] = [];
+                }
+                obj[xy.top].push({
+                    node : _item,
+                    offset : xy,
+                    x : obj[xy.top].length
+                });
+            });
+            S.each(obj , function (v , k){
+                map.push(k);
+            });
+            map.sort(function (a,b){
+                return a - b;
+            });
+            S.each(map , function (key , index){
+                S.each(obj[key] , function (_item){
+                    _item.y = index;
+                    _item.node.data('src' , _item);//数据绑定
+                });
+                map[index] = obj[key];
+            });
+            return map;
+        },
+        /**
+         * 选择位于上方的节点
+         * @param item
+         * @private
+         */
+        _selectHotTop : function (item){
+            var x = item.x;
+            var y = item.y;
+            y--;
+            if (y < 0) {
+                y = this.nodeArr.length - 1;
+            }
+            this._selectHot(x , y , 'up');
+        },
+        /**
+         * 选择位于下方节点
+         * @param item
+         * @private
+         */
+        _selectHotBottom : function (item){
+            var x = item.x;
+            var y = item.y;
+            y++;
+            if (y >= this.nodeArr.length) {
+                y = 0;
+            }
+            this._selectHot(x , y , 'down');
+        },
+        /**
+         * 选择左侧节点
+         * @param item
+         * @private
+         */
+        _selectHotLeft : function (item){
+            var x = item.x ;
+            var y = item.y ;
+            x--;
+            if (x < 0) {
+                y--;
+                if (y<0) {
+                    y = this.nodeArr.length - 1;
+                }
+                x = this.nodeArr[y].length - 1;
+            }
+            this._selectHot(x , y);
+        },
+        /**
+         * 选择右侧节点
+         * @param item
+         * @private
+         */
+        _selectHotRight : function (item){
+            var x = item.x;
+            var y = item.y;
+            x++;
+            if (x >= this.nodeArr[item.y].length) {
+                x = 0 ;
+                y++;
+                if (y >= this.nodeArr.length) {
+                    y = 0;
+                }
+            }
+            this._selectHot(x , y);
+        },
+        /**
+         * 选择指定坐标的节点,当一步没有找到时，根据direction进行下一步的查找
+         * @param x 二维数组横坐标
+         * @param y 二位数组纵坐标
+         * @param direction 来源的键盘键
+         * @private
+         */
+        _selectHot : function (x,y,direction){
+            if (direction == 'up') {
+            }
+            if (this.nodeArr[y]) {
+                if (this.nodeArr[y][x]) {
+                    this.nodeArr[y][x].node[0].focus();
+                }else{//点击上下键，在所在列进行移动，如果当前行对应的列不存在，则跳过去下一行
+                    if (direction === 'up') {
+                        y -- ;
+                        this._selectHot(x, y ,direction);
+                        return false;
+                    }else if(direction === 'down'){
+                        y ++ ;
+                        this._selectHot(x, y ,direction);
+                        return false;
+                    }
+                }
+
+            }
+        }
+    };
+    return AutoCompleteAria;
+},{requires : ['node','event']});
+KISSY.add('gallery/autocomplete/1.0/index-aria',function (S , RichBase , AcBase, AcRich , AcHot , AcAria) {
     /**
      * 通用的自动完成组件
      * @class Autocomplete
@@ -1625,29 +1744,6 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/index&#x27;,function (S , RichBase , Ac
      * @uses AutocompleteRich
      * @uses AutocompleteHot
      */
-    return RichBase.extend([AcBase , AcRich, AcHot] , {},{});
-}, {requires:[&#x27;rich-base&#x27; , &#x27;./base&#x27; , &#x27;./rich&#x27; , &#x27;./hot&#x27; ,&#x27;./autocomplete.css&#x27;]});
+    return RichBase.extend([AcBase , AcRich, AcHot , AcAria] , {},{});
+}, {requires:['rich-base' , './base' , './rich' , './hot' , './aria' ,'./autocomplete.css']});
 
-
-
-
-
-    </pre>
-</div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="../assets/vendor/prettify/prettify-min.js"></script>
-<script>prettyPrint();</script>
-<script src="../assets/js/yui-prettify.js"></script>
-<script src="../assets/../api.js"></script>
-<script src="../assets/js/api-filter.js"></script>
-<script src="../assets/js/api-list.js"></script>
-<script src="../assets/js/api-search.js"></script>
-<script src="../assets/js/apidocs.js"></script>
-</body>
-</html>
