@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/Autocomplete.html">Autocomplete</a></li>
             
+                <li><a href="../classes/AutocompleteAria.html">AutocompleteAria</a></li>
+            
                 <li><a href="../classes/AutoCompleteBase.html">AutoCompleteBase</a></li>
             
                 <li><a href="../classes/AutocompleteHot.html">AutocompleteHot</a></li>
@@ -54,6 +56,8 @@
             <ul id="api-modules" class="apis modules">
             
                 <li><a href="../modules/autocomplete.html">autocomplete</a></li>
+            
+                <li><a href="../modules/autocomplete-aria.html">autocomplete-aria</a></li>
             
                 <li><a href="../modules/autocomplete-hot.html">autocomplete-hot</a></li>
             
@@ -286,7 +290,7 @@ KISSY.add(function (S){
          */
         value : {
             value : &#x27;&#x27;,
-            setter : &#x27;_onSetValue&#x27;
+            setter : &#x27;_onSetVal&#x27;
         },
         /**
          * 开启浏览器默认的自动填充行为
@@ -364,7 +368,7 @@ KISSY.add(function (S){
                 });
             }
         },
-        _onSetValue : function (val){
+        _onSetVal : function (val){
             this.get(&#x27;inputNode&#x27;).val(val);
         },
         _onInputValueChange : function (e){

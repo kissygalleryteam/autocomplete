@@ -1094,11 +1094,11 @@ KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
          */
         _afterKeyDown : function (e){
             switch(e.keyCode){
-                case 38 :
+                case 38 ://up
                     e.preventDefault();
                     this.activePrevItem();
                     break;
-                case 40 :
+                case 40 ://down
                     e.preventDefault();
                     this.activeNextItem();
                     break;
@@ -1256,9 +1256,9 @@ KISSY.add('gallery/autocomplete/1.0/hot',function (S, Node , Event , Io , Tpl){
          **/
         hotTemplate : {
             value : '<div class="ks-ac-hot-city"><div class="ks-ac-acinput-hot-tit">热门城市/国家(支持汉字/拼音/英文字母)</div>' +
-                '<ul class="tab-nav">{{#results}}<li class="J_TabItem">{{tabname}}</li>{{/results}}</ul>' +
+                '<ul class="tab-nav">{{#results}}<li class="J_TabItem" tabindex="2"><a href="javascript:void(0)" target="_self">{{tabname}}</a></li>{{/results}}</ul>' +
                 '<div class="tab-content J_TabContent">{{#results}}' +
-                '<div class="tab-pannel J_Pannel">{{#tabdata}}<dl><dt>{{dt}}</dt><dd>{{#dd}}<span><a data-sid="{{sid}}" class="J_AcItem" tabindex="-1" href="javascript:void(0);" target="_self">{{cityName}}</a></span>{{/dd}}</dd></dl>{{/tabdata}}</div>{{/results}}</div></div>'
+                '<div class="tab-pannel J_Pannel">{{#tabdata}}<dl><dt>{{dt}}</dt><dd>{{#dd}}<span><a data-sid="{{sid}}" class="J_AcItem" tabindex="3" href="javascript:void(0);" target="_self">{{cityName}}</a></span>{{/dd}}</dd></dl>{{/tabdata}}</div>{{/results}}</div></div>'
         },
         /**
          * 热门推荐的宽度
@@ -1403,6 +1403,11 @@ KISSY.add('gallery/autocomplete/1.0/hot',function (S, Node , Event , Io , Tpl){
                 }
                 this.set('hotVisible' , true);
             },this);
+            input_node.on('keydown', function (e){
+                if (this.get('hotVisible') && (e.keyCode === 38 || e.keyCode === 40)) {
+                    this.overlayNode[0].focus();
+                }
+            } , this);
             this.on(EVT_QUERY , function (e){
                 if (S.trim(e.newVal.query) === '') {//输入框为空时展示热门推荐
                     this.set('messageVisible' , false);

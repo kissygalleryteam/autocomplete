@@ -82,7 +82,7 @@ module.exports = function(grunt) {
                 version    : '<%= pkg.version %>',
                 options    : {
                     paths : '<%= pkg.version %>/',
-                    outdir: '<%= pkg.version %>/guide/'
+                    outdir: '<%= pkg.version %>/guide/docs/'
                 }
             }
         }
@@ -94,5 +94,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-kmc');
-    return grunt.registerTask('default', ['copy' , 'cssmin', 'kmc', 'uglify']);
+    return grunt.registerTask('default', ['yuidoc' , 'copy' , 'cssmin', 'kmc', 'uglify']);
 };

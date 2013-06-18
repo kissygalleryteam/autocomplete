@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/Autocomplete.html">Autocomplete</a></li>
             
+                <li><a href="../classes/AutocompleteAria.html">AutocompleteAria</a></li>
+            
                 <li><a href="../classes/AutoCompleteBase.html">AutoCompleteBase</a></li>
             
                 <li><a href="../classes/AutocompleteHot.html">AutocompleteHot</a></li>
@@ -54,6 +56,8 @@
             <ul id="api-modules" class="apis modules">
             
                 <li><a href="../modules/autocomplete.html">autocomplete</a></li>
+            
+                <li><a href="../modules/autocomplete-aria.html">autocomplete-aria</a></li>
             
                 <li><a href="../modules/autocomplete-hot.html">autocomplete-hot</a></li>
             
@@ -138,9 +142,9 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
          **/
         hotTemplate : {
             value : &#x27;&lt;div class=&quot;ks-ac-hot-city&quot;&gt;&lt;div class=&quot;ks-ac-acinput-hot-tit&quot;&gt;热门城市/国家(支持汉字/拼音/英文字母)&lt;/div&gt;&#x27; +
-                &#x27;&lt;ul class=&quot;tab-nav&quot;&gt;{{#results}}&lt;li class=&quot;J_TabItem&quot;&gt;{{tabname}}&lt;/li&gt;{{/results}}&lt;/ul&gt;&#x27; +
+                &#x27;&lt;ul class=&quot;tab-nav&quot;&gt;{{#results}}&lt;li class=&quot;J_TabItem&quot; tabindex=&quot;2&quot;&gt;&lt;a href=&quot;javascript:void(0)&quot; target=&quot;_self&quot;&gt;{{tabname}}&lt;/a&gt;&lt;/li&gt;{{/results}}&lt;/ul&gt;&#x27; +
                 &#x27;&lt;div class=&quot;tab-content J_TabContent&quot;&gt;{{#results}}&#x27; +
-                &#x27;&lt;div class=&quot;tab-pannel J_Pannel&quot;&gt;{{#tabdata}}&lt;dl&gt;&lt;dt&gt;{{dt}}&lt;/dt&gt;&lt;dd&gt;{{#dd}}&lt;span&gt;&lt;a data-sid=&quot;{{sid}}&quot; class=&quot;J_AcItem&quot; tabindex=&quot;-1&quot; href=&quot;javascript:void(0);&quot; target=&quot;_self&quot;&gt;{{cityName}}&lt;/a&gt;&lt;/span&gt;{{/dd}}&lt;/dd&gt;&lt;/dl&gt;{{/tabdata}}&lt;/div&gt;{{/results}}&lt;/div&gt;&lt;/div&gt;&#x27;
+                &#x27;&lt;div class=&quot;tab-pannel J_Pannel&quot;&gt;{{#tabdata}}&lt;dl&gt;&lt;dt&gt;{{dt}}&lt;/dt&gt;&lt;dd&gt;{{#dd}}&lt;span&gt;&lt;a data-sid=&quot;{{sid}}&quot; class=&quot;J_AcItem&quot; tabindex=&quot;3&quot; href=&quot;javascript:void(0);&quot; target=&quot;_self&quot;&gt;{{cityName}}&lt;/a&gt;&lt;/span&gt;{{/dd}}&lt;/dd&gt;&lt;/dl&gt;{{/tabdata}}&lt;/div&gt;{{/results}}&lt;/div&gt;&lt;/div&gt;&#x27;
         },
         /**
          * 热门推荐的宽度
@@ -285,6 +289,11 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
                 }
                 this.set(&#x27;hotVisible&#x27; , true);
             },this);
+            input_node.on(&#x27;keydown&#x27;, function (e){
+                if (this.get(&#x27;hotVisible&#x27;) &amp;&amp; (e.keyCode === 38 || e.keyCode === 40)) {
+                    this.overlayNode[0].focus();
+                }
+            } , this);
             this.on(EVT_QUERY , function (e){
                 if (S.trim(e.newVal.query) === &#x27;&#x27;) {//输入框为空时展示热门推荐
                     this.set(&#x27;messageVisible&#x27; , false);
