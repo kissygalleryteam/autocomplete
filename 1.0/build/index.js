@@ -987,6 +987,7 @@ KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
                 this.overlay.set('width', this.get('width'));
                 this.resultsListNode.show();
                 this.set('visible', true);
+                this._syncPosition();
             } else {
                 this.resultsListNode.hide();
             }
@@ -1382,6 +1383,7 @@ KISSY.add('gallery/autocomplete/1.0/hot',function (S, Node , Event , Io , Tpl){
                     this.overlay.set('width',this.get('hotWidth'));
                     this.set('resultsListVisible' , false);
                     this.set('visible' , true);
+                    this._syncPosition();
                 }else{
                     this.hotNode.hide();
                 }
