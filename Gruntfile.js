@@ -72,7 +72,7 @@ module.exports = function(grunt) {
             base: {
                 files :[{
                     expand : true,
-                    cwd : '<%= pkg.version %>/',
+                    cwd : '<%= pkg.version %>/build/',
                     src : ['./*.js','!./*-min.js'],
                     dest : '<%= pkg.version %>/build/',
                     ext : '-min.js'

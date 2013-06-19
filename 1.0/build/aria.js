@@ -31,10 +31,14 @@ KISSY.add(function (S ,Node , Event , O){
                 var _clickNodes = this.hotItemNodes = _nextPannel.all(SELECTOR_ITEM);
                 this.nodeArr = this.buildArr2(_clickNodes);
                 if (!this.isFirstShow) {
-                    _nextNav.one('a')[0].focus();
+                    _nextNav.one('a') && _nextNav.one('a')[0].focus();
                 }else{
                     this.isFirstShow = false;
                 }
+            },this);
+
+            this.on('afterHotSourceChange' , function (e){
+                this.isFirstShow = true;
             },this);
             this.hotNode.delegate('keydown' , SELECTOR_ITEM , function (e){
                 var target = S.one(e.currentTarget);
