@@ -933,7 +933,7 @@ KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
             setTimeout(function (){
                 that.set('messageVisible', true);
             },1);
-            return this
+            return this;
         },
         /**
          * 重新定位容器对齐
@@ -1004,6 +1004,7 @@ KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
                 this.overlay.set('width', this.get('width'));
                 this.messageNode.show();
                 this.set('visible', true);
+                this._syncPosition();
             } else {
                 this.messageNode.hide();
                 this.set('visilbe', false)
@@ -1736,8 +1737,8 @@ KISSY.add('gallery/autocomplete/1.0/aria',function (S ,Node , Event , O){
 },{requires : ['node','event']});
 KISSY.add('gallery/autocomplete/1.0/index-aria',function (S , RichBase , AcBase, AcRich , AcHot , AcAria) {
     /**
-     * 通用的自动完成组件
-     * @class Autocomplete
+     * 通用的自动完成组件，包括盲人支持模块
+     * @class AutocompleteAll
      * @constructor
      * @extends Base
      * @uses AutocompleteBase

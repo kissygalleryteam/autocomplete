@@ -932,7 +932,7 @@ KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
             setTimeout(function (){
                 that.set('messageVisible', true);
             },1);
-            return this
+            return this;
         },
         /**
          * 重新定位容器对齐
@@ -1003,6 +1003,7 @@ KISSY.add('gallery/autocomplete/1.0/rich',function (S ,Node , Event , O){
                 this.overlay.set('width', this.get('width'));
                 this.messageNode.show();
                 this.set('visible', true);
+                this._syncPosition();
             } else {
                 this.messageNode.hide();
                 this.set('visilbe', false)
