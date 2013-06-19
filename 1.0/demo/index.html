@@ -129,8 +129,10 @@
 	            return result;
             }
         });
-        S.one('#showmessage').on('click', function () {
+        S.one('#showmessage').on('click', function (e) {
+            e.stopPropagation();
             autocomplete.set('messageVisible', false);
+            S.one('#J_Test')[0].focus();
             autocomplete.showMessage('通过showMessage接口调用');
         });
         autocomplete.on('select', function (e) {

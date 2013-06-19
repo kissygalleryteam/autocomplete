@@ -188,6 +188,9 @@ KISSY.add(function (S ,Node , Event , O){
         noResultsMessage : {
             value : '没有"<span class="ks-ac-message-hightlight">{query}</span>"相关的推荐'
         },
+        wrapperClass : {
+            value : ''
+        },
         /**
          * clickoutside时需要排除在外的节点
          * @attribute trigger
@@ -223,13 +226,14 @@ KISSY.add(function (S ,Node , Event , O){
             _align.node = _align.node ? _align.node : input_node;
             //基于overlay组件
             var overlay = this.overlay = new O({
-                align: _align,
-                content : this.get('boundingBoxTemplate')
+                align  : _align,
+                content: this.get('boundingBoxTemplate')
             });
             overlay.render();
             var el = overlay.get('el');
-            this.overlayId = 'J_Ks'+ S.guid();
-            el.prop('id' , this.overlayId).addClass(CLS_AC_CONTAINER).attr('tabindex','-1');
+            this.overlayId = 'J_Ks' + S.guid();
+            el.prop('id', this.overlayId).addClass(CLS_AC_CONTAINER).attr('tabindex', '-1');
+            this.get('wrapperClass') !== '' && el.addClass(this.get('wrapperClass'));
             this.overlayNode = el;
             this.headerNode = el.one('.J_AcHeader');
             this.bodyNode = el.one('.J_AcBody');
@@ -238,7 +242,6 @@ KISSY.add(function (S ,Node , Event , O){
             this.contentNode = el.one('.J_AcContent');
             this.hotNode = el.one('.J_HotList').hide();
             this.resultsListNode = el.one('.J_ResultsList').hide();
-            S.one(win).on('resize',  S.buffer(this._syncPosition , 100 , this), this);
         },
         /**
          * 生成搜索结果列表
@@ -298,6 +301,7 @@ KISSY.add(function (S ,Node , Event , O){
                 //隐藏时 取消监听
                 doc_node.detach('click', clickoutside_handler);
             }, this);
+            S.Event.on(win , 'resize',  S.buffer(this._syncPosition , 100 , this), this);
             this.bindList();
         },
         /**
@@ -425,7 +429,7 @@ KISSY.add(function (S ,Node , Event , O){
         _afterMessageVisibleChange : function (e){
             var isShowIt = e.newVal;
             if (isShowIt) {
-                this.overlay.set('width', this.get('width'));
+                //this.overlay.set('width', this.get('width'));
                 this.messageNode.show();
                 this.set('visible', true);
                 this._syncPosition();
