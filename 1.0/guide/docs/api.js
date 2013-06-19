@@ -3,6 +3,7 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "AutoCompleteBase",
         "Autocomplete",
+        "AutocompleteAll",
         "AutocompleteAria",
         "AutocompleteHot",
         "AutocompleteRich"
