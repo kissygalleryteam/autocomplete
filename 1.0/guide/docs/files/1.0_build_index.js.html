@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/Autocomplete.html">Autocomplete</a></li>
             
+                <li><a href="../classes/AutocompleteAll.html">AutocompleteAll</a></li>
+            
                 <li><a href="../classes/AutocompleteAria.html">AutocompleteAria</a></li>
             
                 <li><a href="../classes/AutoCompleteBase.html">AutoCompleteBase</a></li>
@@ -1038,7 +1040,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
             setTimeout(function (){
                 that.set(&#x27;messageVisible&#x27;, true);
             },1);
-            return this
+            return this;
         },
         /**
          * 重新定位容器对齐
@@ -1109,6 +1111,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
                 this.overlay.set(&#x27;width&#x27;, this.get(&#x27;width&#x27;));
                 this.messageNode.show();
                 this.set(&#x27;visible&#x27;, true);
+                this._syncPosition();
             } else {
                 this.messageNode.hide();
                 this.set(&#x27;visilbe&#x27;, false)
