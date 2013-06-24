@@ -871,6 +871,9 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
         noResultsMessage : {
             value : &#x27;没有&quot;&lt;span class=&quot;ks-ac-message-hightlight&quot;&gt;{query}&lt;/span&gt;&quot;相关的推荐&#x27;
         },
+        wrapperClass : {
+            value : &#x27;&#x27;
+        },
         /**
          * clickoutside时需要排除在外的节点
          * @attribute trigger
@@ -906,13 +909,14 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
             _align.node = _align.node ? _align.node : input_node;
             //基于overlay组件
             var overlay = this.overlay = new O({
-                align: _align,
-                content : this.get(&#x27;boundingBoxTemplate&#x27;)
+                align  : _align,
+                content: this.get(&#x27;boundingBoxTemplate&#x27;)
             });
             overlay.render();
             var el = overlay.get(&#x27;el&#x27;);
-            this.overlayId = &#x27;J_Ks&#x27;+ S.guid();
-            el.prop(&#x27;id&#x27; , this.overlayId).addClass(CLS_AC_CONTAINER).attr(&#x27;tabindex&#x27;,&#x27;-1&#x27;);
+            this.overlayId = &#x27;J_Ks&#x27; + S.guid();
+            el.prop(&#x27;id&#x27;, this.overlayId).addClass(CLS_AC_CONTAINER).attr(&#x27;tabindex&#x27;, &#x27;-1&#x27;);
+            this.get(&#x27;wrapperClass&#x27;) !== &#x27;&#x27; &amp;&amp; el.addClass(this.get(&#x27;wrapperClass&#x27;));
             this.overlayNode = el;
             this.headerNode = el.one(&#x27;.J_AcHeader&#x27;);
             this.bodyNode = el.one(&#x27;.J_AcBody&#x27;);
@@ -921,7 +925,6 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
             this.contentNode = el.one(&#x27;.J_AcContent&#x27;);
             this.hotNode = el.one(&#x27;.J_HotList&#x27;).hide();
             this.resultsListNode = el.one(&#x27;.J_ResultsList&#x27;).hide();
-            S.one(win).on(&#x27;resize&#x27;,  S.buffer(this._syncPosition , 100 , this), this);
         },
         /**
          * 生成搜索结果列表
@@ -981,6 +984,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
                 //隐藏时 取消监听
                 doc_node.detach(&#x27;click&#x27;, clickoutside_handler);
             }, this);
+            S.Event.on(win , &#x27;resize&#x27;,  S.buffer(this._syncPosition , 100 , this), this);
             this.bindList();
         },
         /**
@@ -1108,7 +1112,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
         _afterMessageVisibleChange : function (e){
             var isShowIt = e.newVal;
             if (isShowIt) {
-                this.overlay.set(&#x27;width&#x27;, this.get(&#x27;width&#x27;));
+                //this.overlay.set(&#x27;width&#x27;, this.get(&#x27;width&#x27;));
                 this.messageNode.show();
                 this.set(&#x27;visible&#x27;, true);
                 this._syncPosition();

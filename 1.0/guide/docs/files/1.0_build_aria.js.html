@@ -139,10 +139,14 @@ KISSY.add(function (S ,Node , Event , O){
                 var _clickNodes = this.hotItemNodes = _nextPannel.all(SELECTOR_ITEM);
                 this.nodeArr = this.buildArr2(_clickNodes);
                 if (!this.isFirstShow) {
-                    _nextNav.one(&#x27;a&#x27;)[0].focus();
+                    _nextNav.one(&#x27;a&#x27;) &amp;&amp; _nextNav.one(&#x27;a&#x27;)[0].focus();
                 }else{
                     this.isFirstShow = false;
                 }
+            },this);
+
+            this.on(&#x27;afterHotSourceChange&#x27; , function (e){
+                this.isFirstShow = true;
             },this);
             this.hotNode.delegate(&#x27;keydown&#x27; , SELECTOR_ITEM , function (e){
                 var target = S.one(e.currentTarget);
