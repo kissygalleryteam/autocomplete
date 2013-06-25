@@ -454,6 +454,7 @@ KISSY.add(function (S ,Node , Event , O){
                 this.set(&#x27;messageVisible&#x27;, false);
                 this.get(&#x27;activeFirstItem&#x27;) &amp;&amp; this.set(ACTIVE_ITEM, this._getFirstItem());
                 doc.activeElement  == this.inputNode[0]  &amp;&amp; this.set(&#x27;resultsListVisible&#x27; , true);//焦点还在输入框时才进行现实
+                this._syncPosition();
             }else{
                 query = S.escapeHTML(query);
                 doc.activeElement  == this.inputNode[0]  &amp;&amp; this.showMessage(S.substitute(this.get(&#x27;noResultsMessage&#x27;),{//焦点还在输入框时才进行显示
