@@ -593,6 +593,9 @@ KISSY.add(function (S){
                 case S.isFunction(source) :
                     return this._createJsonpSource(source);
                     break;
+                case S.isArray(source) :
+                    return this._createArraySource(source);
+                    break;
                 case S.isObject(source) :
                     return this._createObjectSource(source);
                     break;

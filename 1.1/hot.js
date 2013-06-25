@@ -222,6 +222,7 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
                 _prevPannel && _prevPannel.hide();
                 _nextNav && _nextNav.addClass(CLS_ACTIVE);
                 _nextPannel && _nextPannel.show();
+                this._syncPosition();
             },this);
 
             //在热门推荐按下esc时触发隐藏
