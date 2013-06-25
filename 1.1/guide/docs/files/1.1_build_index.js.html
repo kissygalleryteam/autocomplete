@@ -109,13 +109,13 @@
 /*
 combined files : 
 
-gallery/autocomplete/1.0/base
-gallery/autocomplete/1.0/rich
-gallery/autocomplete/1.0/hot
-gallery/autocomplete/1.0/index
+gallery/autocomplete/1.1/base
+gallery/autocomplete/1.1/rich
+gallery/autocomplete/1.1/hot
+gallery/autocomplete/1.1/index
 
 */
-KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
+KISSY.add(&#x27;gallery/autocomplete/1.1/base&#x27;,function (S){
     /**
     自动完成组件
     @module autocomplete
@@ -602,6 +602,9 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
                 case S.isFunction(source) :
                     return this._createJsonpSource(source);
                     break;
+                case S.isArray(source) :
+                    return this._createArraySource(source);
+                    break;
                 case S.isObject(source) :
                     return this._createObjectSource(source);
                     break;
@@ -684,7 +687,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/base&#x27;,function (S){
 /**
  * RICH 包含UI所有交互逻辑
  */
-KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , O){
+KISSY.add(&#x27;gallery/autocomplete/1.1/rich&#x27;,function (S ,Node , Event , O){
     /**
      * @module autocomplete
      * @submodule autocomplete-rich
@@ -1029,6 +1032,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
                 this.set(&#x27;messageVisible&#x27;, false);
                 this.get(&#x27;activeFirstItem&#x27;) &amp;&amp; this.set(ACTIVE_ITEM, this._getFirstItem());
                 doc.activeElement  == this.inputNode[0]  &amp;&amp; this.set(&#x27;resultsListVisible&#x27; , true);//焦点还在输入框时才进行现实
+                this._syncPosition();
             }else{
                 query = S.escapeHTML(query);
                 doc.activeElement  == this.inputNode[0]  &amp;&amp; this.showMessage(S.substitute(this.get(&#x27;noResultsMessage&#x27;),{//焦点还在输入框时才进行显示
@@ -1337,7 +1341,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/rich&#x27;,function (S ,Node , Event , 
     };
     return AutoCompleteRich;
 },{requires : [&#x27;node&#x27;,&#x27;event&#x27;,&#x27;overlay&#x27;,&#x27;sizzle&#x27;]});
-KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , Io , Tpl){
+KISSY.add(&#x27;gallery/autocomplete/1.1/hot&#x27;,function (S, Node , Event , Io , Tpl){
     /**
      自动完成组件
      @module autocomplete
@@ -1627,7 +1631,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.0/hot&#x27;,function (S, Node , Event , I
  * @author 舒克&lt;shuke.cl@taobao.com&gt;
  * @module autocomplete
  **/
-KISSY.add(&#x27;gallery/autocomplete/1.0/index&#x27;,function (S , RichBase , AcBase, AcRich , AcHot) {
+KISSY.add(&#x27;gallery/autocomplete/1.1/index&#x27;,function (S , RichBase , AcBase, AcRich , AcHot) {
     /**
      * 通用的自动完成组件
      * @class Autocomplete

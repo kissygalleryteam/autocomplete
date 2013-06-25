@@ -924,6 +924,7 @@ KISSY.add('gallery/autocomplete/1.1/rich',function (S ,Node , Event , O){
                 this.set('messageVisible', false);
                 this.get('activeFirstItem') && this.set(ACTIVE_ITEM, this._getFirstItem());
                 doc.activeElement  == this.inputNode[0]  && this.set('resultsListVisible' , true);//焦点还在输入框时才进行现实
+                this._syncPosition();
             }else{
                 query = S.escapeHTML(query);
                 doc.activeElement  == this.inputNode[0]  && this.showMessage(S.substitute(this.get('noResultsMessage'),{//焦点还在输入框时才进行显示
@@ -1456,6 +1457,7 @@ KISSY.add('gallery/autocomplete/1.1/hot',function (S, Node , Event , Io , Tpl){
                 _prevPannel && _prevPannel.hide();
                 _nextNav && _nextNav.addClass(CLS_ACTIVE);
                 _nextPannel && _nextPannel.show();
+                this._syncPosition();
             },this);
 
             //在热门推荐按下esc时触发隐藏
