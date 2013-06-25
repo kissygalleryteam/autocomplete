@@ -188,6 +188,11 @@ KISSY.add(function (S ,Node , Event , O){
         noResultsMessage : {
             value : '没有"<span class="ks-ac-message-hightlight">{query}</span>"相关的推荐'
         },
+        /**
+         * 添加一个层的自定义className，用于个性化定制样式
+         * @attribute wapperClass
+         * @type String
+         **/
         wrapperClass : {
             value : ''
         },
