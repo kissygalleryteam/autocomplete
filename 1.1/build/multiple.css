@@ -1,0 +1,29 @@
+.ks-multiple-wrap, .ks-multiple-wrap div{
+	display: inline-block;
+	margin: 2px;
+}
+
+.ks-multiple-item-inner{
+	border: 1px solid #345;
+	vertical-align: middle;
+	border-radius: 8px;
+}
+
+.ks-ac-mul-intro{
+	margin-left: 2px;
+}
+
+.ks-ac-mul-delete{
+	padding: 2px 5px;
+	font-size: 14px;
+	color: red;
+	cursor: pointer;
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+	background-color: #F0F0F0;
+}
+
+.ks-ac-mul-delete:hover{
+	background-color: red;
+	color: #FFF;
+}
