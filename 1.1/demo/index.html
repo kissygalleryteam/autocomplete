@@ -32,17 +32,15 @@
     <form>
         <p>输入城市：<input type="text" id="J_NeCity" value="北京"/>（最简单的城市推荐输入框）</p>
         <script type="text/javascript">
-            S.add('gallery/autocomplete/1.0/ac' , function (S, RichBase , AcBase , AcRich ,AcHot , AcAria){
-                return RichBase.extend([AcBase , AcRich , AcHot ,AcAria],{},{});
-            }, {requires:['rich-base' , './base' , './rich' , './hot' , './aria','./autocomplete.css']});
-            S.use('gallery/autocomplete/1.0/index', function (S, Autocomplete) {
+            S.use('gallery/autocomplete/1.1/index', function (S, Autocomplete) {
                 var autocomplete = new Autocomplete({
                     inputNode        : '#J_NeCity',
                     //source           : 'http://kezhan.trip.taobao.com/citysuggest.do?t=0&q={query}',
                     source           : 'http://s.jipiao.trip.taobao.com/city_search.do?lines={maxResults}&q={query}',
                     resultListLocator: 'result',//指定返回数据里的数组位置
                     resultTextLocator: 'cityName',//指定回填的文本内容
-                    hotSource        : 'http://www.taobao.com/go/rgn/trip/chinahotcity_jsonp.php'//不指定及没有热门推荐，必须按照此数据模板提供，其他数据格式需要自行重新配置hotResultsFormatter和hotResultsLocator
+                    hotSource        : 'http://www.taobao.com/go/rgn/trip/chinahotcity_jsonp.php',//不指定及没有热门推荐，必须按照此数据模板提供，其他数据格式需要自行重新配置hotResultsFormatter和hotResultsLocator
+                    zIndex : 100001
                 });
             })
         </script>
@@ -63,7 +61,7 @@
     </form>
 </details>
 <script>
-    S.use('gallery/autocomplete/1.0/index', function (S, Autocomplete) {
+    S.use('gallery/autocomplete/1.1/index', function (S, Autocomplete) {
         var autocomplete = new Autocomplete({
             inputNode        : '#J_Test',
             //source           : 'http://kezhan.trip.taobao.com/citysuggest.do?t=0&q={query}',
@@ -425,7 +423,7 @@
 				}
 			});
 
-	S.use('gallery/autocomplete/1.0/index', function (S, Autocomplete) {
+	S.use('gallery/autocomplete/1.1/index', function (S, Autocomplete) {
 
 		var hotsource = {
 			keywords:['出游防晒衫', '儿童节礼品', '2013夏装', '平底凉鞋', '夏季短裤', '童装', '男士凉鞋', '泳衣']
@@ -575,7 +573,7 @@
 	</form>
 </details>
 <script>
-	S.use('gallery/autocomplete/1.0/multiple', function (S, Multiple) {
+	S.use('gallery/autocomplete/1.1/multiple', function (S, Multiple) {
 
 		var emails = {
 			emails: [{
@@ -701,7 +699,7 @@
 </details>
 
 <script>
-    S.use('gallery/autocomplete/1.0/index', function (S, Autocomplete) {
+    S.use('gallery/autocomplete/1.1/index', function (S, Autocomplete) {
         var autocomplete = new Autocomplete({
             inputNode        : '#J_Citys',
             //source           : 'http://kezhan.trip.taobao.com/citysuggest.do?t=0&q={query}',
@@ -751,7 +749,7 @@
         }
     </style>
     <script type="text/javascript">
-        KISSY.add('gallery/autocomplete/1.0/menu' , function (S , RichBase , AcBase){
+        KISSY.add('gallery/autocomplete/1.1/menu' , function (S , RichBase , AcBase){
             var Menu = RichBase.extend([AcBase],{
                 constructor : function Menu(){
                     Menu.superclass.constructor.apply(this , arguments);
@@ -788,8 +786,8 @@
                 }
             });
             return Menu;
-        }, {requires : ['rich-base','gallery/autocomplete/1.0/base']});
-        KISSY.use('gallery/autocomplete/1.0/menu' , function (S , AcYui){
+        }, {requires : ['rich-base','gallery/autocomplete/1.1/base']});
+        KISSY.use('gallery/autocomplete/1.1/menu' , function (S , AcYui){
             new AcYui({
                 inputNode : '#J_Yui',
                 source : 'http://yuilibrary.com/api/v1/search/suggest?q={query}&count=50',
@@ -811,7 +809,7 @@
 
         <script type="text/javascript">
             //重新定义组件将aria模块mix进来
-            S.use('gallery/autocomplete/1.0/index-aria', function (S, Autocomplete) {
+            S.use('gallery/autocomplete/1.1/index-aria', function (S, Autocomplete) {
                 var autocomplete = new Autocomplete({
                     inputNode        : '#J_AriaCity',
                     //source           : 'http://kezhan.trip.taobao.com/citysuggest.do?t=0&q={query}',
