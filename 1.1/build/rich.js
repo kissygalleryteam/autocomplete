@@ -134,6 +134,15 @@ KISSY.add(function (S ,Node , Event , O){
             setter : '_setAlign'
         },
         /**
+         * overlay组件的zIndex配置
+         * @attribute zIndex
+         * @type number
+         * @default 10000
+         **/
+        zIndex : {
+            value : 10000
+        },
+        /**
          * 最外层容器HTML片段
          */
         /**
@@ -207,15 +216,15 @@ KISSY.add(function (S ,Node , Event , O){
         }
     };
     AutoCompleteRich.prototype = {
-        overlay        : null,//overlay实例
-        overlayNode    : null,//提示层根节点
-        contentNode    : null,//内容节点
-        resultsListNode: null,//推荐结果的节点
-        messageNode    : null,//错误信息节点
-        hotNode        : null,//热门推荐节点
-        headerNode     : null,//头部节点
-        footerNode     : null,//尾部节点
         initRich : function (){
+            this.overlay        =null;//overlay实例
+            this.overlayNode    =null;//提示层根节点
+            this.contentNode    =null;//内容节点
+            this.resultsListNode=null;//推荐结果的节点
+            this.messageNode    =null;//错误信息节点
+            this.hotNode        =null;//热门推荐节点
+            this.headerNode     =null;//头部节点
+            this.footerNode     =null;//尾部节点
             this._renderRich();
             this._bindRich();
         },
@@ -232,7 +241,8 @@ KISSY.add(function (S ,Node , Event , O){
             //基于overlay组件
             var overlay = this.overlay = new O({
                 align  : _align,
-                content: this.get('boundingBoxTemplate')
+                content: this.get('boundingBoxTemplate'),
+                zIndex : this.get('zIndex')
             });
             overlay.render();
             var el = overlay.get('el');
