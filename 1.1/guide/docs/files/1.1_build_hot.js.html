@@ -330,6 +330,7 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
                 _prevPannel &amp;&amp; _prevPannel.hide();
                 _nextNav &amp;&amp; _nextNav.addClass(CLS_ACTIVE);
                 _nextPannel &amp;&amp; _nextPannel.show();
+                this._syncPosition();
             },this);
 
             //在热门推荐按下esc时触发隐藏

@@ -14,7 +14,7 @@
 ##快速使用
 
 ```javascript
-S.use('gallery/autocomplete/1.0/index', function (S, Autocomplete) {
+S.use('gallery/autocomplete/1.1/index', function (S, Autocomplete) {
 var autocomplete = new Autocomplete({
     inputNode        : '#J_NeCity',
     source           : 'http://s.jipiao.trip.taobao.com/city_search.do?lines={maxResults}&q={query}',
