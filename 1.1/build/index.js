@@ -189,6 +189,15 @@ KISSY.add('gallery/autocomplete/1.1/base',function (S){
             setter : '_setSource'
         },
         /**
+         * 如果是服务端返回数据，指定数据源的charset
+         * @attribute sourceCharset
+         * @type string
+         * @default gbk
+         **/
+        sourceCharset : {
+            value : undefined
+        },
+        /**
          * 设置输入框的值,可以用于区分是用户通过UI输入造成的valueChange还是代码通过 setValue()改变的输入框的值
          */
         value : {
@@ -534,6 +543,7 @@ KISSY.add('gallery/autocomplete/1.1/base',function (S){
                 S.IO({
                     url : url,
                     dataType : 'jsonp',
+                    scriptCharset : that.get('sourceCharset'),
                     jsonp : that.get('jsonpCallback'),
                     success : function (data){
                         if (last_request === request) {//仅处理最后一次请求
@@ -1305,6 +1315,15 @@ KISSY.add('gallery/autocomplete/1.1/hot',function (S, Node , Event , Io , Tpl){
             setter : '_onHotSourceChange'
         },
         /**
+         * 远程热门推荐的charset,默认和页面保持一致
+         * @attribute hotSourceCharset
+         * @type string
+         * @default undefined
+         **/
+        hotSourceCharset : {
+            value : undefined
+        },
+        /**
          * 热门推荐数据源指定为JSONP时，callback的参数名
          * @attribute
          * @type String
@@ -1509,6 +1528,7 @@ KISSY.add('gallery/autocomplete/1.1/hot',function (S, Node , Event , Io , Tpl){
                     url : source,
                     dataType : 'jsonp',
                     jsonp : this.get('hotJsonpCallback'),
+                    scriptCharset : that.get('hotSourceCharset'),
                     success : function (data){
                         _build(data);
                     }
