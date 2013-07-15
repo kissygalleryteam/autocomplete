@@ -180,6 +180,15 @@ KISSY.add(function (S){
             setter : '_setSource'
         },
         /**
+         * 如果是服务端返回数据，指定数据源的charset
+         * @attribute sourceCharset
+         * @type string
+         * @default gbk
+         **/
+        sourceCharset : {
+            value : undefined
+        },
+        /**
          * 设置输入框的值,可以用于区分是用户通过UI输入造成的valueChange还是代码通过 setValue()改变的输入框的值
          */
         value : {
@@ -525,6 +534,7 @@ KISSY.add(function (S){
                 S.IO({
                     url : url,
                     dataType : 'jsonp',
+                    scriptCharset : that.get('sourceCharset'),
                     jsonp : that.get('jsonpCallback'),
                     success : function (data){
                         if (last_request === request) {//仅处理最后一次请求

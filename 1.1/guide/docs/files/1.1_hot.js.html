@@ -168,6 +168,15 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
             setter : &#x27;_onHotSourceChange&#x27;
         },
         /**
+         * 远程热门推荐的charset,默认和页面保持一致
+         * @attribute hotSourceCharset
+         * @type string
+         * @default undefined
+         **/
+        hotSourceCharset : {
+            value : undefined
+        },
+        /**
          * 热门推荐数据源指定为JSONP时，callback的参数名
          * @attribute
          * @type String
@@ -372,6 +381,7 @@ KISSY.add(function (S, Node , Event , Io , Tpl){
                     url : source,
                     dataType : &#x27;jsonp&#x27;,
                     jsonp : this.get(&#x27;hotJsonpCallback&#x27;),
+                    scriptCharset : that.get(&#x27;hotSourceCharset&#x27;),
                     success : function (data){
                         _build(data);
                     }

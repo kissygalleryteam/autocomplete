@@ -464,8 +464,7 @@
 					});
 				}
 				Array.prototype.push.apply(ret, result);
-				results.new && ret.push({new: results.new});
-				console.log(ret);
+				results.new && ret.push({'new': results.new});
 				return ret;
 			},//指定返回数据里的数组位置
 			resultTextLocator: function(item){
