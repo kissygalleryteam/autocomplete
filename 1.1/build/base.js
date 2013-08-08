@@ -492,7 +492,7 @@ KISSY.add(function (S){
                     return this._createJsonpSource(source);
                     break;
                 case S.isFunction(source) :
-                    return this._createJsonpSource(source);
+                    return this._createFunctionSource(source);
                     break;
                 case S.isArray(source) :
                     return this._createArraySource(source);
@@ -554,6 +554,18 @@ KISSY.add(function (S){
                     that._sourceSuccess(source , request);
                 }
             };
+        },
+        _createFunctionSource : function (source){
+            var that = this;
+            return {
+                type : 'function',
+                sendRequest : function (request){
+                    var val ;
+                    if (val = source(request.query)) {
+                        that._sourceSuccess(val , request);
+                    }
+                }
+            }
         },
         _createObjectSource : function (source){
             var that = this;
