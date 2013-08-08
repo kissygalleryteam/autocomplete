@@ -99,6 +99,15 @@ KISSY.add(function (S ,Node , Event , O){
             value : false
         },
         /**
+         * 启用当无推荐结果时展示提示信息功能
+         * @attribute enableNoResultsMessage
+         * @type boolean
+         * @default true
+         **/
+        enableNoResultsMessage : {
+            value : true
+        },
+        /**
          * message的可见状态
          */
         messageVisible : {
@@ -359,9 +368,15 @@ KISSY.add(function (S ,Node , Event , O){
                 this._syncPosition();
             }else{
                 query = S.escapeHTML(query);
-                doc.activeElement  == this.inputNode[0]  && this.showMessage(S.substitute(this.get('noResultsMessage'),{//焦点还在输入框时才进行显示
-                    query : query
-                }))
+                if(doc.activeElement  == this.inputNode[0]){
+                    if (this.get('enableNoResultsMessage')) {
+                        this.showMessage(S.substitute(this.get('noResultsMessage'),{//焦点还在输入框时才进行显示
+                            query : query
+                        }));
+                    }else{
+                        list_node.empty();
+                    }
+                }
             }
 
         },
