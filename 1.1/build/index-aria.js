@@ -502,7 +502,7 @@ KISSY.add('gallery/autocomplete/1.1/base',function (S){
                     return this._createJsonpSource(source);
                     break;
                 case S.isFunction(source) :
-                    return this._createJsonpSource(source);
+                    return this._createFunctionSource(source);
                     break;
                 case S.isArray(source) :
                     return this._createArraySource(source);
@@ -564,6 +564,18 @@ KISSY.add('gallery/autocomplete/1.1/base',function (S){
                     that._sourceSuccess(source , request);
                 }
             };
+        },
+        _createFunctionSource : function (source){
+            var that = this;
+            return {
+                type : 'function',
+                sendRequest : function (request){
+                    var val ;
+                    if (val = source(request.query)) {
+                        that._sourceSuccess(val , request);
+                    }
+                }
+            }
         },
         _createObjectSource : function (source){
             var that = this;
@@ -686,6 +698,15 @@ KISSY.add('gallery/autocomplete/1.1/rich',function (S ,Node , Event , O){
          **/
         resultsListVisible : {
             value : false
+        },
+        /**
+         * 启用当无推荐结果时展示提示信息功能
+         * @attribute enableNoResultsMessage
+         * @type boolean
+         * @default true
+         **/
+        enableNoResultsMessage : {
+            value : true
         },
         /**
          * message的可见状态
@@ -948,9 +969,15 @@ KISSY.add('gallery/autocomplete/1.1/rich',function (S ,Node , Event , O){
                 this._syncPosition();
             }else{
                 query = S.escapeHTML(query);
-                doc.activeElement  == this.inputNode[0]  && this.showMessage(S.substitute(this.get('noResultsMessage'),{//焦点还在输入框时才进行显示
-                    query : query
-                }))
+                if(doc.activeElement  == this.inputNode[0]){
+                    if (this.get('enableNoResultsMessage')) {
+                        this.showMessage(S.substitute(this.get('noResultsMessage'),{//焦点还在输入框时才进行显示
+                            query : query
+                        }));
+                    }else{
+                        list_node.empty();
+                    }
+                }
             }
 
         },
