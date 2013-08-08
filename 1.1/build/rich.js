@@ -1,111 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>1.1/rich.js - autocomplete</title>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
-    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
-    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
-</head>
-<body class="yui3-skin-sam">
-
-<div id="doc">
-    <div id="hd" class="yui3-g header">
-        <div class="yui3-u-3-4">
-            
-                <h1><img src="../assets/css/logo.png" title="autocomplete"></h1>
-            
-        </div>
-        <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.1</em>
-        </div>
-    </div>
-    <div id="bd" class="yui3-g">
-
-        <div class="yui3-u-1-4">
-            <div id="docs-sidebar" class="sidebar apidocs">
-                <div id="api-list">
-    <h2 class="off-left">APIs</h2>
-    <div id="api-tabview" class="tabview">
-        <ul class="tabs">
-            <li><a href="#api-classes">Classes</a></li>
-            <li><a href="#api-modules">Modules</a></li>
-        </ul>
-
-        <div id="api-tabview-filter">
-            <input type="search" id="api-filter" placeholder="Type to filter APIs">
-        </div>
-
-        <div id="api-tabview-panel">
-            <ul id="api-classes" class="apis classes">
-            
-                <li><a href="../classes/Autocomplete.html">Autocomplete</a></li>
-            
-                <li><a href="../classes/AutocompleteAll.html">AutocompleteAll</a></li>
-            
-                <li><a href="../classes/AutocompleteAria.html">AutocompleteAria</a></li>
-            
-                <li><a href="../classes/AutoCompleteBase.html">AutoCompleteBase</a></li>
-            
-                <li><a href="../classes/AutocompleteHot.html">AutocompleteHot</a></li>
-            
-                <li><a href="../classes/AutocompleteRich.html">AutocompleteRich</a></li>
-            
-            </ul>
-
-            <ul id="api-modules" class="apis modules">
-            
-                <li><a href="../modules/autocomplete.html">autocomplete</a></li>
-            
-                <li><a href="../modules/autocomplete-aria.html">autocomplete-aria</a></li>
-            
-                <li><a href="../modules/autocomplete-hot.html">autocomplete-hot</a></li>
-            
-                <li><a href="../modules/autocomplete-rich.html">autocomplete-rich</a></li>
-            
-                <li><a href="../modules/autocomplete_multiple.html">autocomplete/multiple</a></li>
-            
-            </ul>
-        </div>
-    </div>
-</div>
-
-            </div>
-        </div>
-        <div class="yui3-u-3-4">
-                <div id="api-options">
-        Show:
-        <label for="api-show-inherited">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </div>
-
-
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <h1 class="file-heading">File: 1.1/rich.js</h1>
-
-<div class="file">
-    <pre class="code prettyprint linenums">
 /**
  * RICH 包含UI所有交互逻辑
  */
@@ -120,23 +12,23 @@ KISSY.add(function (S ,Node , Event , O){
      * @class  AutocompleteRich
      * @extend S.Base
      */
-    var QUERY = &#x27;query&#x27;;
-    var RESULT = &#x27;result&#x27;;
+    var QUERY = 'query';
+    var RESULT = 'result';
 
-    var EVT_QUERY = &#x27;afterQueryChange&#x27;;
-    var EVT_RESULTS = &#x27;results&#x27;;
-    var EVT_SELECT = &#x27;select&#x27;;
+    var EVT_QUERY = 'afterQueryChange';
+    var EVT_RESULTS = 'results';
+    var EVT_SELECT = 'select';
 
-    var ACTIVE_ITEM = &#x27;activeItem&#x27;;
-    var HOVER_ITEM = &#x27;hoverItem&#x27;;
+    var ACTIVE_ITEM = 'activeItem';
+    var HOVER_ITEM = 'hoverItem';
 
-    var CLS_ACTIVE = &#x27;ks-ac-active&#x27;;
-    var CLS_HOVER = &#x27;ks-ac-hover&#x27;;
-    var CLS_ITEM = &#x27;J_AcItem&#x27;;
-    var CLS_AC_CONTAINER = &#x27;ks-autocomplete&#x27;;
-    var CLS_AC_INPUT = &#x27;ks-autocomplete-input&#x27;;
+    var CLS_ACTIVE = 'ks-ac-active';
+    var CLS_HOVER = 'ks-ac-hover';
+    var CLS_ITEM = 'J_AcItem';
+    var CLS_AC_CONTAINER = 'ks-autocomplete';
+    var CLS_AC_INPUT = 'ks-autocomplete-input';
 
-    var SELECTOR_ITEM = &#x27;.&#x27; + CLS_ITEM;
+    var SELECTOR_ITEM = '.' + CLS_ITEM;
 
     var isArray = S.isArray;
     var doc = document;
@@ -157,7 +49,7 @@ KISSY.add(function (S ,Node , Event , O){
          **/
         width:{
             value : null,
-            getter : &#x27;_getWidth&#x27;
+            getter : '_getWidth'
         },
         /**
          * 在输入框失去焦点时有推联想搜索结果，启用自动回填当前被激活的数据项
@@ -230,7 +122,7 @@ KISSY.add(function (S ,Node , Event , O){
          * @type Object
          * @default {
                          node : null,
-                         points : [&#x27;bl&#x27;, &#x27;tl&#x27;],
+                         points : ['bl', 'tl'],
                          offset : [0,-1],
                          overflow:{
                              adjustX: 0, // 当对象不能处于可显示区域时，自动调整横坐标
@@ -241,14 +133,14 @@ KISSY.add(function (S ,Node , Event , O){
         align : {
             value : {
                 node    : null,
-                points  : [&#x27;bl&#x27;, &#x27;tl&#x27;],
+                points  : ['bl', 'tl'],
                 offset  : [0, -1],
                 overflow: {
                     adjustX: 0, // 当对象不能处于可显示区域时，自动调整横坐标
                     adjustY: 0// 当对象不能处于可显示区域时，自动调整纵坐标
                 }
             },
-            setter : &#x27;_setAlign&#x27;
+            setter : '_setAlign'
         },
         /**
          * overlay组件的zIndex配置
@@ -266,53 +158,53 @@ KISSY.add(function (S ,Node , Event , O){
          * 层的基础HTML模板结构
          * @attribute boundingBoxTemplate
          * @type String
-         * @default &#x27;&lt;div class=&quot;ks-ac-header&quot;&gt;&lt;/div&gt;&#x27; +
-         &#x27;&lt;div class=&quot;ks-ac-body&quot;&gt;&#x27; +
-         &#x27;   &lt;div class=&quot;ks-ac-message J_AcMessage&quot;&gt;&lt;/div&gt;&#x27; +
-         &#x27;   &lt;div class=&quot;ks-ac-content J_AcContent&quot;&gt;&#x27; +
-         &#x27;       &lt;div class=&quot;J_HotList&quot;&gt;&lt;/div&gt;&#x27; +
-         &#x27;       &lt;div class=&quot;J_ResultsList&quot;&gt;&lt;/div&gt;&#x27; +
-         &#x27;   &lt;/div&gt;&#x27; +
-         &#x27;&lt;/div&gt;&#x27; +
-         &#x27;&lt;div class=&quot;ks-ac-footer&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&#x27;
+         * @default '<div class="ks-ac-header"></div>' +
+         '<div class="ks-ac-body">' +
+         '   <div class="ks-ac-message J_AcMessage"></div>' +
+         '   <div class="ks-ac-content J_AcContent">' +
+         '       <div class="J_HotList"></div>' +
+         '       <div class="J_ResultsList"></div>' +
+         '   </div>' +
+         '</div>' +
+         '<div class="ks-ac-footer"><span></span></div>'
          **/
         boundingBoxTemplate : {
-            value: &#x27;&lt;div class=&quot;ks-ac-header&quot;&gt;&lt;/div&gt;&#x27; +
-                &#x27;&lt;div class=&quot;ks-ac-body&quot;&gt;&#x27; +
-                &#x27;   &lt;div class=&quot;ks-ac-message J_AcMessage&quot;&gt;&lt;/div&gt;&#x27; +
-                &#x27;   &lt;div class=&quot;ks-ac-content J_AcContent&quot;&gt;&#x27; +
-                &#x27;       &lt;div class=&quot;J_HotList&quot;&gt;&lt;/div&gt;&#x27; +
-                &#x27;       &lt;div class=&quot;J_ResultsList&quot;&gt;&lt;/div&gt;&#x27; +
-                &#x27;   &lt;/div&gt;&#x27; +
-                &#x27;&lt;/div&gt;&#x27; +
-                &#x27;&lt;div class=&quot;ks-ac-footer&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&#x27;
+            value: '<div class="ks-ac-header"></div>' +
+                '<div class="ks-ac-body">' +
+                '   <div class="ks-ac-message J_AcMessage"></div>' +
+                '   <div class="ks-ac-content J_AcContent">' +
+                '       <div class="J_HotList"></div>' +
+                '       <div class="J_ResultsList"></div>' +
+                '   </div>' +
+                '</div>' +
+                '<div class="ks-ac-footer"><span></span></div>'
         },
         /**
          * 推荐结果的外层容器HTML模板
          * @attribute listNodeTemplate
          * @type String
-         * @default &lt;div class=&quot;ks-ac-list&quot;&gt;&lt;/div&gt;
+         * @default <div class="ks-ac-list"></div>
          **/
         listNodeTemplate : {
-            value : &#x27;&lt;div class=&quot;ks-ac-list&quot;&gt;&lt;/div&gt;&#x27;
+            value : '<div class="ks-ac-list"></div>'
         },
         /**
          * 推荐结果单个数据项的外层容器HTML模板
          * @attribute itemNodeTemplate
          * @type String
-         * @default &lt;div class=&quot;ks-ac-item&quot;&gt;&lt;/div&gt;
+         * @default <div class="ks-ac-item"></div>
          **/
         itemNodeTemplate : {
-            value : &#x27;&lt;div class=&quot;ks-ac-item&quot;&gt;&lt;/div&gt;&#x27;
+            value : '<div class="ks-ac-item"></div>'
         },
         /**
          * 没有查询结果时的提示模板
          * @attribute noResultsMessage
          * @type String
-         * @default 没有&quot;&lt;span class=&quot;ks-ac-message-hightlight&quot;&gt;{query}&lt;/span&gt;&quot;相关的推荐
+         * @default 没有"<span class="ks-ac-message-hightlight">{query}</span>"相关的推荐
          **/
         noResultsMessage : {
-            value : &#x27;没有&quot;&lt;span class=&quot;ks-ac-message-hightlight&quot;&gt;{query}&lt;/span&gt;&quot;相关的推荐&#x27;
+            value : '没有"<span class="ks-ac-message-hightlight">{query}</span>"相关的推荐'
         },
         /**
          * 添加一个层的自定义className，用于个性化定制样式
@@ -320,7 +212,7 @@ KISSY.add(function (S ,Node , Event , O){
          * @type String
          **/
         wrapperClass : {
-            value : &#x27;&#x27;
+            value : ''
         },
         /**
          * clickoutside时需要排除在外的节点
@@ -351,29 +243,29 @@ KISSY.add(function (S ,Node , Event , O){
             this.overlay = null;
         },
         _renderRich : function (){
-            var input_node = this.get(&#x27;inputNode&#x27;);
+            var input_node = this.get('inputNode');
             input_node.addClass(CLS_AC_INPUT);
-            var _align = this.get(&#x27;align&#x27;);
+            var _align = this.get('align');
             _align.node = _align.node ? _align.node : input_node;
             //基于overlay组件
             var overlay = this.overlay = new O({
                 align  : _align,
-                content: this.get(&#x27;boundingBoxTemplate&#x27;),
-                zIndex : this.get(&#x27;zIndex&#x27;)
+                content: this.get('boundingBoxTemplate'),
+                zIndex : this.get('zIndex')
             });
             overlay.render();
-            var el = overlay.get(&#x27;el&#x27;);
-            this.overlayId = &#x27;J_Ks&#x27; + S.guid();
-            el.prop(&#x27;id&#x27;, this.overlayId).addClass(CLS_AC_CONTAINER).attr(&#x27;tabindex&#x27;, &#x27;-1&#x27;);
-            this.get(&#x27;wrapperClass&#x27;) !== &#x27;&#x27; &amp;&amp; el.addClass(this.get(&#x27;wrapperClass&#x27;));
+            var el = overlay.get('el');
+            this.overlayId = 'J_Ks' + S.guid();
+            el.prop('id', this.overlayId).addClass(CLS_AC_CONTAINER).attr('tabindex', '-1');
+            this.get('wrapperClass') !== '' && el.addClass(this.get('wrapperClass'));
             this.overlayNode = el;
-            this.headerNode = el.one(&#x27;.J_AcHeader&#x27;);
-            this.bodyNode = el.one(&#x27;.J_AcBody&#x27;);
-            this.footerNode = el.one(&#x27;.J_AcFooter&#x27;);
-            this.messageNode = el.one(&#x27;.J_AcMessage&#x27;).hide();
-            this.contentNode = el.one(&#x27;.J_AcContent&#x27;);
-            this.hotNode = el.one(&#x27;.J_HotList&#x27;).hide();
-            this.resultsListNode = el.one(&#x27;.J_ResultsList&#x27;).hide();
+            this.headerNode = el.one('.J_AcHeader');
+            this.bodyNode = el.one('.J_AcBody');
+            this.footerNode = el.one('.J_AcFooter');
+            this.messageNode = el.one('.J_AcMessage').hide();
+            this.contentNode = el.one('.J_AcContent');
+            this.hotNode = el.one('.J_HotList').hide();
+            this.resultsListNode = el.one('.J_ResultsList').hide();
         },
         /**
          * 生成搜索结果列表
@@ -381,7 +273,7 @@ KISSY.add(function (S ,Node , Event , O){
          * @returns {NodeList} 返回documentFragment;
          */
         _buildList : function (items){
-            var listNode = S.one(S.DOM.create(this.get(&#x27;listNodeTemplate&#x27;)));
+            var listNode = S.one(S.DOM.create(this.get('listNodeTemplate')));
             S.each(items,function (_item){
                 listNode.append(this._createItemNode(_item).data(RESULT,_item));
             },this);
@@ -394,7 +286,7 @@ KISSY.add(function (S ,Node , Event , O){
          * @private
          */
         _createItemNode : function (item){
-            var node = S.one(DOM.create(this.get(&#x27;itemNodeTemplate&#x27;)));
+            var node = S.one(DOM.create(this.get('itemNodeTemplate')));
             node.addClass(CLS_ITEM).append(item.display);
             return node;
         },
@@ -403,20 +295,20 @@ KISSY.add(function (S ,Node , Event , O){
          * @private
          */
         _bindRich : function (){
-            var input_node = this.get(&#x27;inputNode&#x27;);
+            var input_node = this.get('inputNode');
 
             //同步状态
-            this.on(&#x27;afterVisibleChange&#x27;,this._afterVisibleChange, this);
-            this.on(&#x27;afterResultsListVisibleChange&#x27;,this._afterResultsListVisibleChange, this);
-            this.on(&#x27;afterMessageVisibleChange&#x27; , this._afterMessageVisibleChange, this);
+            this.on('afterVisibleChange',this._afterVisibleChange, this);
+            this.on('afterResultsListVisibleChange',this._afterResultsListVisibleChange, this);
+            this.on('afterMessageVisibleChange' , this._afterMessageVisibleChange, this);
 
-            input_node.on(&#x27;keydown&#x27;, S.bind(this._afterKeyDown ,this));
-            input_node.on(&#x27;focus&#x27; , this._onFocus, this);
+            input_node.on('keydown', S.bind(this._afterKeyDown ,this));
+            input_node.on('focus' , this._onFocus, this);
 
             this.on(EVT_RESULTS , S.bind(this._onResults , this));
             this.on(EVT_QUERY, this._onQuery,this);
-            this.on(&#x27;afterActiveItemChange&#x27; , S.bind(this._afterActiveChange , this));
-            this.on(&#x27;afterHoverItemChange&#x27;, S.bind(this._afterHoverChange,this));
+            this.on('afterActiveItemChange' , S.bind(this._afterActiveChange , this));
+            this.on('afterHoverItemChange', S.bind(this._afterHoverChange,this));
 
 
             //event of select
@@ -425,31 +317,31 @@ KISSY.add(function (S ,Node , Event , O){
             //clickoutside
             var doc_node = S.one(doc);
             var clickoutside_handler = S.bind(this._afterDocClick,this);
-            this.overlay.on(&#x27;afterVisibleChange&#x27;,function (e){
+            this.overlay.on('afterVisibleChange',function (e){
                 if(e.newVal){//展示时 绑定outclick事件
-                    doc_node.on(&#x27;click&#x27;, clickoutside_handler);
+                    doc_node.on('click', clickoutside_handler);
                     return ;
                 }
                 //隐藏时 取消监听
-                doc_node.detach(&#x27;click&#x27;, clickoutside_handler);
+                doc_node.detach('click', clickoutside_handler);
             }, this);
-            S.Event.on(win , &#x27;resize&#x27;,  S.buffer(this._syncPosition , 100 , this), this);
+            S.Event.on(win , 'resize',  S.buffer(this._syncPosition , 100 , this), this);
             this.bindList();
         },
         /**
          * 搜索结果列表事件绑定
          */
         bindList : function (){
-            this.resultsListNode.delegate(&#x27;mouseenter&#x27; ,SELECTOR_ITEM , function (e){
+            this.resultsListNode.delegate('mouseenter' ,SELECTOR_ITEM , function (e){
                 var item = S.one(e.currentTarget);
                 this.hoverItem(item);
             },this);
-            this.resultsListNode.delegate(&#x27;click&#x27; , SELECTOR_ITEM , function (e){
+            this.resultsListNode.delegate('click' , SELECTOR_ITEM , function (e){
                 e.preventDefault();
                 var item = S.one(e.currentTarget);
                 this.selectItem(item);
             },this);
-            this.resultsListNode.on(&#x27;mouseleave&#x27; , function (){
+            this.resultsListNode.on('mouseleave' , function (){
                 this.set(HOVER_ITEM,null);
             },this);
         },
@@ -466,19 +358,19 @@ KISSY.add(function (S ,Node , Event , O){
             if (this._isSelectVal) {
                 return ;
             }
-            if (isArray(resluts) &amp;&amp; resluts.length &gt; 0) {
+            if (isArray(resluts) && resluts.length > 0) {
                 this._clear();
                 list_node.empty();
                 list_node.append(this._buildList(resluts));
-                this.set(&#x27;messageVisible&#x27;, false);
-                this.get(&#x27;activeFirstItem&#x27;) &amp;&amp; this.set(ACTIVE_ITEM, this._getFirstItem());
-                doc.activeElement  == this.inputNode[0]  &amp;&amp; this.set(&#x27;resultsListVisible&#x27; , true);//焦点还在输入框时才进行现实
+                this.set('messageVisible', false);
+                this.get('activeFirstItem') && this.set(ACTIVE_ITEM, this._getFirstItem());
+                doc.activeElement  == this.inputNode[0]  && this.set('resultsListVisible' , true);//焦点还在输入框时才进行现实
                 this._syncPosition();
             }else{
                 query = S.escapeHTML(query);
                 if(doc.activeElement  == this.inputNode[0]){
-                    if (this.get(&#x27;enableNoResultsMessage&#x27;)) {
-                        this.showMessage(S.substitute(this.get(&#x27;noResultsMessage&#x27;),{//焦点还在输入框时才进行显示
+                    if (this.get('enableNoResultsMessage')) {
+                        this.showMessage(S.substitute(this.get('noResultsMessage'),{//焦点还在输入框时才进行显示
                             query : query
                         }));
                     }else{
@@ -498,7 +390,7 @@ KISSY.add(function (S ,Node , Event , O){
             this.messageNode.html(msg);
             var that = this;
             setTimeout(function (){
-                that.set(&#x27;messageVisible&#x27;, true);
+                that.set('messageVisible', true);
             },1);
             return this;
         },
@@ -507,7 +399,7 @@ KISSY.add(function (S ,Node , Event , O){
          * @private
          */
         _syncPosition : function (){
-            var _align = this.get(&#x27;align&#x27;);
+            var _align = this.get('align');
             this.overlay.align(_align.node , _align.points , _align.offset , _align.overflow);
         },
         /**
@@ -552,34 +444,34 @@ KISSY.add(function (S ,Node , Event , O){
         _afterResultsListVisibleChange : function (e) {
             var isShowIt = e.newVal;
             if (isShowIt) {
-                this.overlay.set(&#x27;width&#x27;, this.get(&#x27;width&#x27;));
+                this.overlay.set('width', this.get('width'));
                 this.resultsListNode.show();
-                this.set(&#x27;visible&#x27;, true);
+                this.set('visible', true);
                 this._syncPosition();
             } else {
                 this.resultsListNode.hide();
             }
 
             //自动回填:输入框失去焦点时如果有推荐结果被选中则自动回填
-            if (this.get(QUERY).query !== &#x27;&#x27; &amp;&amp; e.newVal === false &amp;&amp; this.get(&#x27;enableAutoFill&#x27;)  &amp;&amp; this.get(ACTIVE_ITEM)) {
+            if (this.get(QUERY).query !== '' && e.newVal === false && this.get('enableAutoFill')  && this.get(ACTIVE_ITEM)) {
                 this.selectItem();
             }
         },
         _afterMessageVisibleChange : function (e){
             var isShowIt = e.newVal;
             if (isShowIt) {
-                //this.overlay.set(&#x27;width&#x27;, this.get(&#x27;width&#x27;));
+                //this.overlay.set('width', this.get('width'));
                 this.messageNode.show();
-                this.set(&#x27;visible&#x27;, true);
+                this.set('visible', true);
                 this._syncPosition();
             } else {
                 this.messageNode.hide();
-                this.set(&#x27;visilbe&#x27;, false)
+                this.set('visilbe', false)
             }
         },
         _onFocus : function (e){
             var that = this;
-            that.set(&#x27;messageVisible&#x27;, false);
+            that.set('messageVisible', false);
             setTimeout(function () {//hack for chrome
                 if (that._isSelectVal) {
                     return;
@@ -595,7 +487,7 @@ KISSY.add(function (S ,Node , Event , O){
          * @private
          */
         _isOutSide: function (target_node, region_nodes) {
-            for (var i = 0 , len = region_nodes.length; i &lt; len; i++) {
+            for (var i = 0 , len = region_nodes.length; i < len; i++) {
                 var _region = region_nodes[i][0];
                 if (target_node === _region || S.one(target_node).parent(function (el) {//触发click事件的srcElement不是region_nodes成员或者它的父级元素也没有region_nodes的成员时
                     //filter
@@ -611,14 +503,14 @@ KISSY.add(function (S ,Node , Event , O){
         },
         _afterDocClick : function (e) {
             var target = e.target;
-            if (this._isOutSide(target, [this.overlayNode , this.inputNode].concat(this.get(&#x27;trigger&#x27;)))) {
-                this.set(&#x27;resultsListVisible&#x27;, false);
-                this.set(&#x27;visible&#x27;, false);
+            if (this._isOutSide(target, [this.overlayNode , this.inputNode].concat(this.get('trigger')))) {
+                this.set('resultsListVisible', false);
+                this.set('visible', false);
             }
         },
         _onSelect : function (e){
             var that = this,
-                input_node = this.get(&#x27;inputNode&#x27;);
+                input_node = this.get('inputNode');
             this._updateValue(e.result.text);
             this._isSelectVal = true;//增加一个私有属性, 记录当前状态的改变是由select事件触发，并在200MS后释放状态
             setTimeout(function () {
@@ -626,13 +518,13 @@ KISSY.add(function (S ,Node , Event , O){
             }, 200);
             input_node[0].focus();
             this.set(ACTIVE_ITEM, null);
-            this.set(&#x27;resultsListVisible&#x27;, false);
-            this.set(&#x27;visible&#x27;, false);
+            this.set('resultsListVisible', false);
+            this.set('visible', false);
         },
         _onQuery : function (e) {
             if (e.newVal.query.length === 0) {
-                this.set(&#x27;resultsListVisible&#x27;, false);
-                this.set(&#x27;messageVisible&#x27;, false);
+                this.set('resultsListVisible', false);
+                this.set('messageVisible', false);
             }
         },
         /**
@@ -643,8 +535,8 @@ KISSY.add(function (S ,Node , Event , O){
         _afterActiveChange : function (e){
             var prev_item = e.prevVal;
             var new_item = e.newVal;
-            prev_item &amp;&amp; prev_item.removeClass(CLS_ACTIVE);
-            new_item &amp;&amp; new_item.addClass(CLS_ACTIVE);
+            prev_item && prev_item.removeClass(CLS_ACTIVE);
+            new_item && new_item.addClass(CLS_ACTIVE);
         },
         /**
          * 鼠标移动到ITEM上时的回调
@@ -654,8 +546,8 @@ KISSY.add(function (S ,Node , Event , O){
         _afterHoverChange : function (e){
             var prev_item = e.prevVal;
             var new_item = e.newVal;
-            prev_item &amp;&amp; prev_item.removeClass(CLS_HOVER);
-            new_item &amp;&amp; new_item.addClass(CLS_HOVER);
+            prev_item && prev_item.removeClass(CLS_HOVER);
+            new_item && new_item.addClass(CLS_HOVER);
         },
         /**
          * 键盘事件回调
@@ -674,19 +566,19 @@ KISSY.add(function (S ,Node , Event , O){
                     break;
                 case 13 :
                     e.preventDefault();
-                    this.get(&#x27;resultsListVisible&#x27;) &amp;&amp; this.get(ACTIVE_ITEM) &amp;&amp; this.selectItem();
+                    this.get('resultsListVisible') && this.get(ACTIVE_ITEM) && this.selectItem();
                     break;
                 case 9 :// tab
-                    if (this.get(&#x27;resultsListVisible&#x27;) &amp;&amp; this.get(ACTIVE_ITEM)) {
+                    if (this.get('resultsListVisible') && this.get(ACTIVE_ITEM)) {
                         e.preventDefault();
                         this.selectItem();
                     }
-                    this.set(&#x27;resultsListVisible&#x27;, false);
-                    this.set(&#x27;visible&#x27; , false);
+                    this.set('resultsListVisible', false);
+                    this.set('visible' , false);
                     break;
                 case 27 :// esc
-                    this.set(&#x27;resultsListVisible&#x27;, false);
-                    this.set(&#x27;visible&#x27; , false);
+                    this.set('resultsListVisible', false);
+                    this.set('visible' , false);
                     break;
                 default :
                     break;
@@ -741,7 +633,7 @@ KISSY.add(function (S ,Node , Event , O){
          * @private
          */
         _getLastItem : function (){
-            return this.resultsListNode.one(SELECTOR_ITEM+&#x27;:last-child&#x27;);
+            return this.resultsListNode.one(SELECTOR_ITEM+':last-child');
         },
         /**
          * 设定宽度值
@@ -757,7 +649,7 @@ KISSY.add(function (S ,Node , Event , O){
                 return val.outerWidth();
             }
             if (val === null) {
-                return this.get(&#x27;inputNode&#x27;).outerWidth();
+                return this.get('inputNode').outerWidth();
             }
         },
         /**
@@ -769,7 +661,7 @@ KISSY.add(function (S ,Node , Event , O){
         _setAlign : function (cfg){
             var _cfg = {
                 node    : null,
-                points  : [&#x27;bl&#x27;, &#x27;tl&#x27;],
+                points  : ['bl', 'tl'],
                 offset  : [0, -1],
                 overflow: {
                     adjustX: 0, // 当对象不能处于可显示区域时，自动调整横坐标
@@ -781,29 +673,10 @@ KISSY.add(function (S ,Node , Event , O){
             if (_cfg.node) {
                 return _cfg;
             }else{
-                _cfg.node = this.get(&#x27;inputNode&#x27;);
+                _cfg.node = this.get('inputNode');
                 return _cfg;
             }
         }
     };
     return AutoCompleteRich;
-},{requires : [&#x27;node&#x27;,&#x27;event&#x27;,&#x27;overlay&#x27;,&#x27;sizzle&#x27;]});
-    </pre>
-</div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="../assets/vendor/prettify/prettify-min.js"></script>
-<script>prettyPrint();</script>
-<script src="../assets/js/yui-prettify.js"></script>
-<script src="../assets/../api.js"></script>
-<script src="../assets/js/api-filter.js"></script>
-<script src="../assets/js/api-list.js"></script>
-<script src="../assets/js/api-search.js"></script>
-<script src="../assets/js/apidocs.js"></script>
-</body>
-</html>
+},{requires : ['node','event','overlay','sizzle']});

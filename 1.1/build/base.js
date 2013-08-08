@@ -1,111 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>1.1/base.js - autocomplete</title>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
-    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
-    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
-</head>
-<body class="yui3-skin-sam">
-
-<div id="doc">
-    <div id="hd" class="yui3-g header">
-        <div class="yui3-u-3-4">
-            
-                <h1><img src="../assets/css/logo.png" title="autocomplete"></h1>
-            
-        </div>
-        <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.1</em>
-        </div>
-    </div>
-    <div id="bd" class="yui3-g">
-
-        <div class="yui3-u-1-4">
-            <div id="docs-sidebar" class="sidebar apidocs">
-                <div id="api-list">
-    <h2 class="off-left">APIs</h2>
-    <div id="api-tabview" class="tabview">
-        <ul class="tabs">
-            <li><a href="#api-classes">Classes</a></li>
-            <li><a href="#api-modules">Modules</a></li>
-        </ul>
-
-        <div id="api-tabview-filter">
-            <input type="search" id="api-filter" placeholder="Type to filter APIs">
-        </div>
-
-        <div id="api-tabview-panel">
-            <ul id="api-classes" class="apis classes">
-            
-                <li><a href="../classes/Autocomplete.html">Autocomplete</a></li>
-            
-                <li><a href="../classes/AutocompleteAll.html">AutocompleteAll</a></li>
-            
-                <li><a href="../classes/AutocompleteAria.html">AutocompleteAria</a></li>
-            
-                <li><a href="../classes/AutoCompleteBase.html">AutoCompleteBase</a></li>
-            
-                <li><a href="../classes/AutocompleteHot.html">AutocompleteHot</a></li>
-            
-                <li><a href="../classes/AutocompleteRich.html">AutocompleteRich</a></li>
-            
-            </ul>
-
-            <ul id="api-modules" class="apis modules">
-            
-                <li><a href="../modules/autocomplete.html">autocomplete</a></li>
-            
-                <li><a href="../modules/autocomplete-aria.html">autocomplete-aria</a></li>
-            
-                <li><a href="../modules/autocomplete-hot.html">autocomplete-hot</a></li>
-            
-                <li><a href="../modules/autocomplete-rich.html">autocomplete-rich</a></li>
-            
-                <li><a href="../modules/autocomplete_multiple.html">autocomplete/multiple</a></li>
-            
-            </ul>
-        </div>
-    </div>
-</div>
-
-            </div>
-        </div>
-        <div class="yui3-u-3-4">
-                <div id="api-options">
-        Show:
-        <label for="api-show-inherited">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </div>
-
-
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <h1 class="file-heading">File: 1.1/base.js</h1>
-
-<div class="file">
-    <pre class="code prettyprint linenums">
 KISSY.add(function (S){
     /**
     自动完成组件
@@ -115,26 +7,26 @@ KISSY.add(function (S){
 
     /**
     AutocompleteBase
-     自动完成组件的基类，主要提供底层数据逻辑的处理，分发两个事件&lt;b&gt;results afterQueryChange&lt;b&gt;
+     自动完成组件的基类，主要提供底层数据逻辑的处理，分发两个事件<b>results afterQueryChange<b>
     @class AutoCompleteBase
     @uses Overlay
     @constructor
     **/
-    var INPUT_NODE = &#x27;inputNode&#x27;;
+    var INPUT_NODE = 'inputNode';
 
-    var QUERY = &#x27;query&#x27;;
-    var RESULTS = &#x27;results&#x27;;
-    var EVT_RESULTS = &#x27;results&#x27;;
+    var QUERY = 'query';
+    var RESULTS = 'results';
+    var EVT_RESULTS = 'results';
     /**
      * query发生变化
      * @event afterQueryChange
      * @param {String} newVal
      * @param {String} prevVal
      */
-    var EVT_QUERY = &#x27;afterQueryChange&#x27; ;
-    var VALUE_CHANGE = &#x27;valuechange&#x27;;
-    var REQUEST_TEMPLATE = &#x27;requestTemplate&#x27;;
-    var RESULT_LIST_LOCATOR = &#x27;resultListLocator&#x27;;
+    var EVT_QUERY = 'afterQueryChange' ;
+    var VALUE_CHANGE = 'valuechange';
+    var REQUEST_TEMPLATE = 'requestTemplate';
+    var RESULT_LIST_LOCATOR = 'resultListLocator';
 
     function AutoCompleteBase(){
         this.initBase.apply(this, arguments);
@@ -182,13 +74,13 @@ KISSY.add(function (S){
             value : 1
         },
         /**
-         * kissy jsonp 的配置项，用于接口的callback的key不是&#x27;callback&#x27;时
+         * kissy jsonp 的配置项，用于接口的callback的key不是'callback'时
          * @attribute jsonpCallback
          * @type String
          * @default callback
          **/
         jsonpCallback : {
-            value : &#x27;callback&#x27;
+            value : 'callback'
         },
         query : {
             value : null
@@ -218,7 +110,7 @@ KISSY.add(function (S){
          */
         requestTemplate : {
             value : null,
-            setter : &#x27;_setRequestTemplate&#x27;
+            setter : '_setRequestTemplate'
         },
         /**
          * 数据结果过滤
@@ -246,7 +138,7 @@ KISSY.add(function (S){
         resultFormatter : {
             value : function (query, results) {
                 return S.map(results, function (_item) {
-                    return S.substitute(&#x27;&lt;div class=&quot;ks-ac-item-inner&quot;&gt;&lt;span class=&quot;ks-ac-name&quot;&gt;{cityname}&lt;/span&gt;&lt;span class=&quot;ks-ac-intro&quot;&gt;{py}&lt;/span&gt;&lt;/div&gt;&#x27;, {
+                    return S.substitute('<div class="ks-ac-item-inner"><span class="ks-ac-name">{cityname}</span><span class="ks-ac-intro">{py}</span></div>', {
                         cityname: _item.text,
                         py      : _item.raw.py
                     });
@@ -261,7 +153,7 @@ KISSY.add(function (S){
          **/
         resultListLocator : {
             value : null ,
-            setter : &#x27;_setLocator&#x27;
+            setter : '_setLocator'
         },
         /**
          * 存储当前的查询结果
@@ -278,14 +170,14 @@ KISSY.add(function (S){
          **/
         resultTextLocator:{
             value : null,
-            setter : &#x27;_setLocator&#x27;
+            setter : '_setLocator'
         },
         /**
          * 数据源
          */
         source : {
             value : null,
-            setter : &#x27;_setSource&#x27;
+            setter : '_setSource'
         },
         /**
          * 如果是服务端返回数据，指定数据源的charset
@@ -300,8 +192,8 @@ KISSY.add(function (S){
          * 设置输入框的值,可以用于区分是用户通过UI输入造成的valueChange还是代码通过 setValue()改变的输入框的值
          */
         value : {
-            value : &#x27;&#x27;,
-            setter : &#x27;_onSetVal&#x27;
+            value : '',
+            setter : '_onSetVal'
         },
         /**
          * 开启浏览器默认的自动填充行为
@@ -315,12 +207,12 @@ KISSY.add(function (S){
     };
     AutoCompleteBase.prototype = {
         initBase : function (){
-            if (this.get(&#x27;enableCache&#x27;) === true) {
+            if (this.get('enableCache') === true) {
                 this._cache = {};
             }
-            this.inputNode = this.get(&#x27;inputNode&#x27;);
+            this.inputNode = this.get('inputNode');
             if (!this.inputNode) {
-                S.log(&#x27;error: 没有对应的输入框节点.&#x27;);
+                S.log('error: 没有对应的输入框节点.');
                 return false;
             }
             this._renderUIAcBase();
@@ -328,7 +220,7 @@ KISSY.add(function (S){
             return this;
         },
         destructor : function (){
-            var input_node = this.get(&#x27;inputNode&#x27;);
+            var input_node = this.get('inputNode');
             input_node.detach();
         },
         /**
@@ -345,17 +237,17 @@ KISSY.add(function (S){
         _bindUIAcBase : function (){
             var input_node = this.get(INPUT_NODE);
             input_node.on(VALUE_CHANGE , this._onInputValueChange , this);
-            this.on(&#x27;afterValueChange&#x27; , this._afterValueChange , this);
+            this.on('afterValueChange' , this._afterValueChange , this);
 
             this.on(EVT_QUERY,function (e){
                 var query = S.trim(e.newVal.query);
-                if (query.length &lt; this.get(&#x27;minQueryLength&#x27;)) {//小宇最短字符时不做处理
+                if (query.length < this.get('minQueryLength')) {//小宇最短字符时不做处理
                     return ;
                 }
                 this.sendRequest(query);
             },this);
 
-            this.on(&#x27;afterAllowBrowserAutocompleteChange&#x27; , this._syncBrowserAutocomplete , this);
+            this.on('afterAllowBrowserAutocompleteChange' , this._syncBrowserAutocomplete , this);
         },
         /**
          * query 事件后默认出发函数
@@ -364,7 +256,7 @@ KISSY.add(function (S){
          */
         sendRequest : function (query , requestTemplate){
             var request ;
-            var source = this.get(&#x27;source&#x27;);
+            var source = this.get('source');
             if (source) {
                 if (!requestTemplate) {
                     requestTemplate = this.get(REQUEST_TEMPLATE);
@@ -380,10 +272,10 @@ KISSY.add(function (S){
             }
         },
         _onSetVal : function (val){
-            this.get(&#x27;inputNode&#x27;).val(val);
+            this.get('inputNode').val(val);
         },
         _onInputValueChange : function (e){
-            this.set(&#x27;value&#x27; , e.newVal ,{
+            this.set('value' , e.newVal ,{
                 silent : false
             });
         },
@@ -394,7 +286,7 @@ KISSY.add(function (S){
         _afterValueChange : function (e){
             var that = this;
             var val = e.newVal;
-            var delimiter = this.get(&#x27;queryDelimiter&#x27;);
+            var delimiter = this.get('queryDelimiter');
             var query= val;
             var arr;
             if (delimiter !== null) {
@@ -407,7 +299,7 @@ KISSY.add(function (S){
                     inputValue : val
                 });
             };
-            var delay = this.get(&#x27;queryDelay&#x27;);
+            var delay = this.get('queryDelay');
 
             if (delay) {
                 clearTimeout(this._delay);
@@ -419,19 +311,19 @@ KISSY.add(function (S){
             }
         },
         _updateValue : function (newVal){
-            var delim = this.get(&#x27;queryDelimiter&#x27;),
+            var delim = this.get('queryDelimiter'),
                 insertDelim,
                 len,
                 prevVal;
             newVal = S.trim(newVal);
             if (delim) {
-                insertDelim = S.trim(delim); // so we don&#x27;t double up on spaces
-                prevVal     = S.map(S.trim(this.get(&#x27;value&#x27;)).split(delim), function (item){
+                insertDelim = S.trim(delim); // so we don't double up on spaces
+                prevVal     = S.map(S.trim(this.get('value')).split(delim), function (item){
                     return S.trim(item);
                 });
                 len         = prevVal.length;
 
-                if (len &gt; 1) {
+                if (len > 1) {
                     prevVal[len - 1] = newVal;
                     newVal = prevVal.join(insertDelim);
                 }
@@ -439,7 +331,7 @@ KISSY.add(function (S){
                 newVal = newVal + insertDelim;
             }
 
-            this.set(&#x27;value&#x27; , newVal,{
+            this.set('value' , newVal,{
                 silent : true//不通过afterValueChange去触发query事件
             });
         },
@@ -448,8 +340,8 @@ KISSY.add(function (S){
          * @private
          */
         _onResponse : function (query , e){
-            if (query === (this.get(&#x27;query&#x27;).query || &#x27;&#x27;)) {
-                this._parseResponse(query || &#x27;&#x27;, e.response, e.data);
+            if (query === (this.get('query').query || '')) {
+                this._parseResponse(query || '', e.response, e.data);
             }
         },
         _parseResponse: function (query , response , data) {
@@ -461,7 +353,7 @@ KISSY.add(function (S){
 
                 listLocator = this.get(RESULT_LIST_LOCATOR),
                 results = [],
-                unfiltered = response &amp;&amp; response.results,
+                unfiltered = response && response.results,
                 formatted,
                 formatter,
                 filter,
@@ -471,18 +363,18 @@ KISSY.add(function (S){
                 result,
                 text,
                 textLocator;
-            if (unfiltered &amp;&amp; listLocator) {//指定返回结果的数组路径
+            if (unfiltered && listLocator) {//指定返回结果的数组路径
                 unfiltered = listLocator.call(this, unfiltered);
             }
 
-            if (unfiltered &amp;&amp; unfiltered.length) {
-                textLocator = this.get(&#x27;resultTextLocator&#x27;);
-                filter = this.get(&#x27;resultFilter&#x27;);
+            if (unfiltered && unfiltered.length) {
+                textLocator = this.get('resultTextLocator');
+                filter = this.get('resultFilter');
                 // Create a lightweight result object for each result to make them
                 // easier to work with. The various properties on the object
                 // represent different formats of the result, and will be populated
                 // as we go.
-                for (i = 0, len = unfiltered.length; i &lt; len; ++i) {
+                for (i = 0, len = unfiltered.length; i < len; ++i) {
                     result = unfiltered[i];
                     text = textLocator ?
                         textLocator.call(this, result) :
@@ -499,20 +391,20 @@ KISSY.add(function (S){
                     results = filter.call(this, query , results.concat());
                 }
                 if (results.length) {
-                    formatter = this.get(&#x27;resultFormatter&#x27;);
-                    maxResults = this.get(&#x27;maxResults&#x27;);
+                    formatter = this.get('resultFormatter');
+                    maxResults = this.get('maxResults');
 
                     //最大数据条数的限制
-                    if (maxResults &amp;&amp; maxResults &gt; 0 &amp;&amp;
-                        results.length &gt; maxResults) {
+                    if (maxResults && maxResults > 0 &&
+                        results.length > maxResults) {
                         results.length = maxResults;
                     }
                     if (formatter) {
                         formatted = formatter.call(this, query, results.concat());
                         if (!formatted) {
-                            S.log(&quot;Formatter didn&#x27;t return anything.&quot;, &#x27;warn&#x27;, &#x27;autocomplete-base&#x27;);
+                            S.log("Formatter didn't return anything.", 'warn', 'autocomplete-base');
                         }else{
-                            for (i = 0, len = formatted.length; i &lt; len; ++i) {
+                            for (i = 0, len = formatted.length; i < len; ++i) {
                                 results[i].display = formatted[i];
                             }
                         }
@@ -578,12 +470,12 @@ KISSY.add(function (S){
             if (S.isFunction(locator)) {
                 return locator;
             }
-            locator = locator.toString().split(&#x27;.&#x27;);
+            locator = locator.toString().split('.');
             var getObjVal = function (obj,path){
                 if (!obj) {
                     return null;
                 }
-                for(var i=0 , len = path.length ;i &lt; len ; i++){
+                for(var i=0 , len = path.length ;i < len ; i++){
                     if (path[i] in obj) {
                         obj = obj[path[i]];
                     }
@@ -591,7 +483,7 @@ KISSY.add(function (S){
                 return obj;
             };
             return function (result){
-                return result &amp;&amp; getObjVal(result , locator);
+                return result && getObjVal(result , locator);
             };
         },
         _setSource : function (source){
@@ -619,7 +511,7 @@ KISSY.add(function (S){
          */
         _createJsonpSource : function (source){
             var jsonp_source = {
-                type : &#x27;jsonp&#x27;
+                type : 'jsonp'
             };
             var that = this ;
             var last_request ;
@@ -630,23 +522,23 @@ KISSY.add(function (S){
             jsonp_source.sendRequest = function (request){
                 last_request = request ;
                 var cacheKey = request.request;
-                if (that._cache &amp;&amp; cacheKey in that._cache) {//从缓存获取数据
+                if (that._cache && cacheKey in that._cache) {//从缓存获取数据
                     that._sourceSuccess(that._cache[cacheKey],request);
                     return ;
                 }
                 var url;
                 url = S.substitute(source , {
                     query : request.query,
-                    maxResults: that.get(&#x27;maxResults&#x27;)
+                    maxResults: that.get('maxResults')
                 });
                 S.IO({
                     url : url,
-                    dataType : &#x27;jsonp&#x27;,
-                    scriptCharset : that.get(&#x27;sourceCharset&#x27;),
-                    jsonp : that.get(&#x27;jsonpCallback&#x27;),
+                    dataType : 'jsonp',
+                    scriptCharset : that.get('sourceCharset'),
+                    jsonp : that.get('jsonpCallback'),
                     success : function (data){
                         if (last_request === request) {//仅处理最后一次请求
-                            that._cache &amp;&amp; (that._cache[request.request] = data);
+                            that._cache && (that._cache[request.request] = data);
                             that._sourceSuccess(data , request);
                         }
                     }
@@ -657,7 +549,7 @@ KISSY.add(function (S){
         _createArraySource : function (source){
             var that = this;
             return  {
-                type : &#x27;Array&#x27;,
+                type : 'Array',
                 sendRequest : function (request){
                     that._sourceSuccess(source , request);
                 }
@@ -666,7 +558,7 @@ KISSY.add(function (S){
         _createFunctionSource : function (source){
             var that = this;
             return {
-                type : &#x27;function&#x27;,
+                type : 'function',
                 sendRequest : function (request){
                     var val ;
                     if (val = source(request.query)) {
@@ -678,7 +570,7 @@ KISSY.add(function (S){
         _createObjectSource : function (source){
             var that = this;
             return  {
-                type : &#x27;Object&#x27;,
+                type : 'Object',
                 sendRequest : function (request){
                     that._sourceSuccess(source , request);
                 }
@@ -689,30 +581,11 @@ KISSY.add(function (S){
          * @private
          */
         _syncBrowserAutocomplete : function (){
-            var input_node = this.get(&#x27;inputNode&#x27;);
-            if (input_node.prop(&#x27;nodeName&#x27;).toLowerCase() === &#x27;input&#x27;) {
-                input_node.attr(&#x27;autocomplete&#x27; , this.get(&#x27;_syncBrowserAutocomplete&#x27;) ? &#x27;on&#x27; : &#x27;off&#x27;);
+            var input_node = this.get('inputNode');
+            if (input_node.prop('nodeName').toLowerCase() === 'input') {
+                input_node.attr('autocomplete' , this.get('_syncBrowserAutocomplete') ? 'on' : 'off');
             }
         }
     };
     return AutoCompleteBase;
-},{requires : [&#x27;node&#x27;,&#x27;base&#x27;]});
-    </pre>
-</div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="../assets/vendor/prettify/prettify-min.js"></script>
-<script>prettyPrint();</script>
-<script src="../assets/js/yui-prettify.js"></script>
-<script src="../assets/../api.js"></script>
-<script src="../assets/js/api-filter.js"></script>
-<script src="../assets/js/api-list.js"></script>
-<script src="../assets/js/api-search.js"></script>
-<script src="../assets/js/apidocs.js"></script>
-</body>
-</html>
+},{requires : ['node','base']});
