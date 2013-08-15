@@ -375,6 +375,7 @@ KISSY.add(function (S ,Node , Event , O){
                         }));
                     }else{
                         list_node.empty();
+                        this.set(ACTIVE_ITEM, null);
                     }
                 }
             }
