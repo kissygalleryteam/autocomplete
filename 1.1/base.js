@@ -83,7 +83,10 @@ KISSY.add(function (S){
             value : 'callback'
         },
         query : {
-            value : null
+            value : {
+                query : '',
+                inputValue : ''
+            }
         },
         /**
          * 延时查询,避免用户连续输入时密集发送查询请求

@@ -93,7 +93,10 @@ KISSY.add('gallery/autocomplete/1.1/base',function (S){
             value : 'callback'
         },
         query : {
-            value : null
+            value : {
+                query : '',
+                inputValue : ''
+            }
         },
         /**
          * 延时查询,避免用户连续输入时密集发送查询请求
@@ -976,6 +979,7 @@ KISSY.add('gallery/autocomplete/1.1/rich',function (S ,Node , Event , O){
                         }));
                     }else{
                         list_node.empty();
+                        this.set(ACTIVE_ITEM, null);
                     }
                 }
             }
