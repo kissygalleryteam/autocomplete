@@ -40,7 +40,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "autocomplete-rich",
             "name": "autocomplete-rich",
-            "description": "AutocompleteBase\n 自动完成组件的基类，主要提供底层数据逻辑的处理，分发两个事件<b>results afterQueryChange<b>"
+            "description": "AutocompleteRich主要基于AutocompleteBase，利用afterQueryChange和results两个事件创建包含更多交互的富应用"
         },
         {
             "displayName": "autocomplete/multiple",
