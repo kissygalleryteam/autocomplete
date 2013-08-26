@@ -1,118 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>1.1/build/aria.js - autocomplete</title>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
-    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
-    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
-    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
-</head>
-<body class="yui3-skin-sam">
-
-<div id="doc">
-    <div id="hd" class="yui3-g header">
-        <div class="yui3-u-3-4">
-            
-                <h1><img src="../assets/css/logo.png" title="autocomplete"></h1>
-            
-        </div>
-        <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.1</em>
-        </div>
-    </div>
-    <div id="bd" class="yui3-g">
-
-        <div class="yui3-u-1-4">
-            <div id="docs-sidebar" class="sidebar apidocs">
-                <div id="api-list">
-    <h2 class="off-left">APIs</h2>
-    <div id="api-tabview" class="tabview">
-        <ul class="tabs">
-            <li><a href="#api-classes">Classes</a></li>
-            <li><a href="#api-modules">Modules</a></li>
-        </ul>
-
-        <div id="api-tabview-filter">
-            <input type="search" id="api-filter" placeholder="Type to filter APIs">
-        </div>
-
-        <div id="api-tabview-panel">
-            <ul id="api-classes" class="apis classes">
-            
-                <li><a href="../classes/Autocomplete.html">Autocomplete</a></li>
-            
-                <li><a href="../classes/AutocompleteAll.html">AutocompleteAll</a></li>
-            
-                <li><a href="../classes/AutocompleteAria.html">AutocompleteAria</a></li>
-            
-                <li><a href="../classes/AutoCompleteBase.html">AutoCompleteBase</a></li>
-            
-                <li><a href="../classes/AutocompleteHot.html">AutocompleteHot</a></li>
-            
-                <li><a href="../classes/AutocompleteRich.html">AutocompleteRich</a></li>
-            
-            </ul>
-
-            <ul id="api-modules" class="apis modules">
-            
-                <li><a href="../modules/autocomplete.html">autocomplete</a></li>
-            
-                <li><a href="../modules/autocomplete-aria.html">autocomplete-aria</a></li>
-            
-                <li><a href="../modules/autocomplete-hot.html">autocomplete-hot</a></li>
-            
-                <li><a href="../modules/autocomplete-rich.html">autocomplete-rich</a></li>
-            
-                <li><a href="../modules/autocomplete_multiple.html">autocomplete/multiple</a></li>
-            
-            </ul>
-        </div>
-    </div>
-</div>
-
-            </div>
-        </div>
-        <div class="yui3-u-3-4">
-                <div id="api-options">
-        Show:
-        <label for="api-show-inherited">
-            <input type="checkbox" id="api-show-inherited" checked>
-            Inherited
-        </label>
-
-        <label for="api-show-protected">
-            <input type="checkbox" id="api-show-protected">
-            Protected
-        </label>
-
-        <label for="api-show-private">
-            <input type="checkbox" id="api-show-private">
-            Private
-        </label>
-        <label for="api-show-deprecated">
-            <input type="checkbox" id="api-show-deprecated">
-            Deprecated
-        </label>
-
-    </div>
-
-
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-                        <h1 class="file-heading">File: 1.1/build/aria.js</h1>
-
-<div class="file">
-    <pre class="code prettyprint linenums">
 /*
 combined files : 
 
 gallery/autocomplete/1.1/aria
 
 */
-KISSY.add(&#x27;gallery/autocomplete/1.1/aria&#x27;,function (S ,Node , Event , O){
+/*
+combined files : 
+
+gallery/autocomplete/1.1/aria
+
+*/
+KISSY.add('gallery/autocomplete/1.1/aria',function (S ,Node , Event , O){
     /**
      * @module autocomplete
      * @submodule autocomplete-aria
@@ -123,9 +21,9 @@ KISSY.add(&#x27;gallery/autocomplete/1.1/aria&#x27;,function (S ,Node , Event , 
      * @class  AutocompleteAria
      * @extend AutocompleteBase
      */
-    var CLS_ITEM = &#x27;J_AcItem&#x27;;
-    var SELECTOR_TAB = &#x27;.J_TabItem&#x27;;
-    var SELECTOR_ITEM = &#x27;.&#x27; + CLS_ITEM;
+    var CLS_ITEM = 'J_AcItem';
+    var SELECTOR_TAB = '.J_TabItem';
+    var SELECTOR_ITEM = '.' + CLS_ITEM;
 
     var AutoCompleteAria = function (){
         this.initAria.apply(this , arguments);
@@ -139,25 +37,25 @@ KISSY.add(&#x27;gallery/autocomplete/1.1/aria&#x27;,function (S ,Node , Event , 
             this.nodeArr = null;
         },
         bindAria : function (){
-            this.on(&#x27;afterHotActiveTabChange&#x27; , function (e){
+            this.on('afterHotActiveTabChange' , function (e){
                 var _nextNav = this.hotNavNodes.item(e.newVal);
                 var _nextPannel = this.hotPannelNodes.item(e.newVal);
                 var _clickNodes = this.hotItemNodes = _nextPannel.all(SELECTOR_ITEM);
                 this.nodeArr = this.buildArr2(_clickNodes);
                 if (!this.isFirstShow) {
-                    _nextNav.one(&#x27;a&#x27;) &amp;&amp; _nextNav.one(&#x27;a&#x27;)[0].focus();
+                    _nextNav.one('a') && _nextNav.one('a')[0].focus();
                 }else{
                     this.isFirstShow = false;
                 }
             },this);
 
-            this.on(&#x27;afterHotSourceChange&#x27; , function (e){
+            this.on('afterHotSourceChange' , function (e){
                 this.isFirstShow = true;
             },this);
-            this.hotNode.delegate(&#x27;keydown&#x27; , SELECTOR_ITEM , function (e){
+            this.hotNode.delegate('keydown' , SELECTOR_ITEM , function (e){
                 var target = S.one(e.currentTarget);
-                var item_data = target.data(&#x27;src&#x27;);
-                if (target.hasClass(CLS_ITEM) &amp;&amp; target.hasData(&#x27;src&#x27;)) {
+                var item_data = target.data('src');
+                if (target.hasClass(CLS_ITEM) && target.hasData('src')) {
                     switch(e.keyCode){
                         case 37 :
                             e.preventDefault();
@@ -182,22 +80,22 @@ KISSY.add(&#x27;gallery/autocomplete/1.1/aria&#x27;,function (S ,Node , Event , 
             }, this);
 
             //在tab上的键盘操作
-            this.hotNode.delegate(&#x27;keydown&#x27; , SELECTOR_TAB , function (e){
-                var curHotTab = this.get(&#x27;hotActiveTab&#x27;);
+            this.hotNode.delegate('keydown' , SELECTOR_TAB , function (e){
+                var curHotTab = this.get('hotActiveTab');
                 switch(e.keyCode){
                     case 37 : //click left
                         curHotTab -- ;
-                        if (curHotTab &lt; 0) {
+                        if (curHotTab < 0) {
                             curHotTab = this.hotNavNodes.length -1;
                         }
-                        this.set(&#x27;hotActiveTab&#x27; , curHotTab);
+                        this.set('hotActiveTab' , curHotTab);
                         break;
                     case 39 ://click right
                         curHotTab ++ ;
-                        if (curHotTab &gt;= this.hotNavNodes.length) {
+                        if (curHotTab >= this.hotNavNodes.length) {
                             curHotTab = 0 ;
                         }
-                        this.set(&#x27;hotActiveTab&#x27; , curHotTab);
+                        this.set('hotActiveTab' , curHotTab);
                         break;
                     case 38 : //up
                         this.hotItemNodes.item(0)[0].focus();
@@ -245,7 +143,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.1/aria&#x27;,function (S ,Node , Event , 
             S.each(map , function (key , index){
                 S.each(obj[key] , function (_item){
                     _item.y = index;
-                    _item.node.data(&#x27;src&#x27; , _item);//数据绑定
+                    _item.node.data('src' , _item);//数据绑定
                 });
                 map[index] = obj[key];
             });
@@ -260,10 +158,10 @@ KISSY.add(&#x27;gallery/autocomplete/1.1/aria&#x27;,function (S ,Node , Event , 
             var x = item.x;
             var y = item.y;
             y--;
-            if (y &lt; 0) {
+            if (y < 0) {
                 y = this.nodeArr.length - 1;
             }
-            this._selectHot(x , y , &#x27;up&#x27;);
+            this._selectHot(x , y , 'up');
         },
         /**
          * 选择位于下方节点
@@ -274,10 +172,10 @@ KISSY.add(&#x27;gallery/autocomplete/1.1/aria&#x27;,function (S ,Node , Event , 
             var x = item.x;
             var y = item.y;
             y++;
-            if (y &gt;= this.nodeArr.length) {
+            if (y >= this.nodeArr.length) {
                 y = 0;
             }
-            this._selectHot(x , y , &#x27;down&#x27;);
+            this._selectHot(x , y , 'down');
         },
         /**
          * 选择左侧节点
@@ -288,9 +186,9 @@ KISSY.add(&#x27;gallery/autocomplete/1.1/aria&#x27;,function (S ,Node , Event , 
             var x = item.x ;
             var y = item.y ;
             x--;
-            if (x &lt; 0) {
+            if (x < 0) {
                 y--;
-                if (y&lt;0) {
+                if (y<0) {
                     y = this.nodeArr.length - 1;
                 }
                 x = this.nodeArr[y].length - 1;
@@ -306,10 +204,10 @@ KISSY.add(&#x27;gallery/autocomplete/1.1/aria&#x27;,function (S ,Node , Event , 
             var x = item.x;
             var y = item.y;
             x++;
-            if (x &gt;= this.nodeArr[item.y].length) {
+            if (x >= this.nodeArr[item.y].length) {
                 x = 0 ;
                 y++;
-                if (y &gt;= this.nodeArr.length) {
+                if (y >= this.nodeArr.length) {
                     y = 0;
                 }
             }
@@ -323,17 +221,17 @@ KISSY.add(&#x27;gallery/autocomplete/1.1/aria&#x27;,function (S ,Node , Event , 
          * @private
          */
         _selectHot : function (x,y,direction){
-            if (direction == &#x27;up&#x27;) {
+            if (direction == 'up') {
             }
             if (this.nodeArr[y]) {
                 if (this.nodeArr[y][x]) {
                     this.nodeArr[y][x].node[0].focus();
                 }else{//点击上下键，在所在列进行移动，如果当前行对应的列不存在，则跳过去下一行
-                    if (direction === &#x27;up&#x27;) {
+                    if (direction === 'up') {
                         y -- ;
                         this._selectHot(x, y ,direction);
                         return false;
-                    }else if(direction === &#x27;down&#x27;){
+                    }else if(direction === 'down'){
                         y ++ ;
                         this._selectHot(x, y ,direction);
                         return false;
@@ -344,24 +242,5 @@ KISSY.add(&#x27;gallery/autocomplete/1.1/aria&#x27;,function (S ,Node , Event , 
         }
     };
     return AutoCompleteAria;
-},{requires : [&#x27;node&#x27;,&#x27;event&#x27;]});
+},{requires : ['node','event']});
 
-    </pre>
-</div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="../assets/vendor/prettify/prettify-min.js"></script>
-<script>prettyPrint();</script>
-<script src="../assets/js/yui-prettify.js"></script>
-<script src="../assets/../api.js"></script>
-<script src="../assets/js/api-filter.js"></script>
-<script src="../assets/js/api-list.js"></script>
-<script src="../assets/js/api-search.js"></script>
-<script src="../assets/js/apidocs.js"></script>
-</body>
-</html>

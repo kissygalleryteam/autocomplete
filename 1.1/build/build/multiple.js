@@ -2,10 +2,16 @@
 combined files : 
 
 gallery/autocomplete/1.1/base
-gallery/autocomplete/1.1/rich
-gallery/autocomplete/1.1/hot
-gallery/autocomplete/1.1/index
-gallery/autocomplete/1.1/multiple
+gallery/autocomplete/1.1/build/rich
+gallery/autocomplete/1.1/build/hot
+gallery/autocomplete/1.1/build/index
+gallery/autocomplete/1.1/build/multiple
+
+*/
+/*
+combined files : 
+
+gallery/autocomplete/1.1/base
 
 */
 KISSY.add('gallery/autocomplete/1.1/base',function (S){
@@ -602,10 +608,11 @@ KISSY.add('gallery/autocomplete/1.1/base',function (S){
     };
     return AutoCompleteBase;
 },{requires : ['node','base']});
+
 /**
  * RICH 包含UI所有交互逻辑
  */
-KISSY.add('gallery/autocomplete/1.1/rich',function (S ,Node , Event , O){
+KISSY.add('gallery/autocomplete/1.1/build/rich',function (S ,Node , Event , O){
     /**
      * @module autocomplete
      * @submodule autocomplete-rich
@@ -1285,7 +1292,7 @@ KISSY.add('gallery/autocomplete/1.1/rich',function (S ,Node , Event , O){
     };
     return AutoCompleteRich;
 },{requires : ['node','event','overlay','sizzle']});
-KISSY.add('gallery/autocomplete/1.1/hot',function (S, Node , Event , Io , Tpl){
+KISSY.add('gallery/autocomplete/1.1/build/hot',function (S, Node , Event , Io , Tpl){
     /**
      自动完成组件
      @module autocomplete
@@ -1586,7 +1593,7 @@ KISSY.add('gallery/autocomplete/1.1/hot',function (S, Node , Event , Io , Tpl){
  * @author 舒克<shuke.cl@taobao.com>
  * @module autocomplete
  **/
-KISSY.add('gallery/autocomplete/1.1/index',function (S , RichBase , AcBase, AcRich , AcHot) {
+KISSY.add('gallery/autocomplete/1.1/build/index',function (S , RichBase , AcBase, AcRich , AcHot) {
     /**
      * 通用的自动完成组件
      * @class Autocomplete
@@ -1607,7 +1614,7 @@ KISSY.add('gallery/autocomplete/1.1/index',function (S , RichBase , AcBase, AcRi
  * @author 弘树<tiehang.lth@taobao.com>
  * @module autocomplete/multiple
  **/
-KISSY.add('gallery/autocomplete/1.1/multiple',function (S, AutoComplete) {
+KISSY.add('gallery/autocomplete/1.1/build/multiple',function (S, AutoComplete) {
 
     var $ = S.all, Node = S.Node, DOM = S.DOM, Event = S.Event, each = S.each;
 

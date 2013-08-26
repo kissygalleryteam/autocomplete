@@ -106,10 +106,16 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
+/*
+combined files : 
+
+gallery/autocomplete/1.1/rich
+
+*/
 /**
  * RICH 包含UI所有交互逻辑
  */
-KISSY.add(function (S ,Node , Event , O){
+KISSY.add(&#x27;gallery/autocomplete/1.1/rich&#x27;,function (S ,Node , Event , O){
     /**
      * @module autocomplete
      * @submodule autocomplete-rich
@@ -483,6 +489,7 @@ KISSY.add(function (S ,Node , Event , O){
                         }));
                     }else{
                         list_node.empty();
+                        this.set(ACTIVE_ITEM, null);
                     }
                 }
             }
@@ -788,6 +795,7 @@ KISSY.add(function (S ,Node , Event , O){
     };
     return AutoCompleteRich;
 },{requires : [&#x27;node&#x27;,&#x27;event&#x27;,&#x27;overlay&#x27;,&#x27;sizzle&#x27;]});
+
     </pre>
 </div>
 

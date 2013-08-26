@@ -2,10 +2,16 @@
 combined files : 
 
 gallery/autocomplete/1.1/base
-gallery/autocomplete/1.1/rich
-gallery/autocomplete/1.1/hot
-gallery/autocomplete/1.1/index
-gallery/autocomplete/1.1/multiple
+gallery/autocomplete/1.1/build/rich
+gallery/autocomplete/1.1/build/hot
+gallery/autocomplete/1.1/aria
+gallery/autocomplete/1.1/build/index-aria
+
+*/
+/*
+combined files : 
+
+gallery/autocomplete/1.1/base
 
 */
 KISSY.add('gallery/autocomplete/1.1/base',function (S){
@@ -602,10 +608,11 @@ KISSY.add('gallery/autocomplete/1.1/base',function (S){
     };
     return AutoCompleteBase;
 },{requires : ['node','base']});
+
 /**
  * RICH 包含UI所有交互逻辑
  */
-KISSY.add('gallery/autocomplete/1.1/rich',function (S ,Node , Event , O){
+KISSY.add('gallery/autocomplete/1.1/build/rich',function (S ,Node , Event , O){
     /**
      * @module autocomplete
      * @submodule autocomplete-rich
@@ -1285,7 +1292,7 @@ KISSY.add('gallery/autocomplete/1.1/rich',function (S ,Node , Event , O){
     };
     return AutoCompleteRich;
 },{requires : ['node','event','overlay','sizzle']});
-KISSY.add('gallery/autocomplete/1.1/hot',function (S, Node , Event , Io , Tpl){
+KISSY.add('gallery/autocomplete/1.1/build/hot',function (S, Node , Event , Io , Tpl){
     /**
      自动完成组件
      @module autocomplete
@@ -1581,187 +1588,256 @@ KISSY.add('gallery/autocomplete/1.1/hot',function (S, Node , Event , Io , Tpl){
     };
     return AutoCompleteHot ;
 }, {requires : ['node','event','ajax' , 'xtemplate']});
-/**
- * @fileoverview 自动完成组件
- * @author 舒克<shuke.cl@taobao.com>
- * @module autocomplete
- **/
-KISSY.add('gallery/autocomplete/1.1/index',function (S , RichBase , AcBase, AcRich , AcHot) {
+/*
+combined files : 
+
+gallery/autocomplete/1.1/aria
+
+*/
+KISSY.add('gallery/autocomplete/1.1/aria',function (S ,Node , Event , O){
     /**
-     * 通用的自动完成组件
-     * @class Autocomplete
+     * @module autocomplete
+     * @submodule autocomplete-aria
+     */
+
+    /**
+     * AutocompleteAria主要基于AutocompleteHot，盲人用户的支持，增加组件的可用性
+     * @class  AutocompleteAria
+     * @extend AutocompleteBase
+     */
+    var CLS_ITEM = 'J_AcItem';
+    var SELECTOR_TAB = '.J_TabItem';
+    var SELECTOR_ITEM = '.' + CLS_ITEM;
+
+    var AutoCompleteAria = function (){
+        this.initAria.apply(this , arguments);
+    };
+    AutoCompleteAria.ATTRS = {};
+    AutoCompleteAria.prototype = {
+        nodeArr : null,
+        isFirstShow : true ,
+        initAria : function (){
+            this.bindAria();
+            this.nodeArr = null;
+        },
+        bindAria : function (){
+            this.on('afterHotActiveTabChange' , function (e){
+                var _nextNav = this.hotNavNodes.item(e.newVal);
+                var _nextPannel = this.hotPannelNodes.item(e.newVal);
+                var _clickNodes = this.hotItemNodes = _nextPannel.all(SELECTOR_ITEM);
+                this.nodeArr = this.buildArr2(_clickNodes);
+                if (!this.isFirstShow) {
+                    _nextNav.one('a') && _nextNav.one('a')[0].focus();
+                }else{
+                    this.isFirstShow = false;
+                }
+            },this);
+
+            this.on('afterHotSourceChange' , function (e){
+                this.isFirstShow = true;
+            },this);
+            this.hotNode.delegate('keydown' , SELECTOR_ITEM , function (e){
+                var target = S.one(e.currentTarget);
+                var item_data = target.data('src');
+                if (target.hasClass(CLS_ITEM) && target.hasData('src')) {
+                    switch(e.keyCode){
+                        case 37 :
+                            e.preventDefault();
+                            this._selectHotLeft(item_data);
+                            break;
+                        case 38 :
+                            e.preventDefault();
+                            this._selectHotTop(item_data);
+                            break;
+                        case 39 :
+                            e.preventDefault();
+                            this._selectHotRight(item_data);
+                            break;
+                        case  40 :
+                            e.preventDefault();
+                            this._selectHotBottom(item_data);
+                            break;
+                        default :
+                            break;
+                    }
+                }
+            }, this);
+
+            //在tab上的键盘操作
+            this.hotNode.delegate('keydown' , SELECTOR_TAB , function (e){
+                var curHotTab = this.get('hotActiveTab');
+                switch(e.keyCode){
+                    case 37 : //click left
+                        curHotTab -- ;
+                        if (curHotTab < 0) {
+                            curHotTab = this.hotNavNodes.length -1;
+                        }
+                        this.set('hotActiveTab' , curHotTab);
+                        break;
+                    case 39 ://click right
+                        curHotTab ++ ;
+                        if (curHotTab >= this.hotNavNodes.length) {
+                            curHotTab = 0 ;
+                        }
+                        this.set('hotActiveTab' , curHotTab);
+                        break;
+                    case 38 : //up
+                        this.hotItemNodes.item(0)[0].focus();
+                        break;
+                    case  40 : //down
+                        this.hotItemNodes.item(0)[0].focus();
+                        break;
+                    case 9 ://click tab 点击tab时切换到当前tab对应的内容模块
+                        e.preventDefault();
+                        this.hotItemNodes.item(0)[0].focus();
+                        break;
+                    default :
+                        break;
+                }
+            },this);
+        },
+        /**
+         * 生成一个二维数组，数组每一项代表一个节点,完成上下左右键盘键操作功能，同时完成节点数据绑定
+         * [[1, 2, 3, 4, 5, 6, 7, 8],
+         *  [9,10,11,12,13,14,15,16],
+         *  [......................]]
+         * @param nodes
+         * @returns {Array}
+         */
+        buildArr2 : function (nodes){
+            var map = [];
+            var obj = {};
+            nodes.each(function (_item){
+                var xy = _item.offset();
+                if (!S.isArray(obj[xy.top])) {
+                    obj[xy.top] = [];
+                }
+                obj[xy.top].push({
+                    node : _item,
+                    offset : xy,
+                    x : obj[xy.top].length
+                });
+            });
+            S.each(obj , function (v , k){
+                map.push(k);
+            });
+            map.sort(function (a,b){
+                return a - b;
+            });
+            S.each(map , function (key , index){
+                S.each(obj[key] , function (_item){
+                    _item.y = index;
+                    _item.node.data('src' , _item);//数据绑定
+                });
+                map[index] = obj[key];
+            });
+            return map;
+        },
+        /**
+         * 选择位于上方的节点
+         * @param item
+         * @private
+         */
+        _selectHotTop : function (item){
+            var x = item.x;
+            var y = item.y;
+            y--;
+            if (y < 0) {
+                y = this.nodeArr.length - 1;
+            }
+            this._selectHot(x , y , 'up');
+        },
+        /**
+         * 选择位于下方节点
+         * @param item
+         * @private
+         */
+        _selectHotBottom : function (item){
+            var x = item.x;
+            var y = item.y;
+            y++;
+            if (y >= this.nodeArr.length) {
+                y = 0;
+            }
+            this._selectHot(x , y , 'down');
+        },
+        /**
+         * 选择左侧节点
+         * @param item
+         * @private
+         */
+        _selectHotLeft : function (item){
+            var x = item.x ;
+            var y = item.y ;
+            x--;
+            if (x < 0) {
+                y--;
+                if (y<0) {
+                    y = this.nodeArr.length - 1;
+                }
+                x = this.nodeArr[y].length - 1;
+            }
+            this._selectHot(x , y);
+        },
+        /**
+         * 选择右侧节点
+         * @param item
+         * @private
+         */
+        _selectHotRight : function (item){
+            var x = item.x;
+            var y = item.y;
+            x++;
+            if (x >= this.nodeArr[item.y].length) {
+                x = 0 ;
+                y++;
+                if (y >= this.nodeArr.length) {
+                    y = 0;
+                }
+            }
+            this._selectHot(x , y);
+        },
+        /**
+         * 选择指定坐标的节点,当一步没有找到时，根据direction进行下一步的查找
+         * @param x 二维数组横坐标
+         * @param y 二位数组纵坐标
+         * @param direction 来源的键盘键
+         * @private
+         */
+        _selectHot : function (x,y,direction){
+            if (direction == 'up') {
+            }
+            if (this.nodeArr[y]) {
+                if (this.nodeArr[y][x]) {
+                    this.nodeArr[y][x].node[0].focus();
+                }else{//点击上下键，在所在列进行移动，如果当前行对应的列不存在，则跳过去下一行
+                    if (direction === 'up') {
+                        y -- ;
+                        this._selectHot(x, y ,direction);
+                        return false;
+                    }else if(direction === 'down'){
+                        y ++ ;
+                        this._selectHot(x, y ,direction);
+                        return false;
+                    }
+                }
+
+            }
+        }
+    };
+    return AutoCompleteAria;
+},{requires : ['node','event']});
+
+KISSY.add('gallery/autocomplete/1.1/build/index-aria',function (S , RichBase , AcBase, AcRich , AcHot , AcAria) {
+    /**
+     * 通用的自动完成组件，包括盲人支持模块
+     * @class AutocompleteAll
      * @constructor
      * @extends Base
      * @uses AutocompleteBase
      * @uses AutocompleteRich
      * @uses AutocompleteHot
      */
-    return RichBase.extend([AcBase , AcRich, AcHot] , {},{});
-}, {requires:['rich-base' , './base' , './rich' , './hot' ,'./autocomplete.css']});
+    return RichBase.extend([AcBase , AcRich, AcHot , AcAria] , {},{});
+}, {requires:['rich-base' , './base' , './rich' , './hot' , './aria' ,'./autocomplete.css']});
 
-
-
-
-/**
- * @fileoverview 自动完成组件继承-多输入
- * @author 弘树<tiehang.lth@taobao.com>
- * @module autocomplete/multiple
- **/
-KISSY.add('gallery/autocomplete/1.1/multiple',function (S, AutoComplete) {
-
-    var $ = S.all, Node = S.Node, DOM = S.DOM, Event = S.Event, each = S.each;
-
-    function Multiple(container, config){
-
-        var self = this;
-
-        if (!(self instanceof Multiple)) {
-            return new Multiple(container, config);
-        }
-        /**
-         * 容器元素
-         * @type {Element}
-         */
-        self.container = container = S.one(container);
-        if (!container) return;
-
-        var obj = S.mix(config,{
-            inputNode        : self.container
-        });
-        Multiple.superclass.constructor.call(self, obj);
-
-        self.init();
-
-    }
-
-    Multiple.ATTRS = {
-
-        inputLimit:{    //约束是否只允许输入下拉提示中的选项
-            value: false
-        },
-        dataList: {     //保存结果
-            value: []
-        },
-        resultIdLocator:{
-            value: ''
-        },
-        insertFormatter: {
-            value: undefined
-        }
-    };
-
-    S.extend(Multiple, AutoComplete);
-
-    S.augment(Multiple, {
-        /**
-         * 初始化Multiple输入框dom结构调整，绑定keydown事件
-         */
-        init: function(){
-            var self = this;
-            //Dom modify
-            var wrapNode = new S.Node('<div class="ks-multiple-wrap"><div class="ks-multiple-list"></div></div>');
-            self.container.after(wrapNode);
-            wrapNode.append(self.container);
-
-            self.bindEvent();
-
-        },
-        /**
-         * 事件绑定
-         */
-        bindEvent: function(){
-            var self = this;
-            //keydown事件绑定
-            var limit = self.get('inputLimit');
-            self.container.on('keydown', function(e){
-                if(!limit && e.keyCode == 13 && this.value){
-                    //回车键，添加item
-                    //只有无输入限制（必须从下拉列表中点选）时才响应回车添加
-                    self.addItem(S.trim(this.value));
-                    this.value = '';
-                }
-            });
-            self.container.siblings('div.ks-multiple-list').delegate('click', 'span.ks-ac-mul-delete', function(e){
-                var target = $(e.currentTarget);
-                var id = target.attr('data-id');
-                self.deleteItem(id);
-            });
-
-            self.on('select', function(e){
-                self.addItem(e.result);
-                self.container.val('');
-            })
-
-            self.on('afterDataListChange', function(){
-                self.renderList();
-            });
-        },
-        /**
-         * 添加item
-         * @param item
-         */
-        addItem: function(item){
-            var self = this;
-            if(S.isString(item)){
-                var val = item;
-                item = {raw: {}};
-                item.raw[self.get('resultIdLocator')] = val;
-            }
-            var list = S.clone(this.get('dataList'));
-            if(this._indexOf(list, item) < 0){
-                list.push(item);
-            }
-            this.set('dataList', list);
-        },
-        /**
-         * 删除item
-         * @param item
-         */
-        deleteItem: function(item){
-            var val = item;
-            item = {raw: {}};
-            item.raw[this.get('resultIdLocator')] = val;
-            var list = S.clone(this.get('dataList'));
-            var index = this._indexOf(list, item);
-            list.splice(index, 1);
-            this.set('dataList', list);
-        },
-        /**
-         * 查找item在array中的序号
-         * @param array
-         * @param item
-         * @returns {number}
-         * @private
-         */
-        _indexOf: function(array, item){
-            var index = -1;
-            var idProp = this.get('resultIdLocator');
-            var i = 0;
-            each(array, function(_item){
-                if(_item.raw[idProp] == item.raw[idProp]){
-                    index = i;
-                    return false;
-                }
-                i++;
-            });
-            return index;
-        },
-        /**
-         * 展示已输入列表
-         */
-        renderList: function(){
-            var inputNode = this.container;
-            var insertFormatter = this.get('insertFormatter');
-            if(insertFormatter){
-                var results = insertFormatter.call(this, this.get('dataList'));
-                var html = '';
-                each(results, function(_html){
-                    html += _html;
-                });
-                inputNode.siblings('div.ks-multiple-list').html(html);
-            }
-        }
-    });
-    return Multiple;
-
-}, {requires:['./index', './multiple.css']});
