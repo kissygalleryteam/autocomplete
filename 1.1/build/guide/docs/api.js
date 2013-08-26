@@ -1,3 +1,9 @@
+/*
+combined files : 
+
+gallery/autocomplete/1.1/guide/docs/api
+
+*/
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [

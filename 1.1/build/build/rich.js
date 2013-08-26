@@ -1,13 +1,13 @@
 /*
 combined files : 
 
-gallery/autocomplete/1.1/rich
+gallery/autocomplete/1.1/build/rich
 
 */
 /**
  * RICH 包含UI所有交互逻辑
  */
-KISSY.add('gallery/autocomplete/1.1/rich',function (S ,Node , Event , O){
+KISSY.add('gallery/autocomplete/1.1/build/rich',function (S ,Node , Event , O){
     /**
      * @module autocomplete
      * @submodule autocomplete-rich

@@ -1,10 +1,10 @@
 /*
 combined files : 
 
-gallery/autocomplete/1.1/hot
+gallery/autocomplete/1.1/build/hot
 
 */
-KISSY.add('gallery/autocomplete/1.1/hot',function (S, Node , Event , Io , Tpl){
+KISSY.add('gallery/autocomplete/1.1/build/hot',function (S, Node , Event , Io , Tpl){
     /**
      自动完成组件
      @module autocomplete

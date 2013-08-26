@@ -25,15 +25,14 @@ module.exports = function(grunt) {
                 map: [["<%= pkg.name %>/", "gallery/<%= pkg.name %>/"]]
             },
             main: {
-                files: [
-                    {
-                        src: "<%= pkg.version %>/index.js",
-                        dest: "<%= pkg.version %>/build/index.js"
-                    },
-                    {
-                        src: "<%= pkg.version %>/index-aria.js",
-                        dest: "<%= pkg.version %>/build/index-aria.js"
-                    }
+                files: [{
+
+                    expand: true,
+                    cwd: '<%= pkg.version %>/',
+                    src: ['**/*.js', '!*-min.js','!**/guide/*.js'],
+                    dest: '<%= pkg.version %>/build/',
+                    ext: '.js'
+                }
                 ]
             }
         },

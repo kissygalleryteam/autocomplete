@@ -1,4 +1,10 @@
-KISSY.add(function (S){
+/*
+combined files : 
+
+gallery/autocomplete/1.1/base
+
+*/
+KISSY.add('gallery/autocomplete/1.1/base',function (S){
     /**
     自动完成组件
     @module autocomplete
