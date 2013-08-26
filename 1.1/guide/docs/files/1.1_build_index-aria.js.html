@@ -201,7 +201,10 @@ KISSY.add(&#x27;gallery/autocomplete/1.1/base&#x27;,function (S){
             value : &#x27;callback&#x27;
         },
         query : {
-            value : null
+            value : {
+                query : &#x27;&#x27;,
+                inputValue : &#x27;&#x27;
+            }
         },
         /**
          * 延时查询,避免用户连续输入时密集发送查询请求
@@ -1084,6 +1087,7 @@ KISSY.add(&#x27;gallery/autocomplete/1.1/rich&#x27;,function (S ,Node , Event , 
                         }));
                     }else{
                         list_node.empty();
+                        this.set(ACTIVE_ITEM, null);
                     }
                 }
             }
