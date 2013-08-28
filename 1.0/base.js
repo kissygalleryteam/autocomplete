@@ -263,7 +263,7 @@ KISSY.add(function (S){
             }
         },
         _onSetVal : function (val){
-            this.get('inputNode').val(val);
+            //this.get('inputNode').val(val);
         },
         _onInputValueChange : function (e){
             this.set('value' , e.newVal ,{
@@ -325,6 +325,7 @@ KISSY.add(function (S){
             this.set('value' , newVal,{
                 silent : true//不通过afterValueChange去触发query事件
             });
+            this.get('inputNode').val(newVal);
         },
         /**
          * 数据查询返回结果后，对数据进行过滤排序，文本替换,高亮等操作
