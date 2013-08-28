@@ -1403,7 +1403,18 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 770,
+            "line": 767,
+            "description": "添加一个层的自定义className，用于个性化定制样式",
+            "itemtype": "attribute",
+            "name": "wapperClass",
+            "type": "String",
+            "class": "AutocompleteRich",
+            "module": "autocomplete",
+            "submodule": "autocomplete-rich"
+        },
+        {
+            "file": "1.0/build/index-aria.js",
+            "line": 775,
             "description": "clickoutside时需要排除在外的节点",
             "itemtype": "attribute",
             "name": "trigger",
@@ -1415,7 +1426,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 822,
+            "line": 827,
             "description": "生成搜索结果列表",
             "params": [
                 {
@@ -1433,7 +1444,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 834,
+            "line": 839,
             "description": "创建搜索结果的子项",
             "params": [
                 {
@@ -1453,7 +1464,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 845,
+            "line": 850,
             "description": "绑定事件",
             "access": "private",
             "tagname": "",
@@ -1463,7 +1474,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 883,
+            "line": 888,
             "description": "搜索结果列表事件绑定",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -1471,7 +1482,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 900,
+            "line": 905,
             "description": "搜索结果返回时响应",
             "params": [
                 {
@@ -1487,7 +1498,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 928,
+            "line": 933,
             "description": "显示信息",
             "itemtype": "method",
             "name": "showMessage",
@@ -1505,7 +1516,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 942,
+            "line": 947,
             "description": "重新定位容器对齐",
             "access": "private",
             "tagname": "",
@@ -1515,7 +1526,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 950,
+            "line": 955,
             "description": "重置results list的状态",
             "access": "private",
             "tagname": "",
@@ -1525,7 +1536,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 964,
+            "line": 969,
             "description": "用户选定某一项后触发",
             "itemtype": "event",
             "name": "select",
@@ -1542,7 +1553,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 975,
+            "line": 980,
             "description": "同步状态",
             "params": [
                 {
@@ -1558,7 +1569,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1027,
+            "line": 1032,
             "description": "判断是否在区域外的点击",
             "params": [
                 {
@@ -1582,7 +1593,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1075,
+            "line": 1080,
             "description": "上下按钮选择时触发回调",
             "params": [
                 {
@@ -1598,7 +1609,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1086,
+            "line": 1091,
             "description": "鼠标移动到ITEM上时的回调",
             "params": [
                 {
@@ -1614,7 +1625,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1097,
+            "line": 1102,
             "description": "键盘事件回调",
             "params": [
                 {
@@ -1630,7 +1641,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1132,
+            "line": 1137,
             "description": "鼠标移入时选中指定项",
             "params": [
                 {
@@ -1644,7 +1655,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1142,
+            "line": 1147,
             "description": "通过键盘激活的下一项",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -1652,7 +1663,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1159,
+            "line": 1164,
             "description": "通过键盘激活的上一项",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -1660,7 +1671,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1167,
+            "line": 1172,
             "description": "返回节点的第一个子节点",
             "return": {
                 "description": "",
@@ -1674,7 +1685,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1175,
+            "line": 1180,
             "description": "返回节点的最后一个子节点",
             "return": {
                 "description": "",
@@ -1688,7 +1699,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1183,
+            "line": 1188,
             "description": "设定宽度值",
             "params": [
                 {
@@ -1708,7 +1719,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1200,
+            "line": 1205,
             "description": "对齐的配置进行默认值的处理",
             "params": [
                 {
@@ -1728,7 +1739,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1255,
+            "line": 1260,
             "description": "热门推荐的模板，数据源来自hotSource参数，内容渲染到this.hotNode节点内",
             "itemtype": "attribute",
             "name": "hotTemplate",
@@ -1740,7 +1751,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1270,
+            "line": 1275,
             "description": "热门推荐的宽度",
             "itemtype": "attribute",
             "name": "hotWidth",
@@ -1752,7 +1763,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1279,
+            "line": 1284,
             "description": "热门推荐的数据源，支持JSONP和本地数据，传参类型为字符串时将被判断为JSONP数据源",
             "itemtype": "attribute",
             "name": "hotSource",
@@ -1764,7 +1775,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1289,
+            "line": 1294,
             "description": "热门推荐数据源指定为JSONP时，callback的参数名",
             "itemtype": "attribute",
             "name": "",
@@ -1776,7 +1787,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1298,
+            "line": 1303,
             "description": "当前热门推荐被选中tab",
             "itemtype": "attribute",
             "name": "hotActiveTab",
@@ -1788,7 +1799,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1307,
+            "line": 1312,
             "description": "热门数据格式化同时要求数据实现绑定",
             "itemtype": "attribute",
             "name": "hotResultsFormatter",
@@ -1800,7 +1811,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1344,
+            "line": 1349,
             "description": "提供一个数据的预处理的机制，要求返回数据对象.",
             "itemtype": "attribute",
             "name": "hotResultsLocator",
@@ -1812,7 +1823,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1353,
+            "line": 1358,
             "description": "热门推荐层的可见状态",
             "itemtype": "attribute",
             "name": "hotVisible",
@@ -1824,7 +1835,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1462,
+            "line": 1467,
             "description": "初始化热门推荐",
             "access": "private",
             "tagname": "",
@@ -1834,7 +1845,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1469,
+            "line": 1474,
             "description": "HOT的渲染",
             "params": [
                 {
@@ -1850,7 +1861,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1501,
+            "line": 1506,
             "description": "修改hotSource时重置HOT的状态",
             "access": "private",
             "tagname": "",
@@ -1860,7 +1871,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1615,
+            "line": 1620,
             "description": "生成一个二维数组，数组每一项代表一个节点,完成上下左右键盘键操作功能，同时完成节点数据绑定\n[[1, 2, 3, 4, 5, 6, 7, 8],\n [9,10,11,12,13,14,15,16],\n [......................]]",
             "params": [
                 {
@@ -1878,7 +1889,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1652,
+            "line": 1657,
             "description": "选择位于上方的节点",
             "params": [
                 {
@@ -1894,7 +1905,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1666,
+            "line": 1671,
             "description": "选择位于下方节点",
             "params": [
                 {
@@ -1910,7 +1921,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1680,
+            "line": 1685,
             "description": "选择左侧节点",
             "params": [
                 {
@@ -1926,7 +1937,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1698,
+            "line": 1703,
             "description": "选择右侧节点",
             "params": [
                 {
@@ -1942,7 +1953,7 @@
         },
         {
             "file": "1.0/build/index-aria.js",
-            "line": 1716,
+            "line": 1721,
             "description": "选择指定坐标的节点,当一步没有找到时，根据direction进行下一步的查找",
             "params": [
                 {
@@ -2465,7 +2476,18 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 769,
+            "line": 766,
+            "description": "添加一个层的自定义className，用于个性化定制样式",
+            "itemtype": "attribute",
+            "name": "wapperClass",
+            "type": "String",
+            "class": "AutocompleteRich",
+            "module": "autocomplete",
+            "submodule": "autocomplete-rich"
+        },
+        {
+            "file": "1.0/build/index.js",
+            "line": 774,
             "description": "clickoutside时需要排除在外的节点",
             "itemtype": "attribute",
             "name": "trigger",
@@ -2477,7 +2499,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 821,
+            "line": 826,
             "description": "生成搜索结果列表",
             "params": [
                 {
@@ -2495,7 +2517,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 833,
+            "line": 838,
             "description": "创建搜索结果的子项",
             "params": [
                 {
@@ -2515,7 +2537,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 844,
+            "line": 849,
             "description": "绑定事件",
             "access": "private",
             "tagname": "",
@@ -2525,7 +2547,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 882,
+            "line": 887,
             "description": "搜索结果列表事件绑定",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -2533,7 +2555,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 899,
+            "line": 904,
             "description": "搜索结果返回时响应",
             "params": [
                 {
@@ -2549,7 +2571,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 927,
+            "line": 932,
             "description": "显示信息",
             "itemtype": "method",
             "name": "showMessage",
@@ -2567,7 +2589,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 941,
+            "line": 946,
             "description": "重新定位容器对齐",
             "access": "private",
             "tagname": "",
@@ -2577,7 +2599,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 949,
+            "line": 954,
             "description": "重置results list的状态",
             "access": "private",
             "tagname": "",
@@ -2587,7 +2609,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 963,
+            "line": 968,
             "description": "用户选定某一项后触发",
             "itemtype": "event",
             "name": "select",
@@ -2604,7 +2626,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 974,
+            "line": 979,
             "description": "同步状态",
             "params": [
                 {
@@ -2620,7 +2642,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1026,
+            "line": 1031,
             "description": "判断是否在区域外的点击",
             "params": [
                 {
@@ -2644,7 +2666,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1074,
+            "line": 1079,
             "description": "上下按钮选择时触发回调",
             "params": [
                 {
@@ -2660,7 +2682,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1085,
+            "line": 1090,
             "description": "鼠标移动到ITEM上时的回调",
             "params": [
                 {
@@ -2676,7 +2698,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1096,
+            "line": 1101,
             "description": "键盘事件回调",
             "params": [
                 {
@@ -2692,7 +2714,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1131,
+            "line": 1136,
             "description": "鼠标移入时选中指定项",
             "params": [
                 {
@@ -2706,7 +2728,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1141,
+            "line": 1146,
             "description": "通过键盘激活的下一项",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -2714,7 +2736,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1158,
+            "line": 1163,
             "description": "通过键盘激活的上一项",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -2722,7 +2744,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1166,
+            "line": 1171,
             "description": "返回节点的第一个子节点",
             "return": {
                 "description": "",
@@ -2736,7 +2758,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1174,
+            "line": 1179,
             "description": "返回节点的最后一个子节点",
             "return": {
                 "description": "",
@@ -2750,7 +2772,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1182,
+            "line": 1187,
             "description": "设定宽度值",
             "params": [
                 {
@@ -2770,7 +2792,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1199,
+            "line": 1204,
             "description": "对齐的配置进行默认值的处理",
             "params": [
                 {
@@ -2790,7 +2812,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1254,
+            "line": 1259,
             "description": "热门推荐的模板，数据源来自hotSource参数，内容渲染到this.hotNode节点内",
             "itemtype": "attribute",
             "name": "hotTemplate",
@@ -2802,7 +2824,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1269,
+            "line": 1274,
             "description": "热门推荐的宽度",
             "itemtype": "attribute",
             "name": "hotWidth",
@@ -2814,7 +2836,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1278,
+            "line": 1283,
             "description": "热门推荐的数据源，支持JSONP和本地数据，传参类型为字符串时将被判断为JSONP数据源",
             "itemtype": "attribute",
             "name": "hotSource",
@@ -2826,7 +2848,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1288,
+            "line": 1293,
             "description": "热门推荐数据源指定为JSONP时，callback的参数名",
             "itemtype": "attribute",
             "name": "",
@@ -2838,7 +2860,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1297,
+            "line": 1302,
             "description": "当前热门推荐被选中tab",
             "itemtype": "attribute",
             "name": "hotActiveTab",
@@ -2850,7 +2872,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1306,
+            "line": 1311,
             "description": "热门数据格式化同时要求数据实现绑定",
             "itemtype": "attribute",
             "name": "hotResultsFormatter",
@@ -2862,7 +2884,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1343,
+            "line": 1348,
             "description": "提供一个数据的预处理的机制，要求返回数据对象.",
             "itemtype": "attribute",
             "name": "hotResultsLocator",
@@ -2874,7 +2896,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1352,
+            "line": 1357,
             "description": "热门推荐层的可见状态",
             "itemtype": "attribute",
             "name": "hotVisible",
@@ -2886,7 +2908,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1461,
+            "line": 1466,
             "description": "初始化热门推荐",
             "access": "private",
             "tagname": "",
@@ -2896,7 +2918,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1468,
+            "line": 1473,
             "description": "HOT的渲染",
             "params": [
                 {
@@ -2912,7 +2934,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 1500,
+            "line": 1505,
             "description": "修改hotSource时重置HOT的状态",
             "access": "private",
             "tagname": "",
@@ -3177,7 +3199,18 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 194,
+            "line": 191,
+            "description": "添加一个层的自定义className，用于个性化定制样式",
+            "itemtype": "attribute",
+            "name": "wapperClass",
+            "type": "String",
+            "class": "AutocompleteRich",
+            "module": "autocomplete",
+            "submodule": "autocomplete-rich"
+        },
+        {
+            "file": "1.0/build/rich.js",
+            "line": 199,
             "description": "clickoutside时需要排除在外的节点",
             "itemtype": "attribute",
             "name": "trigger",
@@ -3189,7 +3222,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 246,
+            "line": 251,
             "description": "生成搜索结果列表",
             "params": [
                 {
@@ -3207,7 +3240,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 258,
+            "line": 263,
             "description": "创建搜索结果的子项",
             "params": [
                 {
@@ -3227,7 +3260,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 269,
+            "line": 274,
             "description": "绑定事件",
             "access": "private",
             "tagname": "",
@@ -3237,7 +3270,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 307,
+            "line": 312,
             "description": "搜索结果列表事件绑定",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -3245,7 +3278,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 324,
+            "line": 329,
             "description": "搜索结果返回时响应",
             "params": [
                 {
@@ -3261,7 +3294,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 352,
+            "line": 357,
             "description": "显示信息",
             "itemtype": "method",
             "name": "showMessage",
@@ -3279,7 +3312,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 366,
+            "line": 371,
             "description": "重新定位容器对齐",
             "access": "private",
             "tagname": "",
@@ -3289,7 +3322,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 374,
+            "line": 379,
             "description": "重置results list的状态",
             "access": "private",
             "tagname": "",
@@ -3299,7 +3332,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 388,
+            "line": 393,
             "description": "用户选定某一项后触发",
             "itemtype": "event",
             "name": "select",
@@ -3316,7 +3349,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 399,
+            "line": 404,
             "description": "同步状态",
             "params": [
                 {
@@ -3332,7 +3365,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 451,
+            "line": 456,
             "description": "判断是否在区域外的点击",
             "params": [
                 {
@@ -3356,7 +3389,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 499,
+            "line": 504,
             "description": "上下按钮选择时触发回调",
             "params": [
                 {
@@ -3372,7 +3405,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 510,
+            "line": 515,
             "description": "鼠标移动到ITEM上时的回调",
             "params": [
                 {
@@ -3388,7 +3421,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 521,
+            "line": 526,
             "description": "键盘事件回调",
             "params": [
                 {
@@ -3404,7 +3437,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 556,
+            "line": 561,
             "description": "鼠标移入时选中指定项",
             "params": [
                 {
@@ -3418,7 +3451,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 566,
+            "line": 571,
             "description": "通过键盘激活的下一项",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -3426,7 +3459,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 583,
+            "line": 588,
             "description": "通过键盘激活的上一项",
             "class": "AutocompleteRich",
             "module": "autocomplete",
@@ -3434,7 +3467,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 591,
+            "line": 596,
             "description": "返回节点的第一个子节点",
             "return": {
                 "description": "",
@@ -3448,7 +3481,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 599,
+            "line": 604,
             "description": "返回节点的最后一个子节点",
             "return": {
                 "description": "",
@@ -3462,7 +3495,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 607,
+            "line": 612,
             "description": "设定宽度值",
             "params": [
                 {
@@ -3482,7 +3515,7 @@
         },
         {
             "file": "1.0/build/rich.js",
-            "line": 624,
+            "line": 629,
             "description": "对齐的配置进行默认值的处理",
             "params": [
                 {
@@ -3849,7 +3882,7 @@
         },
         {
             "file": "1.0/base.js",
-            "line": 329,
+            "line": 330,
             "description": "数据查询返回结果后，对数据进行过滤排序，文本替换,高亮等操作",
             "access": "private",
             "tagname": "",
@@ -3858,7 +3891,7 @@
         },
         {
             "file": "1.0/base.js",
-            "line": 409,
+            "line": 410,
             "description": "匹配到的数据返回且发生变化",
             "itemtype": "event",
             "name": "results",
@@ -3879,7 +3912,7 @@
         },
         {
             "file": "1.0/base.js",
-            "line": 417,
+            "line": 418,
             "description": "数据返回成功后的回调处理方法",
             "params": [
                 {
@@ -3898,7 +3931,7 @@
         },
         {
             "file": "1.0/base.js",
-            "line": 432,
+            "line": 433,
             "description": "setter 启用缓存",
             "access": "private",
             "tagname": "",
@@ -3907,7 +3940,7 @@
         },
         {
             "file": "1.0/base.js",
-            "line": 496,
+            "line": 500,
             "description": "jsonp格式的数据源",
             "params": [
                 {
@@ -3921,7 +3954,7 @@
         },
         {
             "file": "1.0/base.js",
-            "line": 554,
+            "line": 558,
             "description": "设置autocomplete属性，关闭浏览器默认的自动完成功能",
             "access": "private",
             "tagname": "",
@@ -4667,39 +4700,39 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index-aria.js:822"
+            "line": " 1.0/build/index-aria.js:827"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index-aria.js:834"
+            "line": " 1.0/build/index-aria.js:839"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index-aria.js:1027"
+            "line": " 1.0/build/index-aria.js:1032"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index-aria.js:1167"
+            "line": " 1.0/build/index-aria.js:1172"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index-aria.js:1175"
+            "line": " 1.0/build/index-aria.js:1180"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index-aria.js:1183"
+            "line": " 1.0/build/index-aria.js:1188"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index-aria.js:1200"
+            "line": " 1.0/build/index-aria.js:1205"
         },
         {
             "message": "replacing incorrect tag: extend with extends",
-            "line": " 1.0/build/index-aria.js:1519"
+            "line": " 1.0/build/index-aria.js:1524"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index-aria.js:1615"
+            "line": " 1.0/build/index-aria.js:1620"
         },
         {
             "message": "replacing incorrect tag: extend with extends",
@@ -4707,35 +4740,35 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:821"
+            "line": " 1.0/build/index.js:826"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:833"
+            "line": " 1.0/build/index.js:838"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:1026"
+            "line": " 1.0/build/index.js:1031"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:1166"
+            "line": " 1.0/build/index.js:1171"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:1174"
+            "line": " 1.0/build/index.js:1179"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:1182"
+            "line": " 1.0/build/index.js:1187"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:1199"
+            "line": " 1.0/build/index.js:1204"
         },
         {
             "message": "unknown tag: fileoverview",
-            "line": " 1.0/build/index.js:1512"
+            "line": " 1.0/build/index.js:1517"
         },
         {
             "message": "unknown tag: fileoverview",
@@ -4751,31 +4784,31 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/rich.js:246"
+            "line": " 1.0/build/rich.js:251"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/rich.js:258"
+            "line": " 1.0/build/rich.js:263"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/rich.js:451"
+            "line": " 1.0/build/rich.js:456"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/rich.js:591"
+            "line": " 1.0/build/rich.js:596"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/rich.js:599"
+            "line": " 1.0/build/rich.js:604"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/rich.js:607"
+            "line": " 1.0/build/rich.js:612"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/rich.js:624"
+            "line": " 1.0/build/rich.js:629"
         },
         {
             "message": "replacing incorrect tag: extend with extends",
@@ -5011,115 +5044,115 @@
         },
         {
             "message": "Missing item type\n生成搜索结果列表",
-            "line": " 1.0/build/index-aria.js:822"
+            "line": " 1.0/build/index-aria.js:827"
         },
         {
             "message": "Missing item type\n创建搜索结果的子项",
-            "line": " 1.0/build/index-aria.js:834"
+            "line": " 1.0/build/index-aria.js:839"
         },
         {
             "message": "Missing item type\n绑定事件",
-            "line": " 1.0/build/index-aria.js:845"
+            "line": " 1.0/build/index-aria.js:850"
         },
         {
             "message": "Missing item type\n搜索结果列表事件绑定",
-            "line": " 1.0/build/index-aria.js:883"
+            "line": " 1.0/build/index-aria.js:888"
         },
         {
             "message": "Missing item type\n搜索结果返回时响应",
-            "line": " 1.0/build/index-aria.js:900"
+            "line": " 1.0/build/index-aria.js:905"
         },
         {
             "message": "Missing item type\n重新定位容器对齐",
-            "line": " 1.0/build/index-aria.js:942"
+            "line": " 1.0/build/index-aria.js:947"
         },
         {
             "message": "Missing item type\n重置results list的状态",
-            "line": " 1.0/build/index-aria.js:950"
+            "line": " 1.0/build/index-aria.js:955"
         },
         {
             "message": "Missing item type\n同步状态",
-            "line": " 1.0/build/index-aria.js:975"
+            "line": " 1.0/build/index-aria.js:980"
         },
         {
             "message": "Missing item type\n判断是否在区域外的点击",
-            "line": " 1.0/build/index-aria.js:1027"
+            "line": " 1.0/build/index-aria.js:1032"
         },
         {
             "message": "Missing item type\n上下按钮选择时触发回调",
-            "line": " 1.0/build/index-aria.js:1075"
+            "line": " 1.0/build/index-aria.js:1080"
         },
         {
             "message": "Missing item type\n鼠标移动到ITEM上时的回调",
-            "line": " 1.0/build/index-aria.js:1086"
+            "line": " 1.0/build/index-aria.js:1091"
         },
         {
             "message": "Missing item type\n键盘事件回调",
-            "line": " 1.0/build/index-aria.js:1097"
+            "line": " 1.0/build/index-aria.js:1102"
         },
         {
             "message": "Missing item type\n鼠标移入时选中指定项",
-            "line": " 1.0/build/index-aria.js:1132"
+            "line": " 1.0/build/index-aria.js:1137"
         },
         {
             "message": "Missing item type\n通过键盘激活的下一项",
-            "line": " 1.0/build/index-aria.js:1142"
+            "line": " 1.0/build/index-aria.js:1147"
         },
         {
             "message": "Missing item type\n通过键盘激活的上一项",
-            "line": " 1.0/build/index-aria.js:1159"
+            "line": " 1.0/build/index-aria.js:1164"
         },
         {
             "message": "Missing item type\n返回节点的第一个子节点",
-            "line": " 1.0/build/index-aria.js:1167"
+            "line": " 1.0/build/index-aria.js:1172"
         },
         {
             "message": "Missing item type\n返回节点的最后一个子节点",
-            "line": " 1.0/build/index-aria.js:1175"
+            "line": " 1.0/build/index-aria.js:1180"
         },
         {
             "message": "Missing item type\n设定宽度值",
-            "line": " 1.0/build/index-aria.js:1183"
+            "line": " 1.0/build/index-aria.js:1188"
         },
         {
             "message": "Missing item type\n对齐的配置进行默认值的处理",
-            "line": " 1.0/build/index-aria.js:1200"
+            "line": " 1.0/build/index-aria.js:1205"
         },
         {
             "message": "Missing item type\n初始化热门推荐",
-            "line": " 1.0/build/index-aria.js:1462"
+            "line": " 1.0/build/index-aria.js:1467"
         },
         {
             "message": "Missing item type\nHOT的渲染",
-            "line": " 1.0/build/index-aria.js:1469"
+            "line": " 1.0/build/index-aria.js:1474"
         },
         {
             "message": "Missing item type\n修改hotSource时重置HOT的状态",
-            "line": " 1.0/build/index-aria.js:1501"
+            "line": " 1.0/build/index-aria.js:1506"
         },
         {
             "message": "Missing item type\n生成一个二维数组，数组每一项代表一个节点,完成上下左右键盘键操作功能，同时完成节点数据绑定\n[[1, 2, 3, 4, 5, 6, 7, 8],\n [9,10,11,12,13,14,15,16],\n [......................]]",
-            "line": " 1.0/build/index-aria.js:1615"
+            "line": " 1.0/build/index-aria.js:1620"
         },
         {
             "message": "Missing item type\n选择位于上方的节点",
-            "line": " 1.0/build/index-aria.js:1652"
+            "line": " 1.0/build/index-aria.js:1657"
         },
         {
             "message": "Missing item type\n选择位于下方节点",
-            "line": " 1.0/build/index-aria.js:1666"
+            "line": " 1.0/build/index-aria.js:1671"
         },
         {
             "message": "Missing item type\n选择左侧节点",
-            "line": " 1.0/build/index-aria.js:1680"
+            "line": " 1.0/build/index-aria.js:1685"
         },
         {
             "message": "Missing item type\n选择右侧节点",
-            "line": " 1.0/build/index-aria.js:1698"
+            "line": " 1.0/build/index-aria.js:1703"
         },
         {
             "message": "Missing item type\n选择指定坐标的节点,当一步没有找到时，根据direction进行下一步的查找",
-            "line": " 1.0/build/index-aria.js:1716"
+            "line": " 1.0/build/index-aria.js:1721"
         },
         {
             "message": "Missing item type\n数据源的请求模板.",
@@ -5207,91 +5240,91 @@
         },
         {
             "message": "Missing item type\n生成搜索结果列表",
-            "line": " 1.0/build/index.js:821"
+            "line": " 1.0/build/index.js:826"
         },
         {
             "message": "Missing item type\n创建搜索结果的子项",
-            "line": " 1.0/build/index.js:833"
+            "line": " 1.0/build/index.js:838"
         },
         {
             "message": "Missing item type\n绑定事件",
-            "line": " 1.0/build/index.js:844"
+            "line": " 1.0/build/index.js:849"
         },
         {
             "message": "Missing item type\n搜索结果列表事件绑定",
-            "line": " 1.0/build/index.js:882"
+            "line": " 1.0/build/index.js:887"
         },
         {
             "message": "Missing item type\n搜索结果返回时响应",
-            "line": " 1.0/build/index.js:899"
+            "line": " 1.0/build/index.js:904"
         },
         {
             "message": "Missing item type\n重新定位容器对齐",
-            "line": " 1.0/build/index.js:941"
+            "line": " 1.0/build/index.js:946"
         },
         {
             "message": "Missing item type\n重置results list的状态",
-            "line": " 1.0/build/index.js:949"
+            "line": " 1.0/build/index.js:954"
         },
         {
             "message": "Missing item type\n同步状态",
-            "line": " 1.0/build/index.js:974"
+            "line": " 1.0/build/index.js:979"
         },
         {
             "message": "Missing item type\n判断是否在区域外的点击",
-            "line": " 1.0/build/index.js:1026"
+            "line": " 1.0/build/index.js:1031"
         },
         {
             "message": "Missing item type\n上下按钮选择时触发回调",
-            "line": " 1.0/build/index.js:1074"
+            "line": " 1.0/build/index.js:1079"
         },
         {
             "message": "Missing item type\n鼠标移动到ITEM上时的回调",
-            "line": " 1.0/build/index.js:1085"
+            "line": " 1.0/build/index.js:1090"
         },
         {
             "message": "Missing item type\n键盘事件回调",
-            "line": " 1.0/build/index.js:1096"
+            "line": " 1.0/build/index.js:1101"
         },
         {
             "message": "Missing item type\n鼠标移入时选中指定项",
-            "line": " 1.0/build/index.js:1131"
+            "line": " 1.0/build/index.js:1136"
         },
         {
             "message": "Missing item type\n通过键盘激活的下一项",
-            "line": " 1.0/build/index.js:1141"
+            "line": " 1.0/build/index.js:1146"
         },
         {
             "message": "Missing item type\n通过键盘激活的上一项",
-            "line": " 1.0/build/index.js:1158"
+            "line": " 1.0/build/index.js:1163"
         },
         {
             "message": "Missing item type\n返回节点的第一个子节点",
-            "line": " 1.0/build/index.js:1166"
+            "line": " 1.0/build/index.js:1171"
         },
         {
             "message": "Missing item type\n返回节点的最后一个子节点",
-            "line": " 1.0/build/index.js:1174"
+            "line": " 1.0/build/index.js:1179"
         },
         {
             "message": "Missing item type\n设定宽度值",
-            "line": " 1.0/build/index.js:1182"
+            "line": " 1.0/build/index.js:1187"
         },
         {
             "message": "Missing item type\n对齐的配置进行默认值的处理",
-            "line": " 1.0/build/index.js:1199"
+            "line": " 1.0/build/index.js:1204"
         },
         {
             "message": "Missing item type\n初始化热门推荐",
-            "line": " 1.0/build/index.js:1461"
+            "line": " 1.0/build/index.js:1466"
         },
         {
             "message": "Missing item type\nHOT的渲染",
-            "line": " 1.0/build/index.js:1468"
+            "line": " 1.0/build/index.js:1473"
         },
         {
             "message": "Missing item type\n修改hotSource时重置HOT的状态",
-            "line": " 1.0/build/index.js:1500"
+            "line": " 1.0/build/index.js:1505"
         },
         {
             "message": "Missing item type\n容器元素",
@@ -5347,79 +5380,79 @@
         },
         {
             "message": "Missing item type\n生成搜索结果列表",
-            "line": " 1.0/build/rich.js:246"
+            "line": " 1.0/build/rich.js:251"
         },
         {
             "message": "Missing item type\n创建搜索结果的子项",
-            "line": " 1.0/build/rich.js:258"
+            "line": " 1.0/build/rich.js:263"
         },
         {
             "message": "Missing item type\n绑定事件",
-            "line": " 1.0/build/rich.js:269"
+            "line": " 1.0/build/rich.js:274"
         },
         {
             "message": "Missing item type\n搜索结果列表事件绑定",
-            "line": " 1.0/build/rich.js:307"
+            "line": " 1.0/build/rich.js:312"
         },
         {
             "message": "Missing item type\n搜索结果返回时响应",
-            "line": " 1.0/build/rich.js:324"
+            "line": " 1.0/build/rich.js:329"
         },
         {
             "message": "Missing item type\n重新定位容器对齐",
-            "line": " 1.0/build/rich.js:366"
+            "line": " 1.0/build/rich.js:371"
         },
         {
             "message": "Missing item type\n重置results list的状态",
-            "line": " 1.0/build/rich.js:374"
+            "line": " 1.0/build/rich.js:379"
         },
         {
             "message": "Missing item type\n同步状态",
-            "line": " 1.0/build/rich.js:399"
+            "line": " 1.0/build/rich.js:404"
         },
         {
             "message": "Missing item type\n判断是否在区域外的点击",
-            "line": " 1.0/build/rich.js:451"
+            "line": " 1.0/build/rich.js:456"
         },
         {
             "message": "Missing item type\n上下按钮选择时触发回调",
-            "line": " 1.0/build/rich.js:499"
+            "line": " 1.0/build/rich.js:504"
         },
         {
             "message": "Missing item type\n鼠标移动到ITEM上时的回调",
-            "line": " 1.0/build/rich.js:510"
+            "line": " 1.0/build/rich.js:515"
         },
         {
             "message": "Missing item type\n键盘事件回调",
-            "line": " 1.0/build/rich.js:521"
+            "line": " 1.0/build/rich.js:526"
         },
         {
             "message": "Missing item type\n鼠标移入时选中指定项",
-            "line": " 1.0/build/rich.js:556"
+            "line": " 1.0/build/rich.js:561"
         },
         {
             "message": "Missing item type\n通过键盘激活的下一项",
-            "line": " 1.0/build/rich.js:566"
+            "line": " 1.0/build/rich.js:571"
         },
         {
             "message": "Missing item type\n通过键盘激活的上一项",
-            "line": " 1.0/build/rich.js:583"
+            "line": " 1.0/build/rich.js:588"
         },
         {
             "message": "Missing item type\n返回节点的第一个子节点",
-            "line": " 1.0/build/rich.js:591"
+            "line": " 1.0/build/rich.js:596"
         },
         {
             "message": "Missing item type\n返回节点的最后一个子节点",
-            "line": " 1.0/build/rich.js:599"
+            "line": " 1.0/build/rich.js:604"
         },
         {
             "message": "Missing item type\n设定宽度值",
-            "line": " 1.0/build/rich.js:607"
+            "line": " 1.0/build/rich.js:612"
         },
         {
             "message": "Missing item type\n对齐的配置进行默认值的处理",
-            "line": " 1.0/build/rich.js:624"
+            "line": " 1.0/build/rich.js:629"
         },
         {
             "message": "Missing item type\n生成一个二维数组，数组每一项代表一个节点,完成上下左右键盘键操作功能，同时完成节点数据绑定\n[[1, 2, 3, 4, 5, 6, 7, 8],\n [9,10,11,12,13,14,15,16],\n [......................]]",
@@ -5487,23 +5520,23 @@
         },
         {
             "message": "Missing item type\n数据查询返回结果后，对数据进行过滤排序，文本替换,高亮等操作",
-            "line": " 1.0/base.js:329"
+            "line": " 1.0/base.js:330"
         },
         {
             "message": "Missing item type\n数据返回成功后的回调处理方法",
-            "line": " 1.0/base.js:417"
+            "line": " 1.0/base.js:418"
         },
         {
             "message": "Missing item type\nsetter 启用缓存",
-            "line": " 1.0/base.js:432"
+            "line": " 1.0/base.js:433"
         },
         {
             "message": "Missing item type\njsonp格式的数据源",
-            "line": " 1.0/base.js:496"
+            "line": " 1.0/base.js:500"
         },
         {
             "message": "Missing item type\n设置autocomplete属性，关闭浏览器默认的自动完成功能",
-            "line": " 1.0/base.js:554"
+            "line": " 1.0/base.js:558"
         },
         {
             "message": "Missing item type\n初始化热门推荐",
