@@ -640,7 +640,7 @@
         },
         {
             "file": "1.1/base.js",
-            "line": 285,
+            "line": 283,
             "description": "实力的 value 属性被set后触发",
             "access": "private",
             "tagname": "",
@@ -649,7 +649,7 @@
         },
         {
             "file": "1.1/base.js",
-            "line": 341,
+            "line": 340,
             "description": "数据查询返回结果后，对数据进行过滤排序，文本替换,高亮等操作",
             "access": "private",
             "tagname": "",
@@ -658,7 +658,7 @@
         },
         {
             "file": "1.1/base.js",
-            "line": 421,
+            "line": 420,
             "description": "匹配到的数据返回且发生变化",
             "itemtype": "event",
             "name": "results",
@@ -679,7 +679,7 @@
         },
         {
             "file": "1.1/base.js",
-            "line": 429,
+            "line": 428,
             "description": "数据返回成功后的回调处理方法",
             "params": [
                 {
@@ -698,7 +698,7 @@
         },
         {
             "file": "1.1/base.js",
-            "line": 444,
+            "line": 443,
             "description": "setter 启用缓存",
             "access": "private",
             "tagname": "",
@@ -707,7 +707,7 @@
         },
         {
             "file": "1.1/base.js",
-            "line": 511,
+            "line": 510,
             "description": "jsonp格式的数据源",
             "params": [
                 {
@@ -721,7 +721,7 @@
         },
         {
             "file": "1.1/base.js",
-            "line": 582,
+            "line": 581,
             "description": "设置autocomplete属性，关闭浏览器默认的自动完成功能",
             "access": "private",
             "tagname": "",
@@ -1603,27 +1603,27 @@
         },
         {
             "message": "Missing item type\n实力的 value 属性被set后触发",
-            "line": " 1.1/base.js:285"
+            "line": " 1.1/base.js:283"
         },
         {
             "message": "Missing item type\n数据查询返回结果后，对数据进行过滤排序，文本替换,高亮等操作",
-            "line": " 1.1/base.js:341"
+            "line": " 1.1/base.js:340"
         },
         {
             "message": "Missing item type\n数据返回成功后的回调处理方法",
-            "line": " 1.1/base.js:429"
+            "line": " 1.1/base.js:428"
         },
         {
             "message": "Missing item type\nsetter 启用缓存",
-            "line": " 1.1/base.js:444"
+            "line": " 1.1/base.js:443"
         },
         {
             "message": "Missing item type\njsonp格式的数据源",
-            "line": " 1.1/base.js:511"
+            "line": " 1.1/base.js:510"
         },
         {
             "message": "Missing item type\n设置autocomplete属性，关闭浏览器默认的自动完成功能",
-            "line": " 1.1/base.js:582"
+            "line": " 1.1/base.js:581"
         },
         {
             "message": "Missing item type\n初始化热门推荐",
