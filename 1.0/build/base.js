@@ -1,4 +1,10 @@
-KISSY.add(function (S){
+/*
+combined files : 
+
+gallery/autocomplete/1.0/base
+
+*/
+KISSY.add('gallery/autocomplete/1.0/base',function (S){
     /**
     自动完成组件
     @module autocomplete
@@ -263,7 +269,7 @@ KISSY.add(function (S){
             }
         },
         _onSetVal : function (val){
-            this.get('inputNode').val(val);
+            //this.get('inputNode').val(val);
         },
         _onInputValueChange : function (e){
             this.set('value' , e.newVal ,{
@@ -325,6 +331,7 @@ KISSY.add(function (S){
             this.set('value' , newVal,{
                 silent : true//不通过afterValueChange去触发query事件
             });
+            this.get('inputNode').val(newVal);
         },
         /**
          * 数据查询返回结果后，对数据进行过滤排序，文本替换,高亮等操作
@@ -484,6 +491,9 @@ KISSY.add(function (S){
                     break;
                 case S.isFunction(source) :
                     return this._createJsonpSource(source);
+                    break;
+                case S.isArray(source) :
+                    return this._createArraySource(source);
                     break;
                 case S.isObject(source) :
                     return this._createObjectSource(source);
