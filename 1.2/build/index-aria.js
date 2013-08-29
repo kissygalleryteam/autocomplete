@@ -400,7 +400,9 @@ KISSY.add('gallery/autocomplete/1.2/base',function (S){
                 silent : true//不通过afterValueChange去触发query事件
             });
             inputNode.val(newVal);
-            this._setCaretPosition(inputNode[0] ,prevVal.slice(0,pos+1).join(insertDelim).length);
+            if (delim) {
+                this._setCaretPosition(inputNode[0] ,prevVal.slice(0,pos+1).join(insertDelim).length);
+            }
         },
         /**
          * 数据查询返回结果后，对数据进行过滤排序，文本替换,高亮等操作
