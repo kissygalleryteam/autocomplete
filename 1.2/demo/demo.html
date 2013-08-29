@@ -3,7 +3,7 @@
 <head>
     <meta charset="gbk"/>
     <title>AutoComplete组件</title>
-    <script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy-min.js" charset="utf-8"></script>
+    <script src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy.js" charset="utf-8"></script>
 	<link rel="stylesheet" href="http://a.tbcdn.cn/??p/global/1.0/global-min.css,p/fp/2013/assets/build/first-screen.css,p/fp/2013/assets/build/second-screen.css?t=20130520">
 	<link rel="stylesheet" href="demo.css">
     <script type="text/javascript">
@@ -25,27 +25,13 @@
     </script>
 </head>
 <body>
-<h1 style="font-size:25px;">AutoComplete组件</h1>
-<h4>author : 舒克/Shuke.cl@taobao.com 弘树/hongshu.lth@taobao.com </h4>
+<h1>AutoComplete组件</h1>
+<h4>author : Shuke </h4>
 
 <details open>
-    <summary>国内热门城市自动完成</summary>
+    <summary>热门城市推荐——加入附近有机场城市 数据源：JSONP</summary>
     <form>
-        <p>输入城市：<input type="text" id="J_NeCity" value="北京"/>（最简单的城市推荐输入框）</p>
-        <script type="text/javascript">
-            S.use('gallery/autocomplete/1.1/index', function (S, Autocomplete) {
-                var autocomplete = new Autocomplete({
-                    inputNode        : '#J_NeCity',
-                    //source           : 'http://kezhan.trip.taobao.com/citysuggest.do?t=0&q={query}',
-                    source           : 'http://s.jipiao.trip.taobao.com/city_search.do?lines={maxResults}&q={query}',
-                    resultListLocator: 'result',//指定返回数据里的数组位置
-                    resultTextLocator: 'cityName',//指定回填的文本内容
-                    hotSource        : 'http://www.taobao.com/go/rgn/trip/chinahotcity_jsonp.php',//不指定及没有热门推荐，必须按照此数据模板提供，其他数据格式需要自行重新配置hotResultsFormatter和hotResultsLocator
-                    zIndex : 100001
-                });
-            })
-        </script>
-        <p><label for="J_Test">出发城市：</label><input type="text" id="J_Test"/>(对返回数据进行了二次处理，展现临近城市,可以输入sui进行测试)
+        <p><label for="J_Test">出发城市：</label><input type="text" id="J_Test"/>
             <button type="button" id="showmessage">显示提示信息</button>
             <span id="J_SelectedText"></span></p>
         <p>航程类型：
@@ -55,14 +41,63 @@
             </select>
         </p>
         <p>到达城市：<input type="text" id="J_Test2"/> (热门推荐城市数据来源本地)</p>
+
         <p>
             <button type="submit">搜索</button>
         </p>
 
     </form>
 </details>
+
+<details open>
+	<summary>淘宝主站搜索框</summary>
+	<div class="search" id="J_Search" role="search">
+		<div class="search-triggers">
+			<ul class="ks-switchable-nav">
+				<li data-searchtype="item" data-defaultpage="http://list.taobao.com/browse/cat-0.htm" class="selected"><a href="" data-spm-anchor-id="1.1000386.0.28">宝贝</a><!--[if lt IE 9]><s class="search-fix search-fix-triggerlt"></s><s class="search-fix search-fix-triggerrt"></s><![endif]--></li>
+				<li data-searchtype="mall" data-action="http://list.tmall.com/search_product.htm"><a href="">天猫</a><!--[if lt IE 9]><s class="search-fix search-fix-triggerlt"></s><s class="search-fix search-fix-triggerrt"></s><![endif]--></li>
+				<li data-searchtype="shop" data-action="http://shopsearch.taobao.com/browse/shop_search.htm"><a href="">店铺</a><!--[if lt IE 9]><s class="search-fix search-fix-triggerlt"></s><s class="search-fix search-fix-triggerrt"></s><![endif]--></li>
+			</ul>
+		</div>
+		<div class="search-panel ks-switchable-content">
+			<form target="_top" action="http://s.taobao.com/search" name="search" id="J_TSearchForm">
+				<div class="search-panel-fields">
+					<label for="q"><!-- TMS fp2012/search_tips.php -->搜“<span>端午粽动员</span>”试试，9.9元起过端午！<!-- END --></label>
+					<input id="q" name="q" accesskey="s" autocomplete="off" x-webkit-speech="" x-webkit-grammar="builtin:translate">
+					<s></s>
+				</div>
+				<button type="submit">搜 索</button>
+				<input type="hidden" name="commend" value="all">
+				<input type="hidden" name="ssid" value="s5-e" autocomplete="off">
+				<input type="hidden" name="search_type" value="item" autocomplete="off">
+				<input type="hidden" name="sourceId" value="tb.index">
+				<input type="hidden" name="spm" value="1.1000386.5803581.d4908513">
+				<!--[if lt IE 9]><s class="search-fix search-fix-panellt"></s><s class="search-fix search-fix-panellb"></s><![endif]-->
+			</form>
+		</div>
+		<div class="search-tips">
+			<a href="http://list.taobao.com/browse/ad_search.htm?spm=1.1000386.0.39.xmo2di">高级搜索</a><br>
+			<a href="http://service.taobao.com/support/help-10020.htm">使用帮助</a>
+		</div>
+	</div>
+	<div id="output">
+		<h3>输出链接：</h3>
+		<div id="result"></div>
+	</div>
+</details>
+
+<details open>
+	<summary>Email地址输入自动完成</summary>
+	<form>
+		<p><label for="email_input">收件人：</label><input type="text" id="email_input"/>
+			<button type="button" id="show_emails">显示收件人列表</button>
+		</p>
+		<p id="email_list"></p>
+	</form>
+</details>
+
 <script>
-    S.use('gallery/autocomplete/1.1/index', function (S, Autocomplete) {
+    S.use('gallery/autocomplete/1.0/index', function (S, Autocomplete) {
         var autocomplete = new Autocomplete({
             inputNode        : '#J_Test',
             //source           : 'http://kezhan.trip.taobao.com/citysuggest.do?t=0&q={query}',
@@ -70,7 +105,6 @@
             resultListLocator: function(results){
 	            results = results.result;
 	            var filtedData = [];
-                //根据接口进行临近城市的数据处理
 	            S.each(results, function(_item){
 		            if(_item.hasAirport){
 			            filtedData.push(_item);
@@ -88,17 +122,11 @@
             },//指定返回数据里的数组位置
             resultTextLocator: 'cityName',//指定文本内容
             activeFirstItem  : true,
-            enableNoResultsMessage : false, //不展示无结果时的错误提示
-            align : {
-               node : null,
-               points : ['br', 'tr']
-            },
 	        hotSource : 'http://www.taobao.com/go/rgn/trip/chinahotcity_jsonp.php',//不指定及没有热门推荐
             resultFormatter  : function (query, results) {//对展示进行格式化
 	            var result = [];
 	            var tmpl = '<div class="ks-ac-item-inner"><span class="ks-ac-name">{cityname}</span><span class="ks-ac-intro">{py}</span></div>';
 	            var prevNearCity = '';
-                //临近城市的显示处理
 	            for(var idx in results){
 		            var _item = results[idx];
 		            if(!_item.raw.nearCity){
@@ -129,10 +157,8 @@
 	            return result;
             }
         });
-        S.one('#showmessage').on('click', function (e) {
-            e.stopPropagation();
+        S.one('#showmessage').on('click', function () {
             autocomplete.set('messageVisible', false);
-            S.one('#J_Test')[0].focus();
             autocomplete.showMessage('通过showMessage接口调用');
         });
         autocomplete.on('select', function (e) {
@@ -359,20 +385,7 @@
         ]};
         var ac2 = new Autocomplete({
             inputNode        : '#J_Test2',
-            source           : function (query){
-                return {
-                    result : [
-                        {
-                            cityName : '北京',
-                            cityCode : 'BJS'
-                        },
-                        {
-                            cityName : '北京',
-                            cityCode : 'BJS'
-                        }
-                    ]
-                }
-            },
+            source           : 'http://s.jipiao.trip.taobao.com//city_search.do?lines={maxResults}&q={query}',
             jsonpCallback    : 'callback',
             resultListLocator: 'result',//指定返回数据里的数组位置
             resultTextLocator: 'cityName',//指定文本内容
@@ -393,42 +406,6 @@
         });
     })
 </script>
-<details open>
-	<summary>仿淘宝主站搜索框</summary>
-	<div class="search" id="J_Search" role="search">
-		<div class="search-triggers">
-			<ul class="ks-switchable-nav">
-				<li data-searchtype="item" data-defaultpage="http://list.taobao.com/browse/cat-0.htm" class="selected"><a href="" data-spm-anchor-id="1.1000386.0.28">宝贝</a><!--[if lt IE 9]><s class="search-fix search-fix-triggerlt"></s><s class="search-fix search-fix-triggerrt"></s><![endif]--></li>
-				<li data-searchtype="mall" data-action="http://list.tmall.com/search_product.htm"><a href="">天猫</a><!--[if lt IE 9]><s class="search-fix search-fix-triggerlt"></s><s class="search-fix search-fix-triggerrt"></s><![endif]--></li>
-				<li data-searchtype="shop" data-action="http://shopsearch.taobao.com/browse/shop_search.htm"><a href="">店铺</a><!--[if lt IE 9]><s class="search-fix search-fix-triggerlt"></s><s class="search-fix search-fix-triggerrt"></s><![endif]--></li>
-			</ul>
-		</div>
-		<div class="search-panel ks-switchable-content">
-			<form target="_top" action="http://s.taobao.com/search" name="search" id="J_TSearchForm">
-				<div class="search-panel-fields">
-					<label for="q"><!-- TMS fp2012/search_tips.php -->搜“<span>端午粽动员</span>”试试，9.9元起过端午！<!-- END --></label>
-					<input id="q" name="q" accesskey="s" autocomplete="off" x-webkit-speech="" x-webkit-grammar="builtin:translate">
-					<s></s>
-				</div>
-				<button type="submit">搜 索</button>
-				<input type="hidden" name="commend" value="all">
-				<input type="hidden" name="ssid" value="s5-e" autocomplete="off">
-				<input type="hidden" name="search_type" value="item" autocomplete="off">
-				<input type="hidden" name="sourceId" value="tb.index">
-				<input type="hidden" name="spm" value="1.1000386.5803581.d4908513">
-				<!--[if lt IE 9]><s class="search-fix search-fix-panellt"></s><s class="search-fix search-fix-panellb"></s><![endif]-->
-			</form>
-		</div>
-		<div class="search-tips">
-			<a href="http://list.taobao.com/browse/ad_search.htm?spm=1.1000386.0.39.xmo2di">高级搜索</a><br>
-			<a href="http://service.taobao.com/support/help-10020.htm">使用帮助</a>
-		</div>
-	</div>
-	<div id="output">
-		<h3>输出链接：</h3>
-		<div id="result"></div>
-	</div>
-</details>
 <script>
 	S.one('#q').on('focus',function(){
 		S.one('#J_Search').addClass('search-status-focus');
@@ -438,7 +415,7 @@
 				}
 			});
 
-	S.use('gallery/autocomplete/1.1/index', function (S, Autocomplete) {
+	S.use('gallery/autocomplete/1.0/index', function (S, Autocomplete) {
 
 		var hotsource = {
 			keywords:['出游防晒衫', '儿童节礼品', '2013夏装', '平底凉鞋', '夏季短裤', '童装', '男士凉鞋', '泳衣']
@@ -479,10 +456,10 @@
 					});
 				}
 				Array.prototype.push.apply(ret, result);
-				results['new'] && ret.push({'new': results['new']});
+				results.new && ret.push({new: results.new});
+				console.log(ret);
 				return ret;
-			},
-			//指定返回数据里的数组位置
+			},//指定返回数据里的数组位置
 			resultTextLocator: function(item){
 				return item[2] || item[0] || this.get('value');
 			},//指定文本内容
@@ -504,7 +481,7 @@
 					var raw = _item.raw;
 					if(raw.index === undefined){
 						//新品数据
-						if(raw['new'] !== undefined){
+						if(raw.new !== undefined){
 							itemResult.push(S.substitute(newTpl, {
 								newkey: raw['new'],
 								key: _item.text
@@ -578,17 +555,8 @@
 		});
 	});
 </script>
-
-<details open>
-	<summary>Email地址输入自动完成</summary>
-	<form>
-		<p><label for="email_input">请输入多个城市：</label><input type="text" id="email_input"/>
-            <button type="button" id="show_emails">显示收件人列表</button>
-		</p>
-	</form>
-</details>
 <script>
-	S.use('gallery/autocomplete/1.1/multiple', function (S, Multiple) {
+	S.use('gallery/autocomplete/1.0/multiple', function (S, Multiple) {
 
 		var emails = {
 			emails: [{
@@ -703,139 +671,5 @@
 		});
 	});
 </script>
-
-<details open>
-	<summary>支持多个城市的输入，可以指定分隔符</summary>
-	<form>
-		<p><label for="email_input">收件人：</label><input type="text" id="J_Citys"/>
-		</p>
-		<p id="email_list"></p>
-	</form>
-</details>
-
-<script>
-    S.use('gallery/autocomplete/1.1/index', function (S, Autocomplete) {
-        var autocomplete = new Autocomplete({
-            inputNode        : '#J_Citys',
-            //source           : 'http://kezhan.trip.taobao.com/citysuggest.do?t=0&q={query}',
-            source           : 'http://s.jipiao.trip.taobao.com/city_search.do?lines={maxResults}&q={query}',
-            resultListLocator: 'result',//指定返回数据里的数组位置
-            resultTextLocator: 'cityName',//指定文本内容
-            activeFirstItem  : true,
-            queryDelimiter : ',',
-            enableAutoFill : false,//自动回填需要关闭，否则不能删除结尾处的逗号
-            resultFormatter  : function (query, results) {
-                return S.map(results, function (_item) {
-                    return S.substitute('<div class="ks-ac-item-inner"><span class="ks-ac-name">{cityname}</span><span class="ks-ac-intro">{py}</span></div>', {
-                        cityname: _item.text,
-                        py      : _item.raw.py
-                    });
-                });
-            }
-//	        hotSource : 'http://www.taobao.com/go/rgn/trip/chinahotcity_jsonp.php'//不指定及没有热门推荐
-        });
-    })
-</script>
-
-
-<details open>
-	<summary>可以继承AutocompleteBase二次开发，基于afterQueryChange和results两个事件</summary>
-	<form>
-		<p><label for="email_input">YUI Module Search：</label><input type="text" id="J_Yui"/>
-		</p>
-        <div class="nodelist" id="J_NodeList">
-
-        </div>
-	</form>
-    <style type="text/css">
-        .nodelist{
-            border:1px solid #ccc;
-            padding:10px;
-        }
-        .nodelist .list-item{
-            background: #efefef;
-            margin:1px 0;
-            padding:10px;
-        }
-        .nodelist .list-item p{
-            color:#808080;
-            font-size:10px;
-            padding:3px 2em;
-        }
-    </style>
-    <script type="text/javascript">
-        KISSY.add('gallery/autocomplete/1.1/menu' , function (S , RichBase , AcBase){
-            var Menu = RichBase.extend([AcBase],{
-                constructor : function Menu(){
-                    Menu.superclass.constructor.apply(this , arguments);
-                },
-                initializer : function (){
-                    if (!this.get('listNode')) {
-                        return;
-                    }
-                    this._bindMenu();
-                },
-                _bindMenu : function (){
-                    var listNode = this.get('listNode');
-                    this.on('results' , function (e){
-                        var _html = '';
-                        S.each(e.results , function (_item){
-                            _html += S.substitute('<div class="list-item">{displayName} <p>(url: <a target="_blank" href="http://yuilibrary.com{url}">{url}</a></p><p> Description: {description})</p></div>' , _item.raw);
-                        });
-                        listNode.html(_html);
-                    });
-                    this.on('afterQueryChange' , function (e){
-                        if(e.newVal.query === ''){
-                            this.get('listNode').html('');
-                        }
-                    });
-                }
-            },{
-                ATTRS : {
-                    listNode : {
-                        value :null,
-                        setter : function (val){
-                            return val instanceof S.NodeList ? val :  S.one(val);
-                        }
-                    }
-                }
-            });
-            return Menu;
-        }, {requires : ['rich-base','gallery/autocomplete/1.1/base']});
-        KISSY.use('gallery/autocomplete/1.1/menu' , function (S , AcYui){
-            new AcYui({
-                inputNode : '#J_Yui',
-                source : 'http://yuilibrary.com/api/v1/search/suggest?q={query}&count=50',
-                resultListLocator : 'data.results',
-                resultTextLocator : 'name',
-                listNode : '#J_NodeList'
-            })
-        });
-    </script>
-</details>
-
-
-
-<details open>
-    <summary>友好的支持盲人用户操作支持</summary>
-    <form>
-        <p style="color:#808080;">(在热门城市处于展示状态时，点击上下键盘，热门提示层获取焦点，点击tab键，进入热门层内部操作，支持在内部用上下左右选择城市和TAB)</p>
-        <p>输入城市：<input type="text" id="J_AriaCity" value="北京"/></p>
-
-        <script type="text/javascript">
-            //重新定义组件将aria模块mix进来
-            S.use('gallery/autocomplete/1.1/index-aria', function (S, Autocomplete) {
-                var autocomplete = new Autocomplete({
-                    inputNode        : '#J_AriaCity',
-                    //source           : 'http://kezhan.trip.taobao.com/citysuggest.do?t=0&q={query}',
-                    source           : 'http://s.jipiao.trip.taobao.com/city_search.do?lines={maxResults}&q={query}',
-                    resultListLocator: 'result',//指定返回数据里的数组位置
-                    resultTextLocator: 'cityName',//指定回填的文本内容
-                    hotSource        : 'http://www.taobao.com/go/rgn/trip/chinahotcity_jsonp.php'//不指定及没有热门推荐，必须按照此数据模板提供，其他数据格式需要自行重新配置hotResultsFormatter和hotResultsLocator
-                });
-            })
-        </script>
-    </form>
-</details>
 </body>
 </html>
