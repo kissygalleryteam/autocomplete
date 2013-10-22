@@ -609,6 +609,7 @@ KISSY.add('gallery/autocomplete/1.2/base',function (S){
                 S.IO({
                     url : url,
                     dataType : 'jsonp',
+                    crossDomain : true,
                     scriptCharset : that.get('sourceCharset'),
                     jsonp : that.get('jsonpCallback'),
                     success : function (data){
