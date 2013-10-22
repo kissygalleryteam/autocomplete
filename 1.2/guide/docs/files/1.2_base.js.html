@@ -701,6 +701,7 @@ KISSY.add(function (S){
                 S.IO({
                     url : url,
                     dataType : &#x27;jsonp&#x27;,
+                    crossDomain : true,
                     scriptCharset : that.get(&#x27;sourceCharset&#x27;),
                     jsonp : that.get(&#x27;jsonpCallback&#x27;),
                     success : function (data){
