@@ -281,7 +281,7 @@ KISSY.add(function (S){
             this.set('value' , e.newVal);
         },
         /**
-         * 实力的 value 属性被set后触发
+         * 实例的 value 属性被set后触发
          * @private
          */
         _afterValueChange : function (e){
