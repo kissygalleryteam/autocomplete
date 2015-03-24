@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>1.2/build/index-aria.js - autocomplete</title>
+    <link rel="stylesheet" href="//yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="//yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="autocomplete"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.2</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Autocomplete.html">Autocomplete</a></li>
+            
+                <li><a href="../classes/AutocompleteAll.html">AutocompleteAll</a></li>
+            
+                <li><a href="../classes/AutocompleteAria.html">AutocompleteAria</a></li>
+            
+                <li><a href="../classes/AutoCompleteBase.html">AutoCompleteBase</a></li>
+            
+                <li><a href="../classes/AutocompleteHot.html">AutocompleteHot</a></li>
+            
+                <li><a href="../classes/AutocompleteRich.html">AutocompleteRich</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/autocomplete.html">autocomplete</a></li>
+            
+                <li><a href="../modules/autocomplete-aria.html">autocomplete-aria</a></li>
+            
+                <li><a href="../modules/autocomplete-hot.html">autocomplete-hot</a></li>
+            
+                <li><a href="../modules/autocomplete-rich.html">autocomplete-rich</a></li>
+            
+                <li><a href="../modules/autocomplete_multiple.html">autocomplete/multiple</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: 1.2/build/index-aria.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*
+combined files : 
+
+gallery/autocomplete/1.2/base
+gallery/autocomplete/1.2/rich
+gallery/autocomplete/1.2/hot
+gallery/autocomplete/1.2/aria
+gallery/autocomplete/1.2/index-aria
+
+*/
+KISSY.add(&#x27;gallery/autocomplete/1.2/base&#x27;,function (S){
+    /**
+    自动完成组件
+    @module autocomplete
+    @main autocomplete
+    **/
+
+    /**
+    AutocompleteBase
+     自动完成组件的基类，主要提供底层数据逻辑的处理，分发两个事件&lt;b&gt;results afterQueryChange&lt;b&gt;
+    @class AutoCompleteBase
+    @uses Overlay
+    @constructor
+    **/
+    var INPUT_NODE = &#x27;inputNode&#x27;;
+
+    var QUERY = &#x27;query&#x27;;
+    var RESULTS = &#x27;results&#x27;;
+    var EVT_RESULTS = &#x27;results&#x27;;
+    /**
+     * query发生变化
+     * @event afterQueryChange
+     * @param {String} newVal
+     * @param {String} prevVal
+     */
+    var EVT_QUERY = &#x27;afterQueryChange&#x27; ;
+    var VALUE_CHANGE = &#x27;valuechange&#x27;;
+    var REQUEST_TEMPLATE = &#x27;requestTemplate&#x27;;
+    var RESULT_LIST_LOCATOR = &#x27;resultListLocator&#x27;;
+
+    function AutoCompleteBase(){
+        this.initBase.apply(this, arguments);
+    }
+    AutoCompleteBase.ATTRS = {
+        /**
+         * 使用缓存，当source是后端提供的数据接口时，将同样的请求做缓存
+         * @attribute enableCache
+         * @default true
+         * @type boolean
+         */
+        enableCache : {
+            value : true
+        },
+        /**
+         * @attribute inputNode
+         * @default null
+         * @type String|NodeList
+         */
+        inputNode : {
+            value : null,
+            setter : function (el){
+                if (el instanceof S.NodeList) {
+                    return el;
+                }
+                return S.one(el);
+            }
+        },
+        /**
+         * 允许返回的最大值，设置为0表示不限制
+         * @attribute maxResults
+         * @default null
+         * @type String|NodeList
+         */
+        maxResults:{
+            value : 1000
+        },
+        /**
+         * 最小查询字符串长度，输入框的值为空时，不进行查询
+         * @attribute minQuerylengt
+         * @type number
+         * @default 1
+         **/
+        minQueryLength : {
+            value : 1
+        },
+        /**
+         * kissy jsonp 的配置项，用于接口的callback的key不是&#x27;callback&#x27;时
+         * @attribute jsonpCallback
+         * @type String
+         * @default callback
+         **/
+        jsonpCallback : {
+            value : &#x27;callback&#x27;
+        },
+        query : {
+            value : {
+                query : &#x27;&#x27;,
+                inputValue : &#x27;&#x27;
+            }
+        },
+        /**
+         * 延时查询,避免用户连续输入时密集发送查询请求
+         * @attribute queryDelay
+         * @type number
+         * @default 100
+         **/
+        queryDelay : {
+            value : 100
+        },
+        /**
+         * 查询字符分隔符,如果配置了这个值，将以此作为分隔符将输入框的值分割为数组，取数组的最后一个值作为查询参数.
+         * 用于输入框支持多项输入
+         * @attribute queryDelimiter
+         * @type String
+         * @default null
+         **/
+        queryDelimiter : {
+            value : null
+        },
+        /**
+         * 数据源的请求模板.
+         * @type String
+         */
+        requestTemplate : {
+            value : null,
+            setter : &#x27;_setRequestTemplate&#x27;
+        },
+        /**
+         * 数据结果过滤
+         * @type Array
+         */
+        /**
+         * 数据过滤器，要对本地数据或者远程返回数据进行处理时
+         * @attribute resultFilter
+         * @type Function
+         * @default null
+         **/
+        resultFilter : {
+            value : null
+        },
+        /**
+         * 数据结果初始化
+         * @type : Function
+         */
+        /**
+         * 处理数据项展示的函数
+         * @attribute resultFormatter
+         * @type Function
+         * @default null
+         **/
+        resultFormatter : {
+            value : function (query, results) {
+                return S.map(results, function (_item) {
+                    return S.substitute(&#x27;&lt;div class=&quot;ks-ac-item-inner&quot;&gt;&lt;span class=&quot;ks-ac-name&quot;&gt;{cityname}&lt;/span&gt;&lt;span class=&quot;ks-ac-intro&quot;&gt;{py}&lt;/span&gt;&lt;/div&gt;&#x27;, {
+                        cityname: _item.text,
+                        py      : _item.raw.py
+                    });
+                });
+            }
+        },
+        /**
+         * 数据结果返回时的第一个处理函数，指定数组位置,同时可以对数据源进行二次加工
+         * @attribute resultListLocator
+         * @type String | Function
+         * @default null
+         **/
+        resultListLocator : {
+            value : null ,
+            setter : &#x27;_setLocator&#x27;
+        },
+        /**
+         * 存储当前的查询结果
+         */
+
+        results : {
+            value : []
+        },
+        /**
+         * 指定每一个数据项被选中后填入到输入框的内容,可以指定一个字段或者用函数返回一个拼接的字段
+         * @attribute resultTextLocator
+         * @type String | Function
+         * @default null
+         **/
+        resultTextLocator:{
+            value : null,
+            setter : &#x27;_setLocator&#x27;
+        },
+        /**
+         * 数据源
+         */
+        source : {
+            value : null,
+            setter : &#x27;_setSource&#x27;
+        },
+        /**
+         * 如果是服务端返回数据，指定数据源的charset
+         * @attribute sourceCharset
+         * @type string
+         * @default gbk
+         **/
+        sourceCharset : {
+            value : undefined
+        },
+        /**
+         * 设置输入框的值,可以用于区分是用户通过UI输入造成的valueChange还是代码通过 setValue()改变的输入框的值
+         */
+        value : {
+            value : &#x27;&#x27;,
+            setter : &#x27;_onSetVal&#x27;
+        },
+        /**
+         * 开启浏览器默认的自动填充行为
+         * @attribute allowBrowserAutocomplete
+         * @type Boolean
+         * @default false
+         **/
+        allowBrowserAutocomplete : {
+            value : false
+        }
+    };
+    AutoCompleteBase.prototype = {
+        initBase : function (){
+            if (this.get(&#x27;enableCache&#x27;) === true) {
+                this._cache = {};
+            }
+            this.inputNode = this.get(&#x27;inputNode&#x27;);
+            if (!this.inputNode) {
+                S.log(&#x27;error: 没有对应的输入框节点.&#x27;);
+                return false;
+            }
+            this._renderUIAcBase();
+            this._bindUIAcBase();
+            return this;
+        },
+        destructor : function (){
+            var input_node = this.get(&#x27;inputNode&#x27;);
+            input_node.detach();
+        },
+        /**
+         * 渲染组件
+         * @private
+         */
+        _renderUIAcBase : function (){
+            this._syncBrowserAutocomplete();
+        },
+        /**
+         * 事件处理中心
+         * @private
+         */
+        _bindUIAcBase : function (){
+            var input_node = this.get(INPUT_NODE);
+            input_node.on(VALUE_CHANGE , this._onInputValueChange , this);
+            this.on(&#x27;afterValueChange&#x27; , this._afterValueChange , this);
+
+            this.on(EVT_QUERY,function (e){
+                var query = S.trim(e.newVal.query);
+                if (query.length &lt; this.get(&#x27;minQueryLength&#x27;)) {//小宇最短字符时不做处理
+                    return ;
+                }
+                this.sendRequest(query);
+            },this);
+
+            this.on(&#x27;afterAllowBrowserAutocompleteChange&#x27; , this._syncBrowserAutocomplete , this);
+        },
+        /**
+         * query 事件后默认出发函数
+         * @param query
+         * @param requestTemplate
+         */
+        sendRequest : function (query , requestTemplate){
+            var request ;
+            var source = this.get(&#x27;source&#x27;);
+            if (source) {
+                if (!requestTemplate) {
+                    requestTemplate = this.get(REQUEST_TEMPLATE);
+                }
+                request = requestTemplate ? requestTemplate.call(this,query) : query;
+                source.sendRequest({
+                    query : query ,
+                    request : request,
+                    callback : {
+                        success : S.bind(this._onResponse , this , query)
+                    }
+                });
+            }
+        },
+        _onSetVal : function (val){
+            //this.get(&#x27;inputNode&#x27;).val(val);
+        },
+        _onInputValueChange : function (e){
+            this.set(&#x27;value&#x27; , e.newVal);
+        },
+        /**
+         * 实力的 value 属性被set后触发
+         * @private
+         */
+        _afterValueChange : function (e){
+            var that = this;
+            var val = e.newVal;
+            var delimiter = this.get(&#x27;queryDelimiter&#x27;);
+            var query= val;
+            var arr;
+
+
+
+            if (delimiter !== null) {
+                var curPos = this._getCursortPosition(this.get(&#x27;inputNode&#x27;)[0]);
+                var beforeCursorStr = val.slice(0,curPos);
+                var beforeCursorArr = beforeCursorStr.split(delimiter);
+                arr = val.split(delimiter);
+                var pos = beforeCursorArr.length &gt; 0 ? beforeCursorArr.length -1 : 0;
+                query = arr[pos];
+                //query = arr[arr.length - 1];
+            }
+
+            var _setQuery = function (){
+                that.set(QUERY,{
+                    query : query,
+                    inputValue : val
+                });
+            };
+            var delay = this.get(&#x27;queryDelay&#x27;);
+            if (delay) {
+                clearTimeout(this._delay);
+                this._delay = setTimeout(function (){
+                    _setQuery();
+                },delay);
+            }else{
+                _setQuery();
+            }
+        },
+        /**
+         * 获取光标在输入框的位置
+         * @param ctrl
+         * @returns {number}
+         * @private
+         */
+        _getCursortPosition: function(ctrl) {//获取光标位置函数
+            var CaretPos = 0;	// IE Support
+            if (document.selection) {
+                ctrl.focus();
+                var Sel = document.selection.createRange();
+                Sel.moveStart(&#x27;character&#x27;, -ctrl.value.length);
+                CaretPos = Sel.text.length;
+            }
+            // Firefox support
+            else if (ctrl.selectionStart || ctrl.selectionStart == &#x27;0&#x27;)
+                CaretPos = ctrl.selectionStart;
+            return (CaretPos);
+        },
+        /**
+         * 设置光标位置
+         * @param ctrl
+         * @param pos
+         * @private
+         */
+        _setCaretPosition: function(ctrl, pos) {//设置光标位置函数
+            if (ctrl.setSelectionRange) {
+                ctrl.focus();
+                ctrl.setSelectionRange(pos, pos);
+            }
+            else if (ctrl.createTextRange) {
+                var range = ctrl.createTextRange();
+                range.collapse(true);
+                range.moveEnd(&#x27;character&#x27;, pos);
+                range.moveStart(&#x27;character&#x27;, pos);
+                range.select();
+            }
+        },
+        _updateValue : function (newVal){
+            var delim = this.get(&#x27;queryDelimiter&#x27;),
+                inputNode = this.get(&#x27;inputNode&#x27;),
+                insertDelim,
+                len,
+                prevVal;
+            newVal = S.trim(newVal);
+            if (delim) {
+                insertDelim = S.trim(delim); // so we don&#x27;t double up on spaces
+                prevVal = this.get(&#x27;value&#x27;);
+                var curPos = this._getCursortPosition(inputNode[0]);
+                var beforeCursorStr = prevVal.slice(0,curPos);
+                var beforeCursorArr = beforeCursorStr.split(delim);
+                prevVal = prevVal.split(delim);
+                var pos = beforeCursorArr.length &gt; 0 ? beforeCursorArr.length-1 : 0;
+                prevVal     = S.map(S.trim(this.get(&#x27;value&#x27;)).split(delim), function (item){
+                    return S.trim(item);
+                });
+                prevVal[pos] = newVal;
+                newVal = prevVal.join(insertDelim);
+
+/*
+                if (len &gt; 1) {
+                    prevVal[len - 1] = newVal;
+                }*/
+
+                //newVal = newVal + insertDelim;
+            }
+
+            this.set(&#x27;value&#x27; , newVal,{
+                silent : true//不通过afterValueChange去触发query事件
+            });
+            inputNode.val(newVal);
+            this._setCaretPosition(inputNode[0] ,prevVal.slice(0,pos+1).join(insertDelim).length);
+        },
+        /**
+         * 数据查询返回结果后，对数据进行过滤排序，文本替换,高亮等操作
+         * @private
+         */
+        _onResponse : function (query , e){
+            if (query === (this.get(&#x27;query&#x27;).query || &#x27;&#x27;)) {
+                this._parseResponse(query || &#x27;&#x27;, e.response, e.data);
+            }
+        },
+        _parseResponse: function (query , response , data) {
+            var facade = {
+                    data   : data,
+                    query  : query,
+                    results: []
+                },
+
+                listLocator = this.get(RESULT_LIST_LOCATOR),
+                results = [],
+                unfiltered = response &amp;&amp; response.results,
+                formatted,
+                formatter,
+                filter,
+                i,
+                len,
+                maxResults,
+                result,
+                text,
+                textLocator;
+            if (unfiltered &amp;&amp; listLocator) {//指定返回结果的数组路径
+                unfiltered = listLocator.call(this, unfiltered);
+            }
+
+            if (unfiltered &amp;&amp; unfiltered.length) {
+                textLocator = this.get(&#x27;resultTextLocator&#x27;);
+                filter = this.get(&#x27;resultFilter&#x27;);
+                // Create a lightweight result object for each result to make them
+                // easier to work with. The various properties on the object
+                // represent different formats of the result, and will be populated
+                // as we go.
+                for (i = 0, len = unfiltered.length; i &lt; len; ++i) {
+                    result = unfiltered[i];
+                    text = textLocator ?
+                        textLocator.call(this, result) :
+                        result.toString();
+
+                    results.push({
+                        display: text,
+                        raw    : result,
+                        text   : text
+                    });
+
+                }
+                if (filter) {
+                    results = filter.call(this, query , results.concat());
+                }
+                if (results.length) {
+                    formatter = this.get(&#x27;resultFormatter&#x27;);
+                    maxResults = this.get(&#x27;maxResults&#x27;);
+
+                    //最大数据条数的限制
+                    if (maxResults &amp;&amp; maxResults &gt; 0 &amp;&amp;
+                        results.length &gt; maxResults) {
+                        results.length = maxResults;
+                    }
+                    if (formatter) {
+                        formatted = formatter.call(this, query, results.concat());
+                        if (!formatted) {
+                            S.log(&quot;Formatter didn&#x27;t return anything.&quot;, &#x27;warn&#x27;, &#x27;autocomplete-base&#x27;);
+                        }else{
+                            for (i = 0, len = formatted.length; i &lt; len; ++i) {
+                                results[i].display = formatted[i];
+                            }
+                        }
+                    }
+                }
+            }
+
+            facade.results = results;
+            this.set(RESULTS , results);
+
+            /**
+             匹配到的数据返回且发生变化
+             @event results
+             @param {Array} 推荐的数据结果
+             @param {String} 查询的关键字
+             */
+            this.fire(EVT_RESULTS, facade);
+        },
+        /**
+         * 数据返回成功后的回调处理方法
+         * @param data
+         * @param request
+         * @private
+         */
+        _sourceSuccess : function (data , request){
+            request.callback.success({
+                data : data ,
+                response : {
+                    results : data
+                },
+                request : request
+            });
+        },
+        /**
+         * setter 启用缓存
+         * @private
+         */
+        _setEnableCache : function (value){
+            if (value === true) {
+                this._cache = {};
+            }
+        },
+        _setRequestTemplate : function (template){
+            if (S.isFunction(template)) {
+                return template.call(this, query);
+            }
+            return function (query){
+                return S.substitute(template , {
+                    query : encodeURIComponent(query)
+                });
+            }
+        },
+        _setResultFilter : function (query , results){
+            return results;
+        },
+        _setResultHighlighter : function (highlighter){
+            if (S.isFunction(highlighter)) {
+                return highlighter;
+            }
+            return false;
+        },
+        _setLocator : function (locator){
+            if (S.isFunction(locator)) {
+                return locator;
+            }
+            locator = locator.toString().split(&#x27;.&#x27;);
+            var getObjVal = function (obj,path){
+                if (!obj) {
+                    return null;
+                }
+                for(var i=0 , len = path.length ;i &lt; len ; i++){
+                    if (path[i] in obj) {
+                        obj = obj[path[i]];
+                    }
+                }
+                return obj;
+            };
+            return function (result){
+                return result &amp;&amp; getObjVal(result , locator);
+            };
+        },
+        _setSource : function (source){
+            switch (true){
+                case S.isString(source) :
+                    return this._createJsonpSource(source);
+                    break;
+                case S.isFunction(source) :
+                    return this._createFunctionSource(source);
+                    break;
+                case S.isArray(source) :
+                    return this._createArraySource(source);
+                    break;
+                case S.isObject(source) :
+                    return this._createObjectSource(source);
+                    break;
+                default :
+                    break;
+            }
+            return source;
+        },
+        /**
+         * jsonp格式的数据源
+         * @param {String} source
+         */
+        _createJsonpSource : function (source){
+            var jsonp_source = {
+                type : &#x27;jsonp&#x27;
+            };
+            var that = this ;
+            var last_request ;
+            var requestTemplate = this.get(REQUEST_TEMPLATE);
+            if (requestTemplate) {
+                source += requestTemplate.call(this,query);
+            }
+            jsonp_source.sendRequest = function (request){
+                last_request = request ;
+                var cacheKey = request.request;
+                if (that._cache &amp;&amp; cacheKey in that._cache) {//从缓存获取数据
+                    that._sourceSuccess(that._cache[cacheKey],request);
+                    return ;
+                }
+                var url;
+                url = S.substitute(source , {
+                    query : request.query,
+                    maxResults: that.get(&#x27;maxResults&#x27;)
+                });
+                S.IO({
+                    url : url,
+                    dataType : &#x27;jsonp&#x27;,
+                    scriptCharset : that.get(&#x27;sourceCharset&#x27;),
+                    jsonp : that.get(&#x27;jsonpCallback&#x27;),
+                    success : function (data){
+                        if (last_request === request) {//仅处理最后一次请求
+                            that._cache &amp;&amp; (that._cache[request.request] = data);
+                            that._sourceSuccess(data , request);
+                        }
+                    }
+                });
+            };
+            return jsonp_source;
+        },
+        _createArraySource : function (source){
+            var that = this;
+            return  {
+                type : &#x27;Array&#x27;,
+                sendRequest : function (request){
+                    that._sourceSuccess(source , request);
+                }
+            };
+        },
+        _createFunctionSource : function (source){
+            var that = this;
+            return {
+                type : &#x27;function&#x27;,
+                sendRequest : function (request){
+                    var val ;
+                    if (val = source(request.query)) {
+                        that._sourceSuccess(val , request);
+                    }
+                }
+            }
+        },
+        _createObjectSource : function (source){
+            var that = this;
+            return  {
+                type : &#x27;Object&#x27;,
+                sendRequest : function (request){
+                    that._sourceSuccess(source , request);
+                }
+            };
+        },
+        /**
+         * 设置autocomplete属性，关闭浏览器默认的自动完成功能
+         * @private
+         */
+        _syncBrowserAutocomplete : function (){
+            var input_node = this.get(&#x27;inputNode&#x27;);
+            if (input_node.prop(&#x27;nodeName&#x27;).toLowerCase() === &#x27;input&#x27;) {
+                input_node.attr(&#x27;autocomplete&#x27; , this.get(&#x27;_syncBrowserAutocomplete&#x27;) ? &#x27;on&#x27; : &#x27;off&#x27;);
+            }
+        }
+    };
+    return AutoCompleteBase;
+},{requires : [&#x27;node&#x27;,&#x27;base&#x27;]});
+/**
+ * RICH 包含UI所有交互逻辑
+ */
+KISSY.add(&#x27;gallery/autocomplete/1.2/rich&#x27;,function (S ,Node , Event , O){
+    /**
+     * @module autocomplete
+     * @submodule autocomplete-rich
+     */
+
+    /**
+     * AutocompleteRich主要基于AutocompleteBase，利用afterQueryChange和results两个事件创建包含更多交互的富应用
+     * @class  AutocompleteRich
+     * @extend S.Base
+     */
+    var QUERY = &#x27;query&#x27;;
+    var RESULT = &#x27;result&#x27;;
+
+    var EVT_QUERY = &#x27;afterQueryChange&#x27;;
+    var EVT_RESULTS = &#x27;results&#x27;;
+    var EVT_SELECT = &#x27;select&#x27;;
+
+    var ACTIVE_ITEM = &#x27;activeItem&#x27;;
+    var HOVER_ITEM = &#x27;hoverItem&#x27;;
+
+    var CLS_ACTIVE = &#x27;ks-ac-active&#x27;;
+    var CLS_HOVER = &#x27;ks-ac-hover&#x27;;
+    var CLS_ITEM = &#x27;J_AcItem&#x27;;
+    var CLS_AC_CONTAINER = &#x27;ks-autocomplete&#x27;;
+    var CLS_AC_INPUT = &#x27;ks-autocomplete-input&#x27;;
+
+    var SELECTOR_ITEM = &#x27;.&#x27; + CLS_ITEM;
+
+    var isArray = S.isArray;
+    var doc = document;
+    var body = doc.body;
+    var DOM = S.DOM;
+    var win = window;
+
+
+    var AutoCompleteRich = function (){
+        this.initRich.apply(this , arguments);
+    };
+    AutoCompleteRich.ATTRS = {
+        /**
+         * 显示提示框的宽度设定。传入一个节点时，会以此节点的宽度作为组件宽度，默认null时，会自动设定为输入框的宽度
+         * @attribute width
+         * @type Number|NodeList|null
+         * @default null
+         **/
+        width:{
+            value : null,
+            getter : &#x27;_getWidth&#x27;
+        },
+        /**
+         * 在输入框失去焦点时有推联想搜索结果，启用自动回填当前被激活的数据项
+         * @attribute enableAutoFill
+         * @type Boolean
+         * @default true
+         **/
+        enableAutoFill : {
+            value : true
+        },
+        /**
+         * 有推荐结果时，默认选中第一项
+         * @attribute activeFirstItem
+         * @type Boolean
+         * @default true
+         **/
+        activeFirstItem: {
+            value: true
+        },
+        /**
+         * 当前的激活项
+         */
+        activeItem : {
+            value : null
+        },
+        /**
+         * 当前的HOVER项
+         */
+        hoveredItem: {
+            readOnly: true,
+            value: null
+        },
+        /**
+         提示层可见状态发送变化时的事件
+         @event afterVisibleChange
+         @param {Boolean} e.newVal e.prevVal
+         **/
+        visible : {
+            value : false
+        },
+        /**
+         推荐的结果的LIST可见状态发生变化时触发
+         @event afterResultsListVisibleChange
+         @param {Boolean} e.newVal e.prevVal
+         **/
+        resultsListVisible : {
+            value : false
+        },
+        /**
+         * 启用当无推荐结果时展示提示信息功能
+         * @attribute enableNoResultsMessage
+         * @type boolean
+         * @default true
+         **/
+        enableNoResultsMessage : {
+            value : true
+        },
+        /**
+         * message的可见状态
+         */
+        messageVisible : {
+            value : false
+        },
+        /**
+         * 对齐配置
+         */
+        /**
+         * 提示层的位置的配置，
+         * @attribute align
+         * @type Object
+         * @default {
+                         node : null,
+                         points : [&#x27;bl&#x27;, &#x27;tl&#x27;],
+                         offset : [0,-1],
+                         overflow:{
+                             adjustX: 0, // 当对象不能处于可显示区域时，自动调整横坐标
+                             adjustY: 0// 当对象不能处于可显示区域时，自动调整纵坐标
+                         }
+                     }
+         **/
+        align : {
+            value : {
+                node    : null,
+                points  : [&#x27;bl&#x27;, &#x27;tl&#x27;],
+                offset  : [0, -1],
+                overflow: {
+                    adjustX: 0, // 当对象不能处于可显示区域时，自动调整横坐标
+                    adjustY: 0// 当对象不能处于可显示区域时，自动调整纵坐标
+                }
+            },
+            setter : &#x27;_setAlign&#x27;
+        },
+        /**
+         * overlay组件的zIndex配置
+         * @attribute zIndex
+         * @type number
+         * @default 10000
+         **/
+        zIndex : {
+            value : 10000
+        },
+        /**
+         * 最外层容器HTML片段
+         */
+        /**
+         * 层的基础HTML模板结构
+         * @attribute boundingBoxTemplate
+         * @type String
+         * @default &#x27;&lt;div class=&quot;ks-ac-header&quot;&gt;&lt;/div&gt;&#x27; +
+         &#x27;&lt;div class=&quot;ks-ac-body&quot;&gt;&#x27; +
+         &#x27;   &lt;div class=&quot;ks-ac-message J_AcMessage&quot;&gt;&lt;/div&gt;&#x27; +
+         &#x27;   &lt;div class=&quot;ks-ac-content J_AcContent&quot;&gt;&#x27; +
+         &#x27;       &lt;div class=&quot;J_HotList&quot;&gt;&lt;/div&gt;&#x27; +
+         &#x27;       &lt;div class=&quot;J_ResultsList&quot;&gt;&lt;/div&gt;&#x27; +
+         &#x27;   &lt;/div&gt;&#x27; +
+         &#x27;&lt;/div&gt;&#x27; +
+         &#x27;&lt;div class=&quot;ks-ac-footer&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&#x27;
+         **/
+        boundingBoxTemplate : {
+            value: &#x27;&lt;div class=&quot;ks-ac-header&quot;&gt;&lt;/div&gt;&#x27; +
+                &#x27;&lt;div class=&quot;ks-ac-body&quot;&gt;&#x27; +
+                &#x27;   &lt;div class=&quot;ks-ac-message J_AcMessage&quot;&gt;&lt;/div&gt;&#x27; +
+                &#x27;   &lt;div class=&quot;ks-ac-content J_AcContent&quot;&gt;&#x27; +
+                &#x27;       &lt;div class=&quot;J_HotList&quot;&gt;&lt;/div&gt;&#x27; +
+                &#x27;       &lt;div class=&quot;J_ResultsList&quot;&gt;&lt;/div&gt;&#x27; +
+                &#x27;   &lt;/div&gt;&#x27; +
+                &#x27;&lt;/div&gt;&#x27; +
+                &#x27;&lt;div class=&quot;ks-ac-footer&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;&#x27;
+        },
+        /**
+         * 推荐结果的外层容器HTML模板
+         * @attribute listNodeTemplate
+         * @type String
+         * @default &lt;div class=&quot;ks-ac-list&quot;&gt;&lt;/div&gt;
+         **/
+        listNodeTemplate : {
+            value : &#x27;&lt;div class=&quot;ks-ac-list&quot;&gt;&lt;/div&gt;&#x27;
+        },
+        /**
+         * 推荐结果单个数据项的外层容器HTML模板
+         * @attribute itemNodeTemplate
+         * @type String
+         * @default &lt;div class=&quot;ks-ac-item&quot;&gt;&lt;/div&gt;
+         **/
+        itemNodeTemplate : {
+            value : &#x27;&lt;div class=&quot;ks-ac-item&quot;&gt;&lt;/div&gt;&#x27;
+        },
+        /**
+         * 没有查询结果时的提示模板
+         * @attribute noResultsMessage
+         * @type String
+         * @default 没有&quot;&lt;span class=&quot;ks-ac-message-hightlight&quot;&gt;{query}&lt;/span&gt;&quot;相关的推荐
+         **/
+        noResultsMessage : {
+            value : &#x27;没有&quot;&lt;span class=&quot;ks-ac-message-hightlight&quot;&gt;{query}&lt;/span&gt;&quot;相关的推荐&#x27;
+        },
+        /**
+         * 添加一个层的自定义className，用于个性化定制样式
+         * @attribute wapperClass
+         * @type String
+         **/
+        wrapperClass : {
+            value : &#x27;&#x27;
+        },
+        /**
+         * clickoutside时需要排除在外的节点
+         * @attribute trigger
+         * @type Array
+         * @default []
+         **/
+        trigger : {
+            value : []
+        }
+    };
+    AutoCompleteRich.prototype = {
+        initRich : function (){
+            this.overlay        =null;//overlay实例
+            this.overlayNode    =null;//提示层根节点
+            this.contentNode    =null;//内容节点
+            this.resultsListNode=null;//推荐结果的节点
+            this.messageNode    =null;//错误信息节点
+            this.hotNode        =null;//热门推荐节点
+            this.headerNode     =null;//头部节点
+            this.footerNode     =null;//尾部节点
+            this._renderRich();
+            this._bindRich();
+        },
+        destructor : function (){
+            this.resultsListNode.detach();
+            this.detach();
+            this.overlay = null;
+        },
+        _renderRich : function (){
+            var input_node = this.get(&#x27;inputNode&#x27;);
+            input_node.addClass(CLS_AC_INPUT);
+            var _align = this.get(&#x27;align&#x27;);
+            _align.node = _align.node ? _align.node : input_node;
+            //基于overlay组件
+            var overlay = this.overlay = new O({
+                align  : _align,
+                content: this.get(&#x27;boundingBoxTemplate&#x27;),
+                zIndex : this.get(&#x27;zIndex&#x27;)
+            });
+            overlay.render();
+            var el = overlay.get(&#x27;el&#x27;);
+            this.overlayId = &#x27;J_Ks&#x27; + S.guid();
+            el.prop(&#x27;id&#x27;, this.overlayId).addClass(CLS_AC_CONTAINER).attr(&#x27;tabindex&#x27;, &#x27;-1&#x27;);
+            this.get(&#x27;wrapperClass&#x27;) !== &#x27;&#x27; &amp;&amp; el.addClass(this.get(&#x27;wrapperClass&#x27;));
+            this.overlayNode = el;
+            this.headerNode = el.one(&#x27;.J_AcHeader&#x27;);
+            this.bodyNode = el.one(&#x27;.J_AcBody&#x27;);
+            this.footerNode = el.one(&#x27;.J_AcFooter&#x27;);
+            this.messageNode = el.one(&#x27;.J_AcMessage&#x27;).hide();
+            this.contentNode = el.one(&#x27;.J_AcContent&#x27;);
+            this.hotNode = el.one(&#x27;.J_HotList&#x27;).hide();
+            this.resultsListNode = el.one(&#x27;.J_ResultsList&#x27;).hide();
+        },
+        /**
+         * 生成搜索结果列表
+         * @param items 列表所依赖的数据
+         * @returns {NodeList} 返回documentFragment;
+         */
+        _buildList : function (items){
+            var listNode = S.one(S.DOM.create(this.get(&#x27;listNodeTemplate&#x27;)));
+            S.each(items,function (_item){
+                listNode.append(this._createItemNode(_item).data(RESULT,_item));
+            },this);
+            return listNode;
+        },
+        /**
+         * 创建搜索结果的子项
+         * @param item
+         * @returns {*}
+         * @private
+         */
+        _createItemNode : function (item){
+            var node = S.one(DOM.create(this.get(&#x27;itemNodeTemplate&#x27;)));
+            node.addClass(CLS_ITEM).append(item.display);
+            return node;
+        },
+        /**
+         * 绑定事件
+         * @private
+         */
+        _bindRich : function (){
+            var input_node = this.get(&#x27;inputNode&#x27;);
+
+            //同步状态
+            this.on(&#x27;afterVisibleChange&#x27;,this._afterVisibleChange, this);
+            this.on(&#x27;afterResultsListVisibleChange&#x27;,this._afterResultsListVisibleChange, this);
+            this.on(&#x27;afterMessageVisibleChange&#x27; , this._afterMessageVisibleChange, this);
+
+            input_node.on(&#x27;keydown&#x27;, S.bind(this._afterKeyDown ,this));
+            input_node.on(&#x27;focus&#x27; , this._onFocus, this);
+
+            this.on(EVT_RESULTS , S.bind(this._onResults , this));
+            this.on(EVT_QUERY, this._onQuery,this);
+            this.on(&#x27;afterActiveItemChange&#x27; , S.bind(this._afterActiveChange , this));
+            this.on(&#x27;afterHoverItemChange&#x27;, S.bind(this._afterHoverChange,this));
+
+
+            //event of select
+            this.on(EVT_SELECT , this._onSelect, this);
+
+            //clickoutside
+            var doc_node = S.one(doc);
+            var clickoutside_handler = S.bind(this._afterDocClick,this);
+            this.overlay.on(&#x27;afterVisibleChange&#x27;,function (e){
+                if(e.newVal){//展示时 绑定outclick事件
+                    doc_node.on(&#x27;click&#x27;, clickoutside_handler);
+                    return ;
+                }
+                //隐藏时 取消监听
+                doc_node.detach(&#x27;click&#x27;, clickoutside_handler);
+            }, this);
+            S.Event.on(win , &#x27;resize&#x27;,  S.buffer(this._syncPosition , 100 , this), this);
+            this.bindList();
+        },
+        /**
+         * 搜索结果列表事件绑定
+         */
+        bindList : function (){
+            this.resultsListNode.delegate(&#x27;mouseenter&#x27; ,SELECTOR_ITEM , function (e){
+                var item = S.one(e.currentTarget);
+                this.hoverItem(item);
+            },this);
+            this.resultsListNode.delegate(&#x27;click&#x27; , SELECTOR_ITEM , function (e){
+                e.preventDefault();
+                var item = S.one(e.currentTarget);
+                this.selectItem(item);
+            },this);
+            this.resultsListNode.on(&#x27;mouseleave&#x27; , function (){
+                this.set(HOVER_ITEM,null);
+            },this);
+        },
+        /**
+         * 搜索结果返回时响应
+         * @param e
+         * @private
+         */
+        _onResults : function (e){
+            var resluts = e.results ;
+            var query = e.query ;
+            var list_node =  this.resultsListNode;
+
+            if (this._isSelectVal) {
+                return ;
+            }
+            if (isArray(resluts) &amp;&amp; resluts.length &gt; 0) {
+                this._clear();
+                list_node.empty();
+                list_node.append(this._buildList(resluts));
+                this.set(&#x27;messageVisible&#x27;, false);
+                this.get(&#x27;activeFirstItem&#x27;) &amp;&amp; this.set(ACTIVE_ITEM, this._getFirstItem());
+                doc.activeElement  == this.inputNode[0]  &amp;&amp; this.set(&#x27;resultsListVisible&#x27; , true);//焦点还在输入框时才进行现实
+                this._syncPosition();
+            }else{
+                query = S.escapeHTML(query);
+                if(doc.activeElement  == this.inputNode[0]){
+                    if (this.get(&#x27;enableNoResultsMessage&#x27;)) {
+                        this.showMessage(S.substitute(this.get(&#x27;noResultsMessage&#x27;),{//焦点还在输入框时才进行显示
+                            query : query
+                        }));
+                    }else{
+                        list_node.empty();
+                        this.set(ACTIVE_ITEM, null);
+                    }
+                }
+            }
+
+        },
+        /**
+         * 显示信息
+         * @method showMessage
+         * @param {String} msg 错误提示信息
+         * @chainable
+         **/
+        showMessage : function (msg){
+            this.messageNode.html(msg);
+            var that = this;
+            setTimeout(function (){
+                that.set(&#x27;messageVisible&#x27;, true);
+            },1);
+            return this;
+        },
+        /**
+         * 重新定位容器对齐
+         * @private
+         */
+        _syncPosition : function (){
+            var _align = this.get(&#x27;align&#x27;);
+            this.overlay.align(_align.node , _align.points , _align.offset , _align.overflow);
+        },
+        /**
+         * 重置results list的状态
+         * @private
+         */
+        _clear : function (){
+            this.set(ACTIVE_ITEM , null);
+            this.set(HOVER_ITEM , null);
+        },
+        selectItem : function (item_node){
+            if (!item_node) {
+                item_node = this.get(ACTIVE_ITEM);
+            }
+            var result = item_node.data(RESULT);
+
+            /**
+             * 用户选定某一项后触发
+             * @event select
+             * @param {Object} results {node : 触发事件的节点,result:{text:文本,display:显示的HTML代码,raw:对应的数据源}}
+             **/
+            this.fire(EVT_SELECT,{
+                node : item_node,
+                result : result
+            });
+            return this;
+        },
+        /**
+         * 同步状态
+         * @param e
+         * @private
+         */
+        _afterVisibleChange : function (e){
+            var isShowIt = e.newVal;
+            this._syncPosition();
+            if (isShowIt) {
+                this.overlay.show();
+            }else{
+                this.overlay.hide();
+            }
+        },
+        _afterResultsListVisibleChange : function (e) {
+            var isShowIt = e.newVal;
+            if (isShowIt) {
+                this.overlay.set(&#x27;width&#x27;, this.get(&#x27;width&#x27;));
+                this.resultsListNode.show();
+                this.set(&#x27;visible&#x27;, true);
+                this._syncPosition();
+            } else {
+                this.resultsListNode.hide();
+            }
+
+            //自动回填:输入框失去焦点时如果有推荐结果被选中则自动回填
+            if (this.get(QUERY).query !== &#x27;&#x27; &amp;&amp; e.newVal === false &amp;&amp; this.get(&#x27;enableAutoFill&#x27;)  &amp;&amp; this.get(ACTIVE_ITEM)) {
+                this.selectItem();
+            }
+        },
+        _afterMessageVisibleChange : function (e){
+            var isShowIt = e.newVal;
+            if (isShowIt) {
+                //this.overlay.set(&#x27;width&#x27;, this.get(&#x27;width&#x27;));
+                this.messageNode.show();
+                this.set(&#x27;visible&#x27;, true);
+                this._syncPosition();
+            } else {
+                this.messageNode.hide();
+                this.set(&#x27;visilbe&#x27;, false)
+            }
+        },
+        _onFocus : function (e){
+            var that = this;
+            that.set(&#x27;messageVisible&#x27;, false);
+            setTimeout(function () {//hack for chrome
+                if (that._isSelectVal) {
+                    return;
+                }
+                e.currentTarget.select();
+            }, 100)
+        },
+        /**
+         * 判断是否在区域外的点击
+         * @param target_node
+         * @param region_nodes
+         * @returns {boolean}
+         * @private
+         */
+        _isOutSide: function (target_node, region_nodes) {
+            for (var i = 0 , len = region_nodes.length; i &lt; len; i++) {
+                var _region = region_nodes[i][0];
+                if (target_node === _region || S.one(target_node).parent(function (el) {//触发click事件的srcElement不是region_nodes成员或者它的父级元素也没有region_nodes的成员时
+                    //filter
+                    if (el === _region) {
+                        return true;
+                    }
+                })) {
+                    return false;
+                }
+
+            }
+            return true;
+        },
+        _afterDocClick : function (e) {
+            var target = e.target;
+            if (this._isOutSide(target, [this.overlayNode , this.inputNode].concat(this.get(&#x27;trigger&#x27;)))) {
+                this.set(&#x27;resultsListVisible&#x27;, false);
+                this.set(&#x27;visible&#x27;, false);
+            }
+        },
+        _onSelect : function (e){
+            var that = this,
+                input_node = this.get(&#x27;inputNode&#x27;);
+            this._updateValue(e.result.text);
+            this._isSelectVal = true;//增加一个私有属性, 记录当前状态的改变是由select事件触发，并在200MS后释放状态
+            setTimeout(function () {
+                that._isSelectVal = false;
+            }, 200);
+            input_node[0].focus();
+            this.set(ACTIVE_ITEM, null);
+            this.set(&#x27;resultsListVisible&#x27;, false);
+            this.set(&#x27;visible&#x27;, false);
+        },
+        _onQuery : function (e) {
+            if (e.newVal.query.length === 0) {
+                this.set(&#x27;resultsListVisible&#x27;, false);
+                this.set(&#x27;messageVisible&#x27;, false);
+            }
+        },
+        /**
+         * 上下按钮选择时触发回调
+         * @param e
+         * @private
+         */
+        _afterActiveChange : function (e){
+            var prev_item = e.prevVal;
+            var new_item = e.newVal;
+            prev_item &amp;&amp; prev_item.removeClass(CLS_ACTIVE);
+            new_item &amp;&amp; new_item.addClass(CLS_ACTIVE);
+        },
+        /**
+         * 鼠标移动到ITEM上时的回调
+         * @param e
+         * @private
+         */
+        _afterHoverChange : function (e){
+            var prev_item = e.prevVal;
+            var new_item = e.newVal;
+            prev_item &amp;&amp; prev_item.removeClass(CLS_HOVER);
+            new_item &amp;&amp; new_item.addClass(CLS_HOVER);
+        },
+        /**
+         * 键盘事件回调
+         * @param e
+         * @private
+         */
+        _afterKeyDown : function (e){
+            switch(e.keyCode){
+                case 38 ://up
+                    e.preventDefault();
+                    this.activePrevItem();
+                    break;
+                case 40 ://down
+                    e.preventDefault();
+                    this.activeNextItem();
+                    break;
+                case 13 :
+                    e.preventDefault();
+                    this.get(&#x27;resultsListVisible&#x27;) &amp;&amp; this.get(ACTIVE_ITEM) &amp;&amp; this.selectItem();
+                    break;
+                case 9 :// tab
+                    if (this.get(&#x27;resultsListVisible&#x27;) &amp;&amp; this.get(ACTIVE_ITEM)) {
+                        e.preventDefault();
+                        this.selectItem();
+                    }
+                    this.set(&#x27;resultsListVisible&#x27;, false);
+                    this.set(&#x27;visible&#x27; , false);
+                    break;
+                case 27 :// esc
+                    this.set(&#x27;resultsListVisible&#x27;, false);
+                    this.set(&#x27;visible&#x27; , false);
+                    break;
+                default :
+                    break;
+            }
+        },
+        /**
+         * 鼠标移入时选中指定项
+         * @param item
+         */
+        hoverItem : function (item){
+            if (!item) {
+                return ;
+            }
+            this.set(HOVER_ITEM , item);
+        },
+        /**
+         * 通过键盘激活的下一项
+         */
+        activeNextItem : function (){
+            var active_item = this.get(ACTIVE_ITEM);
+            var next_item ;
+            if(active_item){
+                next_item = active_item.next(SELECTOR_ITEM);
+                if (!next_item) {
+                    next_item = this._getFirstItem();
+                }
+            }
+            else{
+                next_item = this._getFirstItem();
+            }
+            this.set(ACTIVE_ITEM , next_item);
+        },
+        /**
+         * 通过键盘激活的上一项
+         */
+        activePrevItem : function (){
+            var item = this.get(ACTIVE_ITEM);
+            var prev_item =  item ? item.prev(SELECTOR_ITEM) || this._getLastItem() : this._getLastItem();
+            this.set(ACTIVE_ITEM , prev_item);
+        },
+        /**
+         * 返回节点的第一个子节点
+         * @returns {*}
+         * @private
+         */
+        _getFirstItem : function (){
+            return this.resultsListNode.one(SELECTOR_ITEM);
+        },
+        /**
+         * 返回节点的最后一个子节点
+         * @returns {*}
+         * @private
+         */
+        _getLastItem : function (){
+            return this.resultsListNode.one(SELECTOR_ITEM+&#x27;:last-child&#x27;);
+        },
+        /**
+         * 设定宽度值
+         * @param val
+         * @returns {*}
+         * @private
+         */
+        _getWidth: function (val) {
+            if (S.isNumber(val)) {
+                return val;
+            }
+            if (val instanceof S.NodeList) {
+                return val.outerWidth();
+            }
+            if (val === null) {
+                return this.get(&#x27;inputNode&#x27;).outerWidth();
+            }
+        },
+        /**
+         * 对齐的配置进行默认值的处理
+         * @param cfg
+         * @returns {{node: null, points: Array, offset: Array, overflow: {adjustX: number, adjustY: number}}}
+         * @private
+         */
+        _setAlign : function (cfg){
+            var _cfg = {
+                node    : null,
+                points  : [&#x27;bl&#x27;, &#x27;tl&#x27;],
+                offset  : [0, -1],
+                overflow: {
+                    adjustX: 0, // 当对象不能处于可显示区域时，自动调整横坐标
+                    adjustY: 0// 当对象不能处于可显示区域时，自动调整纵坐标
+                }
+            };
+            S.mix(_cfg , cfg , undefined , undefined , true);
+            _cfg.node = S.isString(_cfg.node) ? S.one(_cfg.node) : _cfg.node;
+            if (_cfg.node) {
+                return _cfg;
+            }else{
+                _cfg.node = this.get(&#x27;inputNode&#x27;);
+                return _cfg;
+            }
+        }
+    };
+    return AutoCompleteRich;
+},{requires : [&#x27;node&#x27;,&#x27;event&#x27;,&#x27;overlay&#x27;,&#x27;sizzle&#x27;]});
+KISSY.add(&#x27;gallery/autocomplete/1.2/hot&#x27;,function (S, Node , Event , Io , Tpl){
+    /**
+     自动完成组件
+     @module autocomplete
+     @submodule autocomplete-hot
+     **/
+    /**
+     自动完成组件热门推荐
+     @class AutocompleteHot
+     @extends AutocompleteBase
+     @uses Overlay
+     @constructor
+     @param {Object} 配置项
+     **/
+    var EVT_SELECT = &#x27;select&#x27;;
+    var EVT_QUERY = &#x27;afterQueryChange&#x27;;
+
+    var CLS_ITEM = &#x27;J_AcItem&#x27;;
+    var CLS_ACTIVE = &#x27;ks-ac-hot-selected&#x27;;
+
+    var SELECTOR_ITEM = &#x27;.&#x27; + CLS_ITEM;
+    var SELECTOR_TAB = &#x27;.J_TabItem&#x27;;
+
+    var AutoCompleteHot = function (){
+        this.initHot.apply(this , arguments);
+    };
+    AutoCompleteHot.ATTRS = {
+        /**
+         * 热门推荐的模板，数据源来自hotSource参数，内容渲染到this.hotNode节点内
+         * @attribute hotTemplate
+         * @type String
+         * @default &#x27;&lt;div class=&quot;ks-ac-hot-city&quot;&gt;&lt;div class=&quot;ks-ac-acinput-hot-tit&quot;&gt;热门城市/国家(支持汉字/拼音/英文字母)&lt;/div&gt;&#x27; +
+                         &#x27;&lt;ul class=&quot;tab-nav&quot;&gt;{{#results}}&lt;li class=&quot;J_TabItem&quot;&gt;{{tabname}}&lt;/li&gt;{{/results}}&lt;/ul&gt;&#x27; +
+                         &#x27;&lt;div class=&quot;tab-content J_TabContent&quot;&gt;{{#results}}&#x27; +
+                         &#x27;&lt;div class=&quot;tab-pannel J_Pannel&quot;&gt;{{#tabdata}}&lt;dl&gt;&lt;dt&gt;{{dt}}&lt;/dt&gt;&lt;dd&gt;{{#dd}}&lt;span&gt;&lt;a data-sid=&quot;{{sid}}&quot; class=&quot;J_AcItem&quot; tabindex=&quot;-1&quot; href=&quot;javascript:void(0);&quot; target=&quot;_self&quot;&gt;{{cityName}}&lt;/a&gt;&lt;/span&gt;{{/dd}}&lt;/dd&gt;&lt;/dl&gt;{{/tabdata}}&lt;/div&gt;{{/results}}&lt;/div&gt;&lt;/div&gt;&#x27;
+         **/
+        hotTemplate : {
+            value : &#x27;&lt;div class=&quot;ks-ac-hot-city&quot;&gt;&lt;div class=&quot;ks-ac-acinput-hot-tit&quot;&gt;热门城市/国家(支持汉字/拼音/英文字母)&lt;/div&gt;&#x27; +
+                &#x27;&lt;ul class=&quot;tab-nav&quot;&gt;{{#results}}&lt;li class=&quot;J_TabItem&quot; tabindex=&quot;2&quot;&gt;&lt;a href=&quot;javascript:void(0)&quot; target=&quot;_self&quot;&gt;{{tabname}}&lt;/a&gt;&lt;/li&gt;{{/results}}&lt;/ul&gt;&#x27; +
+                &#x27;&lt;div class=&quot;tab-content J_TabContent&quot;&gt;{{#results}}&#x27; +
+                &#x27;&lt;div class=&quot;tab-pannel J_Pannel&quot;&gt;{{#tabdata}}&lt;dl&gt;&lt;dt&gt;{{dt}}&lt;/dt&gt;&lt;dd&gt;{{#dd}}&lt;span&gt;&lt;a data-sid=&quot;{{sid}}&quot; class=&quot;J_AcItem&quot; tabindex=&quot;3&quot; href=&quot;javascript:void(0);&quot; target=&quot;_self&quot;&gt;{{cityName}}&lt;/a&gt;&lt;/span&gt;{{/dd}}&lt;/dd&gt;&lt;/dl&gt;{{/tabdata}}&lt;/div&gt;{{/results}}&lt;/div&gt;&lt;/div&gt;&#x27;
+        },
+        /**
+         * 热门推荐的宽度
+         * @attribute hotWidth
+         * @type number|NodeList|null
+         * @default null
+         **/
+        hotWidth : {
+            value : 320
+        },
+        /**
+         * 热门推荐的数据源，支持JSONP和本地数据，传参类型为字符串时将被判断为JSONP数据源
+         * @attribute hotSource
+         * @type String|Object
+         * @default null
+         **/
+        hotSource : {
+            value : null,
+            setter : &#x27;_onHotSourceChange&#x27;
+        },
+        /**
+         * 远程热门推荐的charset,默认和页面保持一致
+         * @attribute hotSourceCharset
+         * @type string
+         * @default undefined
+         **/
+        hotSourceCharset : {
+            value : undefined
+        },
+        /**
+         * 热门推荐数据源指定为JSONP时，callback的参数名
+         * @attribute
+         * @type String
+         * @default
+         **/
+        hotJsonpCallback : {
+            value :&#x27;callback&#x27;
+        },
+        /**
+         * 当前热门推荐被选中tab
+         * @attribute hotActiveTab
+         * @type number
+         * @default null
+         **/
+        hotActiveTab : {
+            value : null
+        },
+        /**
+         * 热门数据格式化同时要求数据实现绑定
+         * @attribute hotResultsFormatter
+         * @type function
+         * @default  function (data){
+                         var results = {};
+                         S.each(data.results,function (_iObj){
+                             S.each(_iObj.tabdata , function (_jObj){
+                                 S.each(_jObj.dd , function (_kObj){
+                                     var id = &#x27;hot_source_id_&#x27;+ S.guid();//必需
+                                     _kObj.raw = S.mix({}, _kObj);
+                                     _kObj.sid = id;//必需
+                                     _kObj.text = _kObj.cityName;
+                                     results[id] = _kObj;
+                                 })
+                             });
+                         });
+                         return results;
+                     }
+         **/
+        hotResultsFormatter : {
+            value : function (data){
+                var results = {};
+                S.each(data.results,function (_iObj){
+                    S.each(_iObj.tabdata , function (_jObj){
+                        S.each(_jObj.dd , function (_kObj){
+                            var id = &#x27;hot_source_id_&#x27;+ S.guid();//必需
+                            _kObj.raw = S.mix({}, _kObj);
+                            _kObj.sid = id;//必需
+                            _kObj.text = _kObj.cityName;
+                            results[id] = _kObj;
+                        })
+                    });
+                });
+                return results;
+            }
+        },
+        /**
+         * 提供一个数据的预处理的机制，要求返回数据对象.
+         * @attribute hotResultsLocator
+         * @type function
+         * @default null
+         **/
+        hotResultsLocator : {
+            value : null
+        },
+        /**
+         * 热门推荐层的可见状态
+         * @attribute hotVisible
+         * @type boolean
+         * @default false
+         **/
+        hotVisible : {
+            value : false
+        }
+    };
+    AutoCompleteHot.prototype = {
+        initHot : function (){
+            if (this.get(&#x27;hotSource&#x27;) === null) {
+                return ;
+            }
+            this._renderHot();
+            this._bindHot();
+            this._hasBuildHot  = false;//是否初始化过热门数据
+            this._hotResults = {};
+        },
+        destructor : function (){
+            this.hotNode.detach();
+        },
+        _renderHot : function (){
+
+        },
+        _bindHot : function (){
+            var input_node = this.get(&#x27;inputNode&#x27;);
+
+            this.on(&#x27;afterHotVisibleChange&#x27; , function (e){
+                var isShowIt = e.newVal;
+                if (isShowIt) {
+                    if (!this._hasBuildHot) {
+                        this._buildHot();
+                    }
+                    this.hotNode.show();
+                    this.overlay.set(&#x27;width&#x27;,this.get(&#x27;hotWidth&#x27;));
+                    this.set(&#x27;resultsListVisible&#x27; , false);
+                    this.set(&#x27;visible&#x27; , true);
+                    this._syncPosition();
+                }else{
+                    this.hotNode.hide();
+                }
+            },this);
+            this.on(&#x27;afterVisibleChange&#x27;, function (e){
+                if (e.newVal === false) {
+                    this.set(&#x27;hotVisible&#x27; , false);
+                }
+            }, this);
+            //展示推荐结果时不展示热门推荐
+            this.on(&#x27;afterResultsListVisibleChange&#x27; , function (e){
+                if (e.newVal) {
+                    this.set(&#x27;hotVisible&#x27; , false);
+                }
+            }, this);
+            input_node.on(&#x27;focus&#x27;, function (){
+                if (this._isSelectVal) {
+                    return;
+                }
+                this.set(&#x27;hotVisible&#x27; , true);
+            },this);
+            input_node.on(&#x27;keydown&#x27;, function (e){
+                if (this.get(&#x27;hotVisible&#x27;) &amp;&amp; (e.keyCode === 38 || e.keyCode === 40)) {
+                    this.overlayNode[0].focus();
+                }
+            } , this);
+            this.on(EVT_QUERY , function (e){
+                if (S.trim(e.newVal.query) === &#x27;&#x27;) {//输入框为空时展示热门推荐
+                    this.set(&#x27;messageVisible&#x27; , false);
+                    this.set(&#x27;hotVisible&#x27; , true);
+                }else{
+                    this.set(&#x27;hotVisible&#x27; , false);
+                }
+            } , this);
+
+            //点击选择项
+            this.hotNode.delegate(&#x27;click&#x27; , SELECTOR_ITEM , function (e){
+                var el = S.one(e.currentTarget);
+                this.fire(EVT_SELECT , {
+                    node : el,
+                    result : this._hotResults[el.attr(&#x27;data-sid&#x27;)]
+                })
+            },this);
+
+            //tab 切换
+            this.hotNode.delegate(&#x27;click&#x27; , SELECTOR_TAB , function (e){
+                var index = S.indexOf(e.currentTarget , this.hotNavNodes);
+                this.set(&#x27;hotActiveTab&#x27; , index);
+            },this);
+
+            this.on(&#x27;afterHotActiveTabChange&#x27; , function (e){
+                var _prevNav = this.hotNavNodes.item(e.prevVal);
+                var _prevPannel = this.hotPannelNodes.item(e.prevVal);
+                var _nextNav = this.hotNavNodes.item(e.newVal);
+                var _nextPannel = this.hotPannelNodes.item(e.newVal);
+                _prevNav &amp;&amp; _prevNav.removeClass(CLS_ACTIVE);
+                _prevPannel &amp;&amp; _prevPannel.hide();
+                _nextNav &amp;&amp; _nextNav.addClass(CLS_ACTIVE);
+                _nextPannel &amp;&amp; _nextPannel.show();
+                this._syncPosition();
+            },this);
+
+            //在热门推荐按下esc时触发隐藏
+            this.hotNode.on(&#x27;keydown&#x27;, function (e){
+                if (e.keyCode === 27) {
+                    this.set(&#x27;hotVisible&#x27; , false);
+                    this.set(&#x27;visible&#x27;,false);
+                }
+            },this);
+        },
+        /**
+         * 初始化热门推荐
+         * @private
+         */
+        _buildHot : function (){
+            var that = this;
+            var source = this.get(&#x27;hotSource&#x27;);
+            /**
+             * HOT的渲染
+             * @param data 依赖的数据源
+             * @private
+             */
+            var _build = function (data){
+                var locator = that.get(&#x27;hotResultsLocator&#x27;);
+                var formatter = that.get(&#x27;hotResultsFormatter&#x27;);
+                locator &amp;&amp; (data = locator.call(that , data));
+                that._hotResults = formatter.call(that, data);//数据扁平化实现DOM的id和数据的绑定
+                var html = new Tpl(that.get(&#x27;hotTemplate&#x27;)).render(data);
+                var hot_node = that.hotNode;
+                hot_node.html(html);
+                that.hotNavNodes = hot_node.all(&#x27;.J_TabItem&#x27;);
+                that.hotPannelNodes = hot_node.all(&#x27;.J_Pannel&#x27;);
+                that.hotPannelNodes.hide();
+                that.set(&#x27;hotActiveTab&#x27;,0);
+                that._hasBuildHot = true;
+            };
+            if (S.isString(source)) {
+                S.IO({
+                    url : source,
+                    dataType : &#x27;jsonp&#x27;,
+                    jsonp : this.get(&#x27;hotJsonpCallback&#x27;),
+                    scriptCharset : that.get(&#x27;hotSourceCharset&#x27;),
+                    success : function (data){
+                        _build(data);
+                    }
+                });
+            }else if(S.isObject(source) || S.isArray(source)){
+                _build(source);
+            }
+        },
+        /**
+         * 修改hotSource时重置HOT的状态
+         * @private
+         */
+        _onHotSourceChange : function (){
+            this._hasBuildHot = false ;
+            this._hotResults = {};
+            this.set(&#x27;hotActiveTab&#x27; , -1);
+        }
+    };
+    return AutoCompleteHot ;
+}, {requires : [&#x27;node&#x27;,&#x27;event&#x27;,&#x27;ajax&#x27; , &#x27;xtemplate&#x27;]});
+KISSY.add(&#x27;gallery/autocomplete/1.2/aria&#x27;,function (S ,Node , Event , O){
+    /**
+     * @module autocomplete
+     * @submodule autocomplete-aria
+     */
+
+    /**
+     * AutocompleteAria主要基于AutocompleteHot，盲人用户的支持，增加组件的可用性
+     * @class  AutocompleteAria
+     * @extend AutocompleteBase
+     */
+    var CLS_ITEM = &#x27;J_AcItem&#x27;;
+    var SELECTOR_TAB = &#x27;.J_TabItem&#x27;;
+    var SELECTOR_ITEM = &#x27;.&#x27; + CLS_ITEM;
+
+    var AutoCompleteAria = function (){
+        this.initAria.apply(this , arguments);
+    };
+    AutoCompleteAria.ATTRS = {};
+    AutoCompleteAria.prototype = {
+        nodeArr : null,
+        isFirstShow : true ,
+        initAria : function (){
+            this.bindAria();
+            this.nodeArr = null;
+        },
+        bindAria : function (){
+            this.on(&#x27;afterHotActiveTabChange&#x27; , function (e){
+                var _nextNav = this.hotNavNodes.item(e.newVal);
+                var _nextPannel = this.hotPannelNodes.item(e.newVal);
+                var _clickNodes = this.hotItemNodes = _nextPannel.all(SELECTOR_ITEM);
+                this.nodeArr = this.buildArr2(_clickNodes);
+                if (!this.isFirstShow) {
+                    _nextNav.one(&#x27;a&#x27;) &amp;&amp; _nextNav.one(&#x27;a&#x27;)[0].focus();
+                }else{
+                    this.isFirstShow = false;
+                }
+            },this);
+
+            this.on(&#x27;afterHotSourceChange&#x27; , function (e){
+                this.isFirstShow = true;
+            },this);
+            this.hotNode.delegate(&#x27;keydown&#x27; , SELECTOR_ITEM , function (e){
+                var target = S.one(e.currentTarget);
+                var item_data = target.data(&#x27;src&#x27;);
+                if (target.hasClass(CLS_ITEM) &amp;&amp; target.hasData(&#x27;src&#x27;)) {
+                    switch(e.keyCode){
+                        case 37 :
+                            e.preventDefault();
+                            this._selectHotLeft(item_data);
+                            break;
+                        case 38 :
+                            e.preventDefault();
+                            this._selectHotTop(item_data);
+                            break;
+                        case 39 :
+                            e.preventDefault();
+                            this._selectHotRight(item_data);
+                            break;
+                        case  40 :
+                            e.preventDefault();
+                            this._selectHotBottom(item_data);
+                            break;
+                        default :
+                            break;
+                    }
+                }
+            }, this);
+
+            //在tab上的键盘操作
+            this.hotNode.delegate(&#x27;keydown&#x27; , SELECTOR_TAB , function (e){
+                var curHotTab = this.get(&#x27;hotActiveTab&#x27;);
+                switch(e.keyCode){
+                    case 37 : //click left
+                        curHotTab -- ;
+                        if (curHotTab &lt; 0) {
+                            curHotTab = this.hotNavNodes.length -1;
+                        }
+                        this.set(&#x27;hotActiveTab&#x27; , curHotTab);
+                        break;
+                    case 39 ://click right
+                        curHotTab ++ ;
+                        if (curHotTab &gt;= this.hotNavNodes.length) {
+                            curHotTab = 0 ;
+                        }
+                        this.set(&#x27;hotActiveTab&#x27; , curHotTab);
+                        break;
+                    case 38 : //up
+                        this.hotItemNodes.item(0)[0].focus();
+                        break;
+                    case  40 : //down
+                        this.hotItemNodes.item(0)[0].focus();
+                        break;
+                    case 9 ://click tab 点击tab时切换到当前tab对应的内容模块
+                        e.preventDefault();
+                        this.hotItemNodes.item(0)[0].focus();
+                        break;
+                    default :
+                        break;
+                }
+            },this);
+        },
+        /**
+         * 生成一个二维数组，数组每一项代表一个节点,完成上下左右键盘键操作功能，同时完成节点数据绑定
+         * [[1, 2, 3, 4, 5, 6, 7, 8],
+         *  [9,10,11,12,13,14,15,16],
+         *  [......................]]
+         * @param nodes
+         * @returns {Array}
+         */
+        buildArr2 : function (nodes){
+            var map = [];
+            var obj = {};
+            nodes.each(function (_item){
+                var xy = _item.offset();
+                if (!S.isArray(obj[xy.top])) {
+                    obj[xy.top] = [];
+                }
+                obj[xy.top].push({
+                    node : _item,
+                    offset : xy,
+                    x : obj[xy.top].length
+                });
+            });
+            S.each(obj , function (v , k){
+                map.push(k);
+            });
+            map.sort(function (a,b){
+                return a - b;
+            });
+            S.each(map , function (key , index){
+                S.each(obj[key] , function (_item){
+                    _item.y = index;
+                    _item.node.data(&#x27;src&#x27; , _item);//数据绑定
+                });
+                map[index] = obj[key];
+            });
+            return map;
+        },
+        /**
+         * 选择位于上方的节点
+         * @param item
+         * @private
+         */
+        _selectHotTop : function (item){
+            var x = item.x;
+            var y = item.y;
+            y--;
+            if (y &lt; 0) {
+                y = this.nodeArr.length - 1;
+            }
+            this._selectHot(x , y , &#x27;up&#x27;);
+        },
+        /**
+         * 选择位于下方节点
+         * @param item
+         * @private
+         */
+        _selectHotBottom : function (item){
+            var x = item.x;
+            var y = item.y;
+            y++;
+            if (y &gt;= this.nodeArr.length) {
+                y = 0;
+            }
+            this._selectHot(x , y , &#x27;down&#x27;);
+        },
+        /**
+         * 选择左侧节点
+         * @param item
+         * @private
+         */
+        _selectHotLeft : function (item){
+            var x = item.x ;
+            var y = item.y ;
+            x--;
+            if (x &lt; 0) {
+                y--;
+                if (y&lt;0) {
+                    y = this.nodeArr.length - 1;
+                }
+                x = this.nodeArr[y].length - 1;
+            }
+            this._selectHot(x , y);
+        },
+        /**
+         * 选择右侧节点
+         * @param item
+         * @private
+         */
+        _selectHotRight : function (item){
+            var x = item.x;
+            var y = item.y;
+            x++;
+            if (x &gt;= this.nodeArr[item.y].length) {
+                x = 0 ;
+                y++;
+                if (y &gt;= this.nodeArr.length) {
+                    y = 0;
+                }
+            }
+            this._selectHot(x , y);
+        },
+        /**
+         * 选择指定坐标的节点,当一步没有找到时，根据direction进行下一步的查找
+         * @param x 二维数组横坐标
+         * @param y 二位数组纵坐标
+         * @param direction 来源的键盘键
+         * @private
+         */
+        _selectHot : function (x,y,direction){
+            if (direction == &#x27;up&#x27;) {
+            }
+            if (this.nodeArr[y]) {
+                if (this.nodeArr[y][x]) {
+                    this.nodeArr[y][x].node[0].focus();
+                }else{//点击上下键，在所在列进行移动，如果当前行对应的列不存在，则跳过去下一行
+                    if (direction === &#x27;up&#x27;) {
+                        y -- ;
+                        this._selectHot(x, y ,direction);
+                        return false;
+                    }else if(direction === &#x27;down&#x27;){
+                        y ++ ;
+                        this._selectHot(x, y ,direction);
+                        return false;
+                    }
+                }
+
+            }
+        }
+    };
+    return AutoCompleteAria;
+},{requires : [&#x27;node&#x27;,&#x27;event&#x27;]});
+KISSY.add(&#x27;gallery/autocomplete/1.2/index-aria&#x27;,function (S , RichBase , AcBase, AcRich , AcHot , AcAria) {
+    /**
+     * 通用的自动完成组件，包括盲人支持模块
+     * @class AutocompleteAll
+     * @constructor
+     * @extends Base
+     * @uses AutocompleteBase
+     * @uses AutocompleteRich
+     * @uses AutocompleteHot
+     */
+    return RichBase.extend([AcBase , AcRich, AcHot , AcAria] , {},{});
+}, {requires:[&#x27;rich-base&#x27; , &#x27;./base&#x27; , &#x27;./rich&#x27; , &#x27;./hot&#x27; , &#x27;./aria&#x27; ,&#x27;./autocomplete.css&#x27;]});
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
