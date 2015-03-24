@@ -1,14 +1,14 @@
 /*
 combined files : 
 
-gallery/autocomplete/1.2/base
-gallery/autocomplete/1.2/rich
-gallery/autocomplete/1.2/hot
-gallery/autocomplete/1.2/aria
-gallery/autocomplete/1.2/index-aria
+kg/autocomplete/3.0.0/base
+kg/autocomplete/3.0.0/rich
+kg/autocomplete/3.0.0/hot
+kg/autocomplete/3.0.0/aria
+kg/autocomplete/3.0.0/index-aria
 
 */
-KISSY.add('gallery/autocomplete/1.2/base',function (S){
+KISSY.add('kg/autocomplete/3.0.0/base',function (S){
     /**
     自动完成组件
     @module autocomplete
@@ -662,7 +662,7 @@ KISSY.add('gallery/autocomplete/1.2/base',function (S){
 /**
  * RICH 包含UI所有交互逻辑
  */
-KISSY.add('gallery/autocomplete/1.2/rich',function (S ,Node , Event , O){
+KISSY.add('kg/autocomplete/3.0.0/rich',function (S ,Node , Event , O){
     /**
      * @module autocomplete
      * @submodule autocomplete-rich
@@ -1342,7 +1342,7 @@ KISSY.add('gallery/autocomplete/1.2/rich',function (S ,Node , Event , O){
     };
     return AutoCompleteRich;
 },{requires : ['node','event','overlay','sizzle']});
-KISSY.add('gallery/autocomplete/1.2/hot',function (S, Node , Event , Io , Tpl){
+KISSY.add('kg/autocomplete/3.0.0/hot',function (S, Node , Event , Io , Tpl){
     /**
      自动完成组件
      @module autocomplete
@@ -1638,7 +1638,7 @@ KISSY.add('gallery/autocomplete/1.2/hot',function (S, Node , Event , Io , Tpl){
     };
     return AutoCompleteHot ;
 }, {requires : ['node','event','ajax' , 'xtemplate']});
-KISSY.add('gallery/autocomplete/1.2/aria',function (S ,Node , Event , O){
+KISSY.add('kg/autocomplete/3.0.0/aria',function (S ,Node , Event , O){
     /**
      * @module autocomplete
      * @submodule autocomplete-aria
@@ -1871,7 +1871,7 @@ KISSY.add('gallery/autocomplete/1.2/aria',function (S ,Node , Event , O){
     };
     return AutoCompleteAria;
 },{requires : ['node','event']});
-KISSY.add('gallery/autocomplete/1.2/index-aria',function (S , RichBase , AcBase, AcRich , AcHot , AcAria) {
+KISSY.add('kg/autocomplete/3.0.0/index-aria',function (S , RichBase , AcBase, AcRich , AcHot , AcAria) {
     /**
      * 通用的自动完成组件，包括盲人支持模块
      * @class AutocompleteAll

@@ -1,14 +1,14 @@
 /*
 combined files : 
 
-gallery/autocomplete/1.2/base
-gallery/autocomplete/1.2/rich
-gallery/autocomplete/1.2/hot
-gallery/autocomplete/1.2/index
-gallery/autocomplete/1.2/multiple
+kg/autocomplete/3.0.0/base
+kg/autocomplete/3.0.0/rich
+kg/autocomplete/3.0.0/hot
+kg/autocomplete/3.0.0/index
+kg/autocomplete/3.0.0/multiple
 
 */
-KISSY.add('gallery/autocomplete/1.2/base',function (S){
+KISSY.add('kg/autocomplete/3.0.0/base',function (S){
     /**
     自动完成组件
     @module autocomplete
@@ -662,7 +662,7 @@ KISSY.add('gallery/autocomplete/1.2/base',function (S){
 /**
  * RICH 包含UI所有交互逻辑
  */
-KISSY.add('gallery/autocomplete/1.2/rich',function (S ,Node , Event , O){
+KISSY.add('kg/autocomplete/3.0.0/rich',function (S ,Node , Event , O){
     /**
      * @module autocomplete
      * @submodule autocomplete-rich
@@ -1342,7 +1342,7 @@ KISSY.add('gallery/autocomplete/1.2/rich',function (S ,Node , Event , O){
     };
     return AutoCompleteRich;
 },{requires : ['node','event','overlay','sizzle']});
-KISSY.add('gallery/autocomplete/1.2/hot',function (S, Node , Event , Io , Tpl){
+KISSY.add('kg/autocomplete/3.0.0/hot',function (S, Node , Event , Io , Tpl){
     /**
      自动完成组件
      @module autocomplete
@@ -1643,7 +1643,7 @@ KISSY.add('gallery/autocomplete/1.2/hot',function (S, Node , Event , Io , Tpl){
  * @author 舒克<shuke.cl@taobao.com>
  * @module autocomplete
  **/
-KISSY.add('gallery/autocomplete/1.2/index',function (S , RichBase , AcBase, AcRich , AcHot) {
+KISSY.add('kg/autocomplete/3.0.0/index',function (S , RichBase , AcBase, AcRich , AcHot) {
     /**
      * 通用的自动完成组件
      * @class Autocomplete
@@ -1664,7 +1664,7 @@ KISSY.add('gallery/autocomplete/1.2/index',function (S , RichBase , AcBase, AcRi
  * @author 弘树<tiehang.lth@taobao.com>
  * @module autocomplete/multiple
  **/
-KISSY.add('gallery/autocomplete/1.2/multiple',function (S, AutoComplete) {
+KISSY.add('kg/autocomplete/3.0.0/multiple',function (S, AutoComplete) {
 
     var $ = S.all, Node = S.Node, DOM = S.DOM, Event = S.Event, each = S.each;
 

@@ -1,10 +1,10 @@
 /*
 combined files : 
 
-gallery/autocomplete/1.2/aria
+kg/autocomplete/3.0.0/aria
 
 */
-KISSY.add('gallery/autocomplete/1.2/aria',function (S ,Node , Event , O){
+KISSY.add('kg/autocomplete/3.0.0/aria',function (S ,Node , Event , O){
     /**
      * @module autocomplete
      * @submodule autocomplete-aria

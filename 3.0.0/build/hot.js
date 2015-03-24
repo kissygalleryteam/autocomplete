@@ -1,10 +1,10 @@
 /*
 combined files : 
 
-gallery/autocomplete/1.2/hot
+kg/autocomplete/3.0.0/hot
 
 */
-KISSY.add('gallery/autocomplete/1.2/hot',function (S, Node , Event , Io , Tpl){
+KISSY.add('kg/autocomplete/3.0.0/hot',function (S, Node , Event , Io , Tpl){
     /**
      自动完成组件
      @module autocomplete
